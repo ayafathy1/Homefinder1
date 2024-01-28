@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:homefinder1/Screens/auth/CompleteSignUp/complete_sign_up.dart';
+import 'package:homefinder1/Widget/custom_arrow_back.dart';
 class VerficationCode extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -14,17 +16,7 @@ class VerficationCode extends StatelessWidget{
       child: Center(
         child: Column(
         children: [
-          Row(
-            children: [
-              SizedBox(width: 30,),
-              Container(
-                color: Color(0xffF4F4F4),
-                child: IconButton(onPressed: (){
-                  Navigator.pop(context);
-                }, icon: Icon(Icons.arrow_back_ios ,color: Color(0xff6C63FF),) ,),
-              ),
-            ],
-          ),
+          CustomArrowBack(),
           Text("Enter 4-digit", style: TextStyle(fontSize: 30 , fontWeight: FontWeight.bold) ,),
           Text("Verfication Code" , style: TextStyle(fontSize: 30 , fontWeight: FontWeight.bold)),
           
@@ -66,9 +58,7 @@ class VerficationCode extends StatelessWidget{
             height: 50,
             width: 200,
             child: ElevatedButton(onPressed: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) =>  CompleteSignUp()),
+              Get.to(() =>  CompleteSignUp(),
               );
             },
               child: Row(
