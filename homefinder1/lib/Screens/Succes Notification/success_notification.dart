@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SuccessNotification extends StatelessWidget{
   @override
@@ -28,9 +29,8 @@ class SuccessNotification extends StatelessWidget{
                height: 50,
                width: 130,
                child: ElevatedButton(onPressed: (){
-                 Navigator.push(
-                     context,
-                     MaterialPageRoute(builder: (context) =>  SuccessNotification()));
+                 //Navigate to success notification screen
+                Get.to(() =>  SuccessNotification());
                }
                  ,
                  child: Row(

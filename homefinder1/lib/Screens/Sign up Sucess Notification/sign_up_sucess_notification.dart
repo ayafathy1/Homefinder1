@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:homefinder1/Screens/Forgot%20Password/forgot_password.dart';
 
 class SignUpSucessNotification extends StatelessWidget{
@@ -26,9 +27,7 @@ class SignUpSucessNotification extends StatelessWidget{
                 height: 50,
                 width: 170,
                 child: ElevatedButton(onPressed: (){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) =>  ForgotPassword()));
+                Get.to(() =>  ForgotPassword());
                 }
                   ,
                   child: Row(

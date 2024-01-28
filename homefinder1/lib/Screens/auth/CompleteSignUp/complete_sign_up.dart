@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/Upload%20Photo/upload_photo.dart';
 import 'package:homefinder1/Screens/auth/CompleteSignUp/controller/complete_sign_up_controller.dart';
+import 'package:homefinder1/Widget/custom_arrow_back.dart';
 import 'package:homefinder1/Widget/custom_text_field_widget.dart';
 
 import '../Signup/signup.dart';
@@ -33,17 +34,7 @@ class _CompleteSignUpState extends State<CompleteSignUp> {
                         key: controller.formkey,
                         child: Column(
                             children: [
-                              Row(
-                                children: [
-                                  SizedBox(width: 30,),
-                                  Container(
-                                    color: Color(0xffF4F4F4),
-                                    child: IconButton(onPressed: (){
-                                      Navigator.pop(context);
-                                    }, icon: Icon(Icons.arrow_back_ios ,color: Color(0xff6C63FF),) ,),
-                                  ),
-                                ],
-                              ),
+                              CustomArrowBack(),
 
                               Text("Fill in bio to get" , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 40),),
                               Row(
@@ -69,9 +60,7 @@ class _CompleteSignUpState extends State<CompleteSignUp> {
                                 width: 200,
                                 child: ElevatedButton(onPressed: (){
                                   if (controller.formkey.currentState!.validate()) {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) =>  UploadPhoto()),
+                                   Get.to(()=>  UploadPhoto(),
                                     );
 
                                   }
