@@ -38,9 +38,7 @@ class ForgotPassword extends StatelessWidget{
                 height: 50,
                 width: 200,
                 child: ElevatedButton(onPressed: (){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) =>  SuccessNotification()));
+                  Get.to(() =>  SuccessNotification());
                 }
                   ,
                   child: Row(

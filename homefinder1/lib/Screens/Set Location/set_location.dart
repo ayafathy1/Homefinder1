@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:homefinder1/Screens/Sign%20up%20Sucess%20Notification/sign_up_sucess_notification.dart';
+import 'package:homefinder1/Widget/custom_arrow_back.dart';
 import 'package:homefinder1/Widget/custom_elevated_button_widget.dart';
 
 class SetLocation extends StatelessWidget{
@@ -15,17 +17,7 @@ class SetLocation extends StatelessWidget{
     body: SingleChildScrollView(
         child: Column(
           children: [
-            Row(
-              children: [
-                SizedBox(width: 30,),
-                Container(
-                  color: Color(0xffF4F4F4),
-                  child: IconButton(onPressed: (){
-                    Navigator.pop(context);
-                  }, icon: Icon(Icons.arrow_back_ios ,color: Color(0xff6C63FF),) ,),
-                ),
-              ],
-            ),
+           CustomArrowBack(),
             Text("Set Your Location" , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 35),),
 
 
@@ -81,9 +73,7 @@ class SetLocation extends StatelessWidget{
               height: 50,
               width: 200,
               child: ElevatedButton(onPressed: (){
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) =>  SignUpSucessNotification()));
+                Get.to(()=>  SignUpSucessNotification());
               }
                 ,
                 child: Row(

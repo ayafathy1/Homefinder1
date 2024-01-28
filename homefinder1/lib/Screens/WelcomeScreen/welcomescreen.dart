@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../auth/SignIn/signin.dart';
 import '../auth/Signup/signup.dart';
 
@@ -36,9 +37,7 @@ class Welcomescreen extends StatelessWidget{
               height: 70,
               width: 350,
               child: ElevatedButton(onPressed: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) =>  SignUp()),
+               Get.to((()=>  SignUp()),
                 );
               },
                   child: Text("Sign up" , style: TextStyle(color: Colors.white , fontSize: 18,fontWeight: FontWeight.bold),),
@@ -55,9 +54,7 @@ class Welcomescreen extends StatelessWidget{
               height: 70,
               width: 350,
               child: ElevatedButton(onPressed: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) =>  SignIn()),
+             Get.to(() =>  SignIn(),
                 );
               },
                 child: Text("Sign in" , style: TextStyle(color: Colors.white , fontSize: 18,fontWeight: FontWeight.bold),),

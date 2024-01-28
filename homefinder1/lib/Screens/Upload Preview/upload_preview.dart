@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:homefinder1/Screens/Set%20Location/set_location.dart';
+import 'package:homefinder1/Widget/custom_arrow_back.dart';
 
 class UploadPreview extends StatelessWidget{
   @override
@@ -14,17 +16,7 @@ class UploadPreview extends StatelessWidget{
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Row(
-              children: [
-                SizedBox(width: 30,),
-                Container(
-                  color: Color(0xffF4F4F4),
-                  child: IconButton(onPressed: (){
-                    Navigator.pop(context);
-                  }, icon: Icon(Icons.arrow_back_ios ,color: Color(0xff6C63FF),) ,),
-                ),
-              ],
-            ),
+            CustomArrowBack(),
             Text("Upload Your Photo" , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 35),),
             Row(
               children: [
@@ -44,9 +36,7 @@ class UploadPreview extends StatelessWidget{
               height: 50,
               width: 200,
               child: ElevatedButton(onPressed: (){
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) =>  SetLocation()));
+               Get.to(() =>  SetLocation());
               }
                 ,
                 child: Row(
