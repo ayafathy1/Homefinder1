@@ -68,12 +68,12 @@ class _SignUpState extends State<SignUp> {
         ),
 
         CustomTextFieldWidget(
-        Controller:controller.usernameController , validator:controller.usernameValidator , keyboardType: TextInputType.text, textfieldHint: "User Name", textfieldIcon: Icon(Icons.person), ispasswordField: false, obscureText: false),
+        Controller:controller.usernameController , validator:controller.usernameValidator , keyboardType: TextInputType.text, textfieldHint: "User Name", textfieldIcon: Image( image:AssetImage("lib/assets/images/ProfileIcon.png")), ispasswordField: false, obscureText: false),
         CustomTextFieldWidget(
-            Controller: controller.emailaddressController, validator: controller.emailValidator, keyboardType: TextInputType.emailAddress, textfieldHint:"EmailAddress", textfieldIcon: Icon(Icons.email), ispasswordField: false, obscureText: false),
+            Controller: controller.emailaddressController, validator: controller.emailValidator, keyboardType: TextInputType.emailAddress, textfieldHint:"EmailAddress", textfieldIcon: Image( image:AssetImage("lib/assets/images/MessageIcon.png")), ispasswordField: false, obscureText: false),
 
-        CustomTextFieldWidget(Controller: controller.passwordController, validator: controller.passwordValidator, keyboardType: TextInputType.visiblePassword, textfieldHint: "Password", textfieldIcon: Icon(Icons.lock), ispasswordField: true, obscureText: true),
-        CustomTextFieldWidget(Controller: controller.passwordController, validator:controller.passwordValidator, keyboardType: TextInputType.visiblePassword, textfieldHint: "Confirm Password", textfieldIcon:Icon(Icons.lock), ispasswordField:true, obscureText: true),
+        CustomTextFieldWidget(Controller: controller.passwordController, validator: controller.passwordValidator, keyboardType: TextInputType.visiblePassword, textfieldHint: "Password", textfieldIcon: Image( image:AssetImage("lib/assets/images/LockIcon.png")), ispasswordField: true, obscureText: true),
+        CustomTextFieldWidget(Controller: controller.passwordController, validator:controller.passwordValidator, keyboardType: TextInputType.visiblePassword, textfieldHint: "Confirm Password", textfieldIcon:Image( image:AssetImage("lib/assets/images/LockIcon.png")), ispasswordField:true, obscureText: true),
         Row(children: [
 
         Checkbox(

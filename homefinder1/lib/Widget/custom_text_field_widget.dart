@@ -9,7 +9,7 @@ class CustomTextFieldWidget extends StatelessWidget{
   final String? Function(String?) validator ;
   final TextInputType keyboardType ;
   final String textfieldHint;
-  final Icon textfieldIcon;
+  final Widget textfieldIcon;
   final bool ispasswordField;
   final bool obscureText ;
 
