@@ -33,42 +33,28 @@ class UploadPhoto extends StatelessWidget{
           SizedBox(height: 50,),
           Padding(
               padding: const EdgeInsets.all(20.0),
-              child: TextField(
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  hintText: "                        From Gallery",
-                  fillColor: Color(0xffF4F4F4),
-                  filled: true,
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(
-                      color: Color(0xffF4F4F4),
-                      width: 3,
+              child: InkWell(
+                onTap: (){},
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Color(0xffC4C4C4).withOpacity(0.2),
+                      borderRadius: BorderRadius.all(Radius.circular(20))
+                  ),
+                  width: 300,
+                  height: 140,
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(30.0),
+                      child: Column(
+                        children: [
+                          Image(image: AssetImage('lib/assets/images/Gallery.png')),
+                          Text("From Gallery")
+                        ],
+                      ),
                     ),
                   ),
-
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(
-                      color: Color(0xff6C63FF),
-                      width: 3,
-                    )
                 ),
-                errorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(
-                      color: Colors.red.shade600,
-                      width: 3,
-                    )
-                ),
-                focusedErrorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(
-                      color: Colors.red.shade600,
-                      width: 3,
-                    )
-                ),
-              ))
+              )
           ),
           SizedBox(height: 200,),
           SizedBox(
