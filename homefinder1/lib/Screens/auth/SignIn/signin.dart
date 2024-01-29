@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/auth/SignIn/controller/signin_controller.dart';
+import 'package:homefinder1/Screens/auth/Signup/signup.dart';
 import 'package:homefinder1/Widget/custom_elevated_button_widget.dart';
 import 'package:homefinder1/Widget/custom_text_field_widget.dart';
 
@@ -124,7 +125,7 @@ class _SignInState extends State<SignIn> {
                             SizedBox(height: 30,),
                             Row(children: [
                               Center(child: Text("                              New Member?")),
-                              TextButton(onPressed: (){}, child:Text("Register Now" , style: TextStyle(color: Color(0xff6C63FF)),) )
+                              TextButton(onPressed: (){Get.to(()=>SignUp());}, child:Text("Register Now" , style: TextStyle(color: Color(0xff6C63FF)),) )
 
                             ],)
 
