@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Box extends StatelessWidget{
 
@@ -9,6 +10,8 @@ class Box extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return  Container(
+      height:Get.height*0.4,
+      width: Get.width*0.4,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         color: Colors.white70,
@@ -28,7 +31,7 @@ class Box extends StatelessWidget{
             Center(
               child: ClipRRect(
                 child: Container(
-                  height: 100,
+                  height: 105,
                   width: 180,
                   decoration: BoxDecoration(
                       color: Colors.white

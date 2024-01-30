@@ -183,11 +183,14 @@ class FeaturedEstates extends StatelessWidget{
                 color: Color(0xffF7F7F7),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: GridView.builder(gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2 ,crossAxisSpacing: 20 , mainAxisSpacing: 20 ,mainAxisExtent: 250 ),
-                    itemCount: gridView.length,
-                    itemBuilder: (_, int index) {
-                    return  Box(gridView: gridView ,index: index,);
-                    },
+                  child: Padding(
+                    padding:  EdgeInsets.only(bottom:Get.height*0.12),
+                    child: GridView.builder(gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2 ,crossAxisSpacing: 20 , mainAxisSpacing: 20 ,mainAxisExtent: 250 ),
+                      itemCount: gridView.length,
+                      itemBuilder: (_, int index) {
+                      return  Box(gridView: gridView ,index: index,);
+                      },
+                    ),
                   ),
                 ),
               ),
