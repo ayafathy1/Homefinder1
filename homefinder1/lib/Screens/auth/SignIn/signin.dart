@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/auth/SignIn/controller/signin_controller.dart';
+import 'package:homefinder1/Screens/auth/Signup/signup.dart';
 import 'package:homefinder1/Widget/custom_elevated_button_widget.dart';
 import 'package:homefinder1/Widget/custom_text_field_widget.dart';
 
@@ -61,8 +62,8 @@ class _SignInState extends State<SignIn> {
 
                             SizedBox(height: 40,),
                             Text(" sign in to acess your account"),
-                            CustomTextFieldWidget(Controller: controller.emailaddressController, validator: controller.emailValidator, keyboardType:TextInputType.emailAddress, textfieldHint: "Enter Your EmailAddress", textfieldIcon: Icon(Icons.email), ispasswordField:false, obscureText:false),
-                            CustomTextFieldWidget(Controller: controller.passwordController, validator: controller.passwordValidator, keyboardType: TextInputType.visiblePassword, textfieldHint: "Enter Your Password", textfieldIcon: Icon(Icons.lock), ispasswordField: true, obscureText: true),
+                            CustomTextFieldWidget(Controller: controller.emailaddressController, validator: controller.emailValidator, keyboardType:TextInputType.emailAddress, textfieldHint: "Enter Your EmailAddress", textfieldIcon: Image(image: AssetImage("lib/assets/images/MessageIcon.png"),), ispasswordField:false, obscureText:false),
+                            CustomTextFieldWidget(Controller: controller.passwordController, validator: controller.passwordValidator, keyboardType: TextInputType.visiblePassword, textfieldHint: "Enter Your Password", textfieldIcon:Image(image: AssetImage("lib/assets/images/LockIcon.png"),), ispasswordField: true, obscureText: true),
 
                             Row(
                               children: [
@@ -124,7 +125,7 @@ class _SignInState extends State<SignIn> {
                             SizedBox(height: 30,),
                             Row(children: [
                               Center(child: Text("                              New Member?")),
-                              TextButton(onPressed: (){}, child:Text("Register Now" , style: TextStyle(color: Color(0xff6C63FF)),) )
+                              TextButton(onPressed: (){Get.to(()=>SignUp());}, child:Text("Register Now" , style: TextStyle(color: Color(0xff6C63FF)),) )
 
                             ],)
 
