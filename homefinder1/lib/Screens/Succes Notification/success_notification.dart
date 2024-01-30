@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:homefinder1/Screens/Featured%20Estates/featured_estates.dart';
 
 class SuccessNotification extends StatelessWidget{
   @override
@@ -30,7 +31,7 @@ class SuccessNotification extends StatelessWidget{
                width: 130,
                child: ElevatedButton(onPressed: (){
                  //Navigate to success notification screen
-                Get.to(() =>  SuccessNotification());
+                Get.to(() =>  FeaturedEstates());
                }
                  ,
                  child: Row(
