@@ -64,17 +64,20 @@ class _SignUpState extends State<SignUp> {
             SizedBox(height: 5,),
             Row(
             children: [
-            Text("     by creating a free account" , style: TextStyle(color: Color(0xff252525)),),
+            Padding(
+              padding: const EdgeInsets.only(left: 110.0,),
+              child: Text("     by creating a free account" , style: TextStyle(color: Color(0xff252525)),),
+            ),
             ],
             ),
 
             CustomTextFieldWidget(
-            Controller:controller.usernameController , validator:controller.usernameValidator , keyboardType: TextInputType.text, textfieldHint: "User Name", textfieldIcon:Image(image: AssetImage("lib/assets/images/ProfileIcon.png"),), ispasswordField: false, obscureText: false),
+            Controller:controller.usernameController , validator:controller.usernameValidator , keyboardType: TextInputType.text, textfieldHint: "User Name", textfieldIcon:Image(image: AssetImage("lib/assets/images/ProfileIcon.png"),), ispasswordField: false, obscureText: false, suffixIcon: Icon(Icons.abc,color: Colors.transparent,),),
             CustomTextFieldWidget(
-                Controller: controller.emailaddressController, validator: controller.emailValidator, keyboardType: TextInputType.emailAddress, textfieldHint:"EmailAddress", textfieldIcon: Image(image: AssetImage("lib/assets/images/MessageIcon.png"),), ispasswordField: false, obscureText: false),
+                Controller: controller.emailaddressController, validator: controller.emailValidator, keyboardType: TextInputType.emailAddress, textfieldHint:"EmailAddress", textfieldIcon: Image(image: AssetImage("lib/assets/images/MessageIcon.png"),), ispasswordField: false, obscureText: false, suffixIcon:Icon(Icons.abc,color: Colors.transparent,),),
 
-            CustomTextFieldWidget(Controller: controller.passwordController, validator: controller.passwordValidator, keyboardType: TextInputType.visiblePassword, textfieldHint: "Password", textfieldIcon: Image(image: AssetImage("lib/assets/images/LockIcon.png"),), ispasswordField: true, obscureText: true),
-            CustomTextFieldWidget(Controller: controller.passwordController, validator:controller.passwordValidator, keyboardType: TextInputType.visiblePassword, textfieldHint: "Confirm Password", textfieldIcon:Image(image: AssetImage("lib/assets/images/LockIcon.png"),), ispasswordField:true, obscureText: true),
+            CustomTextFieldWidget(Controller: controller.passwordController, validator: controller.passwordValidator, keyboardType: TextInputType.visiblePassword, textfieldHint: "Password", textfieldIcon: Image(image: AssetImage("lib/assets/images/LockIcon.png"),), ispasswordField: true, obscureText: true, suffixIcon: Image(image: AssetImage("lib/assets/images/Eye.png"),) ,),
+            CustomTextFieldWidget(Controller: controller.passwordController, validator:controller.passwordValidator, keyboardType: TextInputType.visiblePassword, textfieldHint: "Confirm Password", textfieldIcon:Image(image: AssetImage("lib/assets/images/LockIcon.png"),), ispasswordField:true, obscureText: true, suffixIcon:Image(image: AssetImage("lib/assets/images/Eye.png"),) ,),
             Row(children: [
 
             Checkbox(
