@@ -62,8 +62,8 @@ class _SignInState extends State<SignIn> {
 
                             SizedBox(height: 40,),
                             Text(" sign in to acess your account"),
-                            CustomTextFieldWidget(Controller: controller.emailaddressController, validator: controller.emailValidator, keyboardType:TextInputType.emailAddress, textfieldHint: "Enter Your EmailAddress", textfieldIcon: Image(image: AssetImage("lib/assets/images/MessageIcon.png"),), ispasswordField:false, obscureText:false),
-                            CustomTextFieldWidget(Controller: controller.passwordController, validator: controller.passwordValidator, keyboardType: TextInputType.visiblePassword, textfieldHint: "Enter Your Password", textfieldIcon:Image(image: AssetImage("lib/assets/images/LockIcon.png"),), ispasswordField: true, obscureText: true),
+                            CustomTextFieldWidget(Controller: controller.emailaddressController, validator: controller.emailValidator, keyboardType:TextInputType.emailAddress, textfieldHint: "Enter Your EmailAddress", textfieldIcon: Image(image: AssetImage("lib/assets/images/MessageIcon.png"),), ispasswordField:false, obscureText:false, suffixIcon:Icon(Icons.abc,color: Colors.transparent,),),
+                            CustomTextFieldWidget(Controller: controller.passwordController, validator: controller.passwordValidator, keyboardType: TextInputType.visiblePassword, textfieldHint: "Enter Your Password", textfieldIcon:Image(image: AssetImage("lib/assets/images/LockIcon.png"),), ispasswordField: true, obscureText: true, suffixIcon:Image(image: AssetImage("lib/assets/images/Eye.png"),)),
 
                             Row(
                               children: [

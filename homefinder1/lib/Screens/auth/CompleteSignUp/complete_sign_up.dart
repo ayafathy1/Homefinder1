@@ -48,12 +48,12 @@ class _CompleteSignUpState extends State<CompleteSignUp> {
                                 Text("      for seccurity" , style: TextStyle(fontSize: 15),)
                               ] ),
 
-                            CustomTextFieldWidget(Controller: controller.fisrtnameController, validator: controller.fisrtnameValidator, keyboardType: TextInputType.text,textfieldHint: "First Name", textfieldIcon: Icon(Icons.person), ispasswordField:false, obscureText: false),
+                            CustomTextFieldWidget(Controller: controller.fisrtnameController, validator: controller.fisrtnameValidator, keyboardType: TextInputType.text,textfieldHint: "First Name", textfieldIcon: Icon(Icons.person), ispasswordField:false, obscureText: false, suffixIcon: Icon(Icons.abc,color: Colors.transparent,),),
                            // SizedBox(height: 2,),
 
-                            CustomTextFieldWidget(Controller: controller.lastnameController, validator: controller.lastnameValidator, keyboardType: TextInputType.text,textfieldHint: "Last Name", textfieldIcon: Icon(Icons.person), ispasswordField:false, obscureText: false),
-                              CustomTextFieldWidget(Controller: controller.genderController, validator: controller.genderValidator, keyboardType: TextInputType.text, textfieldHint: "Gender", textfieldIcon: Icon(Icons.person), ispasswordField: false, obscureText: false),
-                              CustomTextFieldWidget(Controller: controller.phoneController, validator: controller.phoneValidator, keyboardType: TextInputType.phone, textfieldHint: "Phone Number", textfieldIcon: Icon(Icons.phone), ispasswordField: false, obscureText: false),
+                            CustomTextFieldWidget(Controller: controller.lastnameController, validator: controller.lastnameValidator, keyboardType: TextInputType.text,textfieldHint: "Last Name", textfieldIcon: Icon(Icons.abc,color: Colors.transparent,), ispasswordField:false, obscureText: false, suffixIcon: Icon(Icons.abc,color: Colors.transparent,),),
+                              CustomTextFieldWidget(Controller: controller.genderController, validator: controller.genderValidator, keyboardType: TextInputType.text, textfieldHint: "Gender", textfieldIcon: Icon(Icons.abc,color: Colors.transparent,), ispasswordField: false, obscureText: false, suffixIcon: Icon(Icons.abc,color: Colors.transparent,),),
+                              CustomTextFieldWidget(Controller: controller.phoneController, validator: controller.phoneValidator, keyboardType: TextInputType.phone, textfieldHint: "Phone Number", textfieldIcon: Icon(Icons.abc,color: Colors.transparent,), ispasswordField: false, obscureText: false, suffixIcon: Icon(Icons.abc,color: Colors.transparent,),),
 
                               SizedBox(
                                 height: 50,
