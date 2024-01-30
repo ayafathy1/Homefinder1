@@ -14,6 +14,9 @@ class SignUpController extends GetxController{
   @override
 
   String? usernameValidator (username){
+    if(username!.isEmpty)
+
+       { return 'Please Enter Your Name';}
     if (RegExp(
         r"^[\p{L} ,.'-]*$",
             caseSensitive: false, unicode: true, dotAll: true)
