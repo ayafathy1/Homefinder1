@@ -33,7 +33,7 @@ class ForgotPassword extends StatelessWidget{
               Text("your password", style: TextStyle(color: Colors.black , fontWeight: FontWeight.bold , fontSize: 30),),
               SizedBox(height: 70,),
 
-              CustomTextFieldWidget(Controller: controller.emailaddressController, validator: controller.emailValidator, keyboardType: TextInputType.emailAddress, textfieldHint: "Enter Your Email", textfieldIcon: Icon(Icons.email), ispasswordField: false, obscureText: false, suffixIcon: Icon(Icons.abc,color: Colors.transparent,),),
+              CustomTextFieldWidget(Controller: controller.emailaddressController, validator: controller.emailValidator, keyboardType: TextInputType.emailAddress, textfieldHint: "Enter Your Email", textfieldIcon: Image(image: AssetImage("lib/assets/images/MessageIcon.png"),), ispasswordField: false, obscureText: false, suffixIcon: Icon(Icons.abc,color: Colors.transparent,),),
 
               SizedBox(height: 20,),
               SizedBox(

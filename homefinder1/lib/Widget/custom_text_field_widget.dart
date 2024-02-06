@@ -11,7 +11,7 @@ class CustomTextFieldWidget extends StatelessWidget{
   final String? Function(String?) validator ;
   final TextInputType keyboardType ;
   final String textfieldHint;
-  final Widget stextfieldIcon;
+
   final Widget textfieldIcon;
   final bool ispasswordField;
   final bool obscureText ;
@@ -34,10 +34,9 @@ class CustomTextFieldWidget extends StatelessWidget{
           filled: true,
           fillColor: Color(0xffF4F4F4),
           hintText: textfieldHint,
-          suffixIcon: stextfieldIcon,
+          suffixIcon: suffixIcon,
           prefixIcon:textfieldIcon,
           prefixIconColor:  Color(0xff6C63FF),
-          suffixIcon: suffixIcon,
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),
               borderSide: BorderSide(
