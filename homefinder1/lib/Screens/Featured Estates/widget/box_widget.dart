@@ -10,7 +10,7 @@ class Box extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return  Container(
-      height:Get.height*0.4,
+      height:Get.height*0.9,
       width: Get.width*0.4,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
