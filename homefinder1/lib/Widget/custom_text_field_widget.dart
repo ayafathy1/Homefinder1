@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 
 class CustomTextFieldWidget extends StatelessWidget{
 
-  const CustomTextFieldWidget({Key? key, required this.Controller, required this.validator, required this.keyboardType, required this.textfieldHint, required this.textfieldIcon, required this.ispasswordField, required this.obscureText}) : super (key: key);
+  const CustomTextFieldWidget({Key? key, required this.Controller, required this.validator, required this.keyboardType, required this.textfieldHint, required this.textfieldIcon, required this.ispasswordField, required this.obscureText, required this.stextfieldIcon}) : super (key: key);
 
   final TextEditingController Controller;
   final String? Function(String?) validator ;
   final TextInputType keyboardType ;
   final String textfieldHint;
+  final Widget stextfieldIcon;
   final Widget textfieldIcon;
   final bool ispasswordField;
   final bool obscureText ;
@@ -30,6 +31,7 @@ class CustomTextFieldWidget extends StatelessWidget{
           filled: true,
           fillColor: Color(0xffF4F4F4),
           hintText: textfieldHint,
+          suffixIcon: stextfieldIcon,
           prefixIcon:textfieldIcon,
           prefixIconColor:  Color(0xff6C63FF),
           enabledBorder: OutlineInputBorder(
