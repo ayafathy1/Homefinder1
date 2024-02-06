@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:homefinder1/Screens/verficationcode.dart';
+import 'package:homefinder1/Screens/verification_code/verfication_code_screen.dart';
 import 'package:homefinder1/Widget/custom_text_field_widget.dart';
 import 'package:homefinder1/Screens/auth/Signup/controller/signup_controller.dart';
 

@@ -5,7 +5,7 @@ import 'package:homefinder1/Screens/auth/Signup/signup.dart';
 import 'package:homefinder1/Widget/custom_elevated_button_widget.dart';
 import 'package:homefinder1/Widget/custom_text_field_widget.dart';
 
-import '../../verficationcode.dart';
+import '../../verification_code/verfication_code_screen.dart';
 class SignIn  extends StatefulWidget{
   @override
   State<SignIn> createState() => _SignInState();
