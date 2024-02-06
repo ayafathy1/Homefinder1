@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 class CustomTextFieldWidget extends StatelessWidget{
 
-  const CustomTextFieldWidget({Key? key, required this.Controller, required this.validator, required this.keyboardType, required this.textfieldHint, required this.textfieldIcon, required this.ispasswordField, required this.obscureText, required this.stextfieldIcon}) : super (key: key);
+
+  const CustomTextFieldWidget({Key? key, required this.Controller, required this.validator, required this.keyboardType, required this.textfieldHint, required this.textfieldIcon, required this.ispasswordField, required this.obscureText, required this.suffixIcon}) : super (key: key);
+
 
   final TextEditingController Controller;
   final String? Function(String?) validator ;
@@ -13,6 +15,7 @@ class CustomTextFieldWidget extends StatelessWidget{
   final Widget textfieldIcon;
   final bool ispasswordField;
   final bool obscureText ;
+  final Widget suffixIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +37,7 @@ class CustomTextFieldWidget extends StatelessWidget{
           suffixIcon: stextfieldIcon,
           prefixIcon:textfieldIcon,
           prefixIconColor:  Color(0xff6C63FF),
+          suffixIcon: suffixIcon,
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),
               borderSide: BorderSide(

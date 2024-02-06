@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:homefinder1/Screens/Featured%20Estates/featured_estates.dart';
 import 'package:homefinder1/Screens/SplashScreen/splash_Screen.dart';
 
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
      debugShowCheckedModeBanner: false,
         color: Colors.transparent,
-      home: SplashScreen()
+      home: FeaturedEstates()
     );
   }
 }
