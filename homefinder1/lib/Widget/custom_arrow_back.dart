@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomArrowBack extends StatelessWidget{
   @override
@@ -16,7 +17,7 @@ class CustomArrowBack extends StatelessWidget{
               Padding(
                 padding: const EdgeInsets.only(left: 5.0),
                 child: IconButton(onPressed: (){
-                  Navigator.pop(context);
+                  Get.off(context);
                 }, icon: Icon(Icons.arrow_back_ios ,size: 20,color: Color(0xff6C63FF),) ,),
               ),
 

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/Featured%20Estates/widget/box_widget.dart';
+import 'package:homefinder1/Screens/add_listing/add_listing_screen.dart';
 import 'package:homefinder1/utilities/colors.dart';
 import 'package:homefinder1/utilities/constants.dart';
 
@@ -54,7 +55,7 @@ class HomeScreen extends StatelessWidget {
     ),
       Padding(
         padding: const EdgeInsets.only(top: 10.0,bottom: 8.0,left: 10.0),
-        child: InkWell(child: Container(width: 52,height: 52,decoration:
+        child: InkWell(onTap: (){Get.to(()=>AddListing());},child: Container(width: 52,height: 52,decoration:
         BoxDecoration(image: DecorationImage(image:
         AssetImage("lib/assets/images/Add Home.png")),color: kPrimaryColor,
             border: Border.all(color: kPrimaryColor,width: 1.5,),
