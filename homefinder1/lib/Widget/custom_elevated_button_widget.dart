@@ -16,12 +16,8 @@ class CustomElevatedButtonWidget extends StatelessWidget{
       onPressed!();
 
     },
-      child: Text("Sign in" , style: TextStyle(color: Colors.white , fontSize: 18,fontWeight: FontWeight.bold),),
-      style: ElevatedButton.styleFrom(backgroundColor:Color(0xff6C63FF),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ) ,
-      ),
+      child: Text(text , style: textStyle),
+      style:style
     );
   }
 }
