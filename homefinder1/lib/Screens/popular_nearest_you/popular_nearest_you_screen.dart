@@ -2,86 +2,30 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/Featured%20Estates/widget/box_widget.dart';
+import 'package:homefinder1/Screens/popular_nearest_you/controller/popular_nearest_you_controller.dart';
 import 'package:homefinder1/Widget/custom_arrow_back.dart';
 
 import '../../Widget/custom_bottom_navigation_bar_widget.dart';
+import '../../utilities/colors.dart';
+import '../../utilities/constants.dart';
 
 class PopularNearestYou extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
+    return  GetBuilder<PopularNearestYouController>(
+        init: PopularNearestYouController(),
+    builder: (PopularNearestYouController controller) {
+    return  Scaffold(
 
-    final List  gridView = [
-      {
-        "title" : "Lorem House",
-        "price": "\$1500/month",
-        "Location" : "Avenue west Side",
-        "image" : "lib/assets/images/Frame 34221.png"
-      },
-
-      {
-        "title" : "Lorem House",
-        "price": "\$1500/month",
-        "Location" : "Avenue west Side",
-        "image" : "lib/assets/images/Rectangle 9.png"
-      },
-
-      {
-        "title" : "Lorem House",
-        "price": "\$1500/month",
-        "Location" : "Avenue west Side",
-        "image" : "lib/assets/images/Frame 34221 (1).png"
-      },
-
-      {
-        "title" : "Lorem House",
-        "price": "\$1500/month",
-        "Location" : "Avenue west Side",
-        "image" : "lib/assets/images/Rectangle 9 (1).png"
-      },
-
-      {
-        "title" : "Lorem House",
-        "price": "\$1500/month",
-        "Location" : "Avenue west Side",
-        "image" : "lib/assets/images/Rectangle 9 (2).png"
-      },
-
-      {
-        "title" : "Lorem House",
-        "price": "\$1500/month",
-        "Location" : "Avenue west Side",
-        "image" : "lib/assets/images/Frame 34221 (1).png"
-      },
-
-      {
-        "title" : "Lorem House",
-        "price": "\$1500/month",
-        "Location" : "Avenue west Side",
-        "image" : "lib/assets/images/Rectangle 9 (3).png"
-      },
-      {
-        "title" : "Lorem House",
-        "price": "\$1500/month",
-        "Location" : "Avenue west Side",
-        "image" : "lib/assets/images/Rectangle 9 (3).png"
-      },
-
-    ];
-
-    return Scaffold(
-      appBar: AppBar(title: Text('                      Welcome!',
-          style: TextStyle(fontSize: 0, color: Colors.transparent)),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
       body: SingleChildScrollView(
         child: Column(
           children:<Widget> [
+            SizedBox(height: Get.height*0.06,),
             Row(
               children: [
                 CustomArrowBack(),
                 SizedBox(width: 20,),
-                Text("Popular Nearest You" , style: TextStyle(color: Colors.black , fontSize: 25, fontWeight: FontWeight.bold),),
+                Text("Popular nearest you " , style: TextStyle(color: Colors.black , fontSize: 25, fontWeight: FontWeight.bold),),
 
               ],
             ),
@@ -115,80 +59,77 @@ class PopularNearestYou extends StatelessWidget{
                 ),
               ),
             ),
-            SizedBox(height: 10,),
+            SizedBox(height: 5,),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Container(
-                    width: 90,
-                    height: 60,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        color: Color(0xff6C63FF)
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Center(child: Text("House" , style: TextStyle(color: Colors.white),)),
-                    ),
-                  ),
-                  SizedBox(width: 10,),
-                  Container(
-                    width: 90,
-                    height: 60,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        color: Color(0xffF4F4F4)
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Center(child: Text("Apartment" , style: TextStyle(color: Colors.grey),)),
-                    ),
-                  ),
-                  SizedBox(width: 10,),
-                  Container(
-                    width: 90,
-                    height: 60,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        color: Color(0xffF4F4F4)
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Center(child: Text("Hotel" , style: TextStyle(color: Colors.grey),)),
-                    ),
-                  ),
-                  SizedBox(width: 10,),
-                  Container(
-                    width: 90,
-                    height: 60,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        color: Color(0xffF4F4F4)
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Center(child: Text("Villa" , style: TextStyle(color: Colors.grey),)),
-                    ),
-                  ),
-                ],
+              child:Container(
+                height: Get.height*0.074,
+                width: Get.width,
+                child: ListView.builder(
+                  physics:NeverScrollableScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: controller.types.length,
+                  itemBuilder: (context, index) {
+                    return
+                      Row(
+                        children: [
+                          SizedBox(
+                            width:5,
+                          ),
+                          InkWell(
+                            onTap: (){
+                              controller.selectedIndex = index;
+                                 controller.update();
+                            },
+                            child: Container(
+                              child: Center(
+                                  child: Text(
+                                    "${controller.types[index]}",
+                                    style: TextStyle(
+                                        color: controller.selectedIndex==index?Colors.white:kGreyColor,
+                                        fontWeight: FontWeight.w800,
+                                        fontFamily: kRegularFont,
+                                        fontSize: 13),
+                                  )),
+                              height: 55,
+                              width:92,
+                              decoration: BoxDecoration(
+                                  color: controller.selectedIndex ==index?kPrimaryColor:kLightGreyColor,
+                                  border: Border.all(color: Colors.transparent),
+                                  borderRadius: BorderRadius.circular(10.69),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color:  controller.selectedIndex==index?Colors.grey:Colors.transparent,
+                                        offset: Offset(0, 0),
+                                        blurRadius: 20)
+                                  ]),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+
+                        ],
+                      );},
+                ),
               ),
+
 
             ),
 
-            SizedBox(height: 12,),
+
             Center(
               child: Container(
-                height: 500,
+                height: 540,
                 color: Color(0xffF7F7F7),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Padding(
-                    padding:  EdgeInsets.only(bottom:Get.height*0.12),
+                    padding:  EdgeInsets.only(bottom:Get.height*0.07),
                     child: GridView.builder(gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2 ,crossAxisSpacing: 20 , mainAxisSpacing: 20 ,mainAxisExtent: 250 ),
-                      itemCount: gridView.length,
+                      itemCount: controller.gridView.length,
                       itemBuilder: (_, int index) {
-                        return  Box(gridView: gridView ,index: index,);
+                        return  Box(gridView:controller.gridView ,index: index,);
                       },
                     ),
                   ),
@@ -199,7 +140,7 @@ class PopularNearestYou extends StatelessWidget{
         ),
       ),
       bottomNavigationBar: CustomBottomNavigationBarWidget(),
-    );
+    );});
   }
 
 }
