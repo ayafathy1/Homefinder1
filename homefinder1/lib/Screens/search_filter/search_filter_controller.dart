@@ -23,4 +23,14 @@ int selectedIndex2=0;
 ScrollController sController=ScrollController();
 int min= 100;
 int max=5000;
+void restFilter(){
+  max=5000;
+  min=100;
+  selectedIndex=2;
+  selectedIndex1=0;
+  selectedIndex2=0;
+  selectedOption="3";
+  values=SfRangeValues(100, 5000);
+  update();
+}
 }
