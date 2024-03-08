@@ -479,16 +479,8 @@ class _SearchFilterState extends State<SearchFilter> {
                     child: Center(child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       TextButton(onPressed: (){
-                        controller.max=5000;
-                        controller.min=100;
-                        controller.selectedIndex=2;
-                        controller.selectedIndex1=0;
-                        controller.selectedIndex2=0;
-                        controller.selectedOption="3";
-                        controller.values=SfRangeValues(100, 5000);
-                        setState(() {
 
-                        });
+                      controller.restFilter();
 
                       }, child: Text("Reset Filter",style: TextStyle(fontFamily: kRegularFont,
                           fontSize: 17,
