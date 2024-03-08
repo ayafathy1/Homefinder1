@@ -17,7 +17,7 @@ class CustomArrowBack extends StatelessWidget{
               Padding(
                 padding: const EdgeInsets.only(left: 5.0),
                 child: IconButton(onPressed: (){
-                  Get.off(context);
+                  Get.back();
                 }, icon: Icon(Icons.arrow_back_ios ,size: 20,color: Color(0xff6C63FF),) ,),
               ),
 

@@ -69,14 +69,11 @@ class FeaturedEstates extends StatelessWidget{
     ];
 
     return Scaffold(
-      appBar: AppBar(title: Text('                      Welcome!',
-          style: TextStyle(fontSize: 0, color: Colors.transparent)),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
+
       body: SingleChildScrollView(
         child: Column(
           children:<Widget> [
+            SizedBox(height: Get.height*0.06,),
             Row(
               children: [
                 CustomArrowBack(),
@@ -85,7 +82,7 @@ class FeaturedEstates extends StatelessWidget{
 
               ],
             ),
-            SizedBox(height: 20,),
+            SizedBox(height: 15,),
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: TextField(
@@ -115,7 +112,7 @@ class FeaturedEstates extends StatelessWidget{
                 ),
               ),
             ),
-            SizedBox(height: 30,),
+            SizedBox(height: 5,),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -176,15 +173,15 @@ class FeaturedEstates extends StatelessWidget{
 
             ),
 
-            SizedBox(height: 30,),
+
             Center(
               child: Container(
-                height: 500,
+                height: 540,
                 color: Color(0xffF7F7F7),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Padding(
-                    padding:  EdgeInsets.only(bottom:Get.height*0.12),
+                    padding:  EdgeInsets.only(bottom:Get.height*0.07),
                     child: GridView.builder(gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2 ,crossAxisSpacing: 20 , mainAxisSpacing: 20 ,mainAxisExtent: 250 ),
                       itemCount: gridView.length,
                       itemBuilder: (_, int index) {

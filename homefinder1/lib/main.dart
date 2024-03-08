@@ -3,6 +3,9 @@ import 'package:get/get.dart';
 import 'package:homefinder1/Screens/Featured%20Estates/featured_estates.dart';
 import 'package:homefinder1/Screens/SplashScreen/splash_Screen.dart';
 
+import 'Screens/home/home_screen.dart';
+import 'Screens/search_filter/search_filter_screen.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +20,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
      debugShowCheckedModeBanner: false,
         color: Colors.transparent,
-      home: FeaturedEstates()
+      home: SearchFilter()
     );
   }
 }
