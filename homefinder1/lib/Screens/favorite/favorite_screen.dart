@@ -5,7 +5,7 @@ import 'package:homefinder1/Widget/custom_arrow_back.dart';
 
 import '../../utilities/colors.dart';
 import '../../utilities/constants.dart';
-import 'favorite_controller/favorite_controller.dart';
+import 'controller/favorite_controller.dart';
 
 class FavoriteScreen extends StatelessWidget {
   const FavoriteScreen({super.key});
