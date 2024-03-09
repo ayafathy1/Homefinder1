@@ -32,7 +32,7 @@ class FavoriteScreen extends StatelessWidget {
         controller: controller.scroll,
         child: Column(
           children: [
-            Container(margin: EdgeInsets.only(left: 5,top: 20),width: Get.width,height: Get.height*0.067,child:
+            Container(margin: EdgeInsets.only(left: 5,top: 20),width: Get.width,height: Get.height*0.059,child:
               ListView.separated(physics: NeverScrollableScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context,index){
@@ -65,7 +65,7 @@ class FavoriteScreen extends StatelessWidget {
                 return SizedBox(width: 5,);
               }, itemCount: controller.types.length)
               ,),
-            Container(margin: EdgeInsets.only(top: 15),width: Get.width,height: Get.height*0.79,
+            Container(margin: EdgeInsets.only(top: 15),width: Get.width,height: Get.height,
               child: ListView.builder(controller: controller.scroll,itemCount: 10,physics: BouncingScrollPhysics(),scrollDirection: Axis.vertical,
                   itemBuilder: (context, index) {
                     return Column(
