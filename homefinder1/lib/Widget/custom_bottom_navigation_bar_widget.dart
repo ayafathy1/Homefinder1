@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottomNavigationBarWidget extends StatelessWidget{
+   CustomBottomNavigationBarWidget({super.key, this.selectedOne, this.selectedFourth});
+  final String? selectedOne;
+  final String? selectedFourth;
   @override
   Widget build(BuildContext context) {
     return  BottomNavigationBar(
@@ -35,6 +38,7 @@ class CustomBottomNavigationBarWidget extends StatelessWidget{
             label: "Profile"
         ),
       ],);
+
   }
 
 }
