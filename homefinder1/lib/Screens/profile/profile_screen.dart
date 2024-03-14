@@ -163,6 +163,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   return InkWell(
                                     onTap: () {
                                       controller.selectedIndex = index;
+                                      controller.pendingListingSold();
                                       setState(() {});
                                     },
                                     child: Container(
@@ -201,14 +202,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            "2",
+                            "2 ",
                             style: TextStyle(
                                 color: kDarkBlueColor,
                                 fontWeight: FontWeight.w900,
                                 fontSize: 18,
                                 fontFamily: kRegularFont),
                           ),
-                          Text(" pending",
+                          Text(controller.pendingOrListingOrSold,
                               style: TextStyle(
                                   color: kDarkBlueColor,
                                   fontWeight: FontWeight.w700,
@@ -224,10 +225,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: ListView.separated(
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
-                            controller.pendingListingSold(index);
-                            setState(() {
+                            return controller.listViewItem[index];
 
-                            });
                           },
                           separatorBuilder: (context, index) {
                             return SizedBox(
