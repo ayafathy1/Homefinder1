@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 class CustomBottomNavigationBarWidget extends StatelessWidget{
+  const CustomBottomNavigationBarWidget({super.key, this.selectedOne, this.selectedFourth});
+   final String? selectedOne;
+   final String? selectedFourth;
   @override
   Widget build(BuildContext context) {
     return  Container(
@@ -18,9 +21,9 @@ class CustomBottomNavigationBarWidget extends StatelessWidget{
         selectedItemColor: Color(0xff6C63FF),
         showSelectedLabels: false,
         showUnselectedLabels: false,
-        items: const <BottomNavigationBarItem>[
+        items:  <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Image(image: AssetImage('lib/assets/images/bottomHomeIcon.png')),
+            icon: Image(image: AssetImage(selectedOne??'lib/assets/images/bottomHomeIcon.png')),
             backgroundColor: Color(0xff),
             label: "Home",
 
@@ -36,7 +39,7 @@ class CustomBottomNavigationBarWidget extends StatelessWidget{
               label: "Settings"
           ),
           BottomNavigationBarItem(
-              icon: Image(image: AssetImage('lib/assets/images/PersonIcon.png')),
+              icon: Image(image: AssetImage(selectedFourth??'lib/assets/images/PersonIcon.png')),
               backgroundColor: Color(0xff),
               label: "Profile"
           ),
