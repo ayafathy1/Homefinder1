@@ -10,6 +10,17 @@ class SignUpController extends GetxController{
   final emailaddressController =  TextEditingController();
 
   final passwordController =  TextEditingController();
+  final confirmPasswordController = TextEditingController();
+
+  @override
+  void onInit() {
+    super.onInit();
+    passwordVisible = false;
+    passwordVisible1= false;
+  }
+  bool passwordVisible = false;
+  bool passwordVisible1 = false;
+
 
   @override
 
@@ -58,6 +69,16 @@ class SignUpController extends GetxController{
     else {
       print("not valide");
     }
+  }
+  String? confirmValidator (String? val){
+    if(val!.isEmpty)
+      return 'Empty';
+    else if(val != passwordController.text)
+      return 'Not Match';
+    else if(!RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$').hasMatch(val))
+    {
+      return "Please Enter a Valid password";
+    }else return null;
   }
 
   @override

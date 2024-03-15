@@ -5,6 +5,8 @@ import 'package:homefinder1/Screens/Forgot%20Password/controller/forgot_password
 import 'package:homefinder1/Screens/Succes%20Notification/success_notification.dart';
 import 'package:homefinder1/Widget/custom_text_field_widget.dart';
 
+import '../../services/auth_service.dart';
+
 class ForgotPassword extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,9 @@ class ForgotPassword extends StatelessWidget{
                 height: 50,
                 width: 200,
                 child: ElevatedButton(onPressed: (){
-                  Get.to(() =>  SuccessNotification());
+                  AuthServices.forgetPassword(controller.emailaddressController.text);
+                  Get.to(
+                          () =>  SuccessNotification());
                 }
                   ,
                   child: Row(

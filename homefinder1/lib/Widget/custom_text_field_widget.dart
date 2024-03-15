@@ -22,7 +22,7 @@ class CustomTextFieldWidget extends StatelessWidget{
     return
 
     Padding(
-      padding: const EdgeInsets.all(25.0),
+      padding: const EdgeInsets.all(10.0),
       child: TextFormField(
         cursorColor: Color(0xff6C63FF),
         obscuringCharacter: '*',

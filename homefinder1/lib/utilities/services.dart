@@ -14,7 +14,8 @@ class Services {
  static String advertismentEndPoint = "slider"; //Post
  static String advertismentHasBeenUsedEndPoint = "slider_click"; //Post
  static String linksEndPoint = "social"; //Post
- static String signingUpEndPoint = "signup"; //Post
+ static String signingUpEndPoint = "/api/v1/auth/signup"; //Post
+ static String completeSigningUpEndPoint = "/api/v1/auth/complete-signup";
  static String signingInEndPoint = "/api/v1/auth/login"; //Post
  static String editingMemberDataEndPoint = "member/edit"; //Post
  static String editingMemberPasswordEndPoint = "member/change_password"; //Post
@@ -36,5 +37,5 @@ class Services {
  static String statsEndPoint = "order/new";//post
  static String addingCommentEndPoint = "review/new";//post
  static String getCommentEndPoint = "review";//post
- static String forgetPasswordEndPoint = "member/forget_password";//post
+ static String forgetPasswordEndPoint = "/api/v1/auth/forgot-pass";//post
 }

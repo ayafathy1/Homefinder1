@@ -5,6 +5,7 @@ import 'package:homefinder1/Screens/Upload%20Photo/upload_photo.dart';
 import 'package:homefinder1/Screens/auth/CompleteSignUp/controller/complete_sign_up_controller.dart';
 import 'package:homefinder1/Widget/custom_arrow_back.dart';
 import 'package:homefinder1/Widget/custom_text_field_widget.dart';
+import 'package:homefinder1/services/auth_service.dart';
 
 import '../Signup/signup.dart';
 
@@ -62,6 +63,7 @@ class _CompleteSignUpState extends State<CompleteSignUp> {
                                 width: 200,
                                 child: ElevatedButton(onPressed: (){
                                   if (controller.formkey.currentState!.validate()) {
+                                    AuthServices.completeSigningUp(controller.fisrtnameController.text, controller.lastnameController.text, controller.genderController.text, controller.phoneController.text);
                                    Get.to(()=>  UploadPhoto(),
                                     );
 
