@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 class CustomBottomNavigationBarWidget extends StatelessWidget{
-  const CustomBottomNavigationBarWidget({super.key, this.selectedOne, this.selectedFourth});
+  const CustomBottomNavigationBarWidget({super.key, this.selectedOne, this.selectedFourth, this.selectedFifth});
    final String? selectedOne;
    final String? selectedFourth;
+  final String? selectedFifth;
   @override
   Widget build(BuildContext context) {
     return  Container(
@@ -34,7 +35,7 @@ class CustomBottomNavigationBarWidget extends StatelessWidget{
               label: "Location"
           ),
           BottomNavigationBarItem(
-              icon: Image(image: AssetImage('lib/assets/images/SettingsIcon.png')),
+              icon: Image(image: AssetImage(selectedFifth??'lib/assets/images/SettingsIcon.png')),
               backgroundColor: Color(0xff),
               label: "Settings"
           ),
