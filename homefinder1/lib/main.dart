@@ -4,6 +4,7 @@ import 'package:homefinder1/Screens/Featured%20Estates/featured_estates.dart';
 import 'package:homefinder1/Screens/SplashScreen/splash_Screen.dart';
 import 'package:homefinder1/Screens/add_review/add_review_screen.dart';
 
+import 'Screens/change_password/change_password_screen.dart';
 import 'Screens/edit_profile/edit_profile.dart';
 import 'Screens/home/home_screen.dart';
 import 'Screens/search_filter/search_filter_screen.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
      debugShowCheckedModeBanner: false,
         color: Colors.transparent,
-      home: UploadPhotoScreen()
+      home: ChangePasswordScreen()
     );
   }
 }
