@@ -4,25 +4,25 @@ import 'package:flutter/material.dart';
 class CustomTextFieldWidget extends StatelessWidget{
 
 
-  const CustomTextFieldWidget({Key? key, required this.Controller, required this.validator, required this.keyboardType, required this.textfieldHint, required this.textfieldIcon, required this.ispasswordField, required this.obscureText, required this.suffixIcon}) : super (key: key);
+  const CustomTextFieldWidget({Key? key, required this.Controller, required this.validator, required this.keyboardType, required this.textfieldHint, this.textfieldIcon, required this.ispasswordField, required this.obscureText,  this.suffixIcon, this.formColor}) : super (key: key);
 
 
   final TextEditingController Controller;
   final String? Function(String?) validator ;
   final TextInputType keyboardType ;
   final String textfieldHint;
-
-  final Widget textfieldIcon;
+  final Color? formColor;
+  final Widget? textfieldIcon;
   final bool ispasswordField;
   final bool obscureText ;
-  final Widget suffixIcon;
+  final Widget? suffixIcon;
 
   @override
   Widget build(BuildContext context) {
     return
 
     Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding:  EdgeInsets.all(10.0),
       child: TextFormField(
         cursorColor: Color(0xff6C63FF),
         obscuringCharacter: '*',
@@ -32,7 +32,7 @@ class CustomTextFieldWidget extends StatelessWidget{
         keyboardType: keyboardType,
         decoration: InputDecoration(
           filled: true,
-          fillColor: Color(0xffF4F4F4),
+          fillColor: formColor??Color(0xffF4F4F4),
           hintText: textfieldHint,
           suffixIcon: suffixIcon,
           prefixIcon:textfieldIcon,
