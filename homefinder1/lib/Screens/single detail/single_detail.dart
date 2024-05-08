@@ -21,6 +21,8 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
         builder: (SingleDetailController controller){
         return Scaffold(
           body: SingleChildScrollView(
+            controller: controller.scroll,
+            physics: BouncingScrollPhysics(),
             child: Column(
               children: [
                 Container(
@@ -78,27 +80,27 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
                     ]
                 ),
 
-                SizedBox(height: 20,),
+                SizedBox(height: 5,),
                 Row(
                   children: [
-                    SizedBox(width: 40,),
+                    SizedBox(width: 25,),
                     Text("Woodland Apartment" , style: TextStyle(color: kDarkBlueColor,fontFamily: kRegularFont,fontWeight: FontWeight.w700
                         ,fontSize: 20),),
                   ],
                 ),
-                SizedBox(height: 10,),
+
                 Row(
                   children: [
-                    SizedBox(width: 40,),
+                    SizedBox(width: 25,),
                     Text("1012 Ocean avaneu, New york, USA" , style: TextStyle(color: Color(0xff415770),fontSize: 12,fontFamily:kRegularFont,fontWeight: FontWeight.w500) )
                   ],
                 ),
 
-                SizedBox(height: 5,),
+
 
                 Center(
                     child: Container(
-                      margin: EdgeInsets.only(top: 20),
+                      margin: EdgeInsets.only(top: 5),
                       width: Get.width * 0.93,
                       height: 60,
                       decoration: BoxDecoration(
@@ -107,7 +109,7 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
                       child: Center(
                         child: ListView.separated(
                             padding: EdgeInsets.only(
-                                left: 10, right: 10, top: 6, bottom: 6),
+                                left: 10, right: 10, top: 0, bottom: 0),
                             physics: NeverScrollableScrollPhysics(),
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
@@ -143,24 +145,14 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
                   color:controller.selectedIndex == controller.pOrLOrS
                       ? kPrimaryColor
                       : kGreyColor,
+
                 ),
 
                 Container(
-                  margin: EdgeInsets.only(left: 15, right: 15, top: 5),
+                  margin: EdgeInsets.only(left: 0, right: 0, top: 0),
                   width: Get.width,
-                  height: Get.height * 0.3,
-                  child: ListView.separated(
-                      scrollDirection: Axis.vertical,
-                      itemBuilder: (context, index) {
-                        return controller.listViewItem[index];
 
-                      },
-                      separatorBuilder: (context, index) {
-                        return SizedBox(
-                          width: 500,
-                        );
-                      },
-                      itemCount: 1),
+                  child: Center(child: controller.listViewItem[controller.selectedIndex])
                 )
 
 
