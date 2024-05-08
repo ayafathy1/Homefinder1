@@ -8,6 +8,7 @@ import 'Screens/change_password/change_password_screen.dart';
 import 'Screens/edit_profile/edit_profile.dart';
 import 'Screens/home/home_screen.dart';
 import 'Screens/search_filter/search_filter_screen.dart';
+import 'Screens/single detail/single_detail.dart';
 
 
 void main() {
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
      debugShowCheckedModeBanner: false,
         color: Colors.transparent,
-      home: ChangePasswordScreen()
+      home: SingleDetailScreen()
     );
   }
 }
