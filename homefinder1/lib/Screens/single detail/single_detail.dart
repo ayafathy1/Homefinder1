@@ -108,6 +108,7 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
                           borderRadius: BorderRadius.circular(100)),
                       child: Center(
                         child: ListView.separated(
+
                             padding: EdgeInsets.only(
                                 left: 10, right: 10, top: 0, bottom: 0),
                             physics: NeverScrollableScrollPhysics(),

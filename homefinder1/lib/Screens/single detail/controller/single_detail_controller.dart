@@ -1,4 +1,3 @@
-import 'dart:js';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -424,31 +423,38 @@ class SingleDetailController extends GetxController{
       listViewItem = [];
       descriptionOrGalleryOrReview="Gallery";
       for(var index = 0 ; index<2;index=index+1){
-        return Column(
+         listViewItem.add(Column(
            children: [
-             Row(
-               children: [
-                 Text("Gallery",
-                 style: TextStyle(
-                   color: kVeryDarkBlueColor,
-                   fontFamily: kRegularFont,
-                   fontSize: 14,
-                   fontWeight: FontWeight.w700
-                 ),),
-                 Text(" (400)",
+             Padding(
+               padding: const EdgeInsets.only(left: 10.0,top: 10),
+               child: Row(
+                 children: [
+                   Text("Gallery",
                    style: TextStyle(
-                       color: kPrimaryColor,
-                       fontFamily: kRegularFont,
-                       fontSize: 14,
-                       fontWeight: FontWeight.w700
+                     color: kVeryDarkBlueColor,
+                     fontFamily: kRegularFont,
+                     fontSize: 14,
+                     fontWeight: FontWeight.w700
                    ),),
-               ],
+                   Text(" (400)",
+                     style: TextStyle(
+                         color: kPrimaryColor,
+                         fontFamily: kRegularFont,
+                         fontSize: 14,
+                         fontWeight: FontWeight.w700
+                     ),),
+                 ],
+               ),
              ),
              Container(
-               width: Get.width,
-               height: Get.height*0.5,
-               child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                 crossAxisCount: 3,crossAxisSpacing: 10,mainAxisSpacing: 10
+               width: Get.width*0.95,
+               height: Get.height*0.8,
+               child: GridView.builder(
+                 scrollDirection: Axis.vertical,
+                 physics: NeverScrollableScrollPhysics(),
+                   itemCount: homeDetailImages.length,
+                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                 crossAxisCount: 2,crossAxisSpacing: 10,mainAxisSpacing: 10
                ), itemBuilder:(context,index){
                  return Container(
                    width: 161,
@@ -456,7 +462,12 @@ class SingleDetailController extends GetxController{
                    decoration: BoxDecoration(
                      borderRadius: BorderRadius.circular(5.43)
                    ),
-                   child: Image(image: AssetImage(homeDetailImages[index]),fit: BoxFit.fill,)
+                   child: Image(image:
+                   AssetImage(homeDetailImages[index])
+                     ,fit: BoxFit.fill,
+                     width: 161,
+                     height: 155,
+                   )
                  );
                } ),
              ),
@@ -536,6 +547,17 @@ class SingleDetailController extends GetxController{
              )
 
            ],
+        ));
+      }
+    }
+    else if(selectedIndex==2){
+      listViewItem = [];
+      descriptionOrGalleryOrReview="Review";
+      for(var index = 0 ; index<2;index=index+1){
+        listViewItem.add(
+          Column(
+
+          )
         );
       }
     }

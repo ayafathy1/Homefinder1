@@ -20,137 +20,117 @@ class HomeScreen extends StatelessWidget {
         init: HomeController(),
     builder: (HomeController controller) {
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: Get.height*0.088,
+        leadingWidth: Get.width*0.5,
+        leading:  Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+              child: IconButton(
+                  onPressed: () {},
+                  icon: Image(
+                    image: AssetImage("lib/assets/images/locationIcon 1.png"),
+                    width: 28,
+                    height: 28,
+                    fit: BoxFit.fill,
+                  )),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        "Location",
+                        style: TextStyle(
+                            color: kPrimaryColor,
+                            fontFamily: kRegularFont,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700),
+                      )),
+                  Text(
+                    "Manhattan, New York",
+                    style: TextStyle(
+                        fontSize: 12,
+                        fontFamily: kRegularFont,
+                        fontWeight: FontWeight.w700),
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
+        actions: [Container(
+        width: Get.width*0.3,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            InkWell(
+              child: Container(
+                child: Center(
+                    child: Image(
+                      image: AssetImage(
+                          "lib/assets/images/ion_notifications-outline.png"),
+                      width: 28,
+                      height: 28,
+                      fit: BoxFit.fill,
+                    )),
+                width: 52,
+                height: 52,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(
+                      color: kPrimaryColor,
+                      width: 1.5,
+                    ),
+                    borderRadius: BorderRadius.circular(55)),
+              ),
+            ),
+            InkWell(
+              child: Container(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4.0),
+                      child: Image(
+                        image: AssetImage(
+                            "lib/assets/images/ChatNotifIcon.png"),
+                        width: 23,
+                        height: 23,
+                      ),
+                    ),
+                    Text(
+                      "Chat",
+                      style: TextStyle(
+                          fontFamily: kRegularFont,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 11),
+                    )
+                  ],
+                ),
+                width: 52,
+                height: 52,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(
+                      color: kPrimaryColor,
+                      width: 1.5,
+                    ),
+                    borderRadius: BorderRadius.circular(55)),
+              ),
+            ),
+          ],
+        ),
+      ),],),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         controller: controller.scroll,
         child: Column(
           children: [
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  child: IconButton(
-                      onPressed: () {},
-                      icon: Image(
-                        image: AssetImage("lib/assets/images/locationIcon 1.png"),
-                        width: 28,
-                        height: 28,
-                        fit: BoxFit.fill,
-                      )),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            "Location",
-                            style: TextStyle(
-                                color: kPrimaryColor,
-                                fontFamily: kRegularFont,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w700),
-                          )),
-                      Text(
-                        "Manhattan, New York",
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontFamily: kRegularFont,
-                            fontWeight: FontWeight.w700),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(top: 10.0, bottom: 8.0, left: 40.0),
-                  child: InkWell(
-                    child: Container(
-                      child: Center(
-                          child: Image(
-                        image: AssetImage(
-                            "lib/assets/images/ion_notifications-outline.png"),
-                        width: 28,
-                        height: 28,
-                        fit: BoxFit.fill,
-                      )),
-                      width: 52,
-                      height: 52,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(
-                            color: kPrimaryColor,
-                            width: 1.5,
-                          ),
-                          borderRadius: BorderRadius.circular(55)),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(top: 10.0, bottom: 8.0, left: 10.0),
-                  child: InkWell(
-                    child: Container(
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 4.0),
-                            child: Image(
-                              image: AssetImage(
-                                  "lib/assets/images/ChatNotifIcon.png"),
-                              width: 23,
-                              height: 23,
-                            ),
-                          ),
-                          Text(
-                            "Chat",
-                            style: TextStyle(
-                                fontFamily: kRegularFont,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 11),
-                          )
-                        ],
-                      ),
-                      width: 52,
-                      height: 52,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(
-                            color: kPrimaryColor,
-                            width: 1.5,
-                          ),
-                          borderRadius: BorderRadius.circular(55)),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(top: 10.0, bottom: 8.0, left: 10.0),
-                  child: InkWell(
-                    onTap: () {
-                      Get.to(() => AddListing());
-                    },
-                    child: Container(
-                      width: 52,
-                      height: 52,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image:
-                                  AssetImage("lib/assets/images/Add Home.png")),
-                          color: kPrimaryColor,
-                          border: Border.all(
-                            color: kPrimaryColor,
-                            width: 1.5,
-                          ),
-                          borderRadius: BorderRadius.circular(55)),
-                    ),
-                  ),
-                ),
-              ],
-            ),
             SizedBox(
               height: 10,
             ),
@@ -241,57 +221,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
-            Container(
-              height: Get.height*0.074,
-              width: Get.width,
-              child: ListView.builder(
-                physics:NeverScrollableScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-              itemCount: controller.types.length,
-              itemBuilder: (context, index) {
-               return
-               Row(
-                  children: [
-                    SizedBox(
-                      width:5,
-                    ),
-                    InkWell(
-                      onTap: (){
-                        controller.selectedIndex = index;
-                      controller.update();
-                      },
-                      child: Container(
-                        child: Center(
-                            child: Text(
-                          "${controller.types[index]}",
-                          style: TextStyle(
-                              color: controller.selectedIndex==index?Colors.white:kGreyColor,
-                              fontWeight: FontWeight.w800,
-                              fontFamily: kRegularFont,
-                              fontSize: 13),
-                        )),
-                        height: 55,
-                        width:92,
-                        decoration: BoxDecoration(
-                            color: controller.selectedIndex ==index?kPrimaryColor:kLightGreyColor,
-                            border: Border.all(color: Colors.transparent),
-                            borderRadius: BorderRadius.circular(10.69),
-                            boxShadow: [
-                              BoxShadow(
-                                  color:  controller.selectedIndex==index?Colors.grey:Colors.transparent,
-                                  offset: Offset(0, 0),
-                                  blurRadius: 20)
-                            ]),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
 
-                  ],
-                );},
-              ),
-            ),
             Row(
               children: [
                 SizedBox(
@@ -462,11 +392,11 @@ class HomeScreen extends StatelessWidget {
             ),
             Container(
               width: Get.width,
-              height: Get.height * 0.1402,
+              height: Get.height*0.7,
               child: ListView.builder(
                 controller: controller.scroll,
                   itemCount: 4,
-                  physics: BouncingScrollPhysics(),
+                  physics: NeverScrollableScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   itemBuilder: (context, index) {
                     return Column(
