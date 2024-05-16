@@ -5,6 +5,7 @@ import 'package:homefinder1/Screens/SplashScreen/splash_Screen.dart';
 import 'package:homefinder1/Screens/add_review/add_review_screen.dart';
 
 import 'Screens/add_listing_1st_detail/add_listing_1st_detail_screen.dart';
+import 'Screens/add_listing_second_details/add_listing_second_details_screen.dart';
 import 'Screens/change_password/change_password_screen.dart';
 import 'Screens/edit_profile/edit_profile.dart';
 import 'Screens/home/home_screen.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
      debugShowCheckedModeBanner: false,
         color: Colors.transparent,
-      home: AddListingFirstDetailScreen()
+      home: AddListingSecondDetailsScreen()
     );
   }
 }
