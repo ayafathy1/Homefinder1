@@ -25,7 +25,8 @@ class _AddListingFirstDetailScreenState extends State<AddListingFirstDetailScree
     builder: (AddListingFirstDetailController controller) {
     return Scaffold(
       appBar: AppBar(
-        leadingWidth: Get.width * 0.2,
+        toolbarHeight: Get.height*0.1,
+        leadingWidth: Get.width * 0.25,
         leading: CustomArrowBack(),
         title: Text(
           "Add Listing",
