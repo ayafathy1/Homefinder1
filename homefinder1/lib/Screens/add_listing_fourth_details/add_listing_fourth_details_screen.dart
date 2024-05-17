@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -697,99 +699,102 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
                         showBottomSheet(
                             context: context,
                             builder: (BuildContext context) {
-                              return Container(
-                                width: Get.width,
-                                height: Get.height * 0.55,
-                                decoration: BoxDecoration(
-                                  boxShadow: [BoxShadow(
-                                    color: Colors.grey,
-                                    blurRadius: 15
-                                  )],
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(50),
-                                      topRight: Radius.circular(50),
-                                    )
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Container(
-                                      width: Get.width * 0.15,
-                                      height: 3,
-                                      decoration: BoxDecoration(
-                                          color: Color(0xff53587A)
-                                      ),
-                                    ),
-                                    Container(
-                                      child: Image(
-                                        image: AssetImage("lib/assets/images/SuccessfullyIllustration.png"),
-                                        fit: BoxFit.fill,
-                                      ),
-                                    ),
-                                    Column(
-                                      children: [
-                                        Text(
-                                          "Your listing is now ",
-                                          style: TextStyle(
-                                              color: kDarkBlueColor,
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 25,
-                                              fontFamily: kRegularFont
-                                          ),
+                              return  BackdropFilter(
+                                filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                                child: Container(
+                                  width: Get.width,
+                                  height: Get.height * 0.55,
+                                  decoration: BoxDecoration(
+                                    boxShadow: [BoxShadow(
+                                      color: Colors.grey,
+                                      blurRadius: 15
+                                    )],
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(50),
+                                        topRight: Radius.circular(50),
+                                      )
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Container(
+                                        width: Get.width * 0.15,
+                                        height: 3,
+                                        decoration: BoxDecoration(
+                                            color: Color(0xff53587A)
                                         ),
-                                        Text(
-                                          "published",
-                                          style: TextStyle(
-                                              color: Color(0xff1F4C6B),
-                                              fontFamily: kRegularFont,
-                                              fontSize: 25,
-                                              fontWeight: FontWeight.w900
+                                      ),
+                                      Container(
+                                        child: Image(
+                                          image: AssetImage("lib/assets/images/SuccessfullyIllustration.png"),
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
+                                      Column(
+                                        children: [
+                                          Text(
+                                            "Your listing is now ",
+                                            style: TextStyle(
+                                                color: kDarkBlueColor,
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 25,
+                                                fontFamily: kRegularFont
+                                            ),
                                           ),
-                                        )
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        CustomElevatedButtonWidget(
-                                          text: "Add More",
-                                          onPressed: (){},
-                                          textStyle: TextStyle(
-                                              color: kDarkBlueColor,
-                                              fontWeight: FontWeight.w900,
-                                              fontSize: 16,
-                                              fontFamily: kRegularFont
+                                          Text(
+                                            "published",
+                                            style: TextStyle(
+                                                color: Color(0xff1F4C6B),
+                                                fontFamily: kRegularFont,
+                                                fontSize: 25,
+                                                fontWeight: FontWeight.w900
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          CustomElevatedButtonWidget(
+                                            text: "Add More",
+                                            onPressed: (){},
+                                            textStyle: TextStyle(
+                                                color: kDarkBlueColor,
+                                                fontWeight: FontWeight.w900,
+                                                fontSize: 16,
+                                                fontFamily: kRegularFont
+                                            ),
+                                            style: ElevatedButton.styleFrom(
+                                                fixedSize: Size(Get.width*0.4, Get.height*0.08),
+                                                backgroundColor: Color(0xffF5F4F8),
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.circular(20)
+                                                )
+                                            ),
                                           ),
-                                          style: ElevatedButton.styleFrom(
+                                          CustomElevatedButtonWidget(
+                                            text: "Finish",
+                                            onPressed: (){},
+                                            textStyle: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w900,
+                                                fontSize: 16,
+                                                fontFamily: kRegularFont
+                                            ),
+                                            style: ElevatedButton.styleFrom(
                                               fixedSize: Size(Get.width*0.4, Get.height*0.08),
-                                              backgroundColor: Color(0xffF5F4F8),
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.circular(20)
-                                              )
-                                          ),
-                                        ),
-                                        CustomElevatedButtonWidget(
-                                          text: "Finish",
-                                          onPressed: (){},
-                                          textStyle: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w900,
-                                              fontSize: 16,
-                                              fontFamily: kRegularFont
-                                          ),
-                                          style: ElevatedButton.styleFrom(
-                                            fixedSize: Size(Get.width*0.4, Get.height*0.08),
-                                              backgroundColor: kPrimaryColor,
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.circular(20)
-                                              )
-                                          ),
-                                        )
-                                      ],
-                                    )
-                                  ],
+                                                backgroundColor: kPrimaryColor,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.circular(20)
+                                                )
+                                            ),
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
                                 ),
                               );
                             }
