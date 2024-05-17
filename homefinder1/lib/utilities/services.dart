@@ -1,7 +1,7 @@
 
 
 class Services {
- static String baseEndPoint = "http://localhost:8080";
+ static String baseEndPoint = "https://home-finder-back-end-i7ca.onrender.com";
  static String categoryEndPoint = "ctg"; //Post
 
  static String getGovernmentsEndPoint = "area";//post
