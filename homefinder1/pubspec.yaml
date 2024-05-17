@@ -41,6 +41,9 @@ dependencies:
   flutter_arc_text: ^0.6.0
   syncfusion_flutter_sliders: ^24.2.9
   intl: ^0.19.0
+  cool_alert: ^2.0.1
+  flutter_animate: ^4.2.0
+
   flutter_rating_bar: ^4.0.1
   share_plus: ^7.0.2
   dio: ^5.3.0

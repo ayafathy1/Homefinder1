@@ -51,12 +51,12 @@ class ApiService extends GetxService {
             contentType: contentType,
              headers: headers,
           ));
-      if (response.statusCode != 200) {
+      if (response.statusCode != 200 || response.statusCode != 400) {
         throw "${response.statusMessage}\n${response.statusCode}";
       }
       //Parse response
 
-      if (response.statusCode != 200 || response.data == null) {
+      if (response.statusCode != 200 || response.statusCode != 400 || response.data == null) {
         throw "${response.statusMessage}";
       }
       if (onSuccess != null) {
