@@ -6,6 +6,7 @@ abstract class StorageKeys {
   StorageKeys();
   static const String activeLocale = "ACTIVE_LOCAL";
   static const String userId = "User_Id";
+  static const String userToken = "User_Token";
   static const String userName = "User_Name";
 
 }
@@ -24,11 +25,16 @@ class StorageService extends GetxService {
   //to save id of the account
   Future<void> saveAccountId(String userId) async =>
       _prefs.setString(StorageKeys.userId, userId);
+  Future<void> saveAccountToken(String userToken) async =>
+      _prefs.setString(StorageKeys.userToken, userToken);
   Future<void> saveAccountName(String userName) async =>
       _prefs.setString(StorageKeys.userName, userName);
 
   String get getId {
     return _prefs.getString(StorageKeys.userId)?? "0";
+  }
+  String get getToken {
+    return _prefs.getString(StorageKeys.userToken)?? "0";
   }
   String get userName {
     return _prefs.getString(StorageKeys.userName)?? " ";

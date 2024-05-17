@@ -188,7 +188,7 @@ class _SignUpState extends State<SignUp> {
                           child: ElevatedButton(
                             onPressed: () {
                               if (controller.formkey.currentState!.validate()) {
-                                controller.registerWithEmail();
+                                controller.registerWithEmail(context);
                               }
                             },
                             child: Row(
