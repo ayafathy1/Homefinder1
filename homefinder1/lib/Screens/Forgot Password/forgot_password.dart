@@ -42,7 +42,7 @@ class ForgotPassword extends StatelessWidget{
                 height: 50,
                 width: 200,
                 child: ElevatedButton(onPressed: (){
-                  AuthServices.forgetPassword(controller.emailaddressController.text);
+                  AuthServices.forgetPassword(controller.emailaddressController.text,context);
                   Get.to(
                           () =>  SuccessNotification());
                 }

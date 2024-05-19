@@ -1,83 +1,76 @@
-// ignore_for_file: avoid_print
+import 'dart:convert';
+import 'dart:io';
+import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:cool_alert/cool_alert.dart';
 
-import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart' hide Response, FormData;
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-
-
-class ApiService extends GetxService {
+class ApiService {
   static final ApiService _apiUtil = ApiService._();
-  ApiService._() {
-    init();
-  }
-  factory ApiService() {
-    return _apiUtil;
-  }
+  ApiService._();
+  factory ApiService() => _apiUtil;
 
-  Dio dio = Dio();
-
-  void init() {
-    dio.options.baseUrl = "https://home-finder-back-end-i7ca.onrender.com";
-    dio.options.connectTimeout = const Duration(milliseconds: 600000) ;
-    dio.options.receiveTimeout =  const Duration(milliseconds: 600000) ;
-    dio.interceptors.add(PrettyDioLogger(
-      requestHeader: true,
-      requestBody: true,
-      responseBody: true,
-      responseHeader: true,
-      compact: true,
-    ));
-  }
+  final String baseUrl = "https://home-finder-back-end-i7ca.onrender.com";
 
   Future<dynamic> request<T>(
-    String endPoint,
-    String method, {
-    dynamic data,
-        Map<String, dynamic>? headers,
-    Map<String, dynamic>? queryParamters,
-    String contentType = "application/json",
-    Function(String errorMsg)? errorDialog,
-    Function(String? successMsg)? onSuccess,
-    Function(String errorMsg)? errorMessage,
-  }) async {
-
+      String endPoint,
+      String method, {
+        dynamic data,
+        Map<String, String>? headers,
+        Map<String, dynamic>? queryParameters,
+        Function(String errorMsg)? errorDialog,
+        Function(String? successMsg)? onSuccess,
+        Function(String errorMsg)? errorMessage,
+        required BuildContext context, // Add BuildContext parameter
+      }) async {
     try {
-      Response response = await dio.request<T>(endPoint,
-          data: data ?? {},
-          queryParameters: queryParamters,
-          options: Options(
-            method: method,
-            contentType: contentType,
-             headers: headers,
-          ));
-      if (response.statusCode != 200 || response.statusCode != 400) {
-        throw "${response.statusMessage}\n${response.statusCode}";
-      }
-      //Parse response
+      Uri uri = Uri.parse(baseUrl + endPoint);
+      HttpClient httpClient = HttpClient();
+      HttpClientRequest request;
 
-      if (response.statusCode != 200 || response.statusCode != 400 || response.data == null) {
-        throw "${response.statusMessage}";
+      if (method == 'GET') {
+        request = await httpClient.getUrl(uri);
+      } else {
+        request = await httpClient.postUrl(uri);
+        request.headers.contentType = ContentType.json;
+        request.write(jsonEncode(data));
       }
-      if (onSuccess != null) {
-        print('ApiService.request msg= ${response.statusMessage}');
-        onSuccess(response.statusMessage);
+
+      if (headers != null) {
+        headers.forEach((key, value) {
+          request.headers.add(key, value);
+        });
       }
-      return response.data;
-    } catch (e) {
-      print("Error: $e");
+
+      HttpClientResponse response = await request.close();
+
+      if (response.statusCode == HttpStatus.ok) {
+        String responseBody = await response.transform(utf8.decoder).join();
+        if (onSuccess != null) {
+          onSuccess(responseBody);
+        }
+        return json.decode(responseBody);
+      } else {
+        String errorMessage = await response.transform(utf8.decoder).join();
+        throw errorMessage;
+      }
+    } catch (e, stackTrace) {
+      String Message = " $e";
+      String part = Message.substring(29, Message.length-2);
+      print("Error: $part");
+      print("StackTrace: $stackTrace");
       if (errorDialog == null && errorMessage == null) {
-        await Get.defaultDialog(
-          title:"error",
-          content:const Text("try again later"),
-          middleText: "",
+        CoolAlert.show(
+          context: context,
+          type: CoolAlertType.error,
+          title: "Sorry!",
+          text: part,
         );
       }
       if (errorDialog != null) {
-        await errorDialog(e.toString());
+        errorDialog("Error: $part");
       }
       if (errorMessage != null) {
-        errorMessage(e.toString());
+        errorMessage("Error: $part");
       }
       return null;
     }

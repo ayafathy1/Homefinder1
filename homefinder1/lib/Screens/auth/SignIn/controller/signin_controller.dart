@@ -1,5 +1,12 @@
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:homefinder1/Screens/home/home_screen.dart';
+
+import '../../../../models/auth_model.dart';
+import '../../../../services/auth_service.dart';
+import '../../../../utilities/memory.dart';
 
 class SignInController extends GetxController{
   @override
@@ -48,5 +55,31 @@ saveAndValidate() {
     print("not valide");
   }
 }
+  Future<void> SignInWithEmail(BuildContext context) async {
+    try {
+      AuthModel? data = await AuthServices.signingIn(
+          emailaddressController.text,
+          passwordController.text,
+          context
+      );
+      if (data?.status == "success") {
+        await Get.find<StorageService>().saveAccountId(data?.userId ?? "");
+        await Get.find<StorageService>().saveAccountToken(data?.token ?? "");
+        Get.to(() => HomeScreen());
+      }
+    } catch (e) {
+      // Handle bad request error
+      String errorMessage = " $e";
+      String part = errorMessage.substring(26, 35);
+      // Show error message on the screen
+      CoolAlert.show(
+        context: context,
+        type: CoolAlertType.error,
+        title: "Error",
+        text: part,
+      );
+    }
+
+  }
 
 }

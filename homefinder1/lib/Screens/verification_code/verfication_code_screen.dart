@@ -1,84 +1,158 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/auth/CompleteSignUp/complete_sign_up.dart';
+import 'package:homefinder1/Screens/auth/SignIn/signin.dart';
 import 'package:homefinder1/Widget/custom_arrow_back.dart';
-class VerficationCode extends StatelessWidget{
+import 'package:timer_builder/timer_builder.dart';
+
+import 'controller/verification_code_controller.dart';
+
+class VerficationCode extends StatefulWidget {
+  @override
+  State<VerficationCode> createState() => _VerficationCodeState();
+}
+
+class _VerficationCodeState extends State<VerficationCode> {
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
-       appBar: AppBar(title: Text('                      Welcome!',
-       style: TextStyle(fontSize: 0, color: Colors.transparent)),
-    backgroundColor: Colors.transparent,
-    elevation: 0,
-    ),
-    body: SingleChildScrollView(
-      child: Center(
-        child: Column(
-        children: [
-          CustomArrowBack(),
-          Text("Enter 4-digit", style: TextStyle(fontSize: 30 , fontWeight: FontWeight.bold) ,),
-          Text("Verfication Code" , style: TextStyle(fontSize: 30 , fontWeight: FontWeight.bold)),
+    return GetBuilder<VerficationCodeController>(
+      init: VerficationCodeController(),
+      builder: (VerficationCodeController controller) {
+        return Scaffold(
+          appBar: AppBar(
+            leadingWidth: Get.width*0.2,
+            leading:  CustomArrowBack(),
+            toolbarHeight: Get.height*0.12,
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+          ),
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Container(
+                height: Get.height*0.17,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      "Enter 6-digit",
+                      style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "Verification Code",
+                      style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    ),
+
+                    Text("Code sent to your email. Code will expire in:"),
+                    TimerBuilder.periodic(
+                      Duration(seconds: 1),
+                      builder: (context) {
+                        // Calculate remaining time
+                        Duration remainingTime = controller.calculateRemainingTime();
+                        // Format remaining time as HH:MM:SS
+                        String formattedTime = controller.formatTime(remainingTime);
+                        // Return the formatted time widget
+                        return Text(
+                          formattedTime,
+                          style: TextStyle(fontSize: 20),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
           
-          SizedBox(height: 20,),
-          Text("code send to your email code will expire in 01:30"),
-          SizedBox(height: 30,),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: TextField(
-              maxLength: 4,
-              keyboardType: TextInputType.number,
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-              ],
-              decoration: InputDecoration(
-                fillColor: Color(0xffF4F4F4),
-                filled: true,
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide(
-                    color: Color(0xffF4F4F4),
-                    width: 3,
+              Padding(
+                padding: const EdgeInsets.only(bottom: 15.0,right: 10,left: 10),
+                child: SingleChildScrollView(
+                  child: Form(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: TextFormField(
+                            controller: controller.verificationCodeController,
+                            maxLength: 6,
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                            ],
+                            decoration: InputDecoration(
+                              fillColor: Color(0xffF4F4F4),
+                              filled: true,
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide: BorderSide(
+                                  color: Color(0xffF4F4F4),
+                                  width: 3,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        Row(
+                          children: [
+                            SizedBox(width: 50,),
+                            Text("Didn't receive a code?", style: TextStyle(fontSize: 20),),
+                            TextButton(
+                              onPressed: () async {
+                                controller.resendCode();
+                              },
+                              child: Text(
+                                "Resend",
+                                style: TextStyle(color:controller.remainingTimeInSeconds==0?Color(0xff6C63FF):Colors.grey, fontSize: 20),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ),
-            )
-          ),
-          SizedBox(height: 30,),
-          Row(children: [
-            SizedBox(width: 50,),
-            Text("Didn't recieve a code?" ,style: TextStyle(fontSize: 20),),
-            TextButton(onPressed: (){}, child:Text("Resend" , style: TextStyle(color: Color(0xff6C63FF) ,fontSize: 20),),)
-
-          ],),
-
-          SizedBox(height: 300,),
-
-          SizedBox(
-            height: 50,
-            width: 200,
-            child: ElevatedButton(onPressed: (){
-              Get.to(() =>  CompleteSignUp(),
-              );
-            },
-              child: Row(
-                children: [
-                  Text("          Next" , style: TextStyle(color: Colors.white , fontSize: 20,fontWeight: FontWeight.bold),),
-                  SizedBox(width: 10,),
-                  Icon(Icons.navigate_next , size: 30,),
-                ],
+              ElevatedButton(
+                onPressed: () async {
+                  String? verificationCode = await controller.fetchVerificationCode();
+                  if (verificationCode == controller.verificationCodeController.text) {
+                    Get.to(() => CompleteSignUp());
+                  } else {
+                    // Verification code doesn't match
+                    // Handle invalid verification code
+                    print('Invalid verification code');
+                  }
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Center(
+                      child: Text(
+                        "Next",
+                        style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    SizedBox(width: 10,),
+                    Icon(Icons.navigate_next, size: 30,),
+                  ],
+                ),
+                style: ElevatedButton.styleFrom(
+                  fixedSize:Size(190, 65),
+                  backgroundColor: Color(0xff6C63FF),
+          
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                ),
               ),
-              style: ElevatedButton.styleFrom(backgroundColor:Color(0xff6C63FF),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(28),
-                ) ,
-              ),
-            ),
+            ],
           ),
-
-
-      ]),
-    )));
+        );
+      },
+    );
   }
-
 }

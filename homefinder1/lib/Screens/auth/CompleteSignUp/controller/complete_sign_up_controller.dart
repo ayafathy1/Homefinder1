@@ -1,14 +1,21 @@
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:homefinder1/Screens/edit_profile/edit_profile.dart';
+import 'package:homefinder1/Screens/home/home_screen.dart';
+
+import '../../../../models/auth_model.dart';
+import '../../../../services/auth_service.dart';
+import '../../../../utilities/memory.dart';
 
 class CompleteSignUpController extends GetxController{
 
   final  formkey =  GlobalKey<FormState>();
 
-  final fisrtnameController =  TextEditingController();
-  final lastnameController =  TextEditingController();
-  final genderController  = TextEditingController();
-  final phoneController = TextEditingController();
+  final  fisrtnameController =  TextEditingController();
+  final  lastnameController =  TextEditingController();
+  final  genderController  = TextEditingController();
+  final  phoneController = TextEditingController();
 
 
   @override
@@ -56,10 +63,33 @@ class CompleteSignUpController extends GetxController{
       return "   Enter Correct Phone No." ; }
   }
 
+
+
+
+Future<void> CompleteSignUp(BuildContext context) async {
+  try {
+    AuthModel? data = await AuthServices.completeSigningUp(
+        fisrtnameController.text,
+        lastnameController .text,
+        genderController.text,
+        phoneController.text,
+        context
+    );
+    if (data?.status == "success") {
+      Get.to(() =>UploadPhotoScreen());
+    }
+  } catch (e) {
+    String errorMessage = " $e";
+    String part = errorMessage.substring(26, 35);
+    CoolAlert.show(
+      context: context,
+      type: CoolAlertType.error,
+      title: "Error",
+      text: part,
+    );
+  }
+
 }
-
-
-
 
 
   @override
@@ -73,7 +103,7 @@ class CompleteSignUpController extends GetxController{
     else {
       print("not valide");
     }
-  }
+  }}
 
   @override
   Widget build(BuildContext context) {

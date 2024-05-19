@@ -1,10 +1,10 @@
 
 
 class Services {
- static String baseEndPoint = "http://localhost:8080";
- static String categoryEndPoint = "ctg"; //Post
+ static String baseEndPoint = "https://home-finder-back-end-i7ca.onrender.com";
+ static String resendVerificationEndPoint = "/api/v1/auth/resend-code/65ef8459c2bd7a5646b05034"; //Post
 
- static String getGovernmentsEndPoint = "area";//post
+ static String verificationCodeEndPoint = "/api/v1/auth/verification/65ef8459c2bd7a5646b05034";//post
  static String shopEndPoint = "shop"; //Post
  static String productEndPoint = "item"; //Post
   static String productPagenationEndPoint = "item_pagination"; //Post

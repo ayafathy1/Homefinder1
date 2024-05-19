@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:homefinder1/Screens/auth/SignIn/signin.dart';
 import 'package:homefinder1/Screens/verification_code/verfication_code_screen.dart';
 import 'package:homefinder1/Widget/custom_text_field_widget.dart';
 import 'package:homefinder1/Screens/auth/Signup/controller/signup_controller.dart';
 import 'package:homefinder1/utilities/colors.dart';
 
+import '../../../utilities/api_service.dart';
 import '../../../utilities/constants.dart';
 
 class SignUp extends StatefulWidget {
@@ -13,6 +15,8 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  @override
+
   bool rememberMe = false;
 
   void _onRememberMeChanged(bool? newValue) => setState(() {
@@ -27,6 +31,9 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
+
+
+
     return GetBuilder(
         init: SignUpController(),
         builder: (SignUpController controller) {
@@ -165,23 +172,27 @@ class _SignUpState extends State<SignUp> {
                             },
                           ),
                         ),
-                        Row(children: [
-                          Checkbox(
-                              value: rememberMe, onChanged: _onRememberMeChanged),
-                          Text(
-                            "by checking the box you agree to our",
-                            style: TextStyle(fontSize: 12),
-                          ),
-                          Text(
-                            "Terms",
-                            style: TextStyle(color: Color(0xff6C63FF)),
-                          ),
-                          Text("and"),
-                          Text(
-                            "Conditions",
-                            style: TextStyle(color: Color(0xff6C63FF)),
-                          ),
-                        ]),
+                        Container(
+                          width: Get.width,
+                          height: Get.height*0.05,
+                          child: Row(children: [
+                            Checkbox(
+                                value: rememberMe, onChanged: _onRememberMeChanged),
+                            Text(
+                              "by checking the box you agree to our",
+                              style: TextStyle(fontSize: 12),
+                            ),
+                            Text(
+                              "Terms",
+                              style: TextStyle(color: Color(0xff6C63FF)),
+                            ),
+                            Text("and"),
+                            Text(
+                              "Conditions",
+                              style: TextStyle(color: Color(0xff6C63FF)),
+                            ),
+                          ]),
+                        ),
                         SizedBox(
                           height: 55,
                           width: 300,
@@ -254,16 +265,18 @@ class _SignUpState extends State<SignUp> {
                               color: Color(0xffC4C4C4).withOpacity(0.7),
                               borderRadius: BorderRadius.circular(25)),
                         ),
-                        SizedBox(
-                          height: 15,
-                        ),
+
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                                "                               Already a member?"),
-                            Text(
-                              "Log In",
-                              style: TextStyle(color: Color(0xff6C63FF)),
+                                "Already a member?"),
+                            TextButton(
+                              onPressed: () { Get.to(()=>SignIn()); },
+                              child: Text(
+                                "Log In",
+                                style: TextStyle(color: Color(0xff6C63FF)),
+                              ),
                             )
                           ],
                         ),

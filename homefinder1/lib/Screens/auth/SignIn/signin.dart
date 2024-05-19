@@ -151,8 +151,8 @@ class _SignInState extends State<SignIn> {
                                       .validate()) {
                                     AuthServices.signingIn(
                                         controller.emailaddressController.text,
-                                        controller.passwordController.text);
-                                    Get.to(() => HomeScreen());
+                                        controller.passwordController.text,context);
+
                                   }
                                 },
                                 textStyle: TextStyle(
