@@ -3,8 +3,14 @@
 class Services {
  static String baseEndPoint = "https://home-finder-back-end-i7ca.onrender.com";
  static String resendVerificationEndPoint = "/api/v1/auth/resend-code/65ef8459c2bd7a5646b05034"; //Post
-
  static String verificationCodeEndPoint = "/api/v1/auth/verification/65ef8459c2bd7a5646b05034";//post
+ static String sendMessageEndPoint = "/api/v1/chat/send/";//post
+ static String getConversationEndPoint = "/api/v1/chat/get-conversation/";//get
+ static String getUsersChatListEndPoint = "/api/v1/chat/getChatUsers";//get
+ static String getSearchInUsersChatListEndPoint = "/api/v1/chat/search-users";//get
+ static String editMessageEndPoint = "/api/v1/chat/edit-message/";//patch
+ static String deleteMessageEndPoint = "/api/v1/chat/delete-message/";//delete
+ static String deleteConversationEndPoint = "/api/v1/chat/delete-conversation/";//delete
  static String shopEndPoint = "shop"; //Post
  static String productEndPoint = "item"; //Post
   static String productPagenationEndPoint = "item_pagination"; //Post
