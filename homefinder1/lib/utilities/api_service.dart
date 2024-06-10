@@ -3,13 +3,14 @@ import 'dart:io';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:cool_alert/cool_alert.dart';
+import 'package:homefinder1/utilities/services.dart';
 
 class ApiService {
   static final ApiService _apiUtil = ApiService._();
   ApiService._();
   factory ApiService() => _apiUtil;
 
-  final String baseUrl = "https://home-finder-back-end-i7ca.onrender.com";
+  final String baseUrl = Services.baseEndPoint;
 
   Future<dynamic> request<T>(
       String endPoint,
@@ -32,18 +33,20 @@ class ApiService {
       } else {
         request = await httpClient.postUrl(uri);
         request.headers.contentType = ContentType.json;
-        request.write(jsonEncode(data));
+
       }
 
       if (headers != null) {
+
         headers.forEach((key, value) {
           request.headers.add(key, value);
         });
       }
+      request.write(jsonEncode(data));
 
       HttpClientResponse response = await request.close();
 
-      if (response.statusCode == HttpStatus.ok) {
+      if (response.statusCode <= 300) {
         String responseBody = await response.transform(utf8.decoder).join();
         if (onSuccess != null) {
           onSuccess(responseBody);

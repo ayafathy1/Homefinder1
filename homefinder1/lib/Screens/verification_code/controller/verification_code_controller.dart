@@ -1,11 +1,17 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:homefinder1/Screens/auth/CompleteSignUp/complete_sign_up.dart';
+import 'package:homefinder1/models/serification_model.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../services/auth_service.dart';
+
 class VerficationCodeController extends GetxController {
+  final  formkey =  GlobalKey<FormState>();
   final TextEditingController verificationCodeController = TextEditingController();
   late Timer _timer;
   int remainingTimeInSeconds = 60; // 90 minutes in seconds
@@ -50,33 +56,31 @@ class VerficationCodeController extends GetxController {
     _timer.cancel(); // Cancel timer when controller is closed to prevent memory leaks
   }
 
-  Future<String?> fetchVerificationCode() async {
-    final url = Uri.parse('https://home-finder-back-end-i7ca.onrender.com/api/v1/auth/verification/65ef8459c2bd7a5646b05034');
-    try {
-      final response = await http.get(url);
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> data = json.decode(response.body);
-        return data['verificationCode'];
-      }
-    } catch (e) {
-      print('Error fetching verification code: $e');
-      return null;
-    }
-  }
 
-  Future<void> resendVerificationCode() async {
-    final url = Uri.parse('https://home-finder-back-end-i7ca.onrender.com/api/v1/auth/resend-code/65ef8459c2bd7a5646b05034');
+
+  Future<void> sendVerificationCode(BuildContext context,int code) async {
     try {
-      final response = await http.post(url, body: {'userId': 'your_user_id_here'});
-      if (response.statusCode == 200) {
-        print('Verification code resent successfully.');
-        // Reset remaining time when code is resent
-        remainingTimeInSeconds = 5400;
-        // Restart timer
-        startTimer();
+      VerificationModel? data = await AuthServices.SendingVerificationCode(
+          context,
+          verificationCodeController.text
+      );
+
+      if (data?.status == "success") {
+
+        Get.to(() => CompleteSignUp());
       }
     } catch (e) {
-      print('Error resending verification code: $e');
+      // Handle bad request error
+      String errorMessage = " $e";
+      String part = errorMessage.substring(26, 35);
+      // Show error message on the screen
+      CoolAlert.show(
+        context: context,
+        type: CoolAlertType.error,
+        title: "Error",
+        text: part,
+      );
     }
+
   }
 }

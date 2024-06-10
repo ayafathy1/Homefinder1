@@ -1,9 +1,11 @@
 
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:homefinder1/models/serification_model.dart';
 
 import '../models/auth_model.dart';
 import '../utilities/api_service.dart';
+import '../utilities/memory.dart';
 import '../utilities/services.dart';
 
 class AuthServices{
@@ -42,16 +44,24 @@ class AuthServices{
       return AuthModel.fromJson(data);
     }
     return null;
-  }  static Future<AuthModel?> SendingVerificationCose(String userId,BuildContext context) async {
+  }
+  static Future<VerificationModel?> SendingVerificationCode(BuildContext context,code) async {
     var data = await api.request(context: context,Services.verificationCodeEndPoint, "POST",data: {
-      "userId": userId,
-    });
+      "otp": code,
+    },headers:{"authorization":await Get.find<StorageService>().getToken});
     if (data != null) {
-      return AuthModel.fromJson(data);
+      return VerificationModel.fromJson(data);
     }
     return null;
   }
-
+  static Future<VerificationModel?> reSendingVerificationCode(BuildContext context) async {
+    var data = await api.request(context: context,Services.resendVerificationEndPoint, "GET",data: {
+    },headers:{"Authorization":await Get.find<StorageService>().getToken});
+    if (data != null) {
+      return VerificationModel.fromJson(data);
+    }
+    return null;
+  }
   static forgetPassword(String email,BuildContext context) async {
     var data = await api.request(context: context,Services.forgetPasswordEndPoint, "POST",data: {
       "email":email,

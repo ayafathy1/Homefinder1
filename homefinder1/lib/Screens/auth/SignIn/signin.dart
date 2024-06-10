@@ -149,9 +149,9 @@ class _SignInState extends State<SignIn> {
                                 onPressed: () {
                                   if (controller.formkey.currentState!
                                       .validate()) {
-                                    AuthServices.signingIn(
-                                        controller.emailaddressController.text,
-                                        controller.passwordController.text,context);
+                                    controller.SignInWithEmail(
+                                        context);
+
 
                                   }
                                 },

@@ -4,9 +4,12 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_arc_text/flutter_arc_text.dart';
+import 'package:get/get.dart';
+import 'package:homefinder1/Screens/home/home_screen.dart';
 import 'package:splash_view/source/presentation/pages/pages.dart';
 import 'package:splash_view/source/presentation/presentation.dart';
 
+import '../../utilities/memory.dart';
 import '../WelcomeScreen/welcomescreen.dart';
 
 class SplashScreen extends StatelessWidget{
@@ -15,7 +18,8 @@ class SplashScreen extends StatelessWidget{
     return SplashView(
       backgroundColor: Color(0xff6C63FF),
       duration: Duration(seconds: 6),
-      done: Done(Welcomescreen()),
+      done: Done(
+           Get.find<StorageService>().checkUserIsSignedIn?const HomeScreen():Welcomescreen()),
 
       logo: Stack(
         alignment: Alignment.topCenter,

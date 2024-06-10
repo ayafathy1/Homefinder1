@@ -1,41 +1,14 @@
 
 
 class Services {
- static String baseEndPoint = "https://home-finder-back-end-i7ca.onrender.com";
- static String resendVerificationEndPoint = "/api/v1/auth/resend-code/65ef8459c2bd7a5646b05034"; //Post
+ static String baseEndPoint = "https://home-finder-back-end-i7ca.onrender.com/api/v1/";
+ static String resendVerificationEndPoint = "auth/resend-code"; //Post
+ static String verificationCodeEndPoint = "auth/verification";//post
+ static String signingUpEndPoint = "auth/signup"; //Post
+ static String completeSigningUpEndPoint = "auth/complete-signup";
+ static String signingInEndPoint = "auth/login"; //Post
+ static String createResidence = "residence/create"; //Post
+ static String forgetPasswordEndPoint = "auth/forgot-pass";//post
+ static String firstCompleteEndPoint = "residence/complete/1st/";
 
- static String verificationCodeEndPoint = "/api/v1/auth/verification/65ef8459c2bd7a5646b05034";//post
- static String shopEndPoint = "shop"; //Post
- static String productEndPoint = "item"; //Post
-  static String productPagenationEndPoint = "item_pagination"; //Post
- static String mainCategoryDataProductEndPoint = "ctg/view"; //Post
- static String shopDetailedEndPoint = "shop/view"; //Post
- static String productDetailedEndPoint = "item/view"; //Post
- static String advertismentEndPoint = "slider"; //Post
- static String advertismentHasBeenUsedEndPoint = "slider_click"; //Post
- static String linksEndPoint = "social"; //Post
- static String signingUpEndPoint = "/api/v1/auth/signup"; //Post
- static String completeSigningUpEndPoint = "/api/v1/auth/complete-signup";
- static String signingInEndPoint = "/api/v1/auth/login"; //Post
- static String editingMemberDataEndPoint = "member/edit"; //Post
- static String editingMemberPasswordEndPoint = "member/change_password"; //Post
- static String getUserDataEndPoint = "member"; //Post
- static String getFavoriteShopDataEndPoint = "sfavorite"; //Post
- static String getShopIsInFavoriteOrNotEndPoint = "sfavorite/check"; //Post
- static String addOrRemoveShopToFavoriteEndPoint = "sfavorite/new"; //Post
- static String deleteUserAccountEndPoint = "member_delete"; //Post
- static String orderingProductEndPoint = "item/form"; //Post
- static String getFavoriteProductDataEndPoint = "ifavorite"; //Post
- static String getProductsInFavoriteOrNotEndPoint = "ifavorite/check"; //Post
- static String addOrRemoveProductToFavoriteEndPoint = "ifavorite/new"; //Post
- static String privacyPolicyEndPoint = "policy"; //post
- static String termsAndConditionEndPoint = "terms"; //post
- static String sendingReportEndPoint = "report";//post
- static String getOrdersHistoryEndPoint = "order/history";//post
- static String advancedSearchEndPoint = "search";//post
- static String advancedSearchPaginationEndPoint = "search_pagination";//post
- static String statsEndPoint = "order/new";//post
- static String addingCommentEndPoint = "review/new";//post
- static String getCommentEndPoint = "review";//post
- static String forgetPasswordEndPoint = "/api/v1/auth/forgot-pass";//post
 }

@@ -1,9 +1,7 @@
-import 'dart:convert';
+
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/verification_code/verfication_code_screen.dart';
 import 'package:homefinder1/models/auth_model.dart';
@@ -97,10 +95,6 @@ class SignUpController extends GetxController {
       if (data?.status == "success") {
         await Get.find<StorageService>().saveAccountId(data?.userId ?? "");
         await Get.find<StorageService>().saveAccountToken(data?.token ?? "");
-        AuthModel? code = await AuthServices.SendingVerificationCose(
-           StorageKeys.userId,
-            context
-        );
         Get.to(() => VerficationCode());
       }
     } catch (e) {

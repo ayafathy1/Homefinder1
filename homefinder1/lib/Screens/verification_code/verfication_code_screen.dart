@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:homefinder1/Screens/auth/CompleteSignUp/complete_sign_up.dart';
 import 'package:homefinder1/Screens/auth/SignIn/signin.dart';
 import 'package:homefinder1/Widget/custom_arrow_back.dart';
+import 'package:homefinder1/services/auth_service.dart';
 import 'package:timer_builder/timer_builder.dart';
 
 import 'controller/verification_code_controller.dart';
@@ -70,6 +71,7 @@ class _VerficationCodeState extends State<VerficationCode> {
                 padding: const EdgeInsets.only(bottom: 15.0,right: 10,left: 10),
                 child: SingleChildScrollView(
                   child: Form(
+                    key: controller.formkey,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -80,7 +82,8 @@ class _VerficationCodeState extends State<VerficationCode> {
                             maxLength: 6,
                             keyboardType: TextInputType.number,
                             inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly,
+                              FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                              FilteringTextInputFormatter.digitsOnly
                             ],
                             decoration: InputDecoration(
                               fillColor: Color(0xffF4F4F4),
@@ -102,7 +105,7 @@ class _VerficationCodeState extends State<VerficationCode> {
                             Text("Didn't receive a code?", style: TextStyle(fontSize: 20),),
                             TextButton(
                               onPressed: () async {
-                                controller.resendCode();
+                                AuthServices.reSendingVerificationCode(context);
                               },
                               child: Text(
                                 "Resend",
@@ -118,13 +121,9 @@ class _VerficationCodeState extends State<VerficationCode> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  String? verificationCode = await controller.fetchVerificationCode();
-                  if (verificationCode == controller.verificationCodeController.text) {
-                    Get.to(() => CompleteSignUp());
-                  } else {
-                    // Verification code doesn't match
-                    // Handle invalid verification code
-                    print('Invalid verification code');
+                  if (controller.formkey.currentState!
+                      .validate()) {
+                    controller.sendVerificationCode;
                   }
                 },
                 child: Row(

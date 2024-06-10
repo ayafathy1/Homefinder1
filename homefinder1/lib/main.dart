@@ -2,9 +2,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:homefinder1/Screens/SplashScreen/splash_Screen.dart';
 import 'package:homefinder1/Screens/auth/Signup/signup.dart';
 import 'package:homefinder1/utilities/memory.dart';
 
+import 'Screens/Upload Photo/upload_photo.dart';
+import 'Screens/add_listing/add_listing_screen.dart';
+import 'Screens/add_listing_1st_detail/add_listing_1st_detail_screen.dart';
 import 'Screens/verification_code/verfication_code_screen.dart';
 
 Future<void> main() async {
@@ -26,7 +30,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
      debugShowCheckedModeBanner: false,
         color: Colors.transparent,
-      home: VerficationCode(),
+      home: SplashScreen(),
     );
   }
 }
