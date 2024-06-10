@@ -7,6 +7,7 @@ import 'package:homefinder1/Screens/verification_code/verfication_code_screen.da
 import 'package:homefinder1/models/auth_model.dart';
 import 'package:homefinder1/services/auth_service.dart';
 import 'package:homefinder1/utilities/memory.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../utilities/api_service.dart';
@@ -16,6 +17,7 @@ class SignUpController extends GetxController {
 
   final formkey = GlobalKey<FormState>();
 
+  final ImagePicker _picker = ImagePicker();
   final usernameController = TextEditingController();
   final emailaddressController = TextEditingController();
   final passwordController = TextEditingController();
@@ -27,7 +29,30 @@ class SignUpController extends GetxController {
     passwordVisible = false;
     passwordVisible1 = false;
   }
+  XFile? image;
 
+  Future<void> getImageFromUserThroughCamera() async {
+    image = await _picker.pickImage(source: ImageSource.camera);
+    update();
+  }
+
+  //get image from user through gallery
+  Future<void> getImageFromUserThroughGallery() async {
+    image = await _picker.pickImage(source: ImageSource.gallery);
+    update();
+  }
+
+  choosePhotoSource(context) async {
+    // showModalBottomSheet<void>(
+    //     backgroundColor: Colors.transparent,
+    //     context: context, builder: (BuildContext context) {
+    //   return ChooseCameraSource(openCamera: () {
+    //     getImageFromUserThroughCamera();
+    //   }, openGallery: () {
+    //     getImageFromUserThroughGallery();
+    //   },);
+    // });
+  }
   bool passwordVisible = false;
   bool passwordVisible1 = false;
 
