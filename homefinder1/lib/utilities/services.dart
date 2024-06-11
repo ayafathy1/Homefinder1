@@ -10,5 +10,6 @@ class Services {
  static String createResidence = "residence/create"; //Post
  static String forgetPasswordEndPoint = "auth/forgot-pass";//post
  static String firstCompleteEndPoint = "residence/complete/1st/";
+ static String secondCompleteEndPoint = "residence/complete/2nd/";
 
 }

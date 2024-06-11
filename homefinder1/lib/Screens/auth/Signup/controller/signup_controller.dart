@@ -118,6 +118,7 @@ class SignUpController extends GetxController {
         context
       );
       if (data?.status == "success") {
+
         await Get.find<StorageService>().saveAccountId(data?.userId ?? "");
         await Get.find<StorageService>().saveAccountToken(data?.token ?? "");
         Get.to(() => VerficationCode());

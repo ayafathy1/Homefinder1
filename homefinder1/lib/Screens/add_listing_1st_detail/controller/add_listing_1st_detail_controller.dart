@@ -123,7 +123,7 @@ String electricityLevelSelected="average";
           residanceId
       );
       if (data?.status == "success") {
-        Get.to(() =>AddListingSecondDetailsScreen());
+        Get.to(() =>AddListingSecondDetailsScreen(residanceId: residanceId,));
       }
     } catch (e) {
       String errorMessage = " $e";
