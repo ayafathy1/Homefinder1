@@ -27,7 +27,7 @@ class AddListingController extends GetxController{
          if (data?.status == "success") {
             AddListingController.houseId=data?.residence?.id;
             print(houseId);
-            Get.to(() =>AddListingFirstDetailScreen(residanceId: data?.residence?.id??"",));
+            Get.to(() =>AddListingFirstDetailScreen(residanceId:data?.residence?.id??"",));
          }
       } catch (e) {
          String errorMessage = " $e";

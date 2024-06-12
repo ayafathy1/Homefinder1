@@ -1,5 +1,12 @@
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:homefinder1/Screens/settings/settings_screen.dart';
+import 'package:homefinder1/services/auth_service.dart';
+
+import '../../../models/delete_account_model.dart';
+import '../../../utilities/memory.dart';
+import '../../home/home_screen.dart';
 
 class ChangePasswordController extends GetxController{
   void onInit() {
@@ -35,5 +42,30 @@ class ChangePasswordController extends GetxController{
     {
       return "Please Enter a Valid password";
     }else return null;
+  }
+  Future<void> changeYourPassword(BuildContext context) async {
+    try {
+      DeleteAccountModel? data = await AuthServices.changePassword(
+          oldPasswordController.text,
+          newPasswordController.text,
+          confirmPasswordController.text,
+          context
+      );
+      if (data?.status == "success") {
+        Get.to(() => SettingsScreen());
+      }
+    } catch (e) {
+      // Handle bad request error
+      String errorMessage = " $e";
+      String part = errorMessage.substring(26, 35);
+      // Show error message on the screen
+      CoolAlert.show(
+        context: context,
+        type: CoolAlertType.error,
+        title: "Error",
+        text: part,
+      );
+    }
+
   }
 }

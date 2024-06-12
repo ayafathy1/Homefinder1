@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:homefinder1/utilities/services.dart';
@@ -17,11 +16,10 @@ class ApiService {
       String method, {
         dynamic data,
         Map<String, String>? headers,
-        Map<String, dynamic>? queryParameters,
         Function(String errorMsg)? errorDialog,
         Function(String? successMsg)? onSuccess,
         Function(String errorMsg)? errorMessage,
-        required BuildContext context, // Add BuildContext parameter
+        required BuildContext context,
       }) async {
     try {
       Uri uri = Uri.parse(baseUrl + endPoint);
@@ -30,19 +28,31 @@ class ApiService {
 
       if (method == 'GET') {
         request = await httpClient.getUrl(uri);
-      } else {
+      } else if (method == 'POST') {
         request = await httpClient.postUrl(uri);
         request.headers.contentType = ContentType.json;
-
+      } else if (method == 'PATCH') { // Add PATCH method handling
+        request = await httpClient.patchUrl(uri);
+        request.headers.contentType = ContentType.json;
+      } else {
+        throw 'Unsupported HTTP method: $method';
       }
 
       if (headers != null) {
-
         headers.forEach((key, value) {
           request.headers.add(key, value);
         });
       }
-      request.write(jsonEncode(data));
+
+      // Encode data as JSON and calculate content length
+      if (data != null) {
+        String jsonData = jsonEncode(data);
+        List<int> jsonDataBytes = utf8.encode(jsonData);
+        request.headers.contentLength = jsonDataBytes.length;
+
+        // Write JSON data to request body
+        request.add(jsonDataBytes);
+      }
 
       HttpClientResponse response = await request.close();
 
@@ -57,8 +67,8 @@ class ApiService {
         throw errorMessage;
       }
     } catch (e, stackTrace) {
-      String Message = " $e";
-      String part = Message.substring(29, Message.length-2);
+      String message = "$e";
+      String part = message.substring(28, message.length - 2);
       print("Error: $part");
       print("StackTrace: $stackTrace");
       if (errorDialog == null && errorMessage == null) {

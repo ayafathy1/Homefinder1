@@ -57,6 +57,7 @@ dependencies:
   modal_bottom_sheet: ^3.0.0
   fluttertoast: ^8.2.5
   timer_builder: ^2.0.0
+  loading_animation_widget:
 dev_dependencies:
   flutter_test:
     sdk: flutter

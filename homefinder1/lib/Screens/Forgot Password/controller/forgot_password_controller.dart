@@ -1,5 +1,12 @@
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+
+import '../../../models/forget_password_model.dart';
+import '../../../services/auth_service.dart';
+import '../../auth/SignIn/signin.dart';
 
 class ForgotPasswordController extends GetxController{
 
@@ -36,11 +43,35 @@ class ForgotPasswordController extends GetxController{
     var formdata = formkey.currentState;
     if (formdata!.validate()) {
       formdata.save();
-      print("valide");
+      print("valid");
     }
     else {
-      print("not valide");
+      print("not valid");
     }
   }
+  Future<void> forgotPassword(BuildContext context) async {
+    try {
+      ForgetPaaswordModel? data = await AuthServices.forgetPassword(
+          emailaddressController.text,
+          context
+      );
+      if (data?.status == "success") {
+        Get.to(()=>SignIn());
+      }
+    } catch (e) {
+      // Handle bad request error
+      String errorMessage = " $e";
+      String part = errorMessage.substring(26, 35);
+      // Show error message on the screen
+      CoolAlert.show(
+        context: context,
+        type: CoolAlertType.error,
+        title: "Error",
+        text: part,
+      );
+    }
+
+  }
+
 
 }

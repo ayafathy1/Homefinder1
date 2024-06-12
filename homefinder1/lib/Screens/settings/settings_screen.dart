@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:homefinder1/Screens/change_password/change_password_screen.dart';
+import 'package:homefinder1/Screens/delete_account/delete_account_screen.dart';
 import 'package:homefinder1/Screens/settings/controller/settings_controller4.dart';
 import 'package:homefinder1/Widget/custom_bottom_navigation_bar_widget.dart';
 import 'package:homefinder1/utilities/colors.dart';
@@ -22,7 +24,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 245,
+        toolbarHeight: Get.height*0.1,
         leading: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
@@ -37,6 +41,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
             Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
@@ -65,7 +70,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         children: [
           Center(
             child: Container(
-              height: Get.height*0.8,
+              height: Get.height*0.66,
               width: Get.width*0.9,
               child: ListView.separated(
                 padding: EdgeInsets.only(top: 10),
@@ -74,6 +79,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 InkWell(
                   onTap: (){
                     controller.selectedIndex=index;
+                    if(controller.selectedIndex==5){
+                       controller.signOut(context);
+                    }else if(controller.selectedIndex==6){
+                      Get.to(()=>DeleteAccountScreen());
+                    }else if(controller.selectedIndex==1){
+                      Get.to(()=>ChangePasswordScreen());
+                    }
                     setState(() {
                       
                     });

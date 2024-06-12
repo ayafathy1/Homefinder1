@@ -19,7 +19,7 @@ class SplashScreen extends StatelessWidget{
       backgroundColor: Color(0xff6C63FF),
       duration: Duration(seconds: 6),
       done: Done(
-           Get.find<StorageService>().checkUserIsSignedIn?const HomeScreen():Welcomescreen()),
+          Get.find<StorageService>().checkUserIsSignedIn?const HomeScreen():Welcomescreen()),
 
       logo: Stack(
         alignment: Alignment.topCenter,

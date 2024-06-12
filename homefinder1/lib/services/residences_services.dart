@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/add_listing/controller/add_listing_controller.dart';
 import 'package:homefinder1/models/first_complete_model.dart';
+import 'package:homefinder1/models/fourth_complete_model.dart';
 import '../models/create_residence_first.dart';
 import '../models/second_complete_model.dart';
 import '../utilities/api_service.dart';
@@ -113,5 +114,69 @@ class ResidenceServices{
     }
     return null;
   }
+  static Future<FourthCompleteModel?> fourthComplete(
+      String lotConfig,
+      String landContour,
+      String landSlope,
+      String pavedDrive,
+      int poolArea,
+      int overallQual,
+      int overallCond,
+      int totalarea,
+      int totalporchsf,
+      int lotArea,
+      int lotFrontage,
+      int totalsf,
+      int lowQualFinSF,
+      int miscVal,
+      int houseage,
+      int houseremodelage,
+      BuildContext context,
+      String residanceId,
+      ) async {
+
+    var token = Get.find<StorageService>().getToken;
+    print(token);
+    var data = await api.request(context: context,Services.fourthCompleteEndPoint+residanceId, "POST",data: {
+      "lotConfig":lotConfig,
+      "landContour":landContour,
+      "landSlope":landSlope,
+      "pavedDrive":pavedDrive,
+      "poolArea":poolArea,
+      "overallQual":overallQual,
+      "overallCond":overallCond,
+      "totalarea":totalarea,
+      "totalporchsf":totalporchsf,
+      "lotArea":lotArea,
+      "lotFrontage":lotFrontage,
+      "totalsf":totalsf,
+      "lowQualFinSF":lowQualFinSF,
+      "miscVal":miscVal,
+      "houseage":houseage,
+      "houseremodelage":houseremodelage,
+    },headers: {"Authorization": token});
+    if (data != null) {
+      print(data);
+      return FourthCompleteModel.fromJson(data);
+    }
+    return null;
+  }
+  static Future<FourthCompleteModel?> deleteOneResidence(
+      BuildContext context,
+      String residanceId,
+      ) async {
+
+    var token = Get.find<StorageService>().getToken;
+    print(token);
+    var data = await api.request(context: context,Services.deleteOneResidenceEndPoint+residanceId, "DELETE",data: {
+    },headers: {"Authorization": token});
+    if (data != null) {
+      print(data);
+      return FourthCompleteModel.fromJson(data);
+    }
+    return null;
+  }
+
+
 
 }

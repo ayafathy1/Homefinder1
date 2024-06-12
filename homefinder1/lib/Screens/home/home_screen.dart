@@ -126,433 +126,439 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),],),
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        controller: controller.scroll,
-        child: Column(
-          children: [
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              width: Get.width * 0.96,
-              height: 109,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 5.0, left: 22),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Discover",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: kRegularFont,
-                              fontWeight: FontWeight.w900,
-                              fontSize: 18),
+      body: SafeArea(
+        child: SizedBox(
+          height: Get.height*0.8,
+          child: SingleChildScrollView(
+             physics: BouncingScrollPhysics(),
+            controller: controller.scroll,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  width: Get.width * 0.96,
+                  height: 109,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5.0, left: 22),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Discover",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: kRegularFont,
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: 18),
+                            ),
+                            Text(
+                              "Find your",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: kRegularFont,
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: 23),
+                            ),
+                            Text(
+                              "Best Living Places.",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: kRegularFont,
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: 23),
+                            )
+                          ],
                         ),
-                        Text(
-                          "Find your",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: kRegularFont,
-                              fontWeight: FontWeight.w900,
-                              fontSize: 23),
-                        ),
-                        Text(
-                          "Best Living Places.",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: kRegularFont,
-                              fontWeight: FontWeight.w900,
-                              fontSize: 23),
-                        )
-                      ],
+                      ),
+                      SizedBox(
+                        width: 47,
+                      ),
+                      Image(
+                        image: AssetImage("lib/assets/images/HomeRecImage.png"),
+                      )
+                    ],
+                  ),
+                  decoration: BoxDecoration(
+                      color: kDarkBlueColor,
+                      border: Border.all(color: kDarkBlueColor),
+                      borderRadius: BorderRadius.circular(20)),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Container(
+                  width: Get.width * 0.95,
+                  height: 60,
+                  child: TextField(
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Color(0xffF4F4F4),
+                      hintText: "Search House, Apartment , etc",
+                      prefixIcon: Icon(
+                        Icons.search_outlined,
+                        color: Colors.black,
+                      ),
+                      suffixIcon: InkWell(
+                          onTap: () {},
+                          child: Image(
+                              image: AssetImage('lib/assets/images/options.png'))),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(
+                            color: Color(0xffF4F4F4),
+                            width: 3,
+                          )),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(
+                            color: Color(0xff6C63FF),
+                            width: 3,
+                          )),
                     ),
                   ),
-                  SizedBox(
-                    width: 47,
-                  ),
-                  Image(
-                    image: AssetImage("lib/assets/images/HomeRecImage.png"),
-                  )
-                ],
-              ),
-              decoration: BoxDecoration(
-                  color: kDarkBlueColor,
-                  border: Border.all(color: kDarkBlueColor),
-                  borderRadius: BorderRadius.circular(20)),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            Container(
-              width: Get.width * 0.95,
-              height: 60,
-              child: TextField(
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Color(0xffF4F4F4),
-                  hintText: "Search House, Apartment , etc",
-                  prefixIcon: Icon(
-                    Icons.search_outlined,
-                    color: Colors.black,
-                  ),
-                  suffixIcon: InkWell(
-                      onTap: () {},
-                      child: Image(
-                          image: AssetImage('lib/assets/images/options.png'))),
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide(
-                        color: Color(0xffF4F4F4),
-                        width: 3,
-                      )),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide(
-                        color: Color(0xff6C63FF),
-                        width: 3,
-                      )),
                 ),
-              ),
-            ),
 
 
-            Row(
-              children: [
-                SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  "Popular Nearest You",
-                  style: TextStyle(
-                      color: kDarkBlueColor,
-                      fontFamily: kRegularFont,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 20),
-                ),
-                SizedBox(
-                  width: 85,
-                ),
-                TextButton(
-                    onPressed: () {Get.to(()=>FeaturedEstates());},
-                    child: Text(
-                      "View All",
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "Popular Nearest You",
                       style: TextStyle(
-                          color: kPrimaryColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w800,
-                          fontFamily: kRegularFont),
-                    )),
-              ],
-            ),
-            Container(
-              child: ListView.builder(
-                controller: controller.scroll,
-                physics: BouncingScrollPhysics(),
-                itemCount: 3,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return Row(
-                    children: [
-                      SizedBox(
-                        width: 10,
-                      ),
-                      InkWell(
-                        child: Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Color(0xffF5F5F5)),
-                              borderRadius: BorderRadius.circular(20),
-                              color: kVeryLightGreyColor),
-                          width: 250,
-                          height: Get.height * 0.27,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Container(
-                                height: 130,
-                                width: 250,
-                                child: Image(
-                                  image: AssetImage(
-                                      "lib/assets/images/Home Photo.png"),
-                                  width: 280,
-                                  height: 140,
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
-                                child: Text(
-                                  "Lorem House",
-                                  style: TextStyle(
-                                      color: Color(0xff2F2F2F),
-                                      fontFamily: kRegularFont,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 17),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 2,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 8.0, top: 3),
-                                child: Text(
-                                  "\$340/month",
-                                  style: TextStyle(
-                                      color: kPrimaryColor,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w700,
-                                      fontFamily: kRegularFont),
-                                ),
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    width: 8,
-                                    height: 3,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 8.0),
-                                    child: Icon(
-                                      Icons.location_on_outlined,
-                                      color: kGreyColor,
-                                      size: 16,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 8.0),
-                                    child: Text(
-                                      "Avenue, West Side",
-                                      style: TextStyle(
-                                          color: kGreyColor,
-                                          fontFamily: kRegularFont,
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 50,
-                                  ),
-                                  IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        Icons.favorite_rounded,
-                                        color: kGreyColor,
-                                        size: 27,
-                                      )),
-                                ],
-                              )
-                            ],
+                          color: kDarkBlueColor,
+                          fontFamily: kRegularFont,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 20),
+                    ),
+                    SizedBox(
+                      width: 85,
+                    ),
+                    TextButton(
+                        onPressed: () {Get.to(()=>FeaturedEstates());},
+                        child: Text(
+                          "View All",
+                          style: TextStyle(
+                              color: kPrimaryColor,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w800,
+                              fontFamily: kRegularFont),
+                        )),
+                  ],
+                ),
+                SizedBox(
+                  child: ListView.builder(
+                    controller: controller.scroll,
+                    physics: BouncingScrollPhysics(),
+                    itemCount: 3,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Row(
+                        children: [
+                          SizedBox(
+                            width: 10,
                           ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                    ],
-                  );
-                },
-              ),
-              width: Get.width,
-              height: Get.height * 0.28,
-            ),
-            Row(
-              children: [
-                SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  "Featured Estates",
-                  style: TextStyle(
-                      color: kDarkBlueColor,
-                      fontFamily: kRegularFont,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 20),
-                ),
-                SizedBox(
-                  width: 120,
-                ),
-                TextButton(
-                    onPressed: () {Get.to(()=>PopularNearestYou());},
-                    child: Text(
-                      "View All",
-                      style: TextStyle(
-                          color: kPrimaryColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: kRegularFont),
-                    )),
-              ],
-            ),
-            Container(
-              width: Get.width,
-              height: Get.height*0.7,
-              child: ListView.builder(
-                controller: controller.scroll,
-                  itemCount: 4,
-                  physics: NeverScrollableScrollPhysics(),
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        Container(
-                          width: Get.width * 0.95,
-                          height: Get.height * 0.15,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(15),
-                              border: Border.all(color: Colors.white),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey,
-                                    offset: Offset(0, 0),
-                                    blurRadius: 10)
-                              ]),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Container(
-                                  width: 110,
-                                  height: 110,
-                                  child: Image(
-                                    image:
-                                        AssetImage("lib/assets/images/Villa.png"),
-                                    fit: BoxFit.fill,
-                                  )),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
+                          InkWell(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Color(0xffF5F5F5)),
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: kVeryLightGreyColor),
+                              width: 250,
+                              height: Get.height * 0.27,
+                              child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
+                                  Container(
+                                    height: 130,
+                                    width: 250,
+                                    child: Image(
+                                      image: AssetImage(
+                                          "lib/assets/images/Home Photo.png"),
+                                      width: 280,
+                                      height: 140,
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 8.0),
+                                    child: Text(
+                                      "Lorem House",
+                                      style: TextStyle(
+                                          color: Color(0xff2F2F2F),
+                                          fontFamily: kRegularFont,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 17),
+                                    ),
+                                  ),
                                   SizedBox(
-                                    height: 3,
+                                    height: 2,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 8.0, top: 3),
+                                    child: Text(
+                                      "\$340/month",
+                                      style: TextStyle(
+                                          color: kPrimaryColor,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w700,
+                                          fontFamily: kRegularFont),
+                                    ),
                                   ),
                                   Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       SizedBox(
-                                        width: 5,
+                                        width: 8,
+                                        height: 3,
                                       ),
-                                      Icon(
-                                        Icons.star,
-                                        color: Color(0xffEEA651),
-                                      ),
-                                      SizedBox(
-                                        width: 2,
-                                      ),
-                                      Text(
-                                        "5",
-                                        style: TextStyle(
-                                            color: kGreyColor,
-                                            fontFamily: kRegularFont,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                      SizedBox(
-                                        width: 148,
-                                      ),
-                                      Container(
-                                        height: 30,
-                                        width: 90,
-                                        decoration: BoxDecoration(
-                                            color: Color(0xffF4F6F9),
-                                            border: Border.all(
-                                              color: Color(0xffF4F6F9),
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(25)),
-                                        child: Center(
-                                          child: Text(
-                                            "Apartment",
-                                            style: TextStyle(
-                                                color: kPrimaryColor,
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w600,
-                                                fontFamily: kRegularFont),
-                                          ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(bottom: 8.0),
+                                        child: Icon(
+                                          Icons.location_on_outlined,
+                                          color: kGreyColor,
+                                          size: 16,
                                         ),
-                                      )
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      SizedBox(
-                                        width: 5,
                                       ),
-                                      Text(
-                                        "Woodland Apartment",
-                                        style: TextStyle(
-                                            color: kDarkBlueColor,
-                                            fontFamily: kRegularFont,
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 16),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Icon(
-                                        Icons.location_on,
-                                        color: Color(0xff415770),
-                                        size: 17,
-                                      ),
-                                      Text(
-                                        "1012 Ocean avanue, New yourk, USA",
-                                        style: TextStyle(
-                                            color: Color(0xff415770),
-                                            fontSize: 12,
-                                            fontFamily: kRegularFont,
-                                            fontWeight: FontWeight.w500),
-                                      )
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                        "\$340/month",
-                                        style: TextStyle(
-                                            color: kPrimaryColor,
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 13,
-                                            fontFamily: kRegularFont),
+                                      Padding(
+                                        padding: const EdgeInsets.only(bottom: 8.0),
+                                        child: Text(
+                                          "Avenue, West Side",
+                                          style: TextStyle(
+                                              color: kGreyColor,
+                                              fontFamily: kRegularFont,
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w500),
+                                        ),
                                       ),
                                       SizedBox(
-                                        width: 135,
+                                        width: 50,
                                       ),
                                       IconButton(
                                           onPressed: () {},
                                           icon: Icon(
                                             Icons.favorite_rounded,
                                             color: kGreyColor,
-                                            size: 25,
-                                          ))
+                                            size: 27,
+                                          )),
                                     ],
                                   )
                                 ],
-                              )
-                            ],
+                              ),
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        )
-                      ],
-                    );
-                  }),
-            )
-          ],
+                          SizedBox(
+                            width: 5,
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                  width: Get.width,
+                  height: Get.height * 0.28,
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "Featured Estates",
+                      style: TextStyle(
+                          color: kDarkBlueColor,
+                          fontFamily: kRegularFont,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 20),
+                    ),
+                    SizedBox(
+                      width: 120,
+                    ),
+                    TextButton(
+                        onPressed: () {Get.to(()=>PopularNearestYou());},
+                        child: Text(
+                          "View All",
+                          style: TextStyle(
+                              color: kPrimaryColor,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: kRegularFont),
+                        )),
+                  ],
+                ),
+                Container(
+                  width: Get.width,
+                  height: Get.height*0.7,
+                  child: ListView.builder(
+                    controller: controller.scroll,
+                      itemCount: 4,
+                      physics: NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      itemBuilder: (context, index) {
+                        return Column(
+                          children: [
+                            Container(
+                              width: Get.width * 0.95,
+                              height: Get.height * 0.15,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15),
+                                  border: Border.all(color: Colors.white),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.grey,
+                                        offset: Offset(0, 0),
+                                        blurRadius: 10)
+                                  ]),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  SizedBox(width: 5,),
+                                  Container(
+                                      width: 105,
+                                      height: 110,
+                                      child: Image(
+                                        image:
+                                            AssetImage("lib/assets/images/Villa.png"),
+                                        fit: BoxFit.fill,
+                                      )),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        height: 3,
+                                      ),
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Icon(
+                                            Icons.star,
+                                            color: Color(0xffEEA651),
+                                          ),
+                                          SizedBox(
+                                            width: 2,
+                                          ),
+                                          Text(
+                                            "5",
+                                            style: TextStyle(
+                                                color: kGreyColor,
+                                                fontFamily: kRegularFont,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                          SizedBox(
+                                            width: 148,
+                                          ),
+                                          Container(
+                                            height: 30,
+                                            width: 90,
+                                            decoration: BoxDecoration(
+                                                color: Color(0xffF4F6F9),
+                                                border: Border.all(
+                                                  color: Color(0xffF4F6F9),
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(25)),
+                                            child: Center(
+                                              child: Text(
+                                                "Apartment",
+                                                style: TextStyle(
+                                                    color: kPrimaryColor,
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontFamily: kRegularFont),
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            "Woodland Apartment",
+                                            style: TextStyle(
+                                                color: kDarkBlueColor,
+                                                fontFamily: kRegularFont,
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 16),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Icon(
+                                            Icons.location_on,
+                                            color: Color(0xff415770),
+                                            size: 17,
+                                          ),
+                                          Text(
+                                            "1012 Ocean avanue, New yourk, USA",
+                                            style: TextStyle(
+                                                color: Color(0xff415770),
+                                                fontSize: 12,
+                                                fontFamily: kRegularFont,
+                                                fontWeight: FontWeight.w500),
+                                          )
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            "\$340/month",
+                                            style: TextStyle(
+                                                color: kPrimaryColor,
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 13,
+                                                fontFamily: kRegularFont),
+                                          ),
+                                          SizedBox(
+                                            width: 135,
+                                          ),
+                                          IconButton(
+                                              onPressed: () {},
+                                              icon: Icon(
+                                                Icons.favorite_rounded,
+                                                color: kGreyColor,
+                                                size: 25,
+                                              ))
+                                        ],
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            )
+                          ],
+                        );
+                      }),
+                )
+              ],
+            ),
+          ),
         ),
       ),
-      bottomNavigationBar: CustomBottomNavigationBarWidget(),
+      bottomNavigationBar: const CustomBottomNavigationBarWidget(),
     );});
   }
 }

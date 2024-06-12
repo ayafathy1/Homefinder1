@@ -1,23 +1,23 @@
 import 'dart:convert';
 
-Welcome welcomeFromJson(String str) => Welcome.fromJson(json.decode(str));
+SignOutModel welcomeFromJson(String str) => SignOutModel.fromJson(json.decode(str));
 
-String welcomeToJson(Welcome data) => json.encode(data.toJson());
+String welcomeToJson(SignOutModel data) => json.encode(data.toJson());
 
-class Welcome {
+class SignOutModel {
   String status;
   String message;
   String token;
   String userId;
 
-  Welcome({
+  SignOutModel({
     required this.status,
     required this.message,
     required this.token,
     required this.userId,
   });
 
-  factory Welcome.fromJson(Map<String, dynamic> json) => Welcome(
+  factory SignOutModel.fromJson(Map<String, dynamic> json) => SignOutModel(
     status: json["status"],
     message: json["message"],
     token: json["token"],

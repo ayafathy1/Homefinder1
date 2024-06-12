@@ -3,13 +3,13 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class CombinedImagePicker extends StatefulWidget {
+class CombinedImagePicker1 extends StatefulWidget {
   @override
-  _CombinedImagePickerState createState() => _CombinedImagePickerState();
+  _CombinedImagePickerState1 createState() => _CombinedImagePickerState1();
 }
 
-class _CombinedImagePickerState extends State<CombinedImagePicker> {
-  List<Uint8List> _images = [];
+class _CombinedImagePickerState1 extends State<CombinedImagePicker1> {
+  Uint8List? _imageBytes;
 
   Future<void> _pickImage() async {
     final ImageSource? source = await showDialog<ImageSource>(
@@ -41,17 +41,13 @@ class _CombinedImagePickerState extends State<CombinedImagePicker> {
     );
 
     if (source != null) {
-      XFile? pickedFile;
-      if (source == ImageSource.camera) {
-        pickedFile = await ImagePicker().pickImage(source: ImageSource.camera);
-      } else {
-        pickedFile = (await ImagePicker().pickMultiImage())?.first;
-      }
+      final XFile? pickedFile = await ImagePicker().pickImage(source: source);
 
       if (pickedFile != null) {
-        Uint8List bytes = await pickedFile.readAsBytes();
+        final bytes = await pickedFile.readAsBytes();
+
         setState(() {
-          _images.add(bytes);
+          _imageBytes = bytes;
         });
       }
     }
@@ -72,17 +68,12 @@ class _CombinedImagePickerState extends State<CombinedImagePicker> {
               child: Text('Pick Image'),
             ),
             SizedBox(height: 20),
-            Expanded(
-              child: ListView.builder(
-                itemCount: _images.length,
-                itemBuilder: (context, index) {
-                  return Image.memory(
-                    _images[index],
-                    fit: BoxFit.cover,
-                  );
-                },
-              ),
-            ),
+            _imageBytes != null
+                ? Image.memory(
+              _imageBytes!,
+              fit: BoxFit.cover,
+            )
+                : Container(),
           ],
         ),
       ),

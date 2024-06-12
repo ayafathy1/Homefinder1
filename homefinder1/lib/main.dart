@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/SplashScreen/splash_Screen.dart';
-import 'package:homefinder1/Screens/auth/Signup/signup.dart';
 import 'package:homefinder1/utilities/memory.dart';
 
 import 'Screens/Upload Photo/upload_photo.dart';
-import 'Screens/add_listing/add_listing_screen.dart';
-import 'Screens/add_listing_1st_detail/add_listing_1st_detail_screen.dart';
-import 'Screens/verification_code/verfication_code_screen.dart';
+import 'Screens/add listing - photos/adding_photos.dart';
+import 'Screens/add listing - photos/upload_photo.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

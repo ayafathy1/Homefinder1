@@ -1,17 +1,36 @@
+import 'dart:convert';
+import 'package:cool_alert/cool_alert.dart';
+import 'package:homefinder1/services/auth_service.dart';
+import 'package:homefinder1/utilities/services.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import '../../../models/get_user_model.dart';
+import '../../../models/get_user_model.dart';
 import '../../../utilities/colors.dart';
 import '../../../utilities/constants.dart';
 
 
 class ProfileController extends GetxController{
 
-  List<String> type=["Listings","Sold","Reviews"];
-  List<int> noOfType=[30,12,28];
 
-  List<String> pOrLOrS=["Pending","Listings","Sold"];
+  void onInit() {
+    super.onInit();
+    getdata();
+    pendingListingSold();
+  }
+  User? data ;
+  GetUserModel? data1;
+  bool isLoading=true;
+
+  int pendingCount=0;
+  int approvedCount=0;
+  int soldCount=0;
+
+
+  List<String> pOrLOrS=["Pending","Approved","Sold"];
   int selectedIndex=0;
+
   List<String> housesNames=["Wings Tower","Bridgeland Modern House"];
   List<String>housesPhotos=["lib/assets/images/pending1.png","lib/assets/images/pending2.png"];
   int selectedIndex1=0;
@@ -19,17 +38,43 @@ class ProfileController extends GetxController{
   List<String>listingHousesNames=["Fairview Apartment","Shoolview House"];
   late List<Widget> listViewItem = [];
   String pendingOrListingOrSold="Pending";
+
   @override
-  void onInit() {
-    super.onInit();
-    pendingListingSold();
+
+  getdata() async
+  {
+      var response = await AuthServices.fetchUserData();
+
+      if (response == null) {
+        print("some error occured");
+      } else {
+        data= response.user;
+        data1=response;
+        pendingCount=data1?.pendingCount??0;
+        approvedCount=data1?.approvedCount??0;
+        soldCount=data1?.soldCount??0;
+
+      }
+
+      isLoading = false;
+
+      update();
+
+
   }
+
+
+
+
   pendingListingSold(){
-    if(selectedIndex==0){
+    int counter=data1?.pendingCount??0;
+    int counter1=data1?.approvedCount??0;
+    int counter2=data1?.soldCount??0;
+    if(counter > 0 && selectedIndex == 0){
       listViewItem = [];
       pendingOrListingOrSold="Pending";
 
-      for(var index = 0 ; index<2;index=index+1){
+      for(var index = 0 ; index<counter;index=index+1){
         listViewItem.add(InkWell(
           onTap:(){
 
@@ -174,10 +219,11 @@ class ProfileController extends GetxController{
         ));
       }
 
-    }else if(selectedIndex==1){
+    }else if(counter1 > 0 && selectedIndex == 1){
       listViewItem = [];
       pendingOrListingOrSold="Listing";
-      for(var index = 0 ; index<2;index=index+1){listViewItem.add(InkWell(
+
+      for(var index = 0 ; index<counter1;index=index+1){listViewItem.add(InkWell(
         onTap:(){
 
         } ,
@@ -344,9 +390,11 @@ class ProfileController extends GetxController{
         ),
       ));}
 
-    }else{ listViewItem = [];
+    }else if(counter2 > 0 && selectedIndex == 2)
+    { listViewItem = [];
     pendingOrListingOrSold="Sold";
-    for(var index = 0 ; index<2;index=index+1)
+
+    for(var index = 0 ; index<counter2;index=index+1)
       {listViewItem.add(InkWell(
         onTap:(){
 

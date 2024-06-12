@@ -2,9 +2,11 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:homefinder1/Screens/auth/SignIn/signin.dart';
 import 'package:homefinder1/Screens/home/home_screen.dart';
 
 import '../../../../models/auth_model.dart';
+import '../../../../models/forget_password_model.dart';
 import '../../../../services/auth_service.dart';
 import '../../../../utilities/memory.dart';
 
