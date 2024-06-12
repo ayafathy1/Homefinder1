@@ -63,9 +63,8 @@ class _CompleteSignUpState extends State<CompleteSignUp> {
                                 width: 200,
                                 child: ElevatedButton(onPressed: (){
                                   if (controller.formkey.currentState!.validate()) {
-                                    AuthServices.completeSigningUp(controller.fisrtnameController.text, controller.lastnameController.text, controller.genderController.text, controller.phoneController.text,context);
-                                   Get.to(()=>  UploadPhoto(),
-                                    );
+                                   controller.CompleteSignUp(context);
+
 
                                   }
                                 },
