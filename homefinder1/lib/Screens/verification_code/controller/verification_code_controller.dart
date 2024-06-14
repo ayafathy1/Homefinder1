@@ -66,7 +66,7 @@ class VerficationCodeController extends GetxController {
       VerificationModel? data = await AuthServices.SendingVerificationCode(
           context,
           verificationCodeController.text,
-        userId
+
 
       );
 

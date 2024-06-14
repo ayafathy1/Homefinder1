@@ -24,8 +24,9 @@ class _CompleteSignUpState extends State<CompleteSignUp> {
       init: CompleteSignUpController(),
         builder:( CompleteSignUpController controller){
           return Scaffold(
-              appBar: AppBar(title: Text('                      Welcome!',
-                  style: TextStyle(fontSize: 0, color: Colors.transparent)),
+              appBar: AppBar(
+                leading: CustomArrowBack(),
+                leadingWidth: Get.width*0.3,
                 backgroundColor: Colors.transparent,
                 elevation: 0,
               ),
@@ -35,7 +36,7 @@ class _CompleteSignUpState extends State<CompleteSignUp> {
                         key: controller.formkey,
                         child: Column(
                             children: [
-                              CustomArrowBack(),
+
 
                               Text("Fill in bio to get" , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 40),),
                               Row(

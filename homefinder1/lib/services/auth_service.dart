@@ -52,8 +52,8 @@ class AuthServices{
     }
     return null;
   }
-  static Future<VerificationModel?> SendingVerificationCode(BuildContext context,code,String userId) async {
-    var data = await api.request(context: context,Services.verificationCodeEndPoint+userId, "POST",data: {
+  static Future<VerificationModel?> SendingVerificationCode(BuildContext context,code) async {
+    var data = await api.request(context: context,Services.verificationCodeEndPoint, "POST",data: {
       "otp": code,
     },headers:{"authorization":await Get.find<StorageService>().getToken});
     if (data != null) {
