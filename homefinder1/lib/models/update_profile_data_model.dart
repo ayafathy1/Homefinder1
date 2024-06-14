@@ -4,39 +4,31 @@
 
 import 'dart:convert';
 
-GetUserModel welcomeFromJson(String str) => GetUserModel.fromJson(json.decode(str));
+UpdateProfileDataModel welcomeFromJson(String str) => UpdateProfileDataModel.fromJson(json.decode(str));
 
-String welcomeToJson(GetUserModel data) => json.encode(data.toJson());
+String welcomeToJson(UpdateProfileDataModel data) => json.encode(data.toJson());
 
-class GetUserModel {
+class UpdateProfileDataModel {
   String? status;
-  int? soldCount;
-  int? pendingCount;
-  int? approvedCount;
   User? user;
+  String? message;
 
-  GetUserModel({
+  UpdateProfileDataModel({
     this.status,
-    this.soldCount,
-    this.pendingCount,
-    this.approvedCount,
     this.user,
+    this.message,
   });
 
-  factory GetUserModel.fromJson(Map<String, dynamic> json) => GetUserModel(
+  factory UpdateProfileDataModel.fromJson(Map<String, dynamic> json) => UpdateProfileDataModel(
     status: json["status"],
-    soldCount: json["soldCount"],
-    pendingCount: json["pendingCount"],
-    approvedCount: json["approvedCount"],
     user: json["user"] == null ? null : User.fromJson(json["user"]),
+    message: json["message"],
   );
 
   Map<String, dynamic> toJson() => {
     "status": status,
-    "soldCount": soldCount,
-    "pendingCount": pendingCount,
-    "approvedCount": approvedCount,
     "user": user?.toJson(),
+    "message": message,
   };
 }
 
@@ -51,10 +43,10 @@ class User {
   DateTime? createdAt;
   DateTime? updatedAt;
   String? firstName;
-  String? fullName;
   String? gender;
   String? lastName;
   String? phone;
+  String? fullName;
 
   User({
     this.image,
@@ -67,10 +59,10 @@ class User {
     this.createdAt,
     this.updatedAt,
     this.firstName,
-    this.fullName,
     this.gender,
     this.lastName,
     this.phone,
+    this.fullName,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -84,10 +76,10 @@ class User {
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
     firstName: json["firstName"],
-    fullName: json["fullName"],
     gender: json["gender"],
     lastName: json["lastName"],
     phone: json["phone"],
+    fullName: json["fullName"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -101,10 +93,10 @@ class User {
     "createdAt": createdAt?.toIso8601String(),
     "updatedAt": updatedAt?.toIso8601String(),
     "firstName": firstName,
-    "fullName": fullName,
     "gender": gender,
     "lastName": lastName,
     "phone": phone,
+    "fullName": fullName,
   };
 }
 

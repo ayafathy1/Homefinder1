@@ -1,24 +1,23 @@
 import 'dart:convert';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:homefinder1/services/auth_service.dart';
-import 'package:homefinder1/utilities/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../models/get_user_model.dart';
-import '../../../models/get_user_model.dart';
 import '../../../utilities/colors.dart';
 import '../../../utilities/constants.dart';
+import 'dart:io';
+import 'package:flutter/cupertino.dart';
+import 'dart:typed_data';
+import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
+import '../../../utilities/memory.dart';
 
 class ProfileController extends GetxController{
+  Uint8List? imageBytes;
 
-
-  void onInit() {
-    super.onInit();
-    getdata();
-    pendingListingSold();
-  }
   User? data ;
   GetUserModel? data1;
   bool isLoading=true;
@@ -26,11 +25,8 @@ class ProfileController extends GetxController{
   int pendingCount=0;
   int approvedCount=0;
   int soldCount=0;
-
-
   List<String> pOrLOrS=["Pending","Approved","Sold"];
   int selectedIndex=0;
-
   List<String> housesNames=["Wings Tower","Bridgeland Modern House"];
   List<String>housesPhotos=["lib/assets/images/pending1.png","lib/assets/images/pending2.png"];
   int selectedIndex1=0;
@@ -38,11 +34,122 @@ class ProfileController extends GetxController{
   List<String>listingHousesNames=["Fairview Apartment","Shoolview House"];
   late List<Widget> listViewItem = [];
   String pendingOrListingOrSold="Pending";
-
   @override
+  void onInit() {
+    super.onInit();
 
+    getdata();
+    pendingListingSold();
+  }
+  @override
+  void onReady() {
+    super.onReady();
+    getdata();
+  }
+
+  Future<void> pickImage(BuildContext context) async {
+    final ImageSource? source = await showDialog<ImageSource>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Select Image Source'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                GestureDetector(
+                  child: Text('Gallery'),
+                  onTap: () {
+                    Navigator.of(context).pop(ImageSource.gallery);
+                  },
+                ),
+                SizedBox(height: 20),
+                GestureDetector(
+                  child: Text('Camera'),
+                  onTap: () {
+                    Navigator.of(context).pop(ImageSource.camera);
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+
+    if (source != null) {
+      final XFile? pickedFile = await ImagePicker().pickImage(source: source);
+
+      if (pickedFile != null) {
+        final bytes = await pickedFile.readAsBytes();
+
+
+        imageBytes = bytes;
+        isLoading=true;
+
+        update();
+        // Navigate to UploadPreview page immediately after picking the image
+        uploadImage(context, bytes);
+      }
+    }
+  }
+  Future<void> uploadImage(BuildContext context, Uint8List imageBytes) async {
+    // Convert the image bytes to a file
+    final tempDir = await getTemporaryDirectory();
+    final file = await new File('${tempDir.path}/image.jpg').create();
+    await file.writeAsBytes(imageBytes);
+
+    // Retrieve authorization token
+    String? token = await Get.find<StorageService>().getToken;
+    if (token == null) {
+      print('Authorization token is null.');
+      return;
+    }
+
+    // Prepare the upload request
+    var request = http.MultipartRequest('POST', Uri.parse('https://home-finder-back-end-i7ca.onrender.com/api/v1/user/upload-image'));
+
+    // Attach the file to the request
+    request.files.add(await http.MultipartFile.fromPath('image', file.path));
+    request.headers['Authorization'] = token;
+
+    try {
+      // Send the request
+      var response = await request.send();
+
+      if (response.statusCode == 200) {
+        var responseData = await response.stream.bytesToString();
+        var jsonResponse = jsonDecode(responseData);
+        print('Upload successful: $jsonResponse');
+        update();
+        isLoading=true;
+        getdata();
+        isLoading=false;
+        update();
+
+      } else {
+        // If the status code is not success, show the error in CoolAlert
+        CoolAlert.show(
+          context: context,
+          type: CoolAlertType.error,
+          title:"Error",
+          text: response.reasonPhrase,
+        );
+      }
+    } catch (e) {
+      // If an exception occurs, show the error in CoolAlert
+      CoolAlert.show(
+        context: context,
+        type: CoolAlertType.error,
+        title: "Error",
+        text: "$e",
+      );
+      print('Error occurred while uploading image: $e');
+    }
+  }
   getdata() async
   {
+    isLoading=true;
+    update();
       var response = await AuthServices.fetchUserData();
 
       if (response == null) {

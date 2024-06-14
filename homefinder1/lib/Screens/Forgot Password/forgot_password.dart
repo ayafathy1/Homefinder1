@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/Forgot%20Password/controller/forgot_password_controller.dart';
 import 'package:homefinder1/Screens/Succes%20Notification/success_notification.dart';
+import 'package:homefinder1/Screens/verifiction_code_forget_password/verification_code_forget_password.dart';
 import 'package:homefinder1/Widget/custom_text_field_widget.dart';
 
 import '../../services/auth_service.dart';
@@ -43,6 +44,7 @@ class ForgotPassword extends StatelessWidget{
                 width: 200,
                 child: ElevatedButton(onPressed: (){
                          controller.forgotPassword(context);
+
                 }
                   ,
                   child: Row(

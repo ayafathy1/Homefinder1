@@ -8,7 +8,9 @@ import 'package:homefinder1/models/log_out_model.dart';
 import 'package:homefinder1/models/serification_model.dart';
 import '../models/auth_model.dart';
 import '../models/delete_account_model.dart';
+import '../models/delete_account_photo_model.dart';
 import '../models/forget_password_model.dart';
+import '../models/update_profile_data_model.dart';
 import '../utilities/api_service.dart';
 import '../utilities/memory.dart';
 import '../utilities/services.dart';
@@ -50,8 +52,8 @@ class AuthServices{
     }
     return null;
   }
-  static Future<VerificationModel?> SendingVerificationCode(BuildContext context,code) async {
-    var data = await api.request(context: context,Services.verificationCodeEndPoint, "POST",data: {
+  static Future<VerificationModel?> SendingVerificationCode(BuildContext context,code,String userId) async {
+    var data = await api.request(context: context,Services.verificationCodeEndPoint+userId??"", "POST",data: {
       "otp": code,
     },headers:{"authorization":await Get.find<StorageService>().getToken});
     if (data != null) {
@@ -84,11 +86,11 @@ class AuthServices{
     }
     return null;
   }
-  static Future<AuthModel?> resetPassword(String password,String confirmPass,BuildContext context) async {
-    var data = await api.request(context: context,Services.forgetPasswordEndPoint, "POST",data: {
+  static Future<AuthModel?> resetPassword(String password,String confirmPass,BuildContext context,String email) async {
+    var data = await api.request(context: context,Services.resetPasswordEndPoint+email, "PATCH",data: {
       "password":password,
       "confirmPass":confirmPass
-    },headers:{"Authorization":await Get.find<StorageService>().getToken});
+    });
     if (data != null) {
       return AuthModel.fromJson(data);
     }
@@ -147,5 +149,44 @@ class AuthServices{
 
     return null; // Return null if there's any error or invalid response
   }
-
+  static Future<UpdateProfileDataModel?> updateProfileData(String firstName,String lastName,String gender,String phone,String username,BuildContext context) async {
+    var data = await api.request(context: context,Services.updateUserEndPoint, "PATCH",data: {
+      "firstName":firstName,
+      "gender":gender,
+      "username":username,
+      "lastName":lastName,
+      "phone":phone,
+    },headers:{
+      "Authorization":await Get.find<StorageService>().getToken,
+    } );
+    if (data != null) {
+      return UpdateProfileDataModel.fromJson(data);
+    }
+    return null;
+  }
+  static Future<DeleteAccountPhotoModel?> deleteAccountPhoto(BuildContext context) async {
+    var data = await api.request(context: context,Services.deleteAccountPhotoEndPoint, "DELETE",data: {
+    },headers:{"Authorization":await Get.find<StorageService>().getToken});
+    if (data != null) {
+      return DeleteAccountPhotoModel.fromJson(data);
+    }
+    return null;
+  }
+  static Future<VerificationModel?> SendingVerificationCodeForget(BuildContext context,code,String email) async {
+    var data = await api.request(context: context,Services.verificationCodeForgetEndPoint+email, "POST",data: {
+      "otp": code,
+    });
+    if (data != null) {
+      return VerificationModel.fromJson(data);
+    }
+    return null;
+  }
+  static Future<VerificationModel?> reSendingVerificationCodeForget(BuildContext context,String email) async {
+    var data = await api.request(context: context,Services.resendVerificationForgetEndPoint+email, "GET",data: {
+    });
+    if (data != null) {
+      return VerificationModel.fromJson(data);
+    }
+    return null;
+  }
 }

@@ -140,6 +140,13 @@ class SignUpController extends GetxController {
     }
 
   }
+  void dispose() {
+    usernameController.dispose();
+    emailaddressController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Container();

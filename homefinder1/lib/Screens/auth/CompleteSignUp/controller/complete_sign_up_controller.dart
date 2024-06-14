@@ -7,6 +7,7 @@ import 'package:homefinder1/Screens/home/home_screen.dart';
 import '../../../../models/auth_model.dart';
 import '../../../../services/auth_service.dart';
 import '../../../../utilities/memory.dart';
+import '../../../Upload Photo/upload_photo.dart';
 
 class CompleteSignUpController extends GetxController{
 
@@ -76,7 +77,7 @@ Future<void> CompleteSignUp(BuildContext context) async {
         context
     );
     if (data?.status == "success") {
-      Get.to(() =>UploadPhotoScreen());
+      Get.to(() =>UploadPhoto());
     }
   } catch (e) {
     String errorMessage = " $e";

@@ -26,102 +26,8 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  Uint8List? _imageBytes;
-  Future<void> _pickImage() async {
-    final ImageSource? source = await showDialog<ImageSource>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Select Image Source'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                GestureDetector(
-                  child: Text('Gallery'),
-                  onTap: () {
-                    Navigator.of(context).pop(ImageSource.gallery);
-                  },
-                ),
-                SizedBox(height: 20),
-                GestureDetector(
-                  child: Text('Camera'),
-                  onTap: () {
-                    Navigator.of(context).pop(ImageSource.camera);
-                  },
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
 
-    if (source != null) {
-      final XFile? pickedFile = await ImagePicker().pickImage(source: source);
 
-      if (pickedFile != null) {
-        final bytes = await pickedFile.readAsBytes();
-
-        setState(() {
-          _imageBytes = bytes;
-        });
-
-        // Navigate to UploadPreview page immediately after picking the image
-       uploadImage(context, bytes);
-      }
-    }
-  }
-  Future<void> uploadImage(BuildContext context, Uint8List imageBytes) async {
-    // Convert the image bytes to a file
-    final tempDir = await getTemporaryDirectory();
-    final file = await new File('${tempDir.path}/image.jpg').create();
-    await file.writeAsBytes(imageBytes);
-
-    // Retrieve authorization token
-    String? token = await Get.find<StorageService>().getToken;
-    if (token == null) {
-      print('Authorization token is null.');
-      return;
-    }
-
-    // Prepare the upload request
-    var request = http.MultipartRequest('POST', Uri.parse('https://home-finder-back-end-i7ca.onrender.com/api/v1/user/upload-image'));
-
-    // Attach the file to the request
-    request.files.add(await http.MultipartFile.fromPath('image', file.path));
-    request.headers['Authorization'] = token;
-
-    try {
-      // Send the request
-      var response = await request.send();
-
-      if (response.statusCode == 200) {
-        var responseData = await response.stream.bytesToString();
-        var jsonResponse = jsonDecode(responseData);
-        print('Upload successful: $jsonResponse');
-        setState(() {
-
-        });
-      } else {
-        // If the status code is not success, show the error in CoolAlert
-        CoolAlert.show(
-          context: context,
-          type: CoolAlertType.error,
-          title:"Error",
-          text: response.reasonPhrase,
-        );
-      }
-    } catch (e) {
-      // If an exception occurs, show the error in CoolAlert
-      CoolAlert.show(
-        context: context,
-        type: CoolAlertType.error,
-        title: "Error",
-        text: "$e",
-      );
-      print('Error occurred while uploading image: $e');
-    }
-  }
 
 
   @override
@@ -162,7 +68,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   borderRadius: BorderRadius.circular(50),
                                     image: DecorationImage(
                                         image: NetworkImage(
-                                            controller.data?.image?.url??""),
+                                            controller.data?.image?.url??"https://e7.pngegg.com/pngimages/178/595/png-clipart-user-profile-computer-icons-login-user-avatars-monochrome-black-thumbnail.png"),
                                         fit: BoxFit.fill)),
                               ),
                               Padding(
@@ -170,7 +76,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 const EdgeInsets.only(bottom: 5.0, right: 5),
                                 child: InkWell(
                                     onTap: () {
-                                      _pickImage();
+                                      controller.pickImage(context);
+                                      setState(() {
+
+                                      });
                                     },
                                     child: Container(
                                       width: 30,
@@ -191,7 +100,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     Center(
                       child: Text(
-                        controller.data?.username??"",
+                        controller.data?.fullName??"",
                         style: TextStyle(
                             fontWeight: FontWeight.w900,
                             fontFamily: kRegularFont,

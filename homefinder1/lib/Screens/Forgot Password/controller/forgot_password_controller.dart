@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:homefinder1/Screens/verification_code/verfication_code_screen.dart';
+import 'package:homefinder1/Screens/verifiction_code_forget_password/verification_code_forget_password.dart';
 
 import '../../../models/forget_password_model.dart';
 import '../../../services/auth_service.dart';
@@ -56,7 +58,7 @@ class ForgotPasswordController extends GetxController{
           context
       );
       if (data?.status == "success") {
-        Get.to(()=>SignIn());
+        Get.to(()=>VerficationCodeForget(email: emailaddressController.text));
       }
     } catch (e) {
       // Handle bad request error

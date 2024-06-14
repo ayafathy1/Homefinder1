@@ -52,5 +52,9 @@ class DeleteAccountController extends GetxController{
       );
     }
   }
+  void dispose() {
+    passwordController.dispose();
+    super.dispose();
+  }
 }
 

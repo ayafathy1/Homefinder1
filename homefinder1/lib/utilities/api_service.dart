@@ -31,8 +31,11 @@ class ApiService {
       } else if (method == 'POST') {
         request = await httpClient.postUrl(uri);
         request.headers.contentType = ContentType.json;
-      } else if (method == 'PATCH') { // Add PATCH method handling
+      } else if (method == 'PATCH') {
         request = await httpClient.patchUrl(uri);
+        request.headers.contentType = ContentType.json;
+      } else if (method == 'DELETE') {
+        request = await httpClient.deleteUrl(uri);
         request.headers.contentType = ContentType.json;
       } else {
         throw 'Unsupported HTTP method: $method';
@@ -68,7 +71,7 @@ class ApiService {
       }
     } catch (e, stackTrace) {
       String message = "$e";
-      String part = message.substring(28, message.length - 2);
+      String part = message.substring(28, message.length-2);
       print("Error: $part");
       print("StackTrace: $stackTrace");
       if (errorDialog == null && errorMessage == null) {

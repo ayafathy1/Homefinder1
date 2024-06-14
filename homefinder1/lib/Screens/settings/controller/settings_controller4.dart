@@ -3,17 +3,28 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/SplashScreen/splash_Screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../../models/get_user_model.dart';
 import '../../../models/log_out_model.dart';
 import '../../../services/auth_service.dart';
 import '../../../utilities/memory.dart';
 
 class SettingsController extends GetxController {
-   onInIt(){
+   User? data ;
+   bool isLoading=true;
+   @override
+   void onInit() {
+      super.onInit();
       selectedIndex=7;
+
+      getdata();
+
    }
-   onIn(){
-      selectedIndex=7;
+   @override
+   void onReady() {
+      super.onReady();
+      getdata();
    }
+
    int selectedIndex = 7;
    List<String> photosUnSelected = [
       "lib/assets/images/EditProfileSelected.png",
@@ -67,4 +78,24 @@ class SettingsController extends GetxController {
          );
       }
    }
+   getdata() async
+   {
+      isLoading=true;
+      update();
+      var response = await AuthServices.fetchUserData();
+
+      if (response == null) {
+         print("some error occured");
+      } else {
+         data= response.user;
+
+      }
+
+      isLoading = false;
+
+      update();
+
+
+   }
+
 }

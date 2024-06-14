@@ -5,15 +5,15 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/auth/CompleteSignUp/complete_sign_up.dart';
+import 'package:homefinder1/Screens/reset_password/reset_password_screen.dart';
 import 'package:homefinder1/models/serification_model.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../services/auth_service.dart';
-import '../../../utilities/memory.dart';
 
-class VerficationCodeController extends GetxController {
- final String userId;
-    VerficationCodeController(this.userId);
+class VerficationCodeForgetController extends GetxController {
+  String email;
+  VerficationCodeForgetController(this.email);
   final  formkey =  GlobalKey<FormState>();
   final TextEditingController verificationCodeController = TextEditingController();
   late Timer _timer;
@@ -30,9 +30,9 @@ class VerficationCodeController extends GetxController {
   }
   void resendCode() {
 
-      remainingTimeInSeconds = 60;
-      startTimer();
-      update();
+    remainingTimeInSeconds = 60;
+    startTimer();
+    update();
 
   }
 
@@ -63,11 +63,36 @@ class VerficationCodeController extends GetxController {
 
   Future<void> sendVerificationCode(BuildContext context,int code) async {
     try {
-      VerificationModel? data = await AuthServices.SendingVerificationCode(
+      VerificationModel? data = await AuthServices.SendingVerificationCodeForget(
           context,
           verificationCodeController.text,
-        userId
+        email
+      );
 
+      if (data?.status == "success") {
+
+        Get.to(() =>ResetPasswordScreen(email: email,));
+      }
+    } catch (e) {
+      // Handle bad request error
+      String errorMessage = " $e";
+      String part = errorMessage.substring(26, 35);
+      // Show error message on the screen
+      CoolAlert.show(
+        context: context,
+        type: CoolAlertType.error,
+        title: "Error",
+        text: part,
+      );
+    }
+
+  }
+  Future<void> resendVerificationCode(BuildContext context,String email) async {
+    try {
+      VerificationModel? data = await AuthServices.reSendingVerificationCodeForget(
+          context,
+
+          email
       );
 
       if (data?.status == "success") {
@@ -88,29 +113,4 @@ class VerficationCodeController extends GetxController {
     }
 
   }
- Future<void> resendVerificationCode(BuildContext context,int code) async {
-   try {
-     VerificationModel? data = await AuthServices.reSendingVerificationCode(
-         context,
-
-     );
-
-     if (data?.status == "success") {
-
-       Get.to(() => CompleteSignUp());
-     }
-   } catch (e) {
-     // Handle bad request error
-     String errorMessage = " $e";
-     String part = errorMessage.substring(26, 35);
-     // Show error message on the screen
-     CoolAlert.show(
-       context: context,
-       type: CoolAlertType.error,
-       title: "Error",
-       text: part,
-     );
-   }
-
- }
 }

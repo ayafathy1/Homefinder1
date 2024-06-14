@@ -3,26 +3,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:homefinder1/Screens/auth/CompleteSignUp/complete_sign_up.dart';
-import 'package:homefinder1/Screens/auth/SignIn/signin.dart';
+import 'package:homefinder1/Screens/verifiction_code_forget_password/controller/verification_code_forget_controller.dart';
 import 'package:homefinder1/Widget/custom_arrow_back.dart';
 import 'package:homefinder1/services/auth_service.dart';
 import 'package:timer_builder/timer_builder.dart';
 
 import '../../utilities/memory.dart';
-import 'controller/verification_code_controller.dart';
 
-class VerficationCode extends StatefulWidget {
+
+
+class VerficationCodeForget extends StatefulWidget {
+
+  const VerficationCodeForget({super.key, required this.email});
+  final String email;
   @override
-  State<VerficationCode> createState() => _VerficationCodeState();
+  State<VerficationCodeForget> createState() => _VerficationCodeState();
 }
 
-class _VerficationCodeState extends State<VerficationCode> {
+class _VerficationCodeState extends State<VerficationCodeForget> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<VerficationCodeController>(
-      init: VerficationCodeController(  Get.find<StorageService>().getId),
-      builder: (VerficationCodeController controller) {
+    return GetBuilder<VerficationCodeForgetController>(
+      init: VerficationCodeForgetController(widget.email),
+      builder: (VerficationCodeForgetController controller) {
         return Scaffold(
           appBar: AppBar(
             leadingWidth: Get.width*0.2,
@@ -33,7 +36,7 @@ class _VerficationCodeState extends State<VerficationCode> {
           ),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
                 height: Get.height*0.17,
@@ -67,7 +70,7 @@ class _VerficationCodeState extends State<VerficationCode> {
                   ],
                 ),
               ),
-          
+
               Padding(
                 padding: const EdgeInsets.only(bottom: 15.0,right: 10,left: 10),
                 child: SingleChildScrollView(
@@ -106,7 +109,7 @@ class _VerficationCodeState extends State<VerficationCode> {
                             Text("Didn't receive a code?", style: TextStyle(fontSize: 20),),
                             TextButton(
                               onPressed: () async {
-                                AuthServices.reSendingVerificationCode(context);
+                                controller.resendVerificationCode(context,widget.email);
                               },
                               child: Text(
                                 "Resend",
@@ -124,7 +127,7 @@ class _VerficationCodeState extends State<VerficationCode> {
                 onPressed: () async {
                   if (controller.formkey.currentState!
                       .validate()) {
-                    controller.sendVerificationCode;
+                    controller.sendVerificationCode(context, int.parse(controller.verificationCodeController.text));
                   }
                 },
                 child: Row(
@@ -143,7 +146,7 @@ class _VerficationCodeState extends State<VerficationCode> {
                 style: ElevatedButton.styleFrom(
                   fixedSize:Size(190, 65),
                   backgroundColor: Color(0xff6C63FF),
-          
+
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25),
                   ),

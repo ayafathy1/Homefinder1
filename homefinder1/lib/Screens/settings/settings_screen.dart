@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/change_password/change_password_screen.dart';
 import 'package:homefinder1/Screens/delete_account/delete_account_screen.dart';
+import 'package:homefinder1/Screens/edit_profile/edit_profile.dart';
 import 'package:homefinder1/Screens/settings/controller/settings_controller4.dart';
 import 'package:homefinder1/Widget/custom_bottom_navigation_bar_widget.dart';
 import 'package:homefinder1/utilities/colors.dart';
@@ -23,8 +24,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     builder: (SettingsController controller) {
     return Scaffold(
       appBar: AppBar(
-        leadingWidth: 245,
-        toolbarHeight: Get.height*0.1,
+        leadingWidth: Get.width*0.65,
+        toolbarHeight: Get.height*0.11,
         leading: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -34,10 +35,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
               child: Container(
                 width: 59.5,
                 height: 58.88,
-                child: Image(
-                  image: AssetImage("lib/assets/images/Profile.png"),
-                  fit: BoxFit.fill,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  image: DecorationImage(
+                    image: NetworkImage(controller.data?.image?.url??"lib/assets/images/Profile.png"),
+                    fit: BoxFit.fill,
+                  )
                 ),
+
               ),
             ),
             Column(
@@ -45,14 +50,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Ashfak Sayem",
+                  controller.data?.fullName??"",
                   style: TextStyle(
                       fontSize: 15,
                       color: kDarkBlueColor,
                       fontWeight: FontWeight.w800,
                       fontFamily: kRegularFont),
                 ),
-                Text("ashfaksayem@gmail.com",
+                Text(controller.data?.email??"",
                     style: TextStyle(
                         fontSize: 12,
                         color: Color(0xff535763),
@@ -85,6 +90,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       Get.to(()=>DeleteAccountScreen());
                     }else if(controller.selectedIndex==1){
                       Get.to(()=>ChangePasswordScreen());
+                    }else if(controller.selectedIndex==0){
+                      Get.to(()=>EditProfileScreen());
                     }
                     setState(() {
                       
