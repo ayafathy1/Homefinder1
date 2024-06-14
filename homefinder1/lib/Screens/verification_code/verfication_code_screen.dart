@@ -106,7 +106,7 @@ class _VerficationCodeState extends State<VerficationCode> {
                             Text("Didn't receive a code?", style: TextStyle(fontSize: 20),),
                             TextButton(
                               onPressed: () async {
-                                AuthServices.reSendingVerificationCode(context);
+                                controller.resendVerificationCode(context);
                               },
                               child: Text(
                                 "Resend",
@@ -124,7 +124,7 @@ class _VerficationCodeState extends State<VerficationCode> {
                 onPressed: () async {
                   if (controller.formkey.currentState!
                       .validate()) {
-                    controller.sendVerificationCode;
+                    controller.sendVerificationCode(context,int.parse(controller.verificationCodeController.text));
                   }
                 },
                 child: Row(

@@ -61,7 +61,7 @@ class VerficationCodeController extends GetxController {
 
 
 
-  Future<void> sendVerificationCode(BuildContext context,int code) async {
+  Future<void> sendVerificationCode(BuildContext context,int code,) async {
     try {
       VerificationModel? data = await AuthServices.SendingVerificationCode(
           context,
@@ -88,16 +88,16 @@ class VerficationCodeController extends GetxController {
     }
 
   }
- Future<void> resendVerificationCode(BuildContext context,int code) async {
+ Future<void> resendVerificationCode(BuildContext context) async {
    try {
      VerificationModel? data = await AuthServices.reSendingVerificationCode(
          context,
+
 
      );
 
      if (data?.status == "success") {
 
-       Get.to(() => CompleteSignUp());
      }
    } catch (e) {
      // Handle bad request error
