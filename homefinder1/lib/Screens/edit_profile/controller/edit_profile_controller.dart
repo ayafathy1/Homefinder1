@@ -1,6 +1,8 @@
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:homefinder1/Screens/profile/controller/profile_controller.dart';
+import 'package:homefinder1/Screens/settings/controller/settings_controller4.dart';
 
 import '../../../models/delete_account_photo_model.dart';
 import '../../../models/get_user_model.dart'as dd;
@@ -19,6 +21,9 @@ class EditProfileController extends GetxController{
   void onInit() {
     super.onInit();
     getdata();
+    if(test4){
+      Get.delete<EditProfileController>();
+    }
 
   }
   Uint8List? imageBytes;
@@ -32,6 +37,8 @@ class EditProfileController extends GetxController{
   dd.User? data ;
   dd.GetUserModel? data1;
   bool isLoading=true;
+  bool test4 = Get.isRegistered<EditProfileController>();
+
   getdata() async
   {
      dd.GetUserModel? response = await AuthServices.fetchUserData();
@@ -129,6 +136,14 @@ class EditProfileController extends GetxController{
         getdata();
         isLoading=false;
         update();
+        bool test4 = Get.isRegistered<ProfileController>();
+        if(test4){
+          Get.delete<ProfileController>();
+        }
+        bool test5 = Get.isRegistered<SettingsController>();
+        if(test5){
+          Get.delete<SettingsController>();
+        }
 
       } else {
         // If the status code is not success, show the error in CoolAlert
@@ -167,6 +182,14 @@ class EditProfileController extends GetxController{
           title: "Done",
           text: data?.message,
         );
+        bool test4 = Get.isRegistered<ProfileController>();
+        if(test4){
+          Get.delete<ProfileController>();
+        } bool test5 = Get.isRegistered<SettingsController
+        >();
+        if(test5){
+          Get.delete<SettingsController>();
+        }
 
       }
     } catch (e) {
@@ -195,6 +218,14 @@ class EditProfileController extends GetxController{
         getdata();
         isLoading=false;
         update();
+        bool test4 = Get.isRegistered<ProfileController>();
+        if(test4){
+          Get.delete<ProfileController>();
+        } bool test5 = Get.isRegistered<SettingsController
+        >();
+        if(test5){
+          Get.delete<SettingsController>();
+        }
       }
     } catch (e) {
       // Handle bad request error

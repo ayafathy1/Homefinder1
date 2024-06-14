@@ -11,6 +11,7 @@ import '../../../utilities/memory.dart';
 class SettingsController extends GetxController {
    User? data ;
    bool isLoading=true;
+
    @override
    void onInit() {
       super.onInit();
@@ -18,12 +19,15 @@ class SettingsController extends GetxController {
 
       getdata();
 
+
    }
    @override
    void onReady() {
       super.onReady();
       getdata();
+
    }
+   bool test4 = Get.isRegistered<SettingsController>();
 
    int selectedIndex = 7;
    List<String> photosUnSelected = [

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:cool_alert/cool_alert.dart';
+import 'package:homefinder1/Screens/edit_profile/controller/edit_profile_controller.dart';
 import 'package:homefinder1/services/auth_service.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../../utilities/memory.dart';
+import '../../settings/controller/settings_controller4.dart';
 
 class ProfileController extends GetxController{
   Uint8List? imageBytes;
@@ -34,18 +36,24 @@ class ProfileController extends GetxController{
   List<String>listingHousesNames=["Fairview Apartment","Shoolview House"];
   late List<Widget> listViewItem = [];
   String pendingOrListingOrSold="Pending";
+
   @override
   void onInit() {
     super.onInit();
 
     getdata();
     pendingListingSold();
+
   }
   @override
   void onReady() {
     super.onReady();
     getdata();
+    if(test4){
+      Get.delete<ProfileController>();
+    }
   }
+  bool test4 = Get.isRegistered<ProfileController>();
 
   Future<void> pickImage(BuildContext context) async {
     final ImageSource? source = await showDialog<ImageSource>(
@@ -125,6 +133,13 @@ class ProfileController extends GetxController{
         getdata();
         isLoading=false;
         update();
+        bool test4 = Get.isRegistered<EditProfileController>();
+        if(test4){
+          Get.delete<EditProfileController>();
+        } bool test5 = Get.isRegistered<SettingsController>();
+        if(test5){
+          Get.delete<SettingsController>();
+        }
 
       } else {
         // If the status code is not success, show the error in CoolAlert

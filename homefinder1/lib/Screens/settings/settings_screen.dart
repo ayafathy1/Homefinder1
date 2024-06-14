@@ -4,10 +4,12 @@ import 'package:get/get.dart';
 import 'package:homefinder1/Screens/change_password/change_password_screen.dart';
 import 'package:homefinder1/Screens/delete_account/delete_account_screen.dart';
 import 'package:homefinder1/Screens/edit_profile/edit_profile.dart';
+import 'package:homefinder1/Screens/profile/controller/profile_controller.dart';
 import 'package:homefinder1/Screens/settings/controller/settings_controller4.dart';
 import 'package:homefinder1/Widget/custom_bottom_navigation_bar_widget.dart';
 import 'package:homefinder1/utilities/colors.dart';
 import 'package:homefinder1/utilities/constants.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -71,7 +73,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
       bottomNavigationBar: CustomBottomNavigationBarWidget(selectedOne:
       "lib/assets/images/homeIconButtonNavigationUnselected.png",selectedFifth: "lib/assets/images/SettingsIconButtomNavBar.png",),
-      body: Column(
+      body:controller.isLoading
+          ? Center(
+        child: LoadingAnimationWidget.twistingDots(
+          leftDotColor: const Color(0xFFe9d9e9),
+          rightDotColor: const Color(0xFF8a81d2),
+          size: 200,
+        ),
+      )
+          :  Column(
         children: [
           Center(
             child: Container(
@@ -91,6 +101,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     }else if(controller.selectedIndex==1){
                       Get.to(()=>ChangePasswordScreen());
                     }else if(controller.selectedIndex==0){
+                      bool test4 = Get.isRegistered<ProfileController>();
+                      if(test4){
+                        Get.delete<ProfileController>();
+                      }
                       Get.to(()=>EditProfileScreen());
                     }
                     setState(() {
