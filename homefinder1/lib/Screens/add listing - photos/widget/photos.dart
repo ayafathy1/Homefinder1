@@ -14,7 +14,7 @@ import 'package:http/http.dart' as http;
 import '../../../utilities/memory.dart';
 
 class ImagePickerExample1 extends StatefulWidget {
-  String residenceId;
+  final String residenceId;
   ImagePickerExample1(this.residenceId);
   @override
   _ImagePickerExampleState1 createState() => _ImagePickerExampleState1();
@@ -84,6 +84,7 @@ class _ImagePickerExampleState1 extends State<ImagePickerExample1> {
       },
     );
   }
+
   Future<void> uploadImage(BuildContext context) async {
     if (_images.isEmpty) {
       CoolAlert.show(
@@ -109,11 +110,8 @@ class _ImagePickerExampleState1 extends State<ImagePickerExample1> {
       // Add images to the request
       for (var image in _images) {
         request.files.add(http.MultipartFile.fromBytes('images', image, filename: 'image.jpg'));
-
       }
       request.headers['Authorization'] = token;
-      // Send request with authorization header if needed
-      // request.headers['Authorization'] = 'Bearer your_token_here';
 
       var response = await request.send();
 
@@ -124,7 +122,7 @@ class _ImagePickerExampleState1 extends State<ImagePickerExample1> {
 
         // Navigate to the next screen on success, passing necessary data
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (_) => AddListingFirstDetailScreen(residanceId: widget.residenceId), // Example passing first image
+          builder: (_) => AddListingFirstDetailScreen(residanceId: widget.residenceId),
         ));
       } else {
         CoolAlert.show(
@@ -149,15 +147,17 @@ class _ImagePickerExampleState1 extends State<ImagePickerExample1> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: Get.height*0.1,
-        leadingWidth: Get.width*0.2,
+        toolbarHeight: Get.height * 0.1,
+        leadingWidth: Get.width * 0.2,
         leading: CustomArrowBack(),
-        title: Text('Add Listing',style: TextStyle(
-          color: kDarkBlueColor,
-          fontWeight: FontWeight.w900,
-          fontSize: 20,
-          fontFamily: kRegularFont
-        ),),
+        title: Text(
+          'Add Listing',
+          style: TextStyle(
+              color: kDarkBlueColor,
+              fontWeight: FontWeight.w900,
+              fontSize: 20,
+              fontFamily: kRegularFont),
+        ),
       ),
       body: Center(
         child: Column(
@@ -170,90 +170,103 @@ class _ImagePickerExampleState1 extends State<ImagePickerExample1> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text("  Add",style:TextStyle(
-                        color: kDarkBlueColor,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 25,
-                        fontFamily: kRegularFont
-                    )),
-                    Text(" photos",style:TextStyle(
-                        color: kDarkBlueColor,
-                        fontWeight: FontWeight.w900,
-                        fontSize: 25,
-                        fontFamily: kRegularFont
-                    )),
-                    Text(" to your",style:TextStyle(
-                        color: kDarkBlueColor,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 25,
-                        fontFamily: kRegularFont
-                    )),
+                    Text("  Add",
+                        style: TextStyle(
+                            color: kDarkBlueColor,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 25,
+                            fontFamily: kRegularFont)),
+                    Text(" photos",
+                        style: TextStyle(
+                            color: kDarkBlueColor,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 25,
+                            fontFamily: kRegularFont)),
+                    Text(" to your",
+                        style: TextStyle(
+                            color: kDarkBlueColor,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 25,
+                            fontFamily: kRegularFont)),
                   ],
                 ),
-                Text("   listing",style:TextStyle(
-                    color: kDarkBlueColor,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 25,
-                    fontFamily: kRegularFont
-                )),
+                Text("   listing",
+                    style: TextStyle(
+                        color: kDarkBlueColor,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 25,
+                        fontFamily: kRegularFont)),
               ],
             ),
             _images.isEmpty
                 ? Center(child: Text('No images selected.'))
                 : Container(
-              height: Get.height*0.55,
-                  width: Get.width,
-                  child: GridView.count(
-                                  crossAxisCount: 3,
-                                  children: List.generate(_images.length, (index) {
-                                    return Stack(
-                                      alignment: Alignment.topRight,
-                                      children: [Container(
-                                        margin: EdgeInsets.only(right: 4,left: 4,top: 5),
-                                        width:159,
-                                        height:161,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
-
-                                        ),
-
-                                          child: ClipRRect(borderRadius: BorderRadius.circular(25),child: Image.memory(_images[index],fit: BoxFit.fill,)),),
-                                      InkWell(
-                                        onTap:(){},
-                                        child: Container(
-                                          width:30,
-                                          height:30,
-                                          decoration:BoxDecoration(
-                                            color: Color(0xff9292FD),
-                                            borderRadius: BorderRadius.circular(50)
-                                          ),
-                                          child: Center(
-
-                                            child: Icon(Icons.close,color: Colors.white,size: 17,),
-                                          ),
-                                        ),
-                                      )
-                                      ]
-                                    );
-                                  }),
-                  ),
-                ),
-
+              height: Get.height * 0.55,
+              width: Get.width,
+              child: GridView.count(
+                crossAxisCount: 3,
+                children: List.generate(_images.length, (index) {
+                  return Stack(
+                    alignment: Alignment.topRight,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(right: 4, left: 4, top: 5),
+                        width: 159,
+                        height: 161,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(25),
+                          child: Image.memory(
+                            _images[index],
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            _images.removeAt(index);
+                          });
+                        },
+                        child: Container(
+                          width: 30,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            color: Color(0xff9292FD),
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: Center(
+                            child: Icon(
+                              Icons.close,
+                              color: Colors.white,
+                              size: 17,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                }),
+              ),
+            ),
             Center(
               child: ElevatedButton(
                 onPressed: _showImagePickerDialog,
-                 style: ElevatedButton.styleFrom(
-                   fixedSize: Size(100, 100),
-                   backgroundColor: kVeryLightGreyColor,
-                   shape: RoundedRectangleBorder(
-                     borderRadius: BorderRadius.circular(25),
-
-                   )
-                 ),
-                 child: Center(
-                  child: Icon(Icons.add,size: 20,color: kDarkBlueColor,),
+                style: ElevatedButton.styleFrom(
+                    fixedSize: Size(100, 100),
+                    backgroundColor: kVeryLightGreyColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    )),
+                child: Center(
+                  child: Icon(
+                    Icons.add,
+                    size: 20,
+                    color: kDarkBlueColor,
+                  ),
                 ),
-
               ),
             ),
             Center(
@@ -289,5 +302,3 @@ class _ImagePickerExampleState1 extends State<ImagePickerExample1> {
     );
   }
 }
-
-
