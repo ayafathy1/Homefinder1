@@ -9,6 +9,7 @@ import 'package:homefinder1/utilities/colors.dart';
 import 'package:homefinder1/utilities/constants.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
+import '../settings/controller/settings_controller4.dart';
 import 'controller/edit_profile_controller.dart';
 
 class EditProfileScreen extends StatelessWidget {
@@ -21,7 +22,7 @@ class EditProfileScreen extends StatelessWidget {
         builder: (EditProfileController controller) {
           return Scaffold(
             appBar: AppBar(
-              toolbarHeight: Get.height*0.1,
+              toolbarHeight: Get.height*0.088,
               title: Text(
                 "Edit Profile",
                 style: TextStyle(
@@ -30,7 +31,30 @@ class EditProfileScreen extends StatelessWidget {
                     fontSize: 20,
                     fontFamily: kRegularFont),
               ),
-              leading: CustomArrowBack(),
+              leading:Row(
+                children: [
+                  SizedBox(width: 25,),
+                  Container(
+                    width: 50,
+                    height: 55,
+                    decoration: BoxDecoration(color: Color(0xff9292FD).withOpacity(0.2),
+                        border: Border.all(color: Color(0xff9292FD).withOpacity(0.2)),borderRadius: BorderRadius.circular(15)),
+                    child:
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5.0),
+                      child: IconButton(onPressed: (){
+                        bool test5 = Get.isRegistered<SettingsController
+                        >();
+                        if(test5){
+                          Get.delete<SettingsController>();
+                        }
+                        Get.back();
+                      }, icon: Icon(Icons.arrow_back_ios ,size: 20,color: Color(0xff6C63FF),) ,),
+                    ),
+
+                  ),
+                ],
+              ),
               leadingWidth: 80,
             ),
             body: Container(

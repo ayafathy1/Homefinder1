@@ -26,8 +26,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     builder: (SettingsController controller) {
     return Scaffold(
       appBar: AppBar(
-        leadingWidth: Get.width*0.65,
-        toolbarHeight: Get.height*0.11,
+        leadingWidth: Get.width*0.77,
+        toolbarHeight: Get.height*0.14,
         leading: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -86,7 +86,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           Center(
             child: Container(
               height: Get.height*0.66,
-              width: Get.width*0.9,
+              width: Get.width*0.95,
               child: ListView.separated(
                 padding: EdgeInsets.only(top: 10),
                 physics: NeverScrollableScrollPhysics()

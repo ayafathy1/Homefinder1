@@ -8,6 +8,7 @@ import 'package:homefinder1/utilities/memory.dart';
 import 'Screens/Upload Photo/upload_photo.dart';
 import 'Screens/add listing - photos/adding_photos.dart';
 import 'Screens/add listing - photos/upload_photo.dart';
+import 'Screens/add listing - photos/widget/photos.dart';
 
 
 Future<void> main() async {

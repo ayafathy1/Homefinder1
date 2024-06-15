@@ -5,6 +5,7 @@ import 'package:homefinder1/Screens/add_listing_1st_detail/add_listing_1st_detai
 import 'package:homefinder1/services/residences_services.dart';
 
 import '../../../models/create_residence_first.dart';
+import '../../add listing - photos/widget/photos.dart';
 
 class AddListingController extends GetxController{
    static String? houseId;
@@ -27,7 +28,7 @@ class AddListingController extends GetxController{
          if (data?.status == "success") {
             AddListingController.houseId=data?.residence?.id;
             print(houseId);
-            Get.to(() =>AddListingFirstDetailScreen(residanceId:data?.residence?.id??"",));
+            Get.to(() =>ImagePickerExample1(data?.residence?.id??"",));
          }
       } catch (e) {
          String errorMessage = " $e";
