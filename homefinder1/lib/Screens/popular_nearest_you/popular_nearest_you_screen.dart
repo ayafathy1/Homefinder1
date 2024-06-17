@@ -82,7 +82,7 @@ class PopularNearestYou extends StatelessWidget{
           ],
         ),
       ),
-      bottomNavigationBar: CustomBottomNavigationBarWidget(),
+
     );});
   }
 
