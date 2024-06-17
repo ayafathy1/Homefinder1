@@ -127,7 +127,9 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),],),
-      body:controller.isLoading
+
+      body: controller.isLoading
+
           ? Center(
         child: LoadingAnimationWidget.twistingDots(
           leftDotColor: const Color(0xFFe9d9e9),
@@ -135,7 +137,9 @@ class HomeScreen extends StatelessWidget {
           size: 200,
         ),
       )
-          : SafeArea(
+
+          :SafeArea(
+
         child: SizedBox(
           height: Get.height*0.85,
           child: SingleChildScrollView(
@@ -399,7 +403,7 @@ class HomeScreen extends StatelessWidget {
                       width: 120,
                     ),
                     TextButton(
-                        onPressed: () {Get.to(()=>PopularNearestYou());},
+                        onPressed: () {Get.to(()=>FeaturedEstates());},
                         child: Text(
                           "View All",
                           style: TextStyle(
