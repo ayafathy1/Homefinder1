@@ -9,6 +9,8 @@ import 'package:homefinder1/utilities/constants.dart';
 import '../../utilities/colors.dart';
 
 class SingleDetailScreen extends StatefulWidget{
+  String? resId;
+  SingleDetailScreen(this.resId);
   @override
   State<SingleDetailScreen> createState() => _SingleDetailScreenState();
 }
@@ -17,7 +19,7 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SingleDetailController>(
-      init: SingleDetailController(),
+      init: SingleDetailController(widget.resId,context),
         builder: (SingleDetailController controller){
         return Scaffold(
           body: SingleChildScrollView(

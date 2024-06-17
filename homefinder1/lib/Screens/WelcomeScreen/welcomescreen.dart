@@ -30,11 +30,10 @@ class Welcomescreen extends StatelessWidget{
 
              ],
            ),
-           SizedBox(height: 20,),
            Text("Explore and locate your ideal dream home" ,style: TextStyle(color: Color(0xffA09695) ,fontSize: 15),),
-            SizedBox(height: 30,),
+            SizedBox(height: 20,),
             SizedBox(
-              height: 70,
+              height: 65,
               width: 350,
               child: ElevatedButton(onPressed: (){
                Get.to((()=>  SignUp()),
@@ -51,7 +50,7 @@ class Welcomescreen extends StatelessWidget{
             SizedBox(height: 20,),
 
             SizedBox(
-              height: 70,
+              height: 60,
               width: 350,
               child: ElevatedButton(onPressed: (){
              Get.to(() =>  SignIn(),

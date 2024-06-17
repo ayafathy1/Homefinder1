@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:homefinder1/Screens/edit_profile/controller/edit_profile_controller.dart';
+import 'package:homefinder1/models/get_sold_for_profile_model.dart'as d;
 import 'package:homefinder1/services/auth_service.dart';
+import 'package:homefinder1/services/residences_services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -36,13 +38,18 @@ class ProfileController extends GetxController{
   List<String>listingHousesNames=["Fairview Apartment","Shoolview House"];
   late List<Widget> listViewItem = [];
   String pendingOrListingOrSold="Pending";
+  ScrollController scrollController=ScrollController();
 
   @override
   void onInit() {
     super.onInit();
-
+    scrollController=ScrollController();
     getdata();
+    getDataOfSoldResidences();
+    getDataOfpendingResidences();
+    getDataOfApprovedResidences();
     pendingListingSold();
+    scrollController.addListener(loadMoreDataOfSoldResidences);
 
   }
   @override
@@ -135,10 +142,8 @@ class ProfileController extends GetxController{
         update();
         bool test4 = Get.isRegistered<EditProfileController>();
         if(test4){
-          Get.delete<EditProfileController>();
-        } bool test5 = Get.isRegistered<SettingsController>();
-        if(test5){
           Get.delete<SettingsController>();
+          Get.delete<EditProfileController>();
         }
 
       } else {
@@ -185,18 +190,171 @@ class ProfileController extends GetxController{
 
   }
 
+  List<dynamic>? soldResidences ;
+  int counterOfSoldResidences=1;
+  bool isLoadingMoreDataOfSoldResidences=false;
+  int maxNoOfPagesOfSoldResidences=1;
+  int soldResidenceCount=0;
+
+  getDataOfSoldResidences() async
+  {
+    if(
+    counterOfSoldResidences==1
+    ) {
+      var response = await ResidenceServices.fetchUserSoldData(counterOfSoldResidences);
+
+      if (response == null) {
+        print("some error occured");
+      } else {
+        soldResidenceCount=response.count??0;
+        soldResidences= response.residences;
+
+      }
+
+      isLoading = false;
+
+      update();
+
+    }else{
+      if(counterOfSoldResidences<= (maxNoOfPagesOfSoldResidences??0)){
+        var response = await ResidenceServices.fetchUserSoldData(counterOfSoldResidences);
+        if(response==null){
+          print("some error occured");
+        }else{
+          soldResidences?.addAll(response!.residences!);
+        }
+        isLoadingMoreDataOfSoldResidences= false;
+        update();
+      }
 
 
+
+    }
+  }
+
+  void loadMoreDataOfSoldResidences(){
+    if((scrollController.position.pixels)==(scrollController.position.maxScrollExtent))
+    {
+      counterOfSoldResidences=counterOfSoldResidences+1;
+      isLoadingMoreDataOfSoldResidences= true;
+      update();
+
+
+    }
+  }
+  List<dynamic>? pendingResidences ;
+  int counterOfpendingResidences=1;
+  bool isLoadingMoreDataOfpendingResidences=false;
+  int maxNoOfPagesOfpendingResidences=1;
+int pendingResidenceCount=0;
+
+  getDataOfpendingResidences() async
+  {
+    if(
+    counterOfpendingResidences==1
+    ) {
+      var response = await ResidenceServices.fetchUserpendingData(counterOfpendingResidences);
+
+      if (response == null) {
+        print("some error occured");
+      } else {
+        pendingResidences= response.residences;
+        pendingResidenceCount=response.count??0;
+
+      }
+
+      isLoading = false;
+
+      update();
+
+    }else{
+      if(counterOfpendingResidences<= (maxNoOfPagesOfpendingResidences??0)){
+        var response = await ResidenceServices.fetchUserpendingData(counterOfpendingResidences);
+        if(response==null){
+          print("some error occured");
+        }else{
+          soldResidences?.addAll(response!.residences!);
+        }
+        isLoadingMoreDataOfpendingResidences= false;
+        update();
+      }
+
+
+
+    }
+  }
+
+  void loadMoreDataOfpendingResidences(){
+    if((scrollController.position.pixels)==(scrollController.position.maxScrollExtent))
+    {
+      counterOfpendingResidences=counterOfpendingResidences+1;
+      isLoadingMoreDataOfpendingResidences= true;
+      update();
+
+
+    }
+  }
+
+  List<dynamic>? approvedResidences ;
+  int counterOfApprovedResidences=1;
+  bool isLoadingMoreDataOfApprovedResidences=false;
+  int maxNoOfPagesOfApprovedResidences=1;
+  int approvedResidenceCount=0;
+
+  getDataOfApprovedResidences() async
+  {
+    if(
+    counterOfApprovedResidences==1
+    ) {
+      var response = await ResidenceServices.fetchUserapprovedData(counterOfApprovedResidences);
+
+      if (response == null) {
+        print("some error occured");
+      } else {
+        approvedResidences= response.residences;
+        approvedResidenceCount=response.count??0;
+
+      }
+
+      isLoading = false;
+
+      update();
+
+    }else{
+      if(counterOfApprovedResidences<= (maxNoOfPagesOfApprovedResidences??0)){
+        var response = await ResidenceServices.fetchUserapprovedData(counterOfApprovedResidences);
+        if(response==null){
+          print("some error occured");
+        }else{
+          approvedResidences?.addAll(response!.residences!);
+        }
+        isLoadingMoreDataOfApprovedResidences= false;
+        update();
+      }
+
+
+
+    }
+  }
+
+  void loadMoreDataOfApprovedResidences(){
+    if((scrollController.position.pixels)==(scrollController.position.maxScrollExtent))
+    {
+      counterOfApprovedResidences=counterOfApprovedResidences+1;
+      isLoadingMoreDataOfApprovedResidences= true;
+      update();
+
+
+    }
+  }
 
   pendingListingSold(){
-    int counter=data1?.pendingCount??0;
-    int counter1=data1?.approvedCount??0;
-    int counter2=data1?.soldCount??0;
+    int counter=pendingResidenceCount;
+    int counter1=approvedResidenceCount;
+    int counter2=soldResidenceCount;
     if(counter > 0 && selectedIndex == 0){
       listViewItem = [];
-      pendingOrListingOrSold="Pending";
-
-      for(var index = 0 ; index<counter;index=index+1){
+      for(var index = 0 ; index<counter-1;index=index+1){
         listViewItem.add(InkWell(
           onTap:(){
 
@@ -341,9 +499,11 @@ class ProfileController extends GetxController{
         ));
       }
 
+    }else if(counter==0){
+      listViewItem = [];
+      for(var index = 0 ; index<counter;index=index+1){ listViewItem.add(SizedBox());}
     }else if(counter1 > 0 && selectedIndex == 1){
       listViewItem = [];
-      pendingOrListingOrSold="Listing";
 
       for(var index = 0 ; index<counter1;index=index+1){listViewItem.add(InkWell(
         onTap:(){
@@ -512,9 +672,12 @@ class ProfileController extends GetxController{
         ),
       ));}
 
-    }else if(counter2 > 0 && selectedIndex == 2)
+    }else if(counter1==0){
+      listViewItem = [];
+      for(var index = 0 ; index<counter1;index=index+1){listViewItem.add(SizedBox());}
+    }
+      else if(counter2 > 0 && selectedIndex == 2)
     { listViewItem = [];
-    pendingOrListingOrSold="Sold";
 
     for(var index = 0 ; index<counter2;index=index+1)
       {listViewItem.add(InkWell(
@@ -661,7 +824,11 @@ class ProfileController extends GetxController{
 
       ));}
 
+    }else if(counter2==0){
+      listViewItem = [];
+      for(var index = 0 ; index<counter2;index=index+1){listViewItem.add(SizedBox());}
     }
     update();
+
   }
 }

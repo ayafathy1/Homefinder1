@@ -24,5 +24,5 @@ class Services {
  static String secondCompleteEndPoint = "residence/complete/2nd/";
  static String fourthCompleteEndPoint = "residence/complete/4th/";
  static String deleteOneResidenceEndPoint = "residence/delete/";//delete
-
+ static String GetSoldForProfileEndPoint = "residence/sold?";//get
 }

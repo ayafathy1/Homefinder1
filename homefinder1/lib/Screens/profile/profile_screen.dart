@@ -254,7 +254,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Container(
                           margin: EdgeInsets.only(top: 20),
                           width: Get.width * 0.93,
-                          height: 60,
+                          height: 55,
                           decoration: BoxDecoration(
                               color: Color(0xffF5F4F8),
                               borderRadius: BorderRadius.circular(100)),
@@ -268,7 +268,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   return InkWell(
                                     onTap: () {
                                       controller.selectedIndex = index;
+                                      print(controller.selectedIndex);
                                       controller.pendingListingSold();
+                                      print(controller.listViewItem.length);
+                                      controller.getDataOfApprovedResidences();
+                                      controller.getDataOfpendingResidences();
+                                      controller.getDataOfSoldResidences();
                                       setState(() {});
                                     },
                                     child: Container(
@@ -332,7 +337,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
 
-                            return controller.listViewItem[index];
+                            return controller.listViewItem[controller.selectedIndex];
 
                           },
                           separatorBuilder: (context, index) {

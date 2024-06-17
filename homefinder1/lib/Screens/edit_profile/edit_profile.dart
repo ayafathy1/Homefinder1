@@ -48,6 +48,9 @@ class EditProfileScreen extends StatelessWidget {
                         if(test5){
                           Get.delete<SettingsController>();
                         }
+                        SettingsController ss=SettingsController();
+                        ss.getdata();
+
                         Get.back();
                       }, icon: Icon(Icons.arrow_back_ios ,size: 20,color: Color(0xff6C63FF),) ,),
                     ),

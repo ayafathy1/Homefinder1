@@ -4,10 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Widget/custom_elevated_button_widget.dart';
 
+import '../../../models/get_one_residence_model.dart'as o;
+import '../../../services/residences_services.dart';
 import '../../../utilities/colors.dart';
 import '../../../utilities/constants.dart';
 
 class SingleDetailController extends GetxController{
+  String? userId;
+  BuildContext?context;
+  SingleDetailController(this.userId,this.context);
+  o.Residence? residence;
+  bool isLoading=true;
   ScrollController scroll= ScrollController();
   List<String> type=["Description","Gallery","Review"];
   List<String> pOrLOrS=["Description","Gallery","Review"];
@@ -50,9 +57,35 @@ class SingleDetailController extends GetxController{
     "lib/assets/images/homeDeatail6.png",
 
   ];
+
   @override
   void onInit() {
+    super.onInit();
     descriptionGalleryReview();
+    getDataOfOneResidences(userId!,context!);
+  }
+  getDataOfOneResidences(String resId,BuildContext context) async {
+    try {
+      o.GetOneResidencesModel? response = await ResidenceServices.fetchOneResidences( resId, context);
+      print("API Response Status: ${response?.status}");
+
+      if (response == null) {
+        print("Some error occurred: Response is null");
+      } else {
+        residence = response.residence ;
+
+
+        // Print or access other properties as needed
+        print("Number of residences: ${residence}");
+      }
+
+      isLoading = false;
+      update();
+    } catch (e) {
+      print("Exception occurred: $e");
+      isLoading = false;
+    }
+
   }
 
   descriptionGalleryReview(){
@@ -553,7 +586,7 @@ class SingleDetailController extends GetxController{
     else if(selectedIndex==2){
       listViewItem = [];
       descriptionOrGalleryOrReview="Review";
-      for(var index = 0 ; index<2;index=index+1){
+      for(var index = 0 ; index<=2;index=index+1){
         listViewItem.add(
           Column(
 

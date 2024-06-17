@@ -26,46 +26,52 @@ class _SettingsScreenState extends State<SettingsScreen> {
     builder: (SettingsController controller) {
     return Scaffold(
       appBar: AppBar(
-        leadingWidth: Get.width*0.77,
+        leadingWidth: Get.width,
         toolbarHeight: Get.height*0.14,
         leading: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 5.0),
-              child: Container(
-                width: 59.5,
-                height: 58.88,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  image: DecorationImage(
-                    image: NetworkImage(controller.data?.image?.url??"lib/assets/images/Profile.png"),
-                    fit: BoxFit.fill,
-                  )
-                ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  width: 59.5,
+                  height: 58.88,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    image: DecorationImage(
+                      image: NetworkImage(controller.data?.image?.url??"https://e7.pngegg.com/pngimages/178/595/png-clipart-user-profile-computer-icons-login-user-avatars-monochrome-black-thumbnail.png"),
+                      fit: BoxFit.fill,
+                    )
+                  ),
 
+                ),
               ),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  controller.data?.fullName??"",
-                  style: TextStyle(
-                      fontSize: 15,
-                      color: kDarkBlueColor,
-                      fontWeight: FontWeight.w800,
-                      fontFamily: kRegularFont),
-                ),
-                Text(controller.data?.email??"",
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    controller.data?.fullName??"",
                     style: TextStyle(
-                        fontSize: 12,
-                        color: Color(0xff535763),
-                        fontWeight: FontWeight.w600,
-                        fontFamily: kRegularFont))
-              ],
+                        fontSize: 15,
+                        color: kDarkBlueColor,
+                        fontWeight: FontWeight.w800,
+                        fontFamily: kRegularFont),
+                  ),
+                  Text(controller.data?.email??"",
+                      style: TextStyle(
+                          fontSize: 12,
+                          color: Color(0xff535763),
+                          fontWeight: FontWeight.w600,
+                          fontFamily: kRegularFont))
+                ],
+              ),
             )
           ],
         ),

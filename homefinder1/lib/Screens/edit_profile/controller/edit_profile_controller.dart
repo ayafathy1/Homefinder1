@@ -21,11 +21,21 @@ class EditProfileController extends GetxController{
   void onInit() {
     super.onInit();
     getdata();
+    bool test4 = Get.isRegistered<SettingsController>();
     if(test4){
-      Get.delete<EditProfileController>();
+      Get.delete<SettingsController>();
     }
 
   }
+  bool test4 = Get.isRegistered<SettingsController>();
+  void onReady() {
+    super.onReady();
+    getdata();
+    if(test4){
+      Get.delete<SettingsController>();
+    }
+  }
+
   Uint8List? imageBytes;
   final formkey = GlobalKey<FormState>();
   final usernameController = TextEditingController();
@@ -37,10 +47,11 @@ class EditProfileController extends GetxController{
   dd.User? data ;
   dd.GetUserModel? data1;
   bool isLoading=true;
-  bool test4 = Get.isRegistered<EditProfileController>();
+
 
   getdata() async
   {
+    isLoading=true;
      dd.GetUserModel? response = await AuthServices.fetchUserData();
 
     if (response == null) {
@@ -138,12 +149,10 @@ class EditProfileController extends GetxController{
         update();
         bool test4 = Get.isRegistered<ProfileController>();
         if(test4){
+          Get.delete<SettingsController>();
           Get.delete<ProfileController>();
         }
-        bool test5 = Get.isRegistered<SettingsController>();
-        if(test5){
-          Get.delete<SettingsController>();
-        }
+
 
       } else {
         // If the status code is not success, show the error in CoolAlert
@@ -184,11 +193,8 @@ class EditProfileController extends GetxController{
         );
         bool test4 = Get.isRegistered<ProfileController>();
         if(test4){
-          Get.delete<ProfileController>();
-        } bool test5 = Get.isRegistered<SettingsController
-        >();
-        if(test5){
           Get.delete<SettingsController>();
+          Get.delete<ProfileController>();
         }
 
       }
@@ -220,11 +226,9 @@ class EditProfileController extends GetxController{
         update();
         bool test4 = Get.isRegistered<ProfileController>();
         if(test4){
-          Get.delete<ProfileController>();
-        } bool test5 = Get.isRegistered<SettingsController
-        >();
-        if(test5){
           Get.delete<SettingsController>();
+          Get.delete<ProfileController>();
+
         }
       }
     } catch (e) {
