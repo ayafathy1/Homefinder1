@@ -1,33 +1,29 @@
+// To parse this JSON data, do
+//
+//     final responseModel = responseModelFromJson(jsonString);
+
 import 'dart:convert';
 
-SignOutModel welcomeFromJson(String str) => SignOutModel.fromJson(json.decode(str));
+ResponseModel responseModelFromJson(String str) => ResponseModel.fromJson(json.decode(str));
 
-String welcomeToJson(SignOutModel data) => json.encode(data.toJson());
+String responseModelToJson(ResponseModel data) => json.encode(data.toJson());
 
-class SignOutModel {
-  String status;
-  String message;
-  String token;
-  String userId;
+class ResponseModel {
+  String? status;
+  String? message;
 
-  SignOutModel({
-    required this.status,
-    required this.message,
-    required this.token,
-    required this.userId,
+  ResponseModel({
+    this.status,
+    this.message,
   });
 
-  factory SignOutModel.fromJson(Map<String, dynamic> json) => SignOutModel(
+  factory ResponseModel.fromJson(Map<String, dynamic> json) => ResponseModel(
     status: json["status"],
     message: json["message"],
-    token: json["token"],
-    userId: json["userId"],
   );
 
   Map<String, dynamic> toJson() => {
     "status": status,
     "message": message,
-    "token": token,
-    "userId": userId,
   };
 }

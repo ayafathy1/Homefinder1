@@ -9,6 +9,7 @@ import 'package:homefinder1/models/get_sold_for_profile_model.dart';
 import '../models/create_residence_first.dart';
 import '../models/get_all_reesidences_model.dart';
 import '../models/get_one_residence_model.dart';
+import '../models/respose_model.dart';
 import '../models/second_complete_model.dart';
 import '../utilities/api_service.dart';
 import '../utilities/memory.dart';
@@ -354,6 +355,30 @@ class ResidenceServices {
   }
 
 
+  static Future<ResponseModel?> addFavorite(String resId,BuildContext context) async {
+    var data = await api.request(context: context,Services.addFavEndPoint+resId, "GET",
+        headers: {
+          "Authorization":await Get.find<StorageService>().getToken,
+
+        });
+    if (data != null) {
+      return ResponseModel.fromJson(data);
+
+    }
+    return null;
+  }
+  static Future<ResponseModel?> deleteFavorite(String resId,BuildContext context) async {
+    var data = await api.request(context: context,Services.deleteFavEndPoint+resId, "DELETE",
+        headers: {
+          "Authorization":await Get.find<StorageService>().getToken,
+
+        });
+    if (data != null) {
+      return ResponseModel.fromJson(data);
+
+    }
+    return null;
+  }
 
 }
 
