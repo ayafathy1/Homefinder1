@@ -5,6 +5,8 @@ import 'package:homefinder1/Screens/Featured%20Estates/widget/box_widget.dart';
 import 'package:homefinder1/Widget/custom_arrow_back.dart';
 
 import '../../Widget/custom_bottom_navigation_bar_widget.dart';
+import '../../utilities/colors.dart';
+import '../../utilities/constants.dart';
 
 class FeaturedEstates extends StatelessWidget{
   @override
@@ -69,27 +71,29 @@ class FeaturedEstates extends StatelessWidget{
     ];
 
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: Get.height*0.13,
+        leading:  CustomArrowBack(),
+        leadingWidth: Get.width*0.2,
+        title: Text("Featured Estates " , style: TextStyle(
+            color: kDarkBlueColor,
+            fontFamily: kRegularFont,
+            fontSize: 23,
+            fontWeight: FontWeight.w900
+        )) ,
+      ),
 
       body: SingleChildScrollView(
         child: Column(
-          children:<Widget> [
-            SizedBox(height: Get.height*0.06,),
-            Row(
-              children: [
-                CustomArrowBack(),
-                SizedBox(width: 20,),
-                Text("Featured Estates" , style: TextStyle(color: Colors.black , fontSize: 25, fontWeight: FontWeight.bold),),
+          children: [
 
-              ],
-            ),
-            SizedBox(height: 15,),
             Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(12.0),
               child: TextField(
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   filled: true,
-                    fillColor: Color(0xffF4F4F4),
+                  fillColor: Color(0xffF4F4F4),
                   hintText: "Search House, Apartment , etc",
                   prefixIcon: Icon(Icons.search_outlined , color: Colors.black,),
                   suffixIcon: InkWell(
@@ -112,71 +116,9 @@ class FeaturedEstates extends StatelessWidget{
                 ),
               ),
             ),
-            SizedBox(height: 5,),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Container(
-                    width: 90,
-                    height: 60,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                      color: Color(0xff6C63FF)
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Center(child: Text("House" , style: TextStyle(color: Colors.white),)),
-                    ),
-                  ),
-                    SizedBox(width: 10,),
-                  Container(
-                    width: 90,
-                    height: 60,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        color: Color(0xffF4F4F4)
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Center(child: Text("Apartment" , style: TextStyle(color: Colors.grey),)),
-                    ),
-                  ),
-                   SizedBox(width: 10,),
-                  Container(
-                    width: 90,
-                    height: 60,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        color: Color(0xffF4F4F4)
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Center(child: Text("Hotel" , style: TextStyle(color: Colors.grey),)),
-                    ),
-                  ),
-                    SizedBox(width: 10,),
-                  Container(
-                    width: 90,
-                    height: 60,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        color: Color(0xffF4F4F4)
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Center(child: Text("Villa" , style: TextStyle(color: Colors.grey),)),
-                    ),
-                  ),
-                ],
-              ),
-
-            ),
-
-
             Center(
               child: Container(
-                height: 540,
+                height:Get.height*0.845,
                 color: Color(0xffF7F7F7),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -185,7 +127,7 @@ class FeaturedEstates extends StatelessWidget{
                     child: GridView.builder(gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2 ,crossAxisSpacing: 20 , mainAxisSpacing: 20 ,mainAxisExtent: 250 ),
                       itemCount: gridView.length,
                       itemBuilder: (_, int index) {
-                      return  Box(gridView: gridView ,index: index,);
+                        return  Box(gridView:gridView ,index: index,);
                       },
                     ),
                   ),
@@ -195,7 +137,7 @@ class FeaturedEstates extends StatelessWidget{
           ],
         ),
       ),
-      bottomNavigationBar: CustomBottomNavigationBarWidget(),
+
     );
   }
 
