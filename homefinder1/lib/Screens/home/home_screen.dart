@@ -7,6 +7,7 @@ import 'package:homefinder1/Screens/home/controller/home_controller.dart';
 import 'package:homefinder1/Screens/popular_nearest_you/popular_nearest_you_screen.dart';
 import 'package:homefinder1/utilities/colors.dart';
 import 'package:homefinder1/utilities/constants.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../Widget/custom_bottom_navigation_bar_widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -126,7 +127,15 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),],),
-      body: SafeArea(
+      body:controller.isLoading
+          ? Center(
+        child: LoadingAnimationWidget.twistingDots(
+          leftDotColor: const Color(0xFFe9d9e9),
+          rightDotColor: const Color(0xFF8a81d2),
+          size: 200,
+        ),
+      )
+          : SafeArea(
         child: SizedBox(
           height: Get.height*0.85,
           child: SingleChildScrollView(
