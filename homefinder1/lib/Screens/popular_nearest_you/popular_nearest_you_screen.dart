@@ -23,7 +23,7 @@ class PopularNearestYou extends StatelessWidget{
         title: Text("Popular nearest you " , style: TextStyle(
           color: kDarkBlueColor,
           fontFamily: kRegularFont,
-          fontSize: 20,
+          fontSize: 22,
           fontWeight: FontWeight.w900
         )) ,
       ),
@@ -63,7 +63,7 @@ class PopularNearestYou extends StatelessWidget{
             ),
             Center(
               child: Container(
-                height:Get.height*0.76,
+                height:Get.height*0.845,
                 color: Color(0xffF7F7F7),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
