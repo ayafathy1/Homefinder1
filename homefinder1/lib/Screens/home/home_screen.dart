@@ -399,7 +399,7 @@ class HomeScreen extends StatelessWidget {
                       width: 120,
                     ),
                     TextButton(
-                        onPressed: () {Get.to(()=>PopularNearestYou());},
+                        onPressed: () {Get.to(()=>FeaturedEstates());},
                         child: Text(
                           "View All",
                           style: TextStyle(
