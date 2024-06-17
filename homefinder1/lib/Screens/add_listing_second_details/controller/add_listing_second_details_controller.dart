@@ -1,6 +1,7 @@
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:homefinder1/Screens/add_listing_3rd_detail/add_listing_3rd_detail_screen.dart';
 import 'package:homefinder1/Screens/add_listing_fourth_details/add_listing_fourth_details_screen.dart';
 import 'package:homefinder1/models/second_complete_model.dart';
 import '../../../services/residences_services.dart';
@@ -223,7 +224,7 @@ class AddListingSecondDetailController extends GetxController{
 
       );
       if (data?.status == "success") {
-        Get.to(() =>AddListingFourthDetailsScreen(residanceId: residanceId,));
+        Get.to(() =>AddListingThirdDetailsScreen(residanceId: residanceId,));
       }
     } catch (e) {
       String errorMessage = " $e";

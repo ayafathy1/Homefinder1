@@ -6,6 +6,7 @@ import 'package:homefinder1/Screens/add_listing/controller/add_listing_controlle
 import 'package:homefinder1/models/first_complete_model.dart';
 import 'package:homefinder1/models/fourth_complete_model.dart';
 import 'package:homefinder1/models/get_sold_for_profile_model.dart';
+import 'package:homefinder1/models/third_complete_model.dart';
 import '../models/create_residence_first.dart';
 import '../models/get_all_reesidences_model.dart';
 import '../models/get_one_residence_model.dart';
@@ -130,6 +131,64 @@ class ResidenceServices {
     if (data != null) {
       print(data);
       return SecondCompleteModel.fromJson(data);
+    }
+    return null;
+  }
+
+  static Future<ThirdCompleteModel?> thirdComplete(
+      bool hasGarage,
+      String garageType,
+      String garageQual,
+      int garageCars,
+      String garageFinish,
+      bool hasBasement,
+      bool hasFireplace,
+      int fireplaces,
+      String fireplaceQu,
+      int bedroomAbvGr,
+      int totalbaths,
+      int KitchenAbvGr,
+      String kitchenQual,
+      int totRmsAbvGrd,
+      int bsmtUnfSF,
+      String bsmtExposure,
+      String bsmtFinType1,
+      String bsmtQual,
+      String bsmtCond,
+      BuildContext context,
+      String residanceId,) async {
+    var token = Get
+        .find<StorageService>()
+        .getToken;
+    print(token);
+    var data = await api.request(context: context,
+        Services.thirdCompleteEndPoint + residanceId,
+        "POST",
+        data: {
+          "hasGarage": hasGarage,
+          "garageType": garageType,
+          "garageQual": garageQual,
+          "garageCars": garageCars,
+          "garageFinish": garageFinish,
+          "hasBasement": hasBasement,
+          "hasFireplace": hasFireplace,
+          "fireplaces": fireplaces,
+          "fireplaceQu": fireplaceQu,
+          "bedroomAbvGr": bedroomAbvGr,
+          "totalbaths": totalbaths,
+          "kitchenQual": kitchenQual,
+          "KitchenAbvGr": KitchenAbvGr,
+          "totRmsAbvGrd": totRmsAbvGrd,
+          "bsmtUnfSF": bsmtUnfSF,
+          "bsmtExposure": bsmtExposure,
+          "bsmtCond": bsmtCond,
+          "bsmtFinType1": bsmtFinType1,
+          "bsmtQual": bsmtQual,
+        },
+        headers: {"Authorization": token});
+    if (data != null) {
+      print(data);
+      return ThirdCompleteModel.fromJson(data);
     }
     return null;
   }
