@@ -127,7 +127,9 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),],),
+
       body: controller.isLoading
+
           ? Center(
         child: LoadingAnimationWidget.twistingDots(
           leftDotColor: const Color(0xFFe9d9e9),
@@ -135,7 +137,9 @@ class HomeScreen extends StatelessWidget {
           size: 200,
         ),
       )
+
           :SafeArea(
+
         child: SizedBox(
           height: Get.height*0.85,
           child: SingleChildScrollView(

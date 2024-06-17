@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 class PopularNearestYouController extends GetxController
 {
   List<String> types=["House","appartment","Hotel","Villa"];
@@ -61,4 +60,5 @@ class PopularNearestYouController extends GetxController
     },
 
   ];
+
 }
