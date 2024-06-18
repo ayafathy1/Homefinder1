@@ -3,142 +3,137 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/Featured%20Estates/widget/box_widget.dart';
 import 'package:homefinder1/Widget/custom_arrow_back.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../Widget/custom_bottom_navigation_bar_widget.dart';
 import '../../utilities/colors.dart';
 import '../../utilities/constants.dart';
+import 'controller/feature_estates_controller.dart';
 
-class FeaturedEstates extends StatelessWidget{
+class FeaturedEstates extends StatefulWidget {
+
+
+  @override
+  State<FeaturedEstates> createState() => _FeaturedEstatesState();
+}
+
+class _FeaturedEstatesState extends State<FeaturedEstates> {
   @override
   Widget build(BuildContext context) {
-
-    final List  gridView = [
-      {
-        "title" : "Lorem House",
-        "price": "\$1500/month",
-        "Location" : "Avenue west Side",
-        "image" : "lib/assets/images/Frame 34221.png"
-      },
-
-      {
-        "title" : "Lorem House",
-        "price": "\$1500/month",
-        "Location" : "Avenue west Side",
-        "image" : "lib/assets/images/Rectangle 9.png"
-      },
-
-      {
-        "title" : "Lorem House",
-        "price": "\$1500/month",
-        "Location" : "Avenue west Side",
-        "image" : "lib/assets/images/Frame 34221 (1).png"
-      },
-
-      {
-        "title" : "Lorem House",
-        "price": "\$1500/month",
-        "Location" : "Avenue west Side",
-        "image" : "lib/assets/images/Rectangle 9 (1).png"
-      },
-
-      {
-        "title" : "Lorem House",
-        "price": "\$1500/month",
-        "Location" : "Avenue west Side",
-        "image" : "lib/assets/images/Rectangle 9 (2).png"
-      },
-
-      {
-        "title" : "Lorem House",
-        "price": "\$1500/month",
-        "Location" : "Avenue west Side",
-        "image" : "lib/assets/images/Frame 34221 (1).png"
-      },
-
-      {
-        "title" : "Lorem House",
-        "price": "\$1500/month",
-        "Location" : "Avenue west Side",
-        "image" : "lib/assets/images/Rectangle 9 (3).png"
-      },
-      {
-        "title" : "Lorem House",
-        "price": "\$1500/month",
-        "Location" : "Avenue west Side",
-        "image" : "lib/assets/images/Rectangle 9 (3).png"
-      },
-
-    ];
-
-    return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: Get.height*0.13,
-        leading:  CustomArrowBack(),
-        leadingWidth: Get.width*0.2,
-        title: Text("Featured Estates " , style: TextStyle(
-            color: kDarkBlueColor,
-            fontFamily: kRegularFont,
-            fontSize: 23,
-            fontWeight: FontWeight.w900
-        )) ,
-      ),
-
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: TextField(
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Color(0xffF4F4F4),
-                  hintText: "Search House, Apartment , etc",
-                  prefixIcon: Icon(Icons.search_outlined , color: Colors.black,),
-                  suffixIcon: InkWell(
-                      onTap: (){},
-                      child: Image(image: AssetImage('lib/assets/images/options.png'))),
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide(
-                        color: Color(0xffF4F4F4),
-                        width: 3,
-                      )
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide(
-                        color: Color(0xff6C63FF),
-                        width: 3,
-                      )
-                  ),
-                ),
-              ),
+    return GetBuilder(
+        init: FeatureEstatesController(context),
+        builder: (FeatureEstatesController controller) {
+          return Scaffold(
+            appBar: AppBar(
+              toolbarHeight: Get.height * 0.13,
+              leading: CustomArrowBack(),
+              leadingWidth: Get.width * 0.2,
+              title: Text("Featured Estates ", style: TextStyle(
+                  color: kDarkBlueColor,
+                  fontFamily: kRegularFont,
+                  fontSize: 23,
+                  fontWeight: FontWeight.w900
+              )),
             ),
-            Center(
-              child: Container(
-                height:Get.height*0.845,
-                color: Color(0xffF7F7F7),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Padding(
-                    padding:  EdgeInsets.only(bottom:Get.height*0.07),
-                    child: GridView.builder(gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2 ,crossAxisSpacing: 20 , mainAxisSpacing: 20 ,mainAxisExtent: 250 ),
-                      itemCount: gridView.length,
-                      itemBuilder: (_, int index) {
-                        return  Box(gridView:gridView ,index: index,);
-                      },
+
+            body:controller.isLoading
+                ? Center(
+              child: LoadingAnimationWidget.twistingDots(
+                leftDotColor: const Color(0xFFfddfef),
+                rightDotColor: const Color(0xFF8a81d2),
+                size: 200,
+              ),
+            )
+                : SingleChildScrollView(
+              child: Column(
+                children: [
+
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: TextField(
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Color(0xffF4F4F4),
+                        hintText: "Search House, Apartment , etc",
+                        prefixIcon: Icon(
+                          Icons.search_outlined, color: Colors.black,),
+                        suffixIcon: InkWell(
+                            onTap: () {},
+                            child: Image(image: AssetImage(
+                                'lib/assets/images/options.png'))),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: BorderSide(
+                              color: Color(0xffF4F4F4),
+                              width: 3,
+                            )
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: BorderSide(
+                              color: Color(0xff6C63FF),
+                              width: 3,
+                            )
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                  Center(
+                    child: Container(
+                      height: Get.height * 0.845,
+                      color: Color(0xffF7F7F7),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Padding(
+                          padding: EdgeInsets.only(bottom: Get.height * 0.07),
+                          child: GridView.builder(
+                            physics: BouncingScrollPhysics(),
+                            controller: controller.scroll,
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 20,
+                                mainAxisSpacing: 20,
+                                mainAxisExtent: 250),
+                            itemCount: controller.residences?.length ?? 0,
+                            itemBuilder: (_, int index) {
+                              return Box(
+                                onTap:(){
+                                  controller.getDataOfOneResidence(controller.residences?[index]?.id??"");
+                                },
+                                favCol: controller.favCol,
+                                onPressed: (){
+                              controller.favSelectedIndex=index;
+                              if(controller.residences?[controller.favSelectedIndex??0]?.isLiked==true){
+                              controller.addResidenceToFav(controller.residences![index]!.id!,context);
+                              controller.getDataOfResidences();
+                              controller.residences?[index].isLiked==true?controller.favCol=kPrimaryColor:Colors.grey;
+                              setState(() {
+
+                              });}else{
+                              controller.removeResidenceFromFav(controller.residences![index]!.id!, context);
+                              controller.getDataOfResidences();
+                              controller.residences?[index].isLiked==true?controller.favCol=kPrimaryColor:Colors.grey;
+                              setState(() {
+
+                              });
+                              }
+                              },
+                                location: "${controller.residences?[index].location?.city}, ${controller.residences?[index].location?.state}, ${controller.residences?[index].location?.country}",
+                                price:"\$ ${ controller.residences?[index].salePrice}",
+                                title:controller.residences?[index].title ,
+                               image: controller.residences?[index].images?[0].url, index: index,);
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-      ),
 
-    );
+          );
+        });
   }
-
 }

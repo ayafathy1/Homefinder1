@@ -41,11 +41,13 @@ class AuthServices{
     return null;
   }
   static Future<AuthModel?> completeSigningUp(String firstName,String lastName,String gender,String phone,BuildContext context) async {
-    var data = await api.request(context: context,Services.signingInEndPoint, "POST",data: {
+    var data = await api.request(context: context,Services.completeSigningUpEndPoint, "POST",data: {
       "firstName":firstName,
       "lastName":lastName,
       "gender":gender,
       "phone":phone,
+    },headers: {
+      "Authorization":await Get.find<StorageService>().getToken
     });
     if (data != null) {
       return AuthModel.fromJson(data);

@@ -10,11 +10,14 @@ import 'package:homefinder1/utilities/constants.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../Widget/custom_bottom_navigation_bar_widget.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
 
-
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return  GetBuilder<HomeController>(
@@ -270,7 +273,7 @@ class HomeScreen extends StatelessWidget {
                   child: ListView.builder(
                     controller: controller.scroll,
                     physics: BouncingScrollPhysics(),
-                    itemCount: 3,
+                    itemCount: controller.itemCount1,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       return Row(
@@ -294,12 +297,15 @@ class HomeScreen extends StatelessWidget {
                                   Container(
                                     height: 130,
                                     width: 250,
-                                    child: Image(
-                                      image: NetworkImage(
-                                        controller.residences?[index].images?[0]?.url??""),
-                                      width: 280,
-                                      height: 140,
-                                      fit: BoxFit.fill,
+                                    child:  ClipRRect(
+                                      borderRadius: BorderRadius.circular(20),
+                                      child: Image(
+                                        image: NetworkImage(
+                                          controller.residences?[index].images?[0]?.url??""),
+                                        width: 280,
+                                        height: 140,
+                                        fit: BoxFit.fill,
+                                      ),
                                     ),
                                   ),
                                   Padding(
@@ -363,6 +369,7 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                       IconButton(
                                           onPressed: () {
+                                            controller.favSelectedIndex=index;
 
                                           },
                                           icon: Icon(
@@ -419,7 +426,7 @@ class HomeScreen extends StatelessWidget {
                   height: Get.height*0.7,
                   child: ListView.builder(
                     controller: controller.scroll,
-                      itemCount: 4,
+                      itemCount: controller.itemCount2,
                       physics: NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
@@ -450,10 +457,14 @@ class HomeScreen extends StatelessWidget {
                                     Container(
                                         width: 105,
                                         height: 110,
-                                        child: Image(
-                                          image:
-                                              NetworkImage(controller.residences?[index].images?[0]?.url??""),
-                                          fit: BoxFit.fill,
+
+                                        child:  ClipRRect(
+                                          borderRadius: BorderRadius.circular(15),
+                                          child: Image(
+                                            image:
+                                                NetworkImage(controller.residences?[index].images?[0]?.url??""),
+                                            fit: BoxFit.fill,
+                                          ),
                                         )),
                                     Column(
                                       mainAxisAlignment: MainAxisAlignment.start,
@@ -547,6 +558,7 @@ class HomeScreen extends StatelessWidget {
                                           margin: EdgeInsets.only(left: 10),
                                           child: Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment: CrossAxisAlignment.end,
                                             children: [
 
                                               Container(
@@ -562,13 +574,30 @@ class HomeScreen extends StatelessWidget {
                                                 ),
                                               ),
 
-                                              IconButton(
-                                                  onPressed: () {},
-                                                  icon: Icon(
-                                                    Icons.favorite_rounded,
-                                                    color: kGreyColor,
-                                                    size: 25,
-                                                  ))
+                                              Padding(
+                                                padding: const EdgeInsets.only(right: 10.0,top: 10),
+                                                child: InkWell(
+                                                    onTap: () {
+                                                      controller.favSelectedIndex=index;
+                                                      if(controller.residences?[controller.favSelectedIndex]?.isLiked==true){
+                                                      controller.removeResidenceFromFav(controller.residences![index]!.id!,context);
+                                                      controller.getDataOfResidences(context);
+                                                        setState(() {
+
+                                                        });}else{
+                                                        controller.addResidenceToFav(controller.residences![index]!.id!, context);
+                                                        controller.getDataOfResidences(context);
+                                                        setState(() {
+
+                                                        });
+                                                      }
+                                                    },
+                                                    child: Icon(
+                                                      Icons.favorite_rounded,
+                                                      color: controller.residences?[index]?.isLiked==true?kPrimaryColor:Colors.grey,
+                                                      size: 25,
+                                                    )),
+                                              )
                                             ],
                                           ),
                                         )

@@ -3,79 +3,89 @@ import 'package:get/get.dart';
 
 class Box extends StatelessWidget{
 
-  Box( {Key?Key , required this.gridView , required this.index});
-
+  Box( {super.key, Key?Key , this.favCol,this.onPressed,this.onTap,this.gridView , required this.index, this.image,  this.title,  this.price,  this.location});
+ String? image;
+ String? title;
+ String? price;
+ String? location;
+ void Function()? onTap;
   var gridView;
   int index;
+  void Function()? onPressed;
+  Color? favCol;
   @override
   Widget build(BuildContext context){
-    return  Container(
-      height:Get.height*0.9,
-      width: Get.width*0.4,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        color: Colors.white70,
-      ),
-      child: Column(
-        children: [
-          ClipRRect(
-            child:  Image(image: AssetImage("${gridView.elementAt(index)['image']}" ) ,fit: BoxFit.cover,
-              height: 140,
-              width: double.infinity,
+    return  InkWell(
+      onTap: onTap??(){},
+      child: Container(
+        height:Get.height*0.9,
+        width: Get.width*0.4,
+        decoration: BoxDecoration(
+          boxShadow: [BoxShadow(color: Colors.grey.shade200,blurRadius: 15)],
+          borderRadius: BorderRadius.circular(16),
+          color: Colors.white70,
+        ),
+        child: Column(
+          children: [
+            ClipRRect(
+              child:  Image(image: NetworkImage(image??"" ) ,fit: BoxFit.cover,
+                height: 140,
+                width: double.infinity,
+              ),
+
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(16) , topRight: Radius.circular(16)),
             ),
+            SizedBox(height: 5,),
 
-            borderRadius: BorderRadius.only(topLeft: Radius.circular(16) , topRight: Radius.circular(16)),
-          ),
-          SizedBox(height: 5,),
+              Center(
+                child: ClipRRect(
+                  child: Container(
+                    height: 105,
+                    width: 180,
+                    decoration: BoxDecoration(
+                        color: Colors.white
+                    ),
 
-            Center(
-              child: ClipRRect(
-                child: Container(
-                  height: 105,
-                  width: 180,
-                  decoration: BoxDecoration(
-                      color: Colors.white
-                  ),
-
-                  child: Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("${gridView.elementAt(index)['title']} ", style: TextStyle(fontWeight: FontWeight.w500 ,fontSize: 20),),
-                          SizedBox(height: 15,),
-                          Text(" ${gridView.elementAt(index)['price']}" , style: TextStyle( fontSize: 12,color: Color(0xff6C63FF)),),
-                          SizedBox(height: 5,),
-                          Row(
-                            children: [
-                              Icon(Icons.location_on , color: Color(0xffB9B9B9)),
-                              Text("${gridView.elementAt(index)['Location']}" , style: TextStyle(fontWeight: FontWeight.w300 ,fontSize: 12, color: Color(0xffB9B9B9)),),
-                             SizedBox(width: 18,),
-                              Positioned(
-                                top: 10,
-                                right: 10,
-                                child: InkWell(
-                                  onTap: (){},
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.transparent,
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(title??"", style: TextStyle(fontWeight: FontWeight.w500 ,fontSize: 20),),
+                            SizedBox(height: 15,),
+                            Text(price??"" , style: TextStyle( fontSize: 12,color: Color(0xff6C63FF)),),
+                            SizedBox(height: 5,),
+                            Row(
+                              children: [
+                                Icon(Icons.location_on , color: Color(0xffB9B9B9)),
+                                Container(width:Get.width*0.245,child: Text(location ??"",overflow: TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.w300 ,fontSize: 12, color: Color(0xffB9B9B9)),)),
+                               SizedBox(width: 18,),
+                                Positioned(
+                                  top: 10,
+                                  right: 10,
+                                  child: InkWell(
+                                    onTap: (){},
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.transparent,
+                                      ),
+                                      child: IconButton(onPressed:onPressed ,icon: Icon(Icons.favorite_border , color: favCol,)),
                                     ),
-                                    child: Icon(Icons.favorite_border , color: Color(0xff6C63FF),),
                                   ),
-                                ),
-                              ) ,
-                            ],
-                          ), ]
+                                ) ,
+                              ],
+                            ), ]
+                      ),
                     ),
                   ),
+                  borderRadius: BorderRadius.only( topRight: Radius.circular(16) ,topLeft: Radius.circular(16) ,bottomRight: Radius.circular(16) ,bottomLeft: Radius.circular(16)),
                 ),
-                borderRadius: BorderRadius.only( topRight: Radius.circular(16) ,topLeft: Radius.circular(16) ,bottomRight: Radius.circular(16) ,bottomLeft: Radius.circular(16)),
-              ),
-            )  ,
-        ] ,
+              )  ,
+          ] ,
+
+        ),
 
       ),
-
     );
   }
 
