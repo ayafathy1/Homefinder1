@@ -8,6 +8,7 @@ class Services {
  static String verificationCodeForgetEndPoint = "auth/verify-pass-otp/";//post
  static String addFavEndPoint = "user/favorites/add/"; //get
  static String deleteFavEndPoint = "user/favorites/delete/"; //delete
+ static String deleteAllFavEndPoint = "user/favorites/delete"; //delete
  static String signingUpEndPoint = "auth/signup"; //Post
  static String completeSigningUpEndPoint = "auth/complete-signup";
  static String signingInEndPoint = "auth/login"; //Post

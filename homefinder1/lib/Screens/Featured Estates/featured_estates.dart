@@ -101,6 +101,24 @@ class _FeaturedEstatesState extends State<FeaturedEstates> {
                                 onTap:(){
                                   controller.getDataOfOneResidence(controller.residences?[index]?.id??"");
                                 },
+                                favCol: controller.favCol,
+                                onPressed: (){
+                              controller.favSelectedIndex=index;
+                              if(controller.residences?[controller.favSelectedIndex??0]?.isLiked==true){
+                              controller.addResidenceToFav(controller.residences![index]!.id!,context);
+                              controller.getDataOfResidences();
+                              controller.residences?[index].isLiked==true?controller.favCol=kPrimaryColor:Colors.grey;
+                              setState(() {
+
+                              });}else{
+                              controller.removeResidenceFromFav(controller.residences![index]!.id!, context);
+                              controller.getDataOfResidences();
+                              controller.residences?[index].isLiked==true?controller.favCol=kPrimaryColor:Colors.grey;
+                              setState(() {
+
+                              });
+                              }
+                              },
                                 location: "${controller.residences?[index].location?.city}, ${controller.residences?[index].location?.state}, ${controller.residences?[index].location?.country}",
                                 price:"\$ ${ controller.residences?[index].salePrice}",
                                 title:controller.residences?[index].title ,

@@ -273,7 +273,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: ListView.builder(
                     controller: controller.scroll,
                     physics: BouncingScrollPhysics(),
-                    itemCount: 3,
+                    itemCount: controller.itemCount1,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       return Row(
@@ -369,6 +369,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                       IconButton(
                                           onPressed: () {
+                                            controller.favSelectedIndex=index;
 
                                           },
                                           icon: Icon(
@@ -425,7 +426,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: Get.height*0.7,
                   child: ListView.builder(
                     controller: controller.scroll,
-                      itemCount: 4,
+                      itemCount: controller.itemCount2,
                       physics: NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
@@ -576,24 +577,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                               Padding(
                                                 padding: const EdgeInsets.only(right: 10.0,top: 10),
                                                 child: InkWell(
-                                                  onDoubleTap: (){
-                                                    controller.favSelectedIndex=index;
-                                                    controller.removeResidenceFromFav(controller.residences![index]!.id!,context);
-                                                    setState(() {
-
-                                                    });
-                                                  },
                                                     onTap: () {
-
                                                       controller.favSelectedIndex=index;
-                                                      controller.addResidenceToFav(controller.residences![index]!.id!,context);
+                                                      if(controller.residences?[controller.favSelectedIndex]?.isLiked==true){
+                                                      controller.removeResidenceFromFav(controller.residences![index]!.id!,context);
+                                                      controller.getDataOfResidences(context);
+                                                        setState(() {
+
+                                                        });}else{
+                                                        controller.addResidenceToFav(controller.residences![index]!.id!, context);
+                                                        controller.getDataOfResidences(context);
                                                         setState(() {
 
                                                         });
+                                                      }
                                                     },
                                                     child: Icon(
                                                       Icons.favorite_rounded,
-                                                      color: controller.residences![controller.favSelectedIndex]!.isLiked!?kPrimaryColor:Colors.grey,
+                                                      color: controller.residences?[index]?.isLiked==true?kPrimaryColor:Colors.grey,
                                                       size: 25,
                                                     )),
                                               )

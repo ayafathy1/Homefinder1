@@ -23,9 +23,11 @@ class HomeController extends GetxController {
   o.Residence? residence;
   int? ResidenceCount;
   late TextEditingController searchController;
-Color color=Colors.grey;
+
 int favSelectedIndex=0;
 List<bool>add=[];
+int itemCount1=0;
+  int itemCount2=0;
   @override
   void onInit() async{
     super.onInit();
@@ -37,6 +39,7 @@ List<bool>add=[];
 
 
   getDataOfResidences(BuildContext context) async {
+
     if (counterOfResidences == 1) {
       try {
         GetAllResidencesModel? response = await ResidenceServices.fetchAllResidences(counterOfResidences, context);
@@ -47,7 +50,13 @@ List<bool>add=[];
         } else {
           residences = response.residences ?? [];
           ResidenceCount = response.count ?? 0;
-
+        if(residences==[]){
+          itemCount1=0;
+          itemCount2=0;
+        }else{
+          itemCount1=5;
+          itemCount2=4;
+        }
           // Print or access other properties as needed
           print("Number of residences: ${residences?.length}");
         }
@@ -113,9 +122,9 @@ List<bool>add=[];
           context
       );
       if (data?.status == "success") {
-        color=kPrimaryColor;
+
        print(data?.message);
-       color=kPrimaryColor;
+
       }
     } catch (e) {
       // Handle bad request error
@@ -133,10 +142,11 @@ List<bool>add=[];
           context
       );
       if (data?.status == "success") {
-        color=kPrimaryColor;
+
         print(data?.message);
-        color=Colors.grey;
-        add.add(true);
+        getDataOfResidences(context);
+        update();
+
         bool test4 = Get.isRegistered<HomeController>();
         if(test4){
           Get.delete<HomeController>();
@@ -144,7 +154,7 @@ List<bool>add=[];
 
         }
       }else{
-        add.add(false);
+
       }
     } catch (e) {
 

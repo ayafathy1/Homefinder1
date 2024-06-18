@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 class Box extends StatelessWidget{
 
-  Box( {super.key, Key?Key , this.onTap,this.gridView , required this.index, this.image,  this.title,  this.price,  this.location});
+  Box( {super.key, Key?Key , this.favCol,this.onPressed,this.onTap,this.gridView , required this.index, this.image,  this.title,  this.price,  this.location});
  String? image;
  String? title;
  String? price;
@@ -11,6 +11,8 @@ class Box extends StatelessWidget{
  void Function()? onTap;
   var gridView;
   int index;
+  void Function()? onPressed;
+  Color? favCol;
   @override
   Widget build(BuildContext context){
     return  InkWell(
@@ -67,7 +69,7 @@ class Box extends StatelessWidget{
                                       decoration: BoxDecoration(
                                         color: Colors.transparent,
                                       ),
-                                      child: Icon(Icons.favorite_border , color: Color(0xff6C63FF),),
+                                      child: IconButton(onPressed:onPressed ,icon: Icon(Icons.favorite_border , color: favCol,)),
                                     ),
                                   ),
                                 ) ,

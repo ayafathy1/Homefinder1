@@ -9,6 +9,7 @@ import 'package:homefinder1/models/get_sold_for_profile_model.dart';
 import '../models/create_residence_first.dart';
 import '../models/get_all_reesidences_model.dart';
 import '../models/get_one_residence_model.dart';
+import '../models/get_user_favorite_model.dart';
 import '../models/respose_model.dart';
 import '../models/second_complete_model.dart';
 import '../utilities/api_service.dart';
@@ -369,6 +370,43 @@ class ResidenceServices {
   }
   static Future<ResponseModel?> deleteFavorite(String resId,BuildContext context) async {
     var data = await api.request(context: context,Services.deleteFavEndPoint+resId, "DELETE",
+        headers: {
+          "Authorization":await Get.find<StorageService>().getToken,
+
+        });
+    if (data != null) {
+      return ResponseModel.fromJson(data);
+
+    }
+    return null;
+  }
+  static Future<GetUserFavoriteModel?> fetchfavResidences( BuildContext context) async {
+    const String endPoint = 'user/favorites';
+
+    try {
+      final response = await ApiService().request(
+        '$endPoint',
+        'GET',
+        headers: {
+          "Authorization": await Get.find<StorageService>().getToken, // Ensure token retrieval is correct
+        },
+        context: context,
+      );
+
+      if (response != null && response['status'] == 'success') {
+        print(response);
+        return GetUserFavoriteModel.fromJson(response);
+      } else {
+        print('API Error: ${response['message']}');
+      }
+    } catch (e) {
+      print('Error fetching residences data: $e');
+    }
+
+    return null;
+  }
+  static Future<ResponseModel?> deleteAllFavorite(BuildContext context) async {
+    var data = await api.request(context: context,Services.deleteFavEndPoint, "DELETE",
         headers: {
           "Authorization":await Get.find<StorageService>().getToken,
 

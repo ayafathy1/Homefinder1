@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 
 import '../../../models/get_all_reesidences_model.dart';
 import '../../../models/get_one_residence_model.dart' as o;
+import '../../../models/respose_model.dart';
 import '../../../services/residences_services.dart';
+import '../../home/controller/home_controller.dart';
 import '../../single detail/single_detail.dart';
 
 
@@ -19,58 +21,9 @@ class FeatureEstatesController extends GetxController {
   List<Residence>? residences = [];
   o.Residence? residence;
   int? residenceCount;
+  int?favSelectedIndex;
   late TextEditingController searchController;
-
-  final List<Map<String, String>> gridView = [
-    {
-      "title": "Lorem House",
-      "price": "\$1500/month",
-      "location": "Avenue west Side",
-      "image": "lib/assets/images/Frame 34221.png"
-    },
-    {
-      "title": "Lorem House",
-      "price": "\$1500/month",
-      "location": "Avenue west Side",
-      "image": "lib/assets/images/Rectangle 9.png"
-    },
-    {
-      "title": "Lorem House",
-      "price": "\$1500/month",
-      "location": "Avenue west Side",
-      "image": "lib/assets/images/Frame 34221 (1).png"
-    },
-    {
-      "title": "Lorem House",
-      "price": "\$1500/month",
-      "location": "Avenue west Side",
-      "image": "lib/assets/images/Rectangle 9 (1).png"
-    },
-    {
-      "title": "Lorem House",
-      "price": "\$1500/month",
-      "location": "Avenue west Side",
-      "image": "lib/assets/images/Rectangle 9 (2).png"
-    },
-    {
-      "title": "Lorem House",
-      "price": "\$1500/month",
-      "location": "Avenue west Side",
-      "image": "lib/assets/images/Frame 34221 (1).png"
-    },
-    {
-      "title": "Lorem House",
-      "price": "\$1500/month",
-      "location": "Avenue west Side",
-      "image": "lib/assets/images/Rectangle 9 (3).png"
-    },
-    {
-      "title": "Lorem House",
-      "price": "\$1500/month",
-      "location": "Avenue west Side",
-      "image": "lib/assets/images/Rectangle 9 (3).png"
-    },
-  ];
+  Color? favCol;
 
   @override
   void onInit() {
@@ -155,5 +108,57 @@ class FeatureEstatesController extends GetxController {
       currentPage += 1;
       getDataOfResidences();
     }
+  }
+  Future<void> addResidenceToFav(String resId,BuildContext context) async {
+    try {
+      ResponseModel? data = await ResidenceServices.addFavorite(
+          resId,
+          context
+      );
+      if (data?.status == "success") {
+
+        print(data?.message);
+
+      }
+    } catch (e) {
+      // Handle bad request error
+      String errorMessage = " $e";
+      String part = errorMessage.substring(26, 35);
+      // Show error message on the screen
+      print(part);
+    }
+
+  }
+  Future<void> removeResidenceFromFav(String resId,BuildContext context) async {
+    try {
+      ResponseModel? data = await ResidenceServices.deleteFavorite(
+          resId,
+          context
+      );
+      if (data?.status == "success") {
+
+        print(data?.message);
+        getDataOfResidences();
+        update();
+
+        bool test4 = Get.isRegistered<HomeController>();
+        if(test4){
+          Get.delete<HomeController>();
+
+
+        }
+      }else{
+
+      }
+    } catch (e) {
+
+      // Handle bad request error
+      String errorMessage = " $e";
+      String part = errorMessage.substring(26, 35);
+      // Show error message on the screen
+      print(part);
+
+    }
+
   }
 }

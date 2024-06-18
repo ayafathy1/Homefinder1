@@ -11,6 +11,8 @@ import 'package:homefinder1/utilities/colors.dart';
 import 'package:homefinder1/utilities/constants.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
+import '../favorite/favorite_screen.dart';
+
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
 
@@ -112,6 +114,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         Get.delete<ProfileController>();
                       }
                       Get.to(()=>EditProfileScreen());
+                    }else if(controller.selectedIndex==4){
+                      Get.to(()=>FavoriteScreen());
                     }
                     setState(() {
                       
