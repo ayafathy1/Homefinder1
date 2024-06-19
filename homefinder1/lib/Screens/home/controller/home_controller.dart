@@ -3,7 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/single%20detail/single_detail.dart';
 import 'package:homefinder1/utilities/colors.dart';
-import '../../../models/get_all_reesidences_model.dart';
+
+import '../../../models/get_all_reesidences_model.dart'as a;
 import '../../../models/get_one_residence_model.dart'as o;
 import '../../../models/respose_model.dart';
 import '../../../services/residences_services.dart';
@@ -12,14 +13,15 @@ import 'package:flutter/material.dart';
 
 class HomeController extends GetxController {
   final BuildContext? context;
-  String?resId;
+
+int? SelectedResidenceIndex;
   HomeController( this.context);
   ScrollController scroll = ScrollController();
   bool isLoading = true;
   int counterOfResidences = 1;
   int maxNoOfPagesOfResidences = 1;
   bool isLoadingMoreDataOfResidences = false;
-  List<Residence>? residences;
+  List<a.Residence>? residences;
   o.Residence? residence;
   int? ResidenceCount;
   late TextEditingController searchController;
@@ -42,7 +44,7 @@ int itemCount1=0;
 
     if (counterOfResidences == 1) {
       try {
-        GetAllResidencesModel? response = await ResidenceServices.fetchAllResidences(counterOfResidences, context);
+        a.GetAllResidencesModel? response = await ResidenceServices.fetchAllResidences(counterOfResidences, context);
         print("API Response Status: ${response?.status}");
 
         if (response == null) {
@@ -92,7 +94,7 @@ int itemCount1=0;
       }
     }
   }
-  getDataOfOneResidences(String resId,BuildContext context) async {
+  getDataOfOneResidences(int Id,String resId,BuildContext context) async {
       try {
         o.GetOneResidencesModel? response = await ResidenceServices.fetchOneResidences( resId, context);
         print("API Response Status: ${response?.status}");
@@ -102,7 +104,7 @@ int itemCount1=0;
         } else {
           residence = response.residence ;
 
-        Get.to(()=>SingleDetailScreen(resId));
+        Get.to(()=>SingleDetailScreen(Id,resId));
           // Print or access other properties as needed
           print("Number of residences: ${residence}");
         }

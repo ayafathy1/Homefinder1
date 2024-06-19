@@ -24,7 +24,7 @@ class FeatureEstatesController extends GetxController {
   int?favSelectedIndex;
   late TextEditingController searchController;
   Color? favCol;
-
+int? SelectedHouse;
   @override
   void onInit() {
     super.onInit();
@@ -80,7 +80,7 @@ class FeatureEstatesController extends GetxController {
     }
   }
 
-  Future<void> getDataOfOneResidence(String resId) async {
+  Future<void> getDataOfOneResidence(int Id,String resId) async {
     try {
       isLoading = true;
       update();
@@ -88,7 +88,7 @@ class FeatureEstatesController extends GetxController {
       o.GetOneResidencesModel? response = await ResidenceServices.fetchOneResidences(resId, context!);
       if (response != null) {
         residence = response.residence;
-        Get.to(() => SingleDetailScreen(resId));
+        Get.to(() => SingleDetailScreen(Id,resId));
         print("Residence details: ${residence}");
       } else {
         print("Some error occurred: Response is null");

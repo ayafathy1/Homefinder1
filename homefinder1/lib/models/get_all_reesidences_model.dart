@@ -1,12 +1,12 @@
 // To parse this JSON data, do
 //
-//     final getAllResidencesModel = getAllResidencesModelFromJson(jsonString);
+//     final getOneResidencesModel = getOneResidencesModelFromJson(jsonString);
 
 import 'dart:convert';
 
-GetAllResidencesModel getAllResidencesModelFromJson(String str) => GetAllResidencesModel.fromJson(json.decode(str));
+GetAllResidencesModel GetAllResidencesFromJson(String str) => GetAllResidencesModel.fromJson(json.decode(str));
 
-String getAllResidencesModelToJson(GetAllResidencesModel data) => json.encode(data.toJson());
+String GetAllResidencesModelToJson(GetAllResidencesModel data) => json.encode(data.toJson());
 
 class GetAllResidencesModel {
   String? status;
@@ -50,7 +50,7 @@ class Residence {
   String? createdAt;
   String? updatedAt;
   List<ImageElement>? images;
-  int? msSubClass;
+  String? msSubClass;
   String? mszoning;
   int? lotFrontage;
   int? lotArea;
@@ -110,8 +110,9 @@ class Residence {
   int? totalporchsf;
   String? alley;
   int? avgRating;
-  List<String>? likedUsers;
+  List<dynamic>? likedUsers;
   List<Review>? reviews;
+  List<String>? bookedBy;
 
   Residence({
     this.isLiked,
@@ -193,6 +194,7 @@ class Residence {
     this.avgRating,
     this.likedUsers,
     this.reviews,
+    this.bookedBy,
   });
 
   factory Residence.fromJson(Map<String, dynamic> json) => Residence(
@@ -226,7 +228,7 @@ class Residence {
     neighborhood: json["neighborhood"],
     condition1: json["condition1"],
     condition2: json["condition2"],
-    bldgType:json["bldgType"],
+    bldgType: json["bldgType"],
     houseStyle: json["houseStyle"],
     overallQual: json["overallQual"],
     overallCond: json["overallCond"],
@@ -250,20 +252,20 @@ class Residence {
     electrical: json["electrical"],
     lowQualFinSf: json["lowQualFinSF"],
     bedroomAbvGr: json["bedroomAbvGr"],
-    kitchenQual: json["kitchenQual"],
+    kitchenQual:json["kitchenQual"],
     totRmsAbvGrd: json["totRmsAbvGrd"],
     fireplaces: json["fireplaces"],
     fireplaceQu: json["fireplaceQu"],
     garageType: json["garageType"],
-    garageFinish: json["garageFinish"],
+    garageFinish:json["garageFinish"],
     garageCars: json["garageCars"],
     garageQual: json["garageQual"],
-    pavedDrive: json["pavedDrive"],
+    pavedDrive:json["pavedDrive"],
     poolArea: json["poolArea"],
     miscVal: json["miscVal"],
     moSold: json["moSold"],
-    saleType: json["saleType"],
-    saleCondition:json["saleCondition"],
+    saleType:json["saleType"],
+    saleCondition: json["saleCondition"],
     salePrice: json["salePrice"]?.toDouble(),
     houseage: json["houseage"],
     houseremodelage: json["houseremodelage"],
@@ -273,8 +275,9 @@ class Residence {
     totalporchsf: json["totalporchsf"],
     alley: json["alley"],
     avgRating: json["avgRating"],
-    likedUsers: json["likedUsers"] == null ? [] : List<String>.from(json["likedUsers"]!.map((x) => x)),
+    likedUsers: json["likedUsers"] == null ? [] : List<dynamic>.from(json["likedUsers"]!.map((x) => x)),
     reviews: json["reviews"] == null ? [] : List<Review>.from(json["reviews"]!.map((x) => Review.fromJson(x))),
+    bookedBy: json["bookedBy"] == null ? [] : List<String>.from(json["bookedBy"]!.map((x) => x)),
   );
 
   Map<String, dynamic> toJson() => {
@@ -314,7 +317,7 @@ class Residence {
     "overallCond": overallCond,
     "roofStyle": roofStyle,
     "roofMatl": roofMatl,
-    "exterior1st":exterior1St,
+    "exterior1st": exterior1St,
     "exterior2nd": exterior2Nd,
     "masVnrType": masVnrType,
     "masVnrArea": masVnrArea,
@@ -357,8 +360,10 @@ class Residence {
     "avgRating": avgRating,
     "likedUsers": likedUsers == null ? [] : List<dynamic>.from(likedUsers!.map((x) => x)),
     "reviews": reviews == null ? [] : List<dynamic>.from(reviews!.map((x) => x.toJson())),
+    "bookedBy": bookedBy == null ? [] : List<dynamic>.from(bookedBy!.map((x) => x)),
   };
 }
+
 
 class ImageElement {
   String? id;
@@ -409,7 +414,7 @@ class Location {
   );
 
   Map<String, dynamic> toJson() => {
-    "type": type,
+    "type":type,
     "coordinates": coordinates == null ? [] : List<dynamic>.from(coordinates!.map((x) => x)),
     "fullAddress": fullAddress,
     "city": city,
@@ -427,9 +432,9 @@ class Review {
   int? likes;
   int? unLikes;
   List<dynamic>? likedBy;
-  List<dynamic>? unLikedBy;
-  String? createdAt;
-  String? updatedAt;
+  List<String>? unLikedBy;
+  DateTime? createdAt;
+  DateTime? updatedAt;
   int? v;
   String? comment;
 
@@ -456,9 +461,9 @@ class Review {
     likes: json["likes"],
     unLikes: json["unLikes"],
     likedBy: json["likedBy"] == null ? [] : List<dynamic>.from(json["likedBy"]!.map((x) => x)),
-    unLikedBy: json["unLikedBy"] == null ? [] : List<dynamic>.from(json["unLikedBy"]!.map((x) => x)),
-    createdAt: json["createdAt"] ,
-    updatedAt: json["updatedAt"] ,
+    unLikedBy: json["unLikedBy"] == null ? [] : List<String>.from(json["unLikedBy"]!.map((x) => x)),
+    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
+    updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
     v: json["__v"],
     comment: json["comment"],
   );
@@ -472,8 +477,8 @@ class Review {
     "unLikes": unLikes,
     "likedBy": likedBy == null ? [] : List<dynamic>.from(likedBy!.map((x) => x)),
     "unLikedBy": unLikedBy == null ? [] : List<dynamic>.from(unLikedBy!.map((x) => x)),
-    "createdAt": createdAt,
-    "updatedAt": updatedAt,
+    "createdAt": createdAt?.toIso8601String(),
+    "updatedAt": updatedAt?.toIso8601String(),
     "__v": v,
     "comment": comment,
   };
@@ -522,5 +527,6 @@ class UserIdImage {
     "public_id": publicId,
   };
 }
+
 
 

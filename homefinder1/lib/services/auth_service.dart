@@ -30,7 +30,7 @@ class AuthServices{
     }
     return null;
   }
-  static Future<gp.GetPendingForProfileModel?> fetchUserPendingData(int counter, BuildContext context) async {
+  static Future<gp.GetPendingResidencesModel?> fetchUserPendingData(int counter, BuildContext context) async {
     const String endPoint = 'residence/pending';
 
     try {
@@ -45,7 +45,7 @@ class AuthServices{
 
       if (response != null && response['status'] == 'success') {
         print(response);
-        return gp.GetPendingForProfileModel.fromJson(response);
+        return gp.GetPendingResidencesModel.fromJson(response);
       } else {
         print('API Error: ${response['message']}');
       }

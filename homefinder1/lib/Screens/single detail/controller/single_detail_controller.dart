@@ -1,4 +1,3 @@
-
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,38 +5,48 @@ import 'package:get/get.dart';
 import 'package:homefinder1/Widget/custom_elevated_button_widget.dart';
 import 'package:homefinder1/models/add_review_to_residence_model.dart';
 import 'package:homefinder1/models/get_all_reviews_of_residence_model.dart'as a;
-import 'package:homefinder1/models/get_residence_images_model.dart'as o;
+import 'package:homefinder1/models/get_residence_images_model.dart' as o;
 import 'package:homefinder1/models/like_review_model.dart';
-
-import '../../../models/get_one_residence_model.dart'as o;
+import 'package:homefinder1/models/recomendation_model.dart' as r;
+import '../../../models/get_one_residence_model.dart' as o;
 import '../../../services/auth_service.dart';
 import '../../../services/residences_services.dart';
 import '../../../utilities/colors.dart';
 import '../../../utilities/constants.dart';
 
-class SingleDetailController extends GetxController{
-  int rating=0;
+class SingleDetailController extends GetxController {
+  int rating = 0;
   List<a.Review>? reviews;
-  String? userId;
-  BuildContext?context;
-  SingleDetailController(this.userId,this.context);
-  o.Residence? residence;
-  bool isLoading=true;
-  ScrollController scroll= ScrollController();
-  List<String> type=["Description","Gallery","Review"];
-  List<String> pOrLOrS=["Description","Gallery","Review"];
-  int selectedIndex=0;
-  late List<Widget> listViewItem = [];
-  String descriptionOrGalleryOrReview="Description";
-  TextEditingController commentController=TextEditingController();
+  String userId;
+  int Id;
+  BuildContext? context;
 
-  final List <String> homeDetailsTitles=["sqrt","Bedrooms","Bathrooms","Safety Rank"];
-  final List <String> homeDeatilsNo=["1.225","1.225","1.0", "4,457"];
-  final List <String> homeDeatilsIcons=["lib/assets/images/svgviewer-output (7).png",
+  SingleDetailController(this.Id,this.userId, this.context);
+
+  o.Residence? residence;
+  bool isLoading = true;
+  ScrollController scroll = ScrollController();
+  List<String> type = ["Description", "Gallery", "Review"];
+  List<String> pOrLOrS = ["Description", "Gallery", "Review"];
+  int selectedIndex = 0;
+  late List<Widget> listViewItem = [];
+  String descriptionOrGalleryOrReview = "Description";
+  TextEditingController commentController = TextEditingController();
+
+  final List<String> homeDetailsTitles = [
+    "sqrt",
+    "Bedrooms",
+    "Bathrooms",
+    "Safety Rank"
+  ];
+  final List<String> homeDeatilsNo = ["1.225", "1.225", "1.0", "4,457"];
+  final List<String> homeDeatilsIcons = [
+    "lib/assets/images/svgviewer-output (7).png",
     "lib/assets/images/bed1.png",
-  "lib/assets/images/bathtub.png",
-  "lib/assets/images/safety.png"];
-  final List<String> homeFacilitiesIcons=[
+    "lib/assets/images/bathtub.png",
+    "lib/assets/images/safety.png"
+  ];
+  final List<String> homeFacilitiesIcons = [
     "lib/assets/images/bxs_car-wash.png",
     "lib/assets/images/fontisto_wifi.png",
     "lib/assets/images/map_swimming.png",
@@ -47,7 +56,7 @@ class SingleDetailController extends GetxController{
     "lib/assets/images/ion_restaurant.png",
     "lib/assets/images/map_laundry.png"
   ];
-  final List<String>homeFacilitiesTitles=[
+  final List<String> homeFacilitiesTitles = [
     "Car Parking",
     "Wi-fi",
     "Swimming pool",
@@ -57,33 +66,39 @@ class SingleDetailController extends GetxController{
     "Restaurant",
     "Laundry"
   ];
-  final List<String> homeDetailImages=[
+  final List<String> homeDetailImages = [
     "lib/assets/images/homeDetails1.png",
     "lib/assets/images/homeDeatail2.png",
     "lib/assets/images/homeDeatail3.png",
     "lib/assets/images/homeDeatail4.png",
     "lib/assets/images/homeDeatail5.png",
     "lib/assets/images/homeDeatail6.png",
-
   ];
   List<Object>? images;
-int? selectedIndexOfReview;
+  int? selectedIndexOfReview;
+  List<r.Datum>? data;
+
   @override
   void onInit() {
     super.onInit();
     descriptionGalleryReview();
-    getDataOfOneResidences(userId!,context!);
+    getDataOfOneResidences(userId, context!);
+    getPhotosOfResidence(userId,context!);
+    getReviewsOfResidence(userId,context!);
+    getDataOfRecommendationResidences(Id, context!);
+
   }
-  getDataOfOneResidences(String resId,BuildContext context) async {
+
+  getDataOfOneResidences(String resId, BuildContext context) async {
     try {
-      o.GetOneResidencesModel? response = await ResidenceServices.fetchOneResidences( resId, context);
+      o.GetOneResidencesModel? response =
+          await ResidenceServices.fetchOneResidences(resId, context);
       print("API Response Status: ${response?.status}");
 
       if (response == null) {
         print("Some error occurred: Response is null");
       } else {
-        residence = response.residence ;
-
+        residence = response.residence;
 
         // Print or access other properties as needed
         print("Number of residences: ${residence}");
@@ -95,42 +110,20 @@ int? selectedIndexOfReview;
       print("Exception occurred: $e");
       isLoading = false;
     }
-
   }
-  getPhotosOfResidence(BuildContext context) async {
-      try {
-        o.GetResidencesImagesModel? response = await ResidenceServices.fetchImagesOfResidences(residence?.residenceId??"", context);
-        print("API Response Status: ${response?.status}");
 
-        if (response == null) {
-          print("Some error occurred: Response is null");
-        } else {
-          images = response.images ?? [];
-          print(images);
-
-
-          // Print or access other properties as needed
-          print("Number of residences: ${images?.length}");
-        }
-
-        isLoading = false;
-        update();
-      } catch (e) {
-        print("Exception occurred: $e");
-        isLoading = false;
-      }
-
-  }
-  getReviewsOfResidence(BuildContext context) async {
+  getPhotosOfResidence(String resId,BuildContext context) async {
     try {
-     a.GetAllReviewsOfResidenceModel? response = await ResidenceServices.fetchReviewsOfResidences(residence?.residenceId??"", context);
+      o.GetResidencesImagesModel? response =
+          await ResidenceServices.fetchImagesOfResidences(
+              resId, context);
       print("API Response Status: ${response?.status}");
 
       if (response == null) {
         print("Some error occurred: Response is null");
       } else {
-        reviews = response.reviews ?? [];
-
+        images = response.images ?? [];
+        print(images);
 
         // Print or access other properties as needed
         print("Number of residences: ${images?.length}");
@@ -142,19 +135,37 @@ int? selectedIndexOfReview;
       print("Exception occurred: $e");
       isLoading = false;
     }
-
   }
+
+  getReviewsOfResidence(String resId,BuildContext context) async {
+    try {
+      a.GetAllReviewsOfResidenceModel? response =
+          await ResidenceServices.fetchReviewsOfResidences(
+              resId, context);
+      print("API Response Status: ${response?.status}");
+
+      if (response == null) {
+        print("Some error occurred: Response is null");
+      } else {
+        reviews = response.reviews ?? [];
+
+        // Print or access other properties as needed
+        print("Number of residences: ${images?.length}");
+      }
+
+      isLoading = false;
+      update();
+    } catch (e) {
+      print("Exception occurred: $e");
+      isLoading = false;
+    }
+  }
+
   Future<void> addReview(BuildContext context) async {
     try {
-      AddReviewToResidenceModel? data = await AuthServices.addReview(
-          rating,
-          commentController.text,
-          residence?.residenceId??"",
-          context
-      );
-      if (data?.status == "success") {
-
-      }
+      AddReviewToResidenceModel? data = await AuthServices.addReview(rating,
+          commentController.text, residence?.residenceId ?? "", context);
+      if (data?.status == "success") {}
     } catch (e) {
       String errorMessage = " $e";
       String part = errorMessage.substring(26, 35);
@@ -165,18 +176,14 @@ int? selectedIndexOfReview;
         text: part,
       );
     }
-
   }
+
   Future<void> addLikeToReview(BuildContext context) async {
     try {
       LikeReviewModel? data = await ResidenceServices.addLikeToReview(
-          reviews?[selectedIndexOfReview??0].id??"",
-          context
-      );
+          reviews?[selectedIndexOfReview ?? 0].id ?? "", context);
       if (data?.status == "success") {
-
         print(data?.message);
-
       }
     } catch (e) {
       // Handle bad request error
@@ -185,18 +192,14 @@ int? selectedIndexOfReview;
       // Show error message on the screen
       print(part);
     }
-
   }
+
   Future<void> removeLikeToReview(BuildContext context) async {
     try {
       LikeReviewModel? data = await ResidenceServices.removeLikeToReview(
-          reviews?[selectedIndexOfReview??0].id??"",
-          context
-      );
+          reviews?[selectedIndexOfReview ?? 0].id ?? "", context);
       if (data?.status == "success") {
-
         print(data?.message);
-
       }
     } catch (e) {
       // Handle bad request error
@@ -205,18 +208,14 @@ int? selectedIndexOfReview;
       // Show error message on the screen
       print(part);
     }
-
   }
+
   Future<void> addUnLikeToReview(BuildContext context) async {
     try {
       LikeReviewModel? data = await ResidenceServices.addUnLikeToReview(
-          reviews?[selectedIndexOfReview??0].id??"",
-          context
-      );
+          reviews?[selectedIndexOfReview ?? 0].id ?? "", context);
       if (data?.status == "success") {
-
         print(data?.message);
-
       }
     } catch (e) {
       // Handle bad request error
@@ -225,18 +224,14 @@ int? selectedIndexOfReview;
       // Show error message on the screen
       print(part);
     }
-
   }
+
   Future<void> removeUnLikeToReview(BuildContext context) async {
     try {
       LikeReviewModel? data = await ResidenceServices.removeUnLikeToReview(
-          reviews?[selectedIndexOfReview??0].id??"",
-          context
-      );
+          reviews?[selectedIndexOfReview ?? 0].id ?? "", context);
       if (data?.status == "success") {
-
         print(data?.message);
-
       }
     } catch (e) {
       // Handle bad request error
@@ -245,74 +240,100 @@ int? selectedIndexOfReview;
       // Show error message on the screen
       print(part);
     }
-
   }
 
+  getDataOfRecommendationResidences(int Id,BuildContext context) async {
+    isLoading = true;
+    try {
+      r.RecommendationModel? response =
+          await ResidenceServices.fetchRecommendedResidences(
+              Id, context);
+      print("API Response Status: ${response?.status}");
 
-  descriptionGalleryReview(){
-    if(selectedIndex==0){
+      if (response == null) {
+        print("Some error occurred: Response is null");
+      } else {
+        data = response.data ?? [];
+
+        // Print or access other properties as needed
+        print("Number of residences: ${data?.length}");
+      }
+
+      isLoading = false;
+      update();
+    } catch (e) {
+      print("Exception occurred: $e");
+      isLoading = false;
+    }
+  }
+
+  descriptionGalleryReview() {
+    if (selectedIndex == 0) {
       listViewItem = [];
-      descriptionOrGalleryOrReview="Description";
-      for(var index = 0 ; index<2;index=index+1){
+      descriptionOrGalleryOrReview = "Description";
+      for (var index = 0; index < 2; index = index + 1) {
         listViewItem.add(Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.only(left: 25,),
+                margin: EdgeInsets.only(
+                  left: 25,
+                ),
                 width: Get.width,
                 height: 69.95,
-                child:ListView.separated(
-                    physics: NeverScrollableScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context , index){
-                      return Container(
-                        width: 77.5,
-                        height: 69.95,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            color: Color(0xfffffbfe),
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.grey.shade300,
-                                  offset: Offset(0, 16),
-                                  blurRadius: 10)
-                            ]),
-                        child:Column(
-                          children: [
-                           Padding(
-                             padding: const EdgeInsets.only(top: 6.0),
-                             child: Image(image: AssetImage( homeDeatilsIcons[index])),
-                           ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 5.0),
-                              child: Text(
-                                homeDeatilsNo[index],
-                                style: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w600,
-                                    fontFamily: kRegularFont,
-                                    color: Color(0xff53587A)),
-                              ),
-                            ),
-                            Text(
-                              homeDetailsTitles[index],
+                child: ListView.separated(
+                  physics: NeverScrollableScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      width: 77.5,
+                      height: 69.95,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: Color(0xfffffbfe),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.shade300,
+                                offset: Offset(0, 16),
+                                blurRadius: 10)
+                          ]),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 6.0),
+                            child: Image(
+                                image: AssetImage(homeDeatilsIcons[index])),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 5.0),
+                            child: Text(
+                              homeDeatilsNo[index],
                               style: TextStyle(
                                   fontSize: 10,
                                   fontWeight: FontWeight.w600,
                                   fontFamily: kRegularFont,
                                   color: Color(0xff53587A)),
                             ),
-                          ],
-                        ) ,
-                      ) ;
-                    },
-                    separatorBuilder:  (context, index) {
-                      return SizedBox(
-                        width: 15,
-                      );
-                    },
-                    itemCount: homeDetailsTitles.length,
+                          ),
+                          Text(
+                            homeDetailsTitles[index],
+                            style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: kRegularFont,
+                                color: Color(0xff53587A)),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return SizedBox(
+                      width: 15,
+                    );
+                  },
+                  itemCount: homeDetailsTitles.length,
                 )),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -325,18 +346,17 @@ int? selectedIndexOfReview;
                     child: Text(
                       "Listing Agent",
                       style: TextStyle(
-                        color: kVeryDarkBlueColor,
-                        fontFamily: kRegularFont,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700
-                      ),
+                          color: kVeryDarkBlueColor,
+                          fontFamily: kRegularFont,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700),
                     ),
                   ),
                 ),
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 15.0,right: 15),
+              padding: const EdgeInsets.only(left: 15.0, right: 15),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -348,36 +368,41 @@ int? selectedIndexOfReview;
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
                         ),
-                        child: Image(image: AssetImage("lib/assets/images/AgetPhoto.png"),),
+                        child: Image(
+                          image: AssetImage("lib/assets/images/AgetPhoto.png"),
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 10.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Sandeep S.",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 13,
-                              fontFamily: kRegularFont,
-                              color: kVeryDarkBlueColor
-                            ),),
-                            Text("Partner",
-                            style:  TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 11,
-                                fontFamily: kRegularFont,
-                                color: Color(0xff8C8C8C)
-                            ),)
+                            Text(
+                              "Sandeep S.",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 13,
+                                  fontFamily: kRegularFont,
+                                  color: kVeryDarkBlueColor),
+                            ),
+                            Text(
+                              "Partner",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 11,
+                                  fontFamily: kRegularFont,
+                                  color: Color(0xff8C8C8C)),
+                            )
                           ],
                         ),
                       ),
                     ],
                   ),
-                  IconButton(onPressed: (){},
-                      icon: Image(image: AssetImage(
-                        "lib/assets/images/message.png"
-                      ),))
+                  IconButton(
+                      onPressed: () {},
+                      icon: Image(
+                        image: AssetImage("lib/assets/images/message.png"),
+                      ))
                 ],
               ),
             ),
@@ -385,7 +410,6 @@ int? selectedIndexOfReview;
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
-
                   width: 110,
                   height: 40,
                   child: Center(
@@ -395,8 +419,7 @@ int? selectedIndexOfReview;
                           color: kVeryDarkBlueColor,
                           fontFamily: kRegularFont,
                           fontSize: 14,
-                          fontWeight: FontWeight.w700
-                      ),
+                          fontWeight: FontWeight.w700),
                     ),
                   ),
                 ),
@@ -406,15 +429,14 @@ int? selectedIndexOfReview;
               child: Container(
                   margin: EdgeInsets.only(left: 15),
                   width: Get.width,
-                  height:150,
-                  child:Padding(
+                  height: 150,
+                  child: Padding(
                     padding: const EdgeInsets.only(left: 15.0),
                     child: GridView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.horizontal,
-                      itemBuilder: (context , index){
+                      itemBuilder: (context, index) {
                         return Container(
-
                           width: 120,
                           height: 75,
                           decoration: BoxDecoration(
@@ -424,18 +446,19 @@ int? selectedIndexOfReview;
                                 BoxShadow(
                                     color: Colors.grey.shade300,
                                     offset: Offset(0, 16),
-
                                     blurRadius: 10)
                               ]),
-                          child:Column(
+                          child: Column(
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(top: 8.0,bottom: 10),
-                                child: Image(image: AssetImage( homeFacilitiesIcons[index])),
+                                padding:
+                                    const EdgeInsets.only(top: 8.0, bottom: 10),
+                                child: Image(
+                                    image:
+                                        AssetImage(homeFacilitiesIcons[index])),
                               ),
-
                               Container(
-                                width:100,
+                                width: 100,
                                 child: Center(
                                   child: Text(
                                     homeFacilitiesTitles[index],
@@ -449,15 +472,14 @@ int? selectedIndexOfReview;
                                 ),
                               ),
                             ],
-                          ) ,
-                        ) ;
+                          ),
+                        );
                       },
-                      itemCount: homeFacilitiesIcons.length, gridDelegate:
-                    SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                    crossAxisSpacing: 10,
-                      mainAxisSpacing:22
-                    ),
+                      itemCount: homeFacilitiesIcons.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 22),
                     ),
                   )),
             ),
@@ -467,15 +489,16 @@ int? selectedIndexOfReview;
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
-                    width:120,
+                    width: 120,
                     child: Center(
-                      child: Text("Location",
-                      style: TextStyle(
-                        fontFamily: kRegularFont,
-                        fontSize: 19,
-                        fontWeight: FontWeight.w900,
-                        color: kVeryDarkBlueColor
-                      ),),
+                      child: Text(
+                        "Location",
+                        style: TextStyle(
+                            fontFamily: kRegularFont,
+                            fontSize: 19,
+                            fontWeight: FontWeight.w900,
+                            color: kVeryDarkBlueColor),
+                      ),
                     ),
                   ),
                 ],
@@ -485,72 +508,66 @@ int? selectedIndexOfReview;
               padding: const EdgeInsets.only(bottom: 20.0),
               child: Center(
                 child: Container(
-                  height: Get.height*0.29,
-                  width: Get.width*0.85,
-                  child:Column(
+                  height: Get.height * 0.29,
+                  width: Get.width * 0.85,
+                  child: Column(
                     children: [
                       Container(
-                        height: Get.height*0.22,
-                        width: Get.width*0.85,
+                        height: Get.height * 0.22,
+                        width: Get.width * 0.85,
                         child: Image(
                           image: AssetImage("lib/assets/images/map12.png"),
                           fit: BoxFit.fill,
-                          height: Get.height*0.2,
-                          width: Get.width*0.85,
+                          height: Get.height * 0.2,
+                          width: Get.width * 0.85,
                         ),
-
                       ),
                       InkWell(
-                        onTap: (){},
+                        onTap: () {},
                         child: Container(
-                          width: Get.width*0.85,
-                          height: Get.height*0.07,
+                          width: Get.width * 0.85,
+                          height: Get.height * 0.07,
                           decoration: BoxDecoration(
-                            color: Color(0xffD9D9D9),
-                            borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(25),
-                              bottomLeft: Radius.circular(25),
-                            )
-                          ),
+                              color: Color(0xffD9D9D9),
+                              borderRadius: BorderRadius.only(
+                                bottomRight: Radius.circular(25),
+                                bottomLeft: Radius.circular(25),
+                              )),
                           child: Center(
                             child: TextButton(
-                              onPressed: (){},
+                              onPressed: () {},
                               child: Text(
                                 "Select on the map",
                                 style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 12,
-                                  fontFamily: kRegularFont,
-                                  color: kVeryDarkBlueColor
-                                ),
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 12,
+                                    fontFamily: kRegularFont,
+                                    color: kVeryDarkBlueColor),
                               ),
                             ),
                           ),
                         ),
                       ),
-
                     ],
-                  ) ,
+                  ),
                 ),
               ),
             ),
             Container(
               width: Get.width,
-              height: Get.height*0.1,
+              height: Get.height * 0.1,
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(20),
-                      topLeft:  Radius.circular(20),
+                    topRight: Radius.circular(20),
+                    topLeft: Radius.circular(20),
                   ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.shade300,
-                    offset: Offset(0,-12),
-                    blurRadius: 15
-                  )
-                ]
-              ),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey.shade300,
+                        offset: Offset(0, -12),
+                        blurRadius: 15)
+                  ]),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -560,200 +577,196 @@ int? selectedIndexOfReview;
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(top: 3.0),
-                        child: Text("Total Price",
-                        style: TextStyle(
-                          fontFamily: kRegularFont,
-                          fontSize: 22,
-                          fontWeight: FontWeight.w700,
-                          color: kVeryDarkBlueColor
-                        ),),
+                        child: Text(
+                          "Total Price",
+                          style: TextStyle(
+                              fontFamily: kRegularFont,
+                              fontSize: 22,
+                              fontWeight: FontWeight.w700,
+                              color: kVeryDarkBlueColor),
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10.0),
                         child: Row(
                           children: [
-                            Text("\$350",
-                            style: TextStyle(
-                              color: kPrimaryColor,
-                              fontWeight: FontWeight.w600,
-                              fontSize:17,
-                              fontFamily: kRegularFont
-                            ),),
-                            Text(" /month",
-                            style: TextStyle(
-                              fontFamily: kRegularFont,
-                              fontSize:15,
-                              fontWeight: FontWeight.w700,
-                              color: Color(0xff8C8C8C)
-                            ),)
+                            Text(
+                              "\$350",
+                              style: TextStyle(
+                                  color: kPrimaryColor,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 17,
+                                  fontFamily: kRegularFont),
+                            ),
+                            Text(
+                              " /month",
+                              style: TextStyle(
+                                  fontFamily: kRegularFont,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xff8C8C8C)),
+                            )
                           ],
                         ),
                       )
                     ],
                   ),
-                  CustomElevatedButtonWidget(text: "Book Now",
-                      onPressed: (){},
+                  CustomElevatedButtonWidget(
+                      text: "Book Now",
+                      onPressed: () {},
                       textStyle: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 17,
-                        fontFamily: kRegularFont
-                      ), style: ElevatedButton.styleFrom(
-                        fixedSize: Size(165, 46),
-                        backgroundColor: kPrimaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)
-                        )
-                      ))
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 17,
+                          fontFamily: kRegularFont),
+                      style: ElevatedButton.styleFrom(
+                          fixedSize: Size(165, 46),
+                          backgroundColor: kPrimaryColor,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20))))
                 ],
               ),
             )
           ],
         ));
       }
-
-    }
-    else if(selectedIndex==1){
+    } else if (selectedIndex == 1) {
       listViewItem = [];
-      descriptionOrGalleryOrReview="Gallery";
-      for(var index = 0 ; index<2;index=index+1){
-         listViewItem.add(Column(
-           children: [
-             Padding(
-               padding: const EdgeInsets.only(left: 10.0,top: 10),
-               child: Row(
-                 children: [
-                   Text("Gallery",
-                   style: TextStyle(
-                     color: kVeryDarkBlueColor,
-                     fontFamily: kRegularFont,
-                     fontSize: 14,
-                     fontWeight: FontWeight.w700
-                   ),),
-                   Text(" (400)",
-                     style: TextStyle(
-                         color: kPrimaryColor,
-                         fontFamily: kRegularFont,
-                         fontSize: 14,
-                         fontWeight: FontWeight.w700
-                     ),),
-                 ],
-               ),
-             ),
-             Container(
-               width: Get.width*0.95,
-               height: Get.height*0.8,
-               child: GridView.builder(
-                 scrollDirection: Axis.vertical,
-                 physics: NeverScrollableScrollPhysics(),
-                   itemCount: homeDetailImages.length,
-                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                 crossAxisCount: 2,crossAxisSpacing: 10,mainAxisSpacing: 10
-               ), itemBuilder:(context,index){
-                 return Container(
-                   width: 161,
-                   height: 155,
-                   decoration: BoxDecoration(
-                     borderRadius: BorderRadius.circular(5.43)
-                   ),
-                   child: Image(image:
-                   AssetImage(homeDetailImages[index])
-                     ,fit: BoxFit.fill,
-                     width: 161,
-                     height: 155,
-                   )
-                 );
-               } ),
-             ),
-             Container(
-               width: Get.width,
-               height: Get.height*0.1,
-               decoration: BoxDecoration(
-                   color: Colors.white,
-                   borderRadius: BorderRadius.only(
-                     topRight: Radius.circular(20),
-                     topLeft:  Radius.circular(20),
-                   ),
-                   boxShadow: [
-                     BoxShadow(
-                         color: Colors.grey.shade300,
-                         offset: Offset(0,-12),
-                         blurRadius: 15
-                     )
-                   ]
-               ),
-               child: Row(
-                 crossAxisAlignment: CrossAxisAlignment.center,
-                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                 children: [
-                   Column(
-                     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                     children: [
-                       Padding(
-                         padding: const EdgeInsets.only(top: 3.0),
-                         child: Text("Total Price",
-                           style: TextStyle(
-                               fontFamily: kRegularFont,
-                               fontSize: 22,
-                               fontWeight: FontWeight.w700,
-                               color: kVeryDarkBlueColor
-                           ),),
-                       ),
-                       Padding(
-                         padding: const EdgeInsets.only(bottom: 10.0),
-                         child: Row(
-                           children: [
-                             Text("\$350",
-                               style: TextStyle(
-                                   color: kPrimaryColor,
-                                   fontWeight: FontWeight.w600,
-                                   fontSize:17,
-                                   fontFamily: kRegularFont
-                               ),),
-                             Text(" /month",
-                               style: TextStyle(
-                                   fontFamily: kRegularFont,
-                                   fontSize:15,
-                                   fontWeight: FontWeight.w700,
-                                   color: Color(0xff8C8C8C)
-                               ),)
-                           ],
-                         ),
-                       )
-                     ],
-                   ),
-                   CustomElevatedButtonWidget(text: "Book Now",
-                       onPressed: (){},
-                       textStyle: TextStyle(
-                           color: Colors.white,
-                           fontWeight: FontWeight.w700,
-                           fontSize: 17,
-                           fontFamily: kRegularFont
-                       ), style: ElevatedButton.styleFrom(
-                           fixedSize: Size(165, 46),
-                           backgroundColor: kPrimaryColor,
-                           shape: RoundedRectangleBorder(
-                               borderRadius: BorderRadius.circular(20)
-                           )
-                       ))
-                 ],
-               ),
-             )
-
-           ],
+      descriptionOrGalleryOrReview = "Gallery";
+      for (var index = 0; index < 2; index = index + 1) {
+        listViewItem.add(Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 10.0, top: 10),
+              child: Row(
+                children: [
+                  Text(
+                    "Gallery",
+                    style: TextStyle(
+                        color: kVeryDarkBlueColor,
+                        fontFamily: kRegularFont,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700),
+                  ),
+                  Text(
+                    "${residence?.images?.length}",
+                    style: TextStyle(
+                        color: kPrimaryColor,
+                        fontFamily: kRegularFont,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              width: Get.width * 0.95,
+              height: Get.height * 0.8,
+              child: GridView.builder(
+                  scrollDirection: Axis.vertical,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: residence?.images?.length??0,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10),
+                  itemBuilder: (context, index) {
+                    return Container(
+                        width: 161,
+                        height: 155,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5.43)),
+                        child: Image(
+                          image: NetworkImage(residence?.images?[0].url??""),
+                          fit: BoxFit.fill,
+                          width: 161,
+                          height: 155,
+                        ));
+                  }),
+            ),
+            Container(
+              width: Get.width,
+              height: Get.height * 0.1,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(20),
+                    topLeft: Radius.circular(20),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey.shade300,
+                        offset: Offset(0, -12),
+                        blurRadius: 15)
+                  ]),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 3.0),
+                        child: Text(
+                          "Total Price",
+                          style: TextStyle(
+                              fontFamily: kRegularFont,
+                              fontSize: 22,
+                              fontWeight: FontWeight.w700,
+                              color: kVeryDarkBlueColor),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              "\$350",
+                              style: TextStyle(
+                                  color: kPrimaryColor,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 17,
+                                  fontFamily: kRegularFont),
+                            ),
+                            Text(
+                              " /month",
+                              style: TextStyle(
+                                  fontFamily: kRegularFont,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xff8C8C8C)),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  CustomElevatedButtonWidget(
+                      text: "Book Now",
+                      onPressed: () {},
+                      textStyle: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 17,
+                          fontFamily: kRegularFont),
+                      style: ElevatedButton.styleFrom(
+                          fixedSize: Size(165, 46),
+                          backgroundColor: kPrimaryColor,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20))))
+                ],
+              ),
+            )
+          ],
         ));
       }
-    }
-    else if(selectedIndex==2){
+    } else if (selectedIndex == 2) {
       listViewItem = [];
-      descriptionOrGalleryOrReview="Review";
-      for(var index = 0 ; index<=2;index=index+1){
-        listViewItem.add(
-          Column(
-
-          )
-        );
+      descriptionOrGalleryOrReview = "Review";
+      for (var index = 0; index <= 2; index = index + 1) {
+        listViewItem.add(Column());
       }
     }
-
-}}
+  }
+}

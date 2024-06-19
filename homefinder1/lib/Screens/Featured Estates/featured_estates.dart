@@ -100,7 +100,8 @@ class _FeaturedEstatesState extends State<FeaturedEstates> {
                               return Box(
 
                                 onTap:(){
-                                  controller.getDataOfOneResidence(controller.residences?[index].residenceId??"");
+                                  controller.SelectedHouse=index;
+                                  controller.getDataOfOneResidence(controller.residences?[controller.SelectedHouse??0].id??0,controller.residences?[controller.SelectedHouse??0].residenceId??"");
                                 },
                                 favCol: controller.residences?[index].isLiked==true?kPrimaryColor:Colors.grey,
                                 onPressed: (){

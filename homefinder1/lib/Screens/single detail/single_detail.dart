@@ -9,8 +9,9 @@ import 'package:homefinder1/utilities/constants.dart';
 import '../../utilities/colors.dart';
 
 class SingleDetailScreen extends StatefulWidget{
-  String? resId;
-  SingleDetailScreen(this.resId);
+  String resId;
+  int Id;
+  SingleDetailScreen( this.Id,this.resId);
   @override
   State<SingleDetailScreen> createState() => _SingleDetailScreenState();
 }
@@ -19,7 +20,7 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SingleDetailController>(
-      init: SingleDetailController(widget.resId,context),
+      init: SingleDetailController(widget.Id,widget.resId,context),
         builder: (SingleDetailController controller){
         return Scaffold(
           body: SingleChildScrollView(
@@ -41,7 +42,9 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
                           top: 50,
                           left: 20,
                           child:InkWell(
-                            onTap: (){},
+                            onTap: (){
+                              Get.back();
+                            },
                             child: Image(image: AssetImage("lib/assets/images/Icon Back.png")),
                           )
                       ),
