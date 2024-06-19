@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +13,7 @@ class SearchNotFound extends StatelessWidget {
     return Scaffold(body: SingleChildScrollView(child: Column(children: [
 
       SizedBox(height: Get.height*0.05,),
-      Row(children: [CustomArrowBack(),SizedBox(width: Get.width*0.08,),
+      Row(children: [const CustomArrowBack(),SizedBox(width: Get.width*0.08,),
         Text("Search Results",style: TextStyle(color: kDarkBlueColor,fontFamily: kRegularFont,
             fontWeight: FontWeight.w800,fontSize: 20),)],),
       SizedBox(height: Get.height*0.07,),
@@ -26,22 +25,22 @@ class SearchNotFound extends StatelessWidget {
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
             filled: true,
-            fillColor: Color(0xffF4F4F4),
+            fillColor: const Color(0xffF4F4F4),
             hintText: "Search House, Apartment , etc",
-            prefixIcon: Icon(Icons.search_outlined , color: Colors.black,),
+            prefixIcon: const Icon(Icons.search_outlined , color: Colors.black,),
             suffixIcon: InkWell(
                 onTap: (){},
-                child: Image(image: AssetImage('lib/assets/images/options.png'))),
+                child: const Image(image: AssetImage('lib/assets/images/options.png'))),
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: Color(0xffF4F4F4),
                   width: 3,
                 )
             ),
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: Color(0xff6C63FF),
                   width: 3,
                 )
@@ -61,7 +60,7 @@ class SearchNotFound extends StatelessWidget {
             color: kDarkBlueColor,fontWeight: FontWeight.w500,fontFamily: kRegularFont,fontSize: 18
         ),)],),
       SizedBox(height: Get.height*0.105,),
-      Center(child: Image(image:AssetImage("lib/assets/images/NotFound Illustration.png")),)
+      const Center(child: Image(image:AssetImage("lib/assets/images/NotFound Illustration.png")),)
     , SizedBox(height: Get.height*0.04,),
       Center(child:
       Row(mainAxisAlignment: MainAxisAlignment.center,children: [Text("Search",
@@ -75,10 +74,10 @@ class SearchNotFound extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(width: Get.width*0.07,),
-          Container(
+          SizedBox(
             width: Get.width*0.7,
             child: Text("Sorry, we can’t find the real estates you are looking for. Maybe, a little spelling mistake?",style: TextStyle(
-                color: Color(0xff53587A),fontSize: 12,fontFamily: kRegularFont,fontWeight: FontWeight.w500
+                color: const Color(0xff53587A),fontSize: 12,fontFamily: kRegularFont,fontWeight: FontWeight.w500
                      , )),
           ),
         ],

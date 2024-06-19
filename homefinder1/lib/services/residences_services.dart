@@ -1,11 +1,11 @@
-import 'dart:convert';
+// ignore_for_file: prefer_interpolation_to_compose_strings, avoid_print, non_constant_identifier_names, use_build_context_synchronously, unnecessary_string_interpolations, unnecessary_brace_in_string_interps
+
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/models/first_complete_model.dart';
 import 'package:homefinder1/models/fourth_complete_model.dart';
 import 'package:homefinder1/models/get_all_reviews_of_residence_model.dart';
-import 'package:homefinder1/models/get_sold_for_profile_model.dart'as gs;
 import 'package:homefinder1/models/like_review_model.dart';
 import 'package:homefinder1/models/price_prediction_model.dart';
 import 'package:homefinder1/models/third_complete_model.dart';
@@ -20,7 +20,6 @@ import '../models/second_complete_model.dart';
 import '../utilities/api_service.dart';
 import '../utilities/memory.dart';
 import '../utilities/services.dart';
-import 'package:http/http.dart' as http;
 
 class ResidenceServices {
 
@@ -270,7 +269,7 @@ class ResidenceServices {
         '$endPoint?page=$counter',
         'GET',
         headers: {
-          "Authorization": await Get.find<StorageService>().getToken, // Ensure token retrieval is correct
+          "Authorization": Get.find<StorageService>().getToken, // Ensure token retrieval is correct
         },
         context: context,
       );
@@ -295,7 +294,7 @@ class ResidenceServices {
         '$endPoint?page=$counter',
         'GET',
         headers: {
-          "Authorization": await Get.find<StorageService>().getToken, // Ensure token retrieval is correct
+          "Authorization": Get.find<StorageService>().getToken, // Ensure token retrieval is correct
         },
         context: context,
       );
@@ -320,7 +319,7 @@ class ResidenceServices {
         '$endPoint?page=$counter',
         'GET',
         headers: {
-          "Authorization": await Get.find<StorageService>().getToken, // Ensure token retrieval is correct
+          "Authorization": Get.find<StorageService>().getToken, // Ensure token retrieval is correct
         },
         context: context,
       );
@@ -345,7 +344,7 @@ class ResidenceServices {
         '$endPoint$resId',
         'GET',
         headers: {
-          "Authorization": await Get.find<StorageService>().getToken, // Ensure token retrieval is correct
+          "Authorization": Get.find<StorageService>().getToken, // Ensure token retrieval is correct
         },
         context: context,
       );
@@ -365,7 +364,7 @@ class ResidenceServices {
   static Future<ResponseModel?> addFavorite(String resId,BuildContext context) async {
     var data = await api.request(context: context,Services.addFavEndPoint+resId, "GET",
         headers: {
-          "Authorization":await Get.find<StorageService>().getToken,
+          "Authorization":Get.find<StorageService>().getToken,
 
         });
     if (data != null) {
@@ -377,7 +376,7 @@ class ResidenceServices {
   static Future<ResponseModel?> deleteFavorite(String resId,BuildContext context) async {
     var data = await api.request(context: context,Services.deleteFavEndPoint+resId, "DELETE",
         headers: {
-          "Authorization":await Get.find<StorageService>().getToken,
+          "Authorization":Get.find<StorageService>().getToken,
 
         });
     if (data != null) {
@@ -394,7 +393,7 @@ class ResidenceServices {
         '$endPoint',
         'GET',
         headers: {
-          "Authorization": await Get.find<StorageService>().getToken, // Ensure token retrieval is correct
+          "Authorization": Get.find<StorageService>().getToken, // Ensure token retrieval is correct
         },
         context: context,
       );
@@ -414,7 +413,7 @@ class ResidenceServices {
   static Future<ResponseModel?> deleteAllFavorite(BuildContext context) async {
     var data = await api.request(context: context,Services.deleteFavEndPoint, "DELETE",
         headers: {
-          "Authorization":await Get.find<StorageService>().getToken,
+          "Authorization":Get.find<StorageService>().getToken,
 
         });
     if (data != null) {
@@ -431,7 +430,7 @@ class ResidenceServices {
         '$endPoint',
         'GET',
         headers: {
-          "Authorization": await Get.find<StorageService>().getToken, // Ensure token retrieval is correct
+          "Authorization": Get.find<StorageService>().getToken, // Ensure token retrieval is correct
         },
         context: context,
       );
@@ -456,7 +455,7 @@ class ResidenceServices {
         '$endPoint',
         'GET',
         headers: {
-          "Authorization": await Get.find<StorageService>().getToken, // Ensure token retrieval is correct
+          "Authorization": Get.find<StorageService>().getToken, // Ensure token retrieval is correct
         },
         context: context,
       );
@@ -476,7 +475,7 @@ class ResidenceServices {
   static Future<LikeReviewModel?> addLikeToReview(String reviewId,BuildContext context) async {
     var data = await api.request(context: context,"review/like/${reviewId}", "GET",
         headers: {
-          "Authorization":await Get.find<StorageService>().getToken,
+          "Authorization":Get.find<StorageService>().getToken,
 
         });
     if (data != null) {
@@ -488,7 +487,7 @@ class ResidenceServices {
   static Future<LikeReviewModel?> removeLikeToReview(String reviewId,BuildContext context) async {
     var data = await api.request(context: context,"review/remove-like/${reviewId}", "GET",
         headers: {
-          "Authorization":await Get.find<StorageService>().getToken,
+          "Authorization":Get.find<StorageService>().getToken,
 
         });
     if (data != null) {
@@ -500,7 +499,7 @@ class ResidenceServices {
   static Future<LikeReviewModel?> addUnLikeToReview(String reviewId,BuildContext context) async {
     var data = await api.request(context: context,"review/unlike/${reviewId}", "GET",
         headers: {
-          "Authorization":await Get.find<StorageService>().getToken,
+          "Authorization":Get.find<StorageService>().getToken,
 
         });
     if (data != null) {
@@ -512,7 +511,7 @@ class ResidenceServices {
   static Future<LikeReviewModel?> removeUnLikeToReview(String reviewId,BuildContext context) async {
     var data = await api.request(context: context,"review/remove-unlike/${reviewId}", "GET",
         headers: {
-          "Authorization":await Get.find<StorageService>().getToken,
+          "Authorization":Get.find<StorageService>().getToken,
 
         });
     if (data != null) {
@@ -528,7 +527,7 @@ class ResidenceServices {
     const String endPoint = 'residence/predict/';
 
     try {
-      final String token = await Get.find<StorageService>().getToken;
+      final String token = Get.find<StorageService>().getToken;
 
       final response = await ApiService().request(
         "$endPoint$resId",

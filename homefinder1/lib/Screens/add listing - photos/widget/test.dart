@@ -1,8 +1,12 @@
+// ignore_for_file: library_private_types_in_public_api, prefer_final_fields, avoid_print
+
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImagePickerDialog extends StatefulWidget {
+  const ImagePickerDialog({super.key});
+
   @override
   _ImagePickerDialogState createState() => _ImagePickerDialogState();
 }
@@ -31,7 +35,7 @@ class _ImagePickerDialogState extends State<ImagePickerDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Select Image Source'),
+      title: const Text('Select Image Source'),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -40,15 +44,15 @@ class _ImagePickerDialogState extends State<ImagePickerDialog> {
               Navigator.pop(context);
               _pickImage(ImageSource.gallery);
             },
-            child: Text('Gallery'),
+            child: const Text('Gallery'),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           ElevatedButton(
             onPressed: () {
               Navigator.pop(context);
               _pickImage(ImageSource.camera);
             },
-            child: Text('Camera'),
+            child: const Text('Camera'),
           ),
         ],
       ),

@@ -1,16 +1,16 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/Featured%20Estates/widget/box_widget.dart';
 import 'package:homefinder1/Widget/custom_arrow_back.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-import '../../Widget/custom_bottom_navigation_bar_widget.dart';
 import '../../utilities/colors.dart';
 import '../../utilities/constants.dart';
 import 'controller/feature_estates_controller.dart';
 
 class FeaturedEstates extends StatefulWidget {
+  const FeaturedEstates({super.key});
+
 
 
   @override
@@ -26,7 +26,7 @@ class _FeaturedEstatesState extends State<FeaturedEstates> {
           return Scaffold(
             appBar: AppBar(
               toolbarHeight: Get.height * 0.13,
-              leading: CustomArrowBack(),
+              leading: const CustomArrowBack(),
               leadingWidth: Get.width * 0.2,
               title: Text("Featured Estates ", style: TextStyle(
                   color: kDarkBlueColor,
@@ -54,24 +54,24 @@ class _FeaturedEstatesState extends State<FeaturedEstates> {
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: Color(0xffF4F4F4),
+                        fillColor: const Color(0xffF4F4F4),
                         hintText: "Search House, Apartment , etc",
-                        prefixIcon: Icon(
+                        prefixIcon: const Icon(
                           Icons.search_outlined, color: Colors.black,),
                         suffixIcon: InkWell(
                             onTap: () {},
-                            child: Image(image: AssetImage(
+                            child: const Image(image: AssetImage(
                                 'lib/assets/images/options.png'))),
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0xffF4F4F4),
                               width: 3,
                             )
                         ),
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0xff6C63FF),
                               width: 3,
                             )
@@ -82,15 +82,15 @@ class _FeaturedEstatesState extends State<FeaturedEstates> {
                   Center(
                     child: Container(
                       height: Get.height * 0.845,
-                      color: Color(0xffF7F7F7),
+                      color: const Color(0xffF7F7F7),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Padding(
                           padding: EdgeInsets.only(bottom: Get.height * 0.07),
                           child: GridView.builder(
-                            physics: BouncingScrollPhysics(),
+                            physics: const BouncingScrollPhysics(),
                             controller: controller.scroll,
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
                                 crossAxisSpacing: 20,
                                 mainAxisSpacing: 20,

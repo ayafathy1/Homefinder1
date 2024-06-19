@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, use_build_context_synchronously
+
 import 'dart:async';
 import 'dart:convert';
 
@@ -9,7 +11,6 @@ import 'package:homefinder1/models/serification_model.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../services/auth_service.dart';
-import '../../../utilities/memory.dart';
 
 class VerficationCodeController extends GetxController {
  final String userId;
@@ -37,7 +38,7 @@ class VerficationCodeController extends GetxController {
   }
 
   void startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 1), (Timer timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
       if (remainingTimeInSeconds <= 0) {
         _timer.cancel();
       } else {
@@ -59,6 +60,21 @@ class VerficationCodeController extends GetxController {
     _timer.cancel(); // Cancel timer when controller is closed to prevent memory leaks
   }
 
+  Future<String?> fetchVerificationCode() async {
+    final url = Uri.parse('https://home-finder-back-end-i7ca.onrender.com/api/v1/auth/verification/65ef8459c2bd7a5646b05034');
+    try {
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
+        return data['verificationCode'];
+      }
+    } catch (e) {
+      print('Error fetching verification code: $e');
+      return null;
+    }
+    return null;
+  }
+
 
 
   Future<void> sendVerificationCode(BuildContext context,int code,) async {
@@ -72,7 +88,7 @@ class VerficationCodeController extends GetxController {
 
       if (data?.status == "success") {
 
-        Get.to(() => CompleteSignUp());
+        Get.to(() => const CompleteSignUp());
       }
     } catch (e) {
       // Handle bad request error

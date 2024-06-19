@@ -1,5 +1,6 @@
+// ignore_for_file: unnecessary_null_comparison, use_build_context_synchronously, depend_on_referenced_packages, avoid_print
+
 import 'package:cool_alert/cool_alert.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/profile/controller/profile_controller.dart';
 import 'package:homefinder1/Screens/settings/controller/settings_controller4.dart';
@@ -18,6 +19,7 @@ import 'package:path_provider/path_provider.dart';
 import '../../../utilities/memory.dart';
 
 class EditProfileController extends GetxController{
+  @override
   void onInit() {
     super.onInit();
     getdata();
@@ -28,6 +30,7 @@ class EditProfileController extends GetxController{
 
   }
   bool test4 = Get.isRegistered<SettingsController>();
+  @override
   void onReady() {
     super.onReady();
     getdata();
@@ -74,19 +77,19 @@ class EditProfileController extends GetxController{
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Select Image Source'),
+          title: const Text('Select Image Source'),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
                 GestureDetector(
-                  child: Text('Gallery'),
+                  child: const Text('Gallery'),
                   onTap: () {
                     Navigator.of(context).pop(ImageSource.gallery);
                   },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 GestureDetector(
-                  child: Text('Camera'),
+                  child: const Text('Camera'),
                   onTap: () {
                     Navigator.of(context).pop(ImageSource.camera);
                   },
@@ -117,11 +120,11 @@ class EditProfileController extends GetxController{
   Future<void> uploadImage(BuildContext context, Uint8List imageBytes) async {
     // Convert the image bytes to a file
     final tempDir = await getTemporaryDirectory();
-    final file = await new File('${tempDir.path}/image.jpg').create();
+    final file = await File('${tempDir.path}/image.jpg').create();
     await file.writeAsBytes(imageBytes);
 
     // Retrieve authorization token
-    String? token = await Get.find<StorageService>().getToken;
+    String? token = Get.find<StorageService>().getToken;
     if (token == null) {
       print('Authorization token is null.');
       return;
@@ -245,6 +248,7 @@ class EditProfileController extends GetxController{
       );
     }
   }
+  @override
   void dispose() {
     usernameController.dispose();
     firtNameController.dispose();

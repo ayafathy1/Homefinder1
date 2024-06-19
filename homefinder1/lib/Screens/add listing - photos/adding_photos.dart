@@ -1,34 +1,40 @@
+// ignore_for_file: avoid_print, library_private_types_in_public_api
+
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+
 class CombinedImagePicker extends StatefulWidget {
+  const CombinedImagePicker({super.key});
+
   @override
   _CombinedImagePickerState createState() => _CombinedImagePickerState();
 }
 
+
 class _CombinedImagePickerState extends State<CombinedImagePicker> {
-  List<Uint8List> _images = [];
+  final List<Uint8List> _images = [];
 
   Future<void> _pickImage() async {
     final ImageSource? source = await showDialog<ImageSource>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Select Image Source'),
+          title: const Text('Select Image Source'),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
                 GestureDetector(
-                  child: Text('Gallery'),
+                  child: const Text('Gallery'),
                   onTap: () {
                     Navigator.of(context).pop(ImageSource.gallery);
                   },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 GestureDetector(
-                  child: Text('Camera'),
+                  child: const Text('Camera'),
                   onTap: () {
                     Navigator.of(context).pop(ImageSource.camera);
                   },
@@ -40,12 +46,13 @@ class _CombinedImagePickerState extends State<CombinedImagePicker> {
       },
     );
 
+
     if (source != null) {
       XFile? pickedFile;
       if (source == ImageSource.camera) {
         pickedFile = await ImagePicker().pickImage(source: ImageSource.camera);
       } else {
-        pickedFile = (await ImagePicker().pickMultiImage())?.first;
+        pickedFile = (await ImagePicker().pickMultiImage()).first;
       }
 
       if (pickedFile != null) {
@@ -61,7 +68,8 @@ class _CombinedImagePickerState extends State<CombinedImagePicker> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Image Picker'),
+        title: const Text('Image Picker'),
+
       ),
       body: Center(
         child: Column(
@@ -69,9 +77,9 @@ class _CombinedImagePickerState extends State<CombinedImagePicker> {
           children: <Widget>[
             ElevatedButton(
               onPressed: _pickImage,
-              child: Text('Pick Image'),
+              child: const Text('Pick Image'),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Expanded(
               child: ListView.builder(
                 itemCount: _images.length,

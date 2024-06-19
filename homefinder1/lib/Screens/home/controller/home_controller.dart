@@ -1,8 +1,8 @@
-import 'package:cool_alert/cool_alert.dart';
+// ignore_for_file: avoid_print, non_constant_identifier_names, use_build_context_synchronously
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/single%20detail/single_detail.dart';
-import 'package:homefinder1/utilities/colors.dart';
 import '../../../models/get_all_reesidences_model.dart';
 import '../../../models/get_one_residence_model.dart'as o;
 import '../../../models/respose_model.dart';
@@ -68,7 +68,7 @@ int itemCount1=0;
         isLoading = false;
       }
     } else {
-      if (counterOfResidences <= (maxNoOfPagesOfResidences ?? 0)) {
+      if (counterOfResidences <= (maxNoOfPagesOfResidences)) {
         try {
           var response = await ResidenceServices.fetchAllResidences(counterOfResidences, context);
           print("API Response Status: ${response?.status}");
@@ -102,9 +102,9 @@ int itemCount1=0;
         } else {
           residence = response.residence ;
 
-        Get.to(()=>SingleDetailScreen(resId));
+        Get.to(()=>SingleDetailScreen(resId:resId));
           // Print or access other properties as needed
-          print("Number of residences: ${residence}");
+          print("Number of residences: $residence");
         }
 
         isLoading = false;
@@ -177,5 +177,6 @@ int itemCount1=0;
     }
   }
 }
+
 
 

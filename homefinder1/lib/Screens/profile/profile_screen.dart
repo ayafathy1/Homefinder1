@@ -1,20 +1,16 @@
-import 'dart:convert';
-import 'dart:io';
-import 'package:cool_alert/cool_alert.dart';
-import 'package:flutter/cupertino.dart';
+
+// ignore_for_file: avoid_print, library_prefixes
+
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/profile/controller/profile_controller.dart';
 import 'package:homefinder1/Widget/custom_bottom_navigation_bar_widget.dart';
 import 'package:homefinder1/utilities/colors.dart';
 import 'package:homefinder1/utilities/constants.dart';
-import 'dart:typed_data';
-import 'package:http/http.dart' as http;
 import 'package:flutter/widgets.dart' as Flutter;
-import 'package:image_picker/image_picker.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:path_provider/path_provider.dart';
-import '../../utilities/memory.dart';
+
 
 
 class ProfileScreen extends StatefulWidget {
@@ -36,7 +32,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         init: ProfileController(context),
         builder: (ProfileController controller) {
           return Scaffold(
-            bottomNavigationBar: CustomBottomNavigationBarWidget(
+            bottomNavigationBar: const CustomBottomNavigationBarWidget(
               selectedOne:
               "lib/assets/images/homeIconButtonNavigationUnselected.png",
               selectedFourth:
@@ -54,7 +50,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Column(
                   children: [
                     Container(
-                      margin: EdgeInsets.only(top: 40),
+
+                      margin: const EdgeInsets.only(top: 40),
                       height: Get.height * 0.17,
                       width: Get.width,
                       child: Center(
@@ -64,6 +61,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Container(
                                 width: 104.67,
                                 height: 106.88,
+
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
                                     image: DecorationImage(
@@ -87,7 +85,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       decoration: BoxDecoration(
                                           color: kPrimaryColor,
                                           borderRadius: BorderRadius.circular(100)),
-                                      child: Center(
+                                      child: const Center(
                                         child: Flutter.Image(
                                           image: AssetImage(
                                               "lib/assets/images/EditProfilePhoto.png"),
@@ -115,15 +113,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             style: TextStyle(
                                 fontWeight: FontWeight.w800,
                                 fontFamily: kRegularFont,
+
                                 fontSize: 13,
-                                color: Color(0xff53587A))),
+                                color: const Color(0xff53587A))),
                       ),
                     ),
                     Container(
                         width: Get.width,
                         height: 100,
-                        padding: EdgeInsets.only(left: 2, top: 5, right: 2),
-                        margin: EdgeInsets.only(left: 15, top: 5),
+
+                        padding: const EdgeInsets.only(left: 2, top: 5, right: 2),
+                        margin: const EdgeInsets.only(left: 15, top: 5),
                         child: Row(
                           children: [
                             Container(
@@ -133,11 +133,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   borderRadius: BorderRadius.circular(18),
                                   border: Border.all(
                                       color: kLightGreyColor, width: 1),
-                                  color: Color(0xfffffbfe),
+                                  color: const Color(0xfffffbfe),
                                   boxShadow: [
                                     BoxShadow(
                                         color: Colors.grey.shade100,
-                                        offset: Offset(0, 0),
+                                        offset: const Offset(0, 0),
                                         blurRadius: 10)
                                   ]),
                               child: Center(
@@ -160,13 +160,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               fontSize: 10,
                                               fontWeight: FontWeight.w600,
                                               fontFamily: kRegularFont,
-                                              color: Color(0xff53587A)),
+                                              color: const Color(0xff53587A)),
                                         ),
+
                                       ),
                                     ],
                                   )),
                             ),
-                            SizedBox(width: 10,),
+                            const SizedBox(width: 10,),
                             Container(
                               width: 120,
                               height: 100,
@@ -174,11 +175,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   borderRadius: BorderRadius.circular(18),
                                   border: Border.all(
                                       color: kLightGreyColor, width: 1),
-                                  color: Color(0xfffffbfe),
+                                  color: const Color(0xfffffbfe),
                                   boxShadow: [
                                     BoxShadow(
                                         color: Colors.grey.shade100,
-                                        offset: Offset(0, 0),
+                                        offset: const Offset(0, 0),
                                         blurRadius: 10)
                                   ]),
                               child: Center(
@@ -201,13 +202,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               fontSize: 10,
                                               fontWeight: FontWeight.w600,
                                               fontFamily: kRegularFont,
-                                              color: Color(0xff53587A)),
+                                              color: const Color(0xff53587A)),
                                         ),
                                       ),
                                     ],
                                   )),
                             ),
-                            SizedBox(width: 10,),
+                            const SizedBox(width: 10,),
                             Container(
                               width: 120,
                               height: 100,
@@ -215,11 +216,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   borderRadius: BorderRadius.circular(18),
                                   border: Border.all(
                                       color: kLightGreyColor, width: 1),
-                                  color: Color(0xfffffbfe),
+                                  color: const Color(0xfffffbfe),
                                   boxShadow: [
                                     BoxShadow(
                                         color: Colors.grey.shade100,
-                                        offset: Offset(0, 0),
+                                        offset: const Offset(0, 0),
                                         blurRadius: 10)
                                   ]),
                               child: Center(
@@ -242,7 +243,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               fontSize: 10,
                                               fontWeight: FontWeight.w600,
                                               fontFamily: kRegularFont,
-                                              color: Color(0xff53587A)),
+                                              color: const Color(0xff53587A)),
                                         ),
                                       ),
                                     ],
@@ -252,17 +253,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         )),
                     Center(
                         child: Container(
-                          margin: EdgeInsets.only(top: 20),
+                          margin: const EdgeInsets.only(top: 20),
                           width: Get.width * 0.93,
                           height: 55,
                           decoration: BoxDecoration(
-                              color: Color(0xffF5F4F8),
+                              color: const Color(0xffF5F4F8),
                               borderRadius: BorderRadius.circular(100)),
                           child: Center(
                             child: ListView.separated(
-                                padding: EdgeInsets.only(
+                                padding: const EdgeInsets.only(
                                     left: 10, right: 10, top: 6, bottom: 6),
-                                physics: NeverScrollableScrollPhysics(),
+                                physics: const NeverScrollableScrollPhysics(),
                                 scrollDirection: Axis.horizontal,
                                 itemBuilder: (context, index) {
                                   return InkWell(
@@ -293,7 +294,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           style: TextStyle(
                                               color: controller.selectedIndex == index
                                                   ? kDarkBlueColor
-                                                  : Color(0xffA1A5C1),
+                                                  : const Color(0xffA1A5C1),
                                               fontFamily: kRegularFont,
                                               fontSize: 11,
                                               fontWeight: FontWeight.w800),
@@ -303,7 +304,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   );
                                 },
                                 separatorBuilder: (context, index) {
-                                  return SizedBox(width: 30);
+                                  return const SizedBox(width: 30);
                                 },
                                 itemCount: controller.pOrLOrS.length),
                           ),
@@ -333,7 +334,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
 
                     Container(
-                      margin: EdgeInsets.only(left: 15, right: 15, top: 5),
+                      margin: const EdgeInsets.only(left: 15, right: 15, top: 5),
                       width: Get.width,
                       height: Get.height * 0.3,
                       child: ListView.separated(
@@ -344,7 +345,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                           },
                           separatorBuilder: (context, index) {
-                            return SizedBox(
+                            return const SizedBox(
                               width: 20,
                             );
                           },

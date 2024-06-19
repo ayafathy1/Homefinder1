@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/models/price_prediction_model.dart';
@@ -28,7 +30,7 @@ class PredictPriceController extends GetxController{
 
 
         // Print or access other properties as needed
-        print("Number of residences: ${predictedPrice}");
+        print("Number of residences: $predictedPrice");
       }
 
       isLoading = false;

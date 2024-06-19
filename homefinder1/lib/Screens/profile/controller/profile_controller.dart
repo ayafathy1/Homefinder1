@@ -1,8 +1,8 @@
+// ignore_for_file: avoid_unnecessary_containers, duplicate_ignore, avoid_print, unnecessary_null_comparison, depend_on_referenced_packages, use_build_context_synchronously
+
 import 'dart:convert';
 import 'package:cool_alert/cool_alert.dart';
-import 'package:flutter/widgets.dart';
 import 'package:homefinder1/Screens/edit_profile/controller/edit_profile_controller.dart';
-import 'package:homefinder1/models/get_sold_for_profile_model.dart'as d;
 import 'package:homefinder1/services/auth_service.dart';
 import 'package:homefinder1/services/residences_services.dart';
 import 'package:http/http.dart' as http;
@@ -13,7 +13,6 @@ import '../../../models/get_user_model.dart';
 import '../../../utilities/colors.dart';
 import '../../../utilities/constants.dart';
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'dart:typed_data';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
@@ -65,24 +64,25 @@ ProfileController(this.context);
   }
   bool test4 = Get.isRegistered<ProfileController>();
 
+
   Future<void> pickImage(BuildContext context) async {
     final ImageSource? source = await showDialog<ImageSource>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Select Image Source'),
+          title: const Text('Select Image Source'),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
                 GestureDetector(
-                  child: Text('Gallery'),
+                  child: const Text('Gallery'),
                   onTap: () {
                     Navigator.of(context).pop(ImageSource.gallery);
                   },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 GestureDetector(
-                  child: Text('Camera'),
+                  child: const Text('Camera'),
                   onTap: () {
                     Navigator.of(context).pop(ImageSource.camera);
                   },
@@ -113,11 +113,11 @@ ProfileController(this.context);
   Future<void> uploadImage(BuildContext context, Uint8List imageBytes) async {
     // Convert the image bytes to a file
     final tempDir = await getTemporaryDirectory();
-    final file = await new File('${tempDir.path}/image.jpg').create();
+    final file = await  File('${tempDir.path}/image.jpg').create();
     await file.writeAsBytes(imageBytes);
 
     // Retrieve authorization token
-    String? token = await Get.find<StorageService>().getToken;
+    String? token =  Get.find<StorageService>().getToken;
     if (token == null) {
       print('Authorization token is null.');
       return;
@@ -188,6 +188,7 @@ ProfileController(this.context);
 
       isLoading = false;
 
+
       update();
 
 
@@ -198,6 +199,7 @@ ProfileController(this.context);
   bool isLoadingMoreDataOfSoldResidences=false;
   int maxNoOfPagesOfSoldResidences=1;
   int soldResidenceCount=0;
+
 
 
   getDataOfSoldResidences() async
@@ -225,7 +227,7 @@ ProfileController(this.context);
         isLoading = false;
       }
     } else {
-      if (counterOfSoldResidences <= (maxNoOfPagesOfSoldResidences ?? 0)) {
+      if (counterOfSoldResidences <= (maxNoOfPagesOfSoldResidences)) {
         try {
           var response = await ResidenceServices.fetchUserSoldData(counterOfSoldResidences, context);
           print("API Response Status: ${response?.status}");
@@ -291,7 +293,7 @@ int pendingResidenceCount=0;
         isLoading = false;
       }
     } else {
-      if (counterOfpendingResidences <= (maxNoOfPagesOfpendingResidences ?? 0)) {
+      if (counterOfpendingResidences <= (maxNoOfPagesOfpendingResidences)) {
         try {
           var response = await AuthServices.fetchUserPendingData(counterOfpendingResidences, context);
           print("API Response Status: ${response?.status}");
@@ -358,7 +360,7 @@ int pendingResidenceCount=0;
         isLoading = false;
       }
     } else {
-      if (counterOfApprovedResidences <= (maxNoOfPagesOfApprovedResidences ?? 0)) {
+      if (counterOfApprovedResidences <= (maxNoOfPagesOfApprovedResidences)) {
         try {
           var response = await ResidenceServices.fetchUserapprovedData(counterOfApprovedResidences, context);
           print("API Response Status: ${response?.status}");
@@ -406,10 +408,10 @@ int pendingResidenceCount=0;
           listViewItem.add(InkWell(
             onTap: () {},
             child: Container(
-              padding: EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 5),
+              padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 5),
               width: 180,
               decoration: BoxDecoration(
-                  color: Color(0xffF5F4F8),
+                  color: const Color(0xffF5F4F8),
                   borderRadius: BorderRadius.circular(25)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -438,7 +440,7 @@ int pendingResidenceCount=0;
                                   update();
                                 },
                                 child: Container(
-                                    margin: EdgeInsets.only(top: 7, right: 7),
+                                    margin: const EdgeInsets.only(top: 7, right: 7),
                                     width: 30,
                                     height: 30,
                                     decoration: BoxDecoration(
@@ -451,7 +453,7 @@ int pendingResidenceCount=0;
                                             : Icons.favorite_border_outlined,
                                         color: selectedIndex1 == index
                                             ? kPrimaryColor
-                                            : Color(0xff234F68),
+                                            : const Color(0xff234F68),
                                         size: 14,
                                       ),
                                     )),
@@ -463,10 +465,10 @@ int pendingResidenceCount=0;
                             children: [
                               Container(
                                 margin:
-                                EdgeInsets.only(bottom: 7, right: 7),
-                                padding: EdgeInsets.all(5),
+                                const EdgeInsets.only(bottom: 7, right: 7),
+                                padding: const EdgeInsets.all(5),
                                 decoration: BoxDecoration(
-                                    color: Color(0xff1F4C6B).withOpacity(0.6),
+                                    color: const Color(0xff1F4C6B).withOpacity(0.6),
                                     borderRadius: BorderRadius.circular(8)),
                                 child: Center(
                                   child: Text(
@@ -503,7 +505,7 @@ int pendingResidenceCount=0;
                     padding: const EdgeInsets.only(left: 5.0),
                     child: Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.access_time_filled_outlined,
                           color: Color(0xff8BC83F),
                           size: 13,
@@ -515,7 +517,7 @@ int pendingResidenceCount=0;
                               Text(
                                 pendingResidences?[index].createdAt ?? "",
                                 style: TextStyle(
-                                    color: Color(0xff53587A),
+                                    color: const Color(0xff53587A),
                                     fontWeight: FontWeight.w500,
                                     fontSize: 8,
                                     fontFamily: kRegularFont),
@@ -535,7 +537,7 @@ int pendingResidenceCount=0;
     } else if (counter == 0) {
       listViewItem = [];
       for (var index = 0; index < 3; index++) {
-        listViewItem.add(SizedBox());
+        listViewItem.add(const SizedBox());
       }
     } else if (counter1 > 0 && selectedIndex == 1) {
       listViewItem = [];
@@ -544,10 +546,10 @@ int pendingResidenceCount=0;
           listViewItem.add(InkWell(
             onTap: () {},
             child: Container(
-              padding: EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 5),
+              padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 5),
               width: 180,
               decoration: BoxDecoration(
-                  color: Color(0xffF5F4F8),
+                  color: const Color(0xffF5F4F8),
                   borderRadius: BorderRadius.circular(25)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -573,13 +575,13 @@ int pendingResidenceCount=0;
                               InkWell(
                                 onTap: () {},
                                 child: Container(
-                                    margin: EdgeInsets.only(top: 7, left: 7),
+                                    margin: const EdgeInsets.only(top: 7, left: 7),
                                     width: 30,
                                     height: 30,
                                     decoration: BoxDecoration(
                                         color: kPrimaryColor,
                                         borderRadius: BorderRadius.circular(50)),
-                                    child: Center(
+                                    child: const Center(
                                       child: Icon(
                                         Icons.edit,
                                         color: Colors.white,
@@ -593,7 +595,7 @@ int pendingResidenceCount=0;
                                   update();
                                 },
                                 child: Container(
-                                    margin: EdgeInsets.only(top: 7, right: 7),
+                                    margin: const EdgeInsets.only(top: 7, right: 7),
                                     width: 30,
                                     height: 30,
                                     decoration: BoxDecoration(
@@ -606,7 +608,7 @@ int pendingResidenceCount=0;
                                             : Icons.favorite_border_outlined,
                                         color: selectedIndex1 == index
                                             ? kPrimaryColor
-                                            : Color(0xff234F68),
+                                            : const Color(0xff234F68),
                                         size: 14,
                                       ),
                                     )),
@@ -618,10 +620,10 @@ int pendingResidenceCount=0;
                             children: [
                               Container(
                                 margin:
-                                EdgeInsets.only(bottom: 7, right: 7),
-                                padding: EdgeInsets.all(5),
+                                const EdgeInsets.only(bottom: 7, right: 7),
+                                padding: const EdgeInsets.all(5),
                                 decoration: BoxDecoration(
-                                    color: Color(0xff1F4C6B).withOpacity(0.6),
+                                    color: const Color(0xff1F4C6B).withOpacity(0.6),
                                     borderRadius: BorderRadius.circular(8)),
                                 child: Center(
                                   child: Text(
@@ -662,7 +664,7 @@ int pendingResidenceCount=0;
                           children: [
                             Icon(
                               Icons.star,
-                              color: Color(0xff234F68).withOpacity(0.9),
+                              color: const Color(0xff234F68).withOpacity(0.9),
                               size: 13,
                             ),
                             Text(
@@ -671,7 +673,7 @@ int pendingResidenceCount=0;
                                   fontFamily: kRegularFont,
                                   fontSize: 8,
                                   fontWeight: FontWeight.w900,
-                                  color: Color(0xff53587A)),
+                                  color: const Color(0xff53587A)),
                             ),
                           ],
                         ),
@@ -679,7 +681,7 @@ int pendingResidenceCount=0;
                           padding: const EdgeInsets.only(left: 3.0),
                           child: Row(
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.location_on_sharp,
                                 color: Color(0xff1F4C6B),
                                 size: 13,
@@ -687,7 +689,7 @@ int pendingResidenceCount=0;
                               Text(
                                 approvedResidences?[index].location?.type ?? "",
                                 style: TextStyle(
-                                    color: Color(0xff53587A),
+                                    color: const Color(0xff53587A),
                                     fontWeight: FontWeight.w500,
                                     fontSize: 8,
                                     fontFamily: kRegularFont),
@@ -707,7 +709,7 @@ int pendingResidenceCount=0;
     } else if (counter1 == 0) {
       listViewItem = [];
       for (var index = 0; index < 3; index++) {
-        listViewItem.add(SizedBox());
+        listViewItem.add(const SizedBox());
       }
     } else if (counter2 > 0 && selectedIndex == 2) {
       listViewItem = [];
@@ -716,10 +718,10 @@ int pendingResidenceCount=0;
           listViewItem.add(InkWell(
             onTap: () {},
             child: Container(
-              padding: EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 5),
+              padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 5),
               width: 180,
               decoration: BoxDecoration(
-                  color: Color(0xffF5F4F8),
+                  color: const Color(0xffF5F4F8),
                   borderRadius: BorderRadius.circular(25)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -748,7 +750,7 @@ int pendingResidenceCount=0;
                                   update();
                                 },
                                 child: Container(
-                                    margin: EdgeInsets.only(top: 7, right: 7),
+                                    margin: const EdgeInsets.only(top: 7, right: 7),
                                     width: 30,
                                     height: 30,
                                     decoration: BoxDecoration(
@@ -761,7 +763,7 @@ int pendingResidenceCount=0;
                                             : Icons.favorite_border_outlined,
                                         color: selectedIndex1 == index
                                             ? kPrimaryColor
-                                            : Color(0xff234F68),
+                                            : const Color(0xff234F68),
                                         size: 14,
                                       ),
                                     )),
@@ -773,10 +775,10 @@ int pendingResidenceCount=0;
                             children: [
                               Container(
                                 margin:
-                                EdgeInsets.only(bottom: 7, right: 7),
-                                padding: EdgeInsets.all(5),
+                                const EdgeInsets.only(bottom: 7, right: 7),
+                                padding: const EdgeInsets.all(5),
                                 decoration: BoxDecoration(
-                                    color: Color(0xff1F4C6B).withOpacity(0.6),
+                                    color: const Color(0xff1F4C6B).withOpacity(0.6),
                                     borderRadius: BorderRadius.circular(8)),
                                 child: Center(
                                   child: Text(
@@ -813,7 +815,7 @@ int pendingResidenceCount=0;
                     padding: const EdgeInsets.only(left: 5.0),
                     child: Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.access_time_filled_outlined,
                           color: Color(0xff8BC83F),
                           size: 13,
@@ -825,7 +827,7 @@ int pendingResidenceCount=0;
                               Text(
                                 soldResidences?[index].createdAt ?? "",
                                 style: TextStyle(
-                                    color: Color(0xff53587A),
+                                    color: const Color(0xff53587A),
                                     fontWeight: FontWeight.w500,
                                     fontSize: 8,
                                     fontFamily: kRegularFont),
@@ -845,7 +847,7 @@ int pendingResidenceCount=0;
     } else if (counter2 == 0) {
       listViewItem = [];
       for (var index = 0; index < 3; index++) {
-        listViewItem.add(SizedBox());
+        listViewItem.add(const SizedBox());
       }
     }
 

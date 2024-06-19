@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Widget/custom_arrow_back.dart';
@@ -14,7 +13,7 @@ class AddListingLocation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(body: Column(children: [
       SizedBox(height: Get.height*0.05,),
-    Row(children: [CustomArrowBack(),SizedBox(width: Get.width*0.1,),
+    Row(children: [const CustomArrowBack(),SizedBox(width: Get.width*0.1,),
     Text("Add Listing",style: TextStyle(color: kDarkBlueColor,fontFamily: kRegularFont,
     fontWeight: FontWeight.w800,fontSize: 20),)],),
     SizedBox(height: Get.height*0.09,),
@@ -32,15 +31,15 @@ class AddListingLocation extends StatelessWidget {
     SizedBox(height:Get.height*0.05
     ),
     Container(width: Get.width*0.9,height: Get.height*0.44,
-      decoration: BoxDecoration(border: Border.all(color: Colors.transparent,width: 1),borderRadius: BorderRadius.circular(20),image: DecorationImage(image:
+      decoration: BoxDecoration(border: Border.all(color: Colors.transparent,width: 1),borderRadius: BorderRadius.circular(20),image: const DecorationImage(image:
       AssetImage("lib/assets/images/SmallMap.png",),
           fit: BoxFit.fill)),child: Column(mainAxisAlignment: MainAxisAlignment.end,children: [
-         InkWell(onTap:(){Get.to(()=>LocationMap());},
-           child: Container(height: 60,width: Get.width*0.9,child: Center(child: Text("Select on the map",
-           style: TextStyle(color: Colors.black,fontSize: 12,fontFamily: kRegularFont,fontWeight: FontWeight.w500,
-           ),),),
+         InkWell(onTap:(){Get.to(()=>const LocationMap());},
+           child: Container(height: 60,width: Get.width*0.9,
              decoration: BoxDecoration(color: kLightGreyColor,border: Border.all(width: 1,color: kLightGreyColor),
-             borderRadius: BorderRadius.only(bottomLeft:Radius.circular(20),bottomRight: Radius.circular(20) )),),
+             borderRadius: const BorderRadius.only(bottomLeft:Radius.circular(20),bottomRight: Radius.circular(20) )),child: Center(child: Text("Select on the map",
+           style: TextStyle(color: Colors.black,fontSize: 12,fontFamily: kRegularFont,fontWeight: FontWeight.w500,
+           ),),),),
          )
       ],),)],),);
   }

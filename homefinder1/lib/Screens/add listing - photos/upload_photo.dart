@@ -1,9 +1,13 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CombinedImagePicker1 extends StatefulWidget {
+  const CombinedImagePicker1({super.key});
+
   @override
   _CombinedImagePickerState1 createState() => _CombinedImagePickerState1();
 }
@@ -16,19 +20,19 @@ class _CombinedImagePickerState1 extends State<CombinedImagePicker1> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Select Image Source'),
+          title: const Text('Select Image Source'),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
                 GestureDetector(
-                  child: Text('Gallery'),
+                  child: const Text('Gallery'),
                   onTap: () {
                     Navigator.of(context).pop(ImageSource.gallery);
                   },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 GestureDetector(
-                  child: Text('Camera'),
+                  child: const Text('Camera'),
                   onTap: () {
                     Navigator.of(context).pop(ImageSource.camera);
                   },
@@ -57,7 +61,7 @@ class _CombinedImagePickerState1 extends State<CombinedImagePicker1> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Image Picker'),
+        title: const Text('Image Picker'),
       ),
       body: Center(
         child: Column(
@@ -65,9 +69,9 @@ class _CombinedImagePickerState1 extends State<CombinedImagePicker1> {
           children: <Widget>[
             ElevatedButton(
               onPressed: _pickImage,
-              child: Text('Pick Image'),
+              child: const Text('Pick Image'),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             _imageBytes != null
                 ? Image.memory(
               _imageBytes!,

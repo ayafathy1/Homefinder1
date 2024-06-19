@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Widget/custom_arrow_back.dart';
@@ -18,6 +19,7 @@ class FavoriteScreen extends StatefulWidget {
 class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
+
     return GetBuilder<FavoriteController>(
         init: FavoriteController(context),
         builder: (FavoriteController controller) {
@@ -49,7 +51,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.delete,
                               size: 23,
                               color: Colors.white,
@@ -63,13 +65,15 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                           ],
                         ),
                       ),
+
                     ),
                   ),
+
                 )
               ],
               toolbarHeight: Get.height * 0.09,
-              leading: Padding(
-                padding: const EdgeInsets.only(top: 8.0),
+              leading: const Padding(
+                padding: EdgeInsets.only(top: 8.0),
                 child: CustomArrowBack(),
               ),
               leadingWidth: 80,
@@ -95,18 +99,18 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                     ),
                   )
                 :controller.favsCount!=0?SingleChildScrollView(
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     controller: controller.scroll,
                     child: Column(
                       children: [
                         Container(
-                          margin: EdgeInsets.only(top: 15),
+                          margin: const EdgeInsets.only(top: 15),
                           width: Get.width,
                           height: Get.height,
                           child: ListView.builder(
                               controller: controller.scroll,
                               itemCount: controller.favs?.length ?? 0,
-                              physics: BouncingScrollPhysics(),
+                              physics: const BouncingScrollPhysics(),
                               scrollDirection: Axis.vertical,
                               itemBuilder: (context, index) {
                                 return Column(
@@ -120,7 +124,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                               BorderRadius.circular(15),
                                           border:
                                               Border.all(color: Colors.white),
-                                          boxShadow: [
+                                          boxShadow: const [
                                             BoxShadow(
                                                 color: Colors.grey,
                                                 offset: Offset(0, 0),
@@ -130,7 +134,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         children: [
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 5,
                                           ),
                                           Container(
@@ -153,11 +157,11 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 3,
                                               ),
                                               Container(
-                                                margin: EdgeInsets.only(top: 8,right: 5),
+                                                margin: const EdgeInsets.only(top: 8,right: 5),
                                                 width: Get.width*0.65,
                                                 child: Row(
                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -165,7 +169,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
 
                                                     Row(
                                                       children: [
-                                                        Icon(
+                                                        const Icon(
                                                           Icons.star,
                                                           color: Color(0xffEEA651),
                                                         ),
@@ -187,10 +191,10 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                                       width: 90,
                                                       decoration: BoxDecoration(
                                                           color:
-                                                              Color(0xffF4F6F9),
+                                                              const Color(0xffF4F6F9),
                                                           border: Border.all(
                                                             color:
-                                                                Color(0xffF4F6F9),
+                                                                const Color(0xffF4F6F9),
                                                           ),
                                                           borderRadius:
                                                               BorderRadius
@@ -216,7 +220,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                               ),
                                               Row(
                                                 children: [
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 5,
                                                   ),
                                                   Text(
@@ -235,10 +239,10 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                               ),
                                               Row(
                                                 children: [
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 5,
                                                   ),
-                                                  Icon(
+                                                  const Icon(
                                                     Icons.location_on,
                                                     color: Color(0xff415770),
                                                     size: 17,
@@ -251,7 +255,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                                       "${controller.favs?[index].location}",
                                                       style: TextStyle(
                                                           color:
-                                                              Color(0xff415770),
+                                                              const Color(0xff415770),
                                                           fontSize: 12,
                                                           fontFamily:
                                                               kRegularFont,
@@ -263,7 +267,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                               ),
                                               Container(
                                                 width: Get.width*0.65,
-                                                margin: EdgeInsets.only(left: 5),
+                                                margin: const EdgeInsets.only(left: 5),
                                                 child: Row(
                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                   children: [
@@ -298,7 +302,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 10,
                                     )
                                   ],
@@ -311,8 +315,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
             Column(
               children: [
                 Container(
-                  margin: EdgeInsets.only(top: 25,left: 15),
-                  padding: EdgeInsets.only(top: 15,left: 5),
+                  margin: const EdgeInsets.only(top: 25,left: 15),
+                  padding: const EdgeInsets.only(top: 15,left: 5),
                   child: Row(
 
 
@@ -333,14 +337,14 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                   ),
                 ),
                 Center(child: Container(
-                  margin: EdgeInsets.only(top: 35),
+                  margin: const EdgeInsets.only(top: 35),
                   height: Get.height*0.3,
                   child: Center(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(height: 151,width: 163,child: Image(image: AssetImage("lib/assets/images/SuccessIllustration.png"),fit: BoxFit.fill,height: 151,width: 163,)),
+                        Container(height: 151,width: 163,child: const Image(image: AssetImage("lib/assets/images/SuccessIllustration.png"),fit: BoxFit.fill,height: 151,width: 163,)),
 
                       ],
                     ),
@@ -361,7 +365,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 25.0),
                   child: Text("Click add button above to start exploring and",style: TextStyle(
-                    color: Color(0xff53587A),
+                    color: const Color(0xff53587A),
                     fontSize: 12,
                     fontFamily: kRegularFont,
                     fontWeight: FontWeight.w500,
@@ -369,7 +373,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                 ),
                 Center(
                   child: Text("choose your favorite estates.",style: TextStyle(
-                    color: Color(0xff53587A),
+                    color: const Color(0xff53587A),
                     fontSize: 12,
                     fontFamily: kRegularFont,
                     fontWeight: FontWeight.w500,

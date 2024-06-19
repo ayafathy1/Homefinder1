@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, use_build_context_synchronously
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,9 +12,10 @@ import '../../../services/residences_services.dart';
 import '../../home/controller/home_controller.dart';
 
 class FavoriteController extends GetxController{
+
   BuildContext? context;
   FavoriteController(this.context);
-  ScrollController scroll= new ScrollController();
+  ScrollController scroll=  ScrollController();
   List<String> types=["All","House","Villa","appartment",];
   int selectedIndex=0;
   void favCategory(int index){
@@ -22,6 +25,7 @@ class FavoriteController extends GetxController{
   List<Wishlist>?favs;
   int? favsCount;
   bool isLoading=true;
+  @override
   void onInit()async{
     super.onInit();
     await getDataOfFavResidences(context!);

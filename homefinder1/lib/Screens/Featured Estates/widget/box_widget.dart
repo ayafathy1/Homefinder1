@@ -1,6 +1,9 @@
+// ignore_for_file: non_constant_identifier_names, prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class Box extends StatelessWidget{
 
   Box( {super.key, Key?Key , this.favCol,this.onPressed,this.onTap,this.gridView , required this.index, this.image,  this.title,  this.price,  this.location});
@@ -15,6 +18,7 @@ class Box extends StatelessWidget{
   Color? favCol;
   @override
   Widget build(BuildContext context){
+
     return  InkWell(
       onTap: onTap??(){},
       child: Container(
@@ -33,7 +37,7 @@ class Box extends StatelessWidget{
                 width: double.infinity,
               ),
 
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(16) , topRight: Radius.circular(16)),
+              borderRadius: const BorderRadius.only(topLeft: Radius.circular(16) , topRight: Radius.circular(16)),
             ),
 
               Center(
@@ -41,7 +45,7 @@ class Box extends StatelessWidget{
                   child: Container(
                     height:106,
                     width: 180,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: Colors.white
                     ),
 
@@ -50,19 +54,19 @@ class Box extends StatelessWidget{
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(title??"", style: TextStyle(fontWeight: FontWeight.w500 ,fontSize: 20),),
+                            Text(title??"", style: const TextStyle(fontWeight: FontWeight.w500 ,fontSize: 20),),
 
-                            Text(price??"" , style: TextStyle( fontSize: 12,color: Color(0xff6C63FF)),),
+                            Text(price??"" , style: const TextStyle( fontSize: 12,color: Color(0xff6C63FF)),),
 
-                            Container(
+                            SizedBox(
                               width: Get.width,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
-                                      Icon(Icons.location_on , color: Color(0xffB9B9B9)),
-                                      Container(width:Get.width*0.245,child: Text(location ??"",overflow: TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.w300 ,fontSize: 12, color: Color(0xffB9B9B9)),)),
+                                      const Icon(Icons.location_on , color: Color(0xffB9B9B9)),
+                                      SizedBox(width:Get.width*0.245,child: Text(location ??"",overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.w300 ,fontSize: 12, color: Color(0xffB9B9B9)),)),
                                     ],
                                   ),
 
@@ -72,7 +76,7 @@ class Box extends StatelessWidget{
                                     child: InkWell(
                                       onTap: (){},
                                       child: Container(
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: Colors.transparent,
                                         ),
                                         child: IconButton(onPressed:onPressed ,icon: Icon(Icons.favorite_rounded , color: favCol,)),
@@ -85,8 +89,9 @@ class Box extends StatelessWidget{
                       ),
                     ),
                   ),
-                  borderRadius: BorderRadius.only( topRight: Radius.circular(16) ,topLeft: Radius.circular(16) ,bottomRight: Radius.circular(16) ,bottomLeft: Radius.circular(16)),
+                  borderRadius: const BorderRadius.only( topRight: Radius.circular(16) ,topLeft: Radius.circular(16) ,bottomRight: Radius.circular(16) ,bottomLeft: Radius.circular(16)),
                 ),
+
               )  ,
           ] ,
 

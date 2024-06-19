@@ -1,8 +1,8 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:homefinder1/Screens/add_listing_1st_detail/add_listing_1st_detail_screen.dart';
 import 'package:homefinder1/Screens/add_listing_3rd_detail/controller/add_listing_3rd_detail_controller.dart';
-import 'package:homefinder1/Screens/add_listing_fourth_details/add_listing_fourth_details_screen.dart';
 import 'package:homefinder1/Widget/custom_arrow_back.dart';
 import 'package:homefinder1/Widget/custom_elevated_button_widget.dart';
 import 'package:homefinder1/utilities/constants.dart';
@@ -33,7 +33,7 @@ class _AddListingThirdDetailsScreenState
             appBar: AppBar(
               toolbarHeight: Get.height * 0.1,
               leadingWidth: Get.width * 0.25,
-              leading: CustomArrowBack(),
+              leading: const CustomArrowBack(),
               title: Text(
                 "Add Listing",
                 style: TextStyle(
@@ -114,13 +114,13 @@ class _AddListingThirdDetailsScreenState
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 12, top: 15, bottom: 10),
+                    margin: const EdgeInsets.only(left: 12, top: 15, bottom: 10),
                     width: Get.width,
                     height: Get.height * 0.065,
                     child: ListView.separated(
                         controller: controller.scroll,
                         scrollDirection: Axis.horizontal,
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
                           return InkWell(
                               onTap: () {
@@ -133,7 +133,7 @@ class _AddListingThirdDetailsScreenState
                                   color: controller.selectedGarageTypeIndex ==
                                       index
                                       ? kPrimaryColor
-                                      : Color(0xffF5F4F8),
+                                      : const Color(0xffF5F4F8),
                                   borderRadius: BorderRadius.circular(25),
                                 ),
                                 child: Padding(
@@ -188,7 +188,7 @@ class _AddListingThirdDetailsScreenState
                     child: ListView.separated(
                         controller: controller.scroll,
                         scrollDirection: Axis.horizontal,
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
                           return InkWell(
                               onTap: () {
@@ -414,7 +414,7 @@ class _AddListingThirdDetailsScreenState
                   Form(
                     key: controller.formkey,
                     child: Container(
-                      margin: EdgeInsets.only(left: 20, right: 20),
+                      margin: const EdgeInsets.only(left: 20, right: 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -433,7 +433,7 @@ class _AddListingThirdDetailsScreenState
                             controller: controller.basementAreaController,
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
-                              fillColor: Color(0xffF5F4F8),
+                              fillColor: const Color(0xffF5F4F8),
                               filled: true,
                               hintText: "10",
                               hintStyle: TextStyle(
@@ -576,7 +576,7 @@ class _AddListingThirdDetailsScreenState
                                   color: controller.selectedRatingOfBasement ==
                                       index
                                       ? kPrimaryColor
-                                      : Color(0xffF5F4F8),
+                                      : const Color(0xffF5F4F8),
                                   borderRadius: BorderRadius.circular(25),
                                 ),
                                 child: Padding(
@@ -631,7 +631,7 @@ class _AddListingThirdDetailsScreenState
                     child: ListView.separated(
                         controller: controller.scroll,
                         scrollDirection: Axis.horizontal,
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
                           return InkWell(
                               onTap: () {
@@ -757,7 +757,7 @@ class _AddListingThirdDetailsScreenState
                         "Yes",
                         style: TextStyle(fontSize: 18, color: kGreyColor),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 40,
                       ),
                       Text("No",
@@ -765,7 +765,7 @@ class _AddListingThirdDetailsScreenState
                     ],
                   ),
                   Row(children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 25,
                     ),
                     Text(
@@ -776,7 +776,7 @@ class _AddListingThirdDetailsScreenState
                           fontSize: 18,
                           fontWeight: FontWeight.w900),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 50,
                     ),
                     Radio(
@@ -787,7 +787,7 @@ class _AddListingThirdDetailsScreenState
                             groupValue2 = value!;
                           });
                         }),
-                    SizedBox(
+                    const SizedBox(
                       width: 20,
                     ),
                     Radio(
@@ -803,9 +803,9 @@ class _AddListingThirdDetailsScreenState
                     child: Container(
                       height: Get.height * 0.11,
                       width: Get.width * 0.87,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(30)),
-                        color: Color(0xffF4F4F4),
+                        color:  Color(0xffF4F4F4),
                       ),
                       child: Row(
                         children: [
@@ -817,33 +817,33 @@ class _AddListingThirdDetailsScreenState
                                 fontWeight: FontWeight.w800,
                                 fontSize: 15),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 80,
                           ),
                           InkWell(
                             onTap: () {
                               controller.decrementCounter2();
                             },
-                            child: Image(
+                            child: const Image(
                               image: AssetImage(
                                   'lib/assets/images/Delete - Icon.png'),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 15,
                           ),
                           Text(
                             '${controller.counter2}',
-                            style: TextStyle(fontSize: 20),
+                            style: const TextStyle(fontSize: 20),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 15,
                           ),
                           InkWell(
                               onTap: () {
                                 controller.incrementCounter2();
                               },
-                              child: Image(
+                              child: const Image(
                                   image: AssetImage(
                                       'lib/assets/images/Add - Icon.png')))
                         ],
@@ -866,13 +866,13 @@ class _AddListingThirdDetailsScreenState
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 12, top: 15, bottom: 10),
+                    margin: const EdgeInsets.only(left: 12, top: 15, bottom: 10),
                     width: Get.width,
                     height: Get.height * 0.065,
                     child: ListView.separated(
                         controller: controller.scroll,
                         scrollDirection: Axis.horizontal,
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
                           return InkWell(
                               onTap: () {
@@ -887,7 +887,7 @@ class _AddListingThirdDetailsScreenState
                                       .selectedFirePlaceQualityIndex ==
                                       index
                                       ? kPrimaryColor
-                                      : Color(0xffF5F4F8),
+                                      : const Color(0xffF5F4F8),
                                   borderRadius: BorderRadius.circular(25),
                                 ),
                                 child: Padding(
@@ -927,7 +927,7 @@ class _AddListingThirdDetailsScreenState
                     child: Container(
                       height: Get.height * 0.11,
                       width: Get.width * 0.87,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(30)),
                         color: Color(0xffF4F4F4),
                       ),
@@ -948,26 +948,26 @@ class _AddListingThirdDetailsScreenState
                             onTap: () {
                               controller.decrementCounterBedroom();
                             },
-                            child: Image(
+                            child: const Image(
                               image: AssetImage(
                                   'lib/assets/images/Delete - Icon.png'),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 15,
                           ),
                           Text(
                             '${controller.counterBedroom}',
-                            style: TextStyle(fontSize: 20),
+                            style: const TextStyle(fontSize: 20),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 15,
                           ),
                           InkWell(
                               onTap: () {
                                 controller.incrementCounterBedroom();
                               },
-                              child: Image(
+                              child: const Image(
                                   image: AssetImage(
                                       'lib/assets/images/Add - Icon.png')))
                         ],
@@ -981,7 +981,7 @@ class _AddListingThirdDetailsScreenState
                     child: Container(
                       height: Get.height * 0.11,
                       width: Get.width * 0.87,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(30)),
                         color: Color(0xffF4F4F4),
                       ),
@@ -1002,26 +1002,26 @@ class _AddListingThirdDetailsScreenState
                             onTap: () {
                               controller.decrementCounterBathroom();
                             },
-                            child: Image(
+                            child: const Image(
                               image: AssetImage(
                                   'lib/assets/images/Delete - Icon.png'),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 15,
                           ),
                           Text(
                             '${controller.counterBathroom}',
-                            style: TextStyle(fontSize: 20),
+                            style: const TextStyle(fontSize: 20),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 15,
                           ),
                           InkWell(
                               onTap: () {
                                 controller.incrementCounterBathr0om();
                               },
-                              child: Image(
+                              child: const Image(
                                   image: AssetImage(
                                       'lib/assets/images/Add - Icon.png')))
                         ],
@@ -1035,7 +1035,7 @@ class _AddListingThirdDetailsScreenState
                     child: Container(
                       height: Get.height * 0.11,
                       width: Get.width * 0.87,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(30)),
                         color: Color(0xffF4F4F4),
                       ),
@@ -1056,26 +1056,26 @@ class _AddListingThirdDetailsScreenState
                             onTap: () {
                               controller.decrementCounterKitchen();
                             },
-                            child: Image(
+                            child: const Image(
                               image: AssetImage(
                                   'lib/assets/images/Delete - Icon.png'),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 15,
                           ),
                           Text(
                             '${controller.counterKitchen}',
-                            style: TextStyle(fontSize: 20),
+                            style: const TextStyle(fontSize: 20),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 15,
                           ),
                           InkWell(
                               onTap: () {
                                 controller.incrementCounterKitchen();
                               },
-                              child: Image(
+                              child: const Image(
                                   image: AssetImage(
                                       'lib/assets/images/Add - Icon.png')))
                         ],
@@ -1098,13 +1098,13 @@ class _AddListingThirdDetailsScreenState
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 12, top: 15, bottom: 10),
+                    margin: const EdgeInsets.only(left: 12, top: 15, bottom: 10),
                     width: Get.width,
                     height: Get.height * 0.065,
                     child: ListView.separated(
                         controller: controller.scroll,
                         scrollDirection: Axis.horizontal,
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
                           return InkWell(
                               onTap: () {
@@ -1118,7 +1118,7 @@ class _AddListingThirdDetailsScreenState
                                   controller.selectedKitchenQualityIndex ==
                                       index
                                       ? kPrimaryColor
-                                      : Color(0xffF5F4F8),
+                                      : const Color(0xffF5F4F8),
                                   borderRadius: BorderRadius.circular(25),
                                 ),
                                 child: Padding(
@@ -1158,7 +1158,7 @@ class _AddListingThirdDetailsScreenState
                     child: Container(
                       height: Get.height * 0.11,
                       width: Get.width * 0.98,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(30)),
                         color: Color(0xffF4F4F4),
                       ),
@@ -1179,26 +1179,26 @@ class _AddListingThirdDetailsScreenState
                             onTap: () {
                               controller.decrementCounterRoomsWithoutBathroom();
                             },
-                            child: Image(
+                            child: const Image(
                               image: AssetImage(
                                   'lib/assets/images/Delete - Icon.png'),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 15,
                           ),
                           Text(
                             '${controller.counterRoomWithoutBathroom}',
-                            style: TextStyle(fontSize: 20),
+                            style: const TextStyle(fontSize: 20),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 15,
                           ),
                           InkWell(
                               onTap: () {
                                 controller.incrementCounterRoomsWithoutBathroom();
                               },
-                              child: Image(
+                              child: const Image(
                                   image: AssetImage(
                                       'lib/assets/images/Add - Icon.png')))
                         ],

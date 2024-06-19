@@ -1,14 +1,12 @@
+// ignore_for_file: avoid_print, duplicate_ignore, use_build_context_synchronously
+
 import 'package:cool_alert/cool_alert.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-import 'package:homefinder1/Screens/verification_code/verfication_code_screen.dart';
 import 'package:homefinder1/Screens/verifiction_code_forget_password/verification_code_forget_password.dart';
-
 import '../../../models/forget_password_model.dart';
 import '../../../services/auth_service.dart';
-import '../../auth/SignIn/signin.dart';
 
 class ForgotPasswordController extends GetxController{
 
@@ -28,6 +26,7 @@ class ForgotPasswordController extends GetxController{
     else {
       return "   Enter Correct Email";
     }
+    return null;
   }
 
 
@@ -39,13 +38,16 @@ class ForgotPasswordController extends GetxController{
     } else {
       return "   Enter Correct password";
     }
+    return null;
   }
 
   saveAndValidate() {
     var formdata = formkey.currentState;
     if (formdata!.validate()) {
       formdata.save();
-      print("valid");
+      // ignore: avoid_print
+      print("valide");
+
     }
     else {
       print("not valid");
