@@ -7,7 +7,7 @@ import 'package:homefinder1/models/second_complete_model.dart';
 import '../../../services/residences_services.dart';
 
 class AddListingSecondDetailController extends GetxController{
-  final String residanceId;
+   String residanceId;
   AddListingSecondDetailController(this.residanceId);
   ScrollController scroll= ScrollController();
   final List <String> roofStyle=[
@@ -195,8 +195,9 @@ class AddListingSecondDetailController extends GetxController{
   ];
   String? selectedValue4;
   String condition2Selected="normal";
+
   Future<void> secondComplete(
-      BuildContext context,
+      BuildContext context
       ) async {
     try {
   SecondCompleteModel? data = await ResidenceServices.secondComplete(
@@ -225,10 +226,11 @@ class AddListingSecondDetailController extends GetxController{
       );
       if (data?.status == "success") {
         Get.to(() =>AddListingThirdDetailsScreen(residanceId: residanceId,));
+        print(data);
       }
     } catch (e) {
       String errorMessage = " $e";
-      String part = errorMessage.substring(26, 35);
+      String part = errorMessage.substring(0, errorMessage.length);
       CoolAlert.show(
         context: context,
         type: CoolAlertType.error,

@@ -1,52 +1,41 @@
 // To parse this JSON data, do
 //
-//     final getOneResidencesModel = getOneResidencesModelFromJson(jsonString);
+//     final pricePeridectionModel = pricePeridectionModelFromJson(jsonString);
 
 import 'dart:convert';
 
-GetOneResidencesModel getOneResidencesModelFromJson(String str) => GetOneResidencesModel.fromJson(json.decode(str));
+PricePeridectionModel pricePeridectionModelFromJson(String str) => PricePeridectionModel.fromJson(json.decode(str));
 
-String getOneResidencesModelToJson(GetOneResidencesModel data) => json.encode(data.toJson());
+String pricePeridectionModelToJson(PricePeridectionModel data) => json.encode(data.toJson());
 
-class GetOneResidencesModel {
+class PricePeridectionModel {
   String? status;
+  int? predictedPrice;
   Residence? residence;
 
-  GetOneResidencesModel({
+  PricePeridectionModel({
     this.status,
+    this.predictedPrice,
     this.residence,
   });
 
-  factory GetOneResidencesModel.fromJson(Map<String, dynamic> json) => GetOneResidencesModel(
+  factory PricePeridectionModel.fromJson(Map<String, dynamic> json) => PricePeridectionModel(
     status: json["status"],
+    predictedPrice: json["predictedPrice"],
     residence: json["residence"] == null ? null : Residence.fromJson(json["residence"]),
   );
 
   Map<String, dynamic> toJson() => {
     "status": status,
+    "predictedPrice": predictedPrice,
     "residence": residence?.toJson(),
   };
 }
 
 class Residence {
-  bool? isLiked;
-  Location? location;
   String? residenceId;
   int? id;
-  String? title;
-  String? category;
-  String? status;
-  String? type;
-  bool? isSold;
-  String? paymentPeriod;
-  bool? isCompleted;
-  bool? hasGarage;
-  bool? hasFireplace;
-  bool? hasBasement;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  List<ImageElement>? images;
-  String? msSubClass;
+  int? msSubClass;
   String? mszoning;
   int? lotFrontage;
   int? lotArea;
@@ -83,8 +72,10 @@ class Residence {
   String? electrical;
   int? lowQualFinSf;
   int? bedroomAbvGr;
+  int? kitchenAbvGr;
   String? kitchenQual;
   int? totRmsAbvGrd;
+  String? functional;
   int? fireplaces;
   String? fireplaceQu;
   String? garageType;
@@ -105,28 +96,10 @@ class Residence {
   int? totalbaths;
   int? totalporchsf;
   String? alley;
-  int? avgRating;
-  List<dynamic>? likedUsers;
-  List<Review>? reviews;
 
   Residence({
-    this.isLiked,
-    this.location,
     this.residenceId,
     this.id,
-    this.title,
-    this.category,
-    this.status,
-    this.type,
-    this.isSold,
-    this.paymentPeriod,
-    this.isCompleted,
-    this.hasGarage,
-    this.hasFireplace,
-    this.hasBasement,
-    this.createdAt,
-    this.updatedAt,
-    this.images,
     this.msSubClass,
     this.mszoning,
     this.lotFrontage,
@@ -164,8 +137,10 @@ class Residence {
     this.electrical,
     this.lowQualFinSf,
     this.bedroomAbvGr,
+    this.kitchenAbvGr,
     this.kitchenQual,
     this.totRmsAbvGrd,
+    this.functional,
     this.fireplaces,
     this.fireplaceQu,
     this.garageType,
@@ -186,29 +161,11 @@ class Residence {
     this.totalbaths,
     this.totalporchsf,
     this.alley,
-    this.avgRating,
-    this.likedUsers,
-    this.reviews,
   });
 
   factory Residence.fromJson(Map<String, dynamic> json) => Residence(
-    isLiked: json["isLiked"],
-    location: json["location"] == null ? null : Location.fromJson(json["location"]),
     residenceId: json["_id"],
     id: json["Id"],
-    title: json["title"],
-    category: json["category"],
-    status: json["status"],
-    type: json["type"],
-    isSold: json["isSold"],
-    paymentPeriod: json["paymentPeriod"],
-    isCompleted: json["isCompleted"],
-    hasGarage: json["hasGarage"],
-    hasFireplace: json["hasFireplace"],
-    hasBasement: json["hasBasement"],
-    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
-    updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
-    images: json["images"] == null ? [] : List<ImageElement>.from(json["images"]!.map((x) => ImageElement.fromJson(x))),
     msSubClass: json["msSubClass"],
     mszoning: json["mszoning"],
     lotFrontage: json["lotFrontage"],
@@ -246,8 +203,10 @@ class Residence {
     electrical: json["electrical"],
     lowQualFinSf: json["lowQualFinSF"],
     bedroomAbvGr: json["bedroomAbvGr"],
+    kitchenAbvGr: json["kitchenAbvGr"],
     kitchenQual: json["kitchenQual"],
     totRmsAbvGrd: json["totRmsAbvGrd"],
+    functional: json["Functional"],
     fireplaces: json["fireplaces"],
     fireplaceQu: json["fireplaceQu"],
     garageType: json["garageType"],
@@ -268,29 +227,11 @@ class Residence {
     totalbaths: json["totalbaths"],
     totalporchsf: json["totalporchsf"],
     alley: json["alley"],
-    avgRating: json["avgRating"],
-    likedUsers: json["likedUsers"] == null ? [] : List<dynamic>.from(json["likedUsers"]!.map((x) => x)),
-    reviews: json["reviews"] == null ? [] : List<Review>.from(json["reviews"]!.map((x) => Review.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
-    "isLiked": isLiked,
-    "location": location?.toJson(),
     "_id": residenceId,
     "Id": id,
-    "title": title,
-    "category": category,
-    "status": status,
-    "type": type,
-    "isSold": isSold,
-    "paymentPeriod": paymentPeriod,
-    "isCompleted": isCompleted,
-    "hasGarage": hasGarage,
-    "hasFireplace": hasFireplace,
-    "hasBasement": hasBasement,
-    "createdAt": createdAt?.toIso8601String(),
-    "updatedAt": updatedAt?.toIso8601String(),
-    "images": images == null ? [] : List<dynamic>.from(images!.map((x) => x.toJson())),
     "msSubClass": msSubClass,
     "mszoning": mszoning,
     "lotFrontage": lotFrontage,
@@ -328,8 +269,10 @@ class Residence {
     "electrical": electrical,
     "lowQualFinSF": lowQualFinSf,
     "bedroomAbvGr": bedroomAbvGr,
+    "kitchenAbvGr": kitchenAbvGr,
     "kitchenQual": kitchenQual,
     "totRmsAbvGrd": totRmsAbvGrd,
+    "Functional": functional,
     "fireplaces": fireplaces,
     "fireplaceQu": fireplaceQu,
     "garageType": garageType,
@@ -350,168 +293,5 @@ class Residence {
     "totalbaths": totalbaths,
     "totalporchsf": totalporchsf,
     "alley": alley,
-    "avgRating": avgRating,
-    "likedUsers": likedUsers == null ? [] : List<dynamic>.from(likedUsers!.map((x) => x)),
-    "reviews": reviews == null ? [] : List<dynamic>.from(reviews!.map((x) => x.toJson())),
-  };
-}
-
-class ImageElement {
-  String? id;
-  String? url;
-
-  ImageElement({
-    this.id,
-    this.url,
-  });
-
-  factory ImageElement.fromJson(Map<String, dynamic> json) => ImageElement(
-    id: json["_id"],
-    url: json["url"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "_id": id,
-    "url": url,
-  };
-}
-
-class Location {
-  String? type;
-  List<double>? coordinates;
-  String? fullAddress;
-  String? city;
-  String? state;
-  String? country;
-
-  Location({
-    this.type,
-    this.coordinates,
-    this.fullAddress,
-    this.city,
-    this.state,
-    this.country,
-  });
-
-  factory Location.fromJson(Map<String, dynamic> json) => Location(
-    type: json["type"],
-    coordinates: json["coordinates"] == null ? [] : List<double>.from(json["coordinates"]!.map((x) => x?.toDouble())),
-    fullAddress: json["fullAddress"],
-    city: json["city"],
-    state: json["state"],
-    country: json["country"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "type": type,
-    "coordinates": coordinates == null ? [] : List<dynamic>.from(coordinates!.map((x) => x)),
-    "fullAddress": fullAddress,
-    "city": city,
-    "state": state,
-    "country": country,
-  };
-}
-
-class Review {
-  String? id;
-  String? residenceId;
-  UserId? userId;
-  int? rating;
-  int? likes;
-  int? unLikes;
-  List<dynamic>? likedBy;
-  List<dynamic>? unLikedBy;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  int? v;
-  String? comment;
-
-  Review({
-    this.id,
-    this.residenceId,
-    this.userId,
-    this.rating,
-    this.likes,
-    this.unLikes,
-    this.likedBy,
-    this.unLikedBy,
-    this.createdAt,
-    this.updatedAt,
-    this.v,
-    this.comment,
-  });
-
-  factory Review.fromJson(Map<String, dynamic> json) => Review(
-    id: json["_id"],
-    residenceId: json["residenceId"],
-    userId: json["userId"] == null ? null : UserId.fromJson(json["userId"]),
-    rating: json["rating"],
-    likes: json["likes"],
-    unLikes: json["unLikes"],
-    likedBy: json["likedBy"] == null ? [] : List<dynamic>.from(json["likedBy"]!.map((x) => x)),
-    unLikedBy: json["unLikedBy"] == null ? [] : List<dynamic>.from(json["unLikedBy"]!.map((x) => x)),
-    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
-    updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
-    v: json["__v"],
-    comment: json["comment"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "_id": id,
-    "residenceId": residenceId,
-    "userId": userId?.toJson(),
-    "rating": rating,
-    "likes": likes,
-    "unLikes": unLikes,
-    "likedBy": likedBy == null ? [] : List<dynamic>.from(likedBy!.map((x) => x)),
-    "unLikedBy": unLikedBy == null ? [] : List<dynamic>.from(unLikedBy!.map((x) => x)),
-    "createdAt": createdAt?.toIso8601String(),
-    "updatedAt": updatedAt?.toIso8601String(),
-    "__v": v,
-    "comment": comment,
-  };
-}
-
-class UserId {
-  UserIdImage? image;
-  String? id;
-  String? username;
-
-  UserId({
-    this.image,
-    this.id,
-    this.username,
-  });
-
-  factory UserId.fromJson(Map<String, dynamic> json) => UserId(
-    image: json["image"] == null ? null : UserIdImage.fromJson(json["image"]),
-    id: json["_id"],
-    username: json["username"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "image": image?.toJson(),
-    "_id": id,
-    "username": username,
-  };
-}
-
-class UserIdImage {
-  String? url;
-  String? publicId;
-
-  UserIdImage({
-    this.url,
-    this.publicId,
-  });
-
-  factory UserIdImage.fromJson(Map<String, dynamic> json) => UserIdImage(
-    url: json["url"],
-    publicId: json["public_id"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "url": url,
-    "public_id": publicId,
   };
 }

@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
      debugShowCheckedModeBanner: false,
         color: Colors.transparent,
-      home: SignIn(),
+      home: SplashScreen(),
     );
   }
 }

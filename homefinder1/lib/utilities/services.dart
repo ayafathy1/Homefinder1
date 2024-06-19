@@ -1,5 +1,3 @@
-
-
 class Services {
  static String baseEndPoint = "https://home-finder-back-end-i7ca.onrender.com/api/v1/";
  static String resendVerificationEndPoint = "auth/resend-code"; //Post
@@ -27,5 +25,8 @@ class Services {
  static String thirdCompleteEndPoint = "residence/complete/3rd/";
  static String fourthCompleteEndPoint = "residence/complete/4th/";
  static String deleteOneResidenceEndPoint = "residence/delete/";//delete
- static String GetSoldForProfileEndPoint = "residence/sold?";//get
+ static String getSoldForProfileEndPoint = "residence/sold";//get
+ static String getResidencesPhotosEndPoint = "residence/images/";//get
+ static String getAllReviewsOfOneResidenceEndPoint = "review/get/";//get
+ static String addReviewEndPoint = "review/";//post
 }

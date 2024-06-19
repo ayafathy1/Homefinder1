@@ -854,6 +854,8 @@ class _AddListingFirstDetailScreenState
                       child: CustomElevatedButtonWidget(
                         text: 'Next',
                         onPressed: () {
+                          print("hiiiiiiii");
+                          print(widget.residanceId);
                           if (controller.formkey.currentState!.validate()) {
                             controller.firstComplete(
                                 controller.neighborhoodController.text,
@@ -869,7 +871,8 @@ class _AddListingFirstDetailScreenState
                                 controller.electricityLevelSelected,
                                 controller.foundationSelected,
                                 controller.buildingTypeSelected,
-                                context);
+                                context,
+                            );
                           }
                         },
                         textStyle: TextStyle(

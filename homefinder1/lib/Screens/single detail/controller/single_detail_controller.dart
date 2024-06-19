@@ -1,15 +1,23 @@
 
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Widget/custom_elevated_button_widget.dart';
+import 'package:homefinder1/models/add_review_to_residence_model.dart';
+import 'package:homefinder1/models/get_all_reviews_of_residence_model.dart'as a;
+import 'package:homefinder1/models/get_residence_images_model.dart'as o;
+import 'package:homefinder1/models/like_review_model.dart';
 
 import '../../../models/get_one_residence_model.dart'as o;
+import '../../../services/auth_service.dart';
 import '../../../services/residences_services.dart';
 import '../../../utilities/colors.dart';
 import '../../../utilities/constants.dart';
 
 class SingleDetailController extends GetxController{
+  int rating=0;
+  List<a.Review>? reviews;
   String? userId;
   BuildContext?context;
   SingleDetailController(this.userId,this.context);
@@ -21,6 +29,7 @@ class SingleDetailController extends GetxController{
   int selectedIndex=0;
   late List<Widget> listViewItem = [];
   String descriptionOrGalleryOrReview="Description";
+  TextEditingController commentController=TextEditingController();
 
   final List <String> homeDetailsTitles=["sqrt","Bedrooms","Bathrooms","Safety Rank"];
   final List <String> homeDeatilsNo=["1.225","1.225","1.0", "4,457"];
@@ -57,7 +66,8 @@ class SingleDetailController extends GetxController{
     "lib/assets/images/homeDeatail6.png",
 
   ];
-
+  List<Object>? images;
+int? selectedIndexOfReview;
   @override
   void onInit() {
     super.onInit();
@@ -87,6 +97,157 @@ class SingleDetailController extends GetxController{
     }
 
   }
+  getPhotosOfResidence(BuildContext context) async {
+      try {
+        o.GetResidencesImagesModel? response = await ResidenceServices.fetchImagesOfResidences(residence?.residenceId??"", context);
+        print("API Response Status: ${response?.status}");
+
+        if (response == null) {
+          print("Some error occurred: Response is null");
+        } else {
+          images = response.images ?? [];
+          print(images);
+
+
+          // Print or access other properties as needed
+          print("Number of residences: ${images?.length}");
+        }
+
+        isLoading = false;
+        update();
+      } catch (e) {
+        print("Exception occurred: $e");
+        isLoading = false;
+      }
+
+  }
+  getReviewsOfResidence(BuildContext context) async {
+    try {
+     a.GetAllReviewsOfResidenceModel? response = await ResidenceServices.fetchReviewsOfResidences(residence?.residenceId??"", context);
+      print("API Response Status: ${response?.status}");
+
+      if (response == null) {
+        print("Some error occurred: Response is null");
+      } else {
+        reviews = response.reviews ?? [];
+
+
+        // Print or access other properties as needed
+        print("Number of residences: ${images?.length}");
+      }
+
+      isLoading = false;
+      update();
+    } catch (e) {
+      print("Exception occurred: $e");
+      isLoading = false;
+    }
+
+  }
+  Future<void> addReview(BuildContext context) async {
+    try {
+      AddReviewToResidenceModel? data = await AuthServices.addReview(
+          rating,
+          commentController.text,
+          residence?.residenceId??"",
+          context
+      );
+      if (data?.status == "success") {
+
+      }
+    } catch (e) {
+      String errorMessage = " $e";
+      String part = errorMessage.substring(26, 35);
+      CoolAlert.show(
+        context: context,
+        type: CoolAlertType.error,
+        title: "Error",
+        text: part,
+      );
+    }
+
+  }
+  Future<void> addLikeToReview(BuildContext context) async {
+    try {
+      LikeReviewModel? data = await ResidenceServices.addLikeToReview(
+          reviews?[selectedIndexOfReview??0].id??"",
+          context
+      );
+      if (data?.status == "success") {
+
+        print(data?.message);
+
+      }
+    } catch (e) {
+      // Handle bad request error
+      String errorMessage = " $e";
+      String part = errorMessage.substring(26, 35);
+      // Show error message on the screen
+      print(part);
+    }
+
+  }
+  Future<void> removeLikeToReview(BuildContext context) async {
+    try {
+      LikeReviewModel? data = await ResidenceServices.removeLikeToReview(
+          reviews?[selectedIndexOfReview??0].id??"",
+          context
+      );
+      if (data?.status == "success") {
+
+        print(data?.message);
+
+      }
+    } catch (e) {
+      // Handle bad request error
+      String errorMessage = " $e";
+      String part = errorMessage.substring(26, 35);
+      // Show error message on the screen
+      print(part);
+    }
+
+  }
+  Future<void> addUnLikeToReview(BuildContext context) async {
+    try {
+      LikeReviewModel? data = await ResidenceServices.addUnLikeToReview(
+          reviews?[selectedIndexOfReview??0].id??"",
+          context
+      );
+      if (data?.status == "success") {
+
+        print(data?.message);
+
+      }
+    } catch (e) {
+      // Handle bad request error
+      String errorMessage = " $e";
+      String part = errorMessage.substring(26, 35);
+      // Show error message on the screen
+      print(part);
+    }
+
+  }
+  Future<void> removeUnLikeToReview(BuildContext context) async {
+    try {
+      LikeReviewModel? data = await ResidenceServices.removeUnLikeToReview(
+          reviews?[selectedIndexOfReview??0].id??"",
+          context
+      );
+      if (data?.status == "success") {
+
+        print(data?.message);
+
+      }
+    } catch (e) {
+      // Handle bad request error
+      String errorMessage = " $e";
+      String part = errorMessage.substring(26, 35);
+      // Show error message on the screen
+      print(part);
+    }
+
+  }
+
 
   descriptionGalleryReview(){
     if(selectedIndex==0){

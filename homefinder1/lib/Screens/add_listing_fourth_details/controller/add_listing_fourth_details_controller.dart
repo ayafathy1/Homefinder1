@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:homefinder1/Screens/pridected_price/pridected_price_screen.dart';
 
 import '../../../Widget/custom_elevated_button_widget.dart';
 import '../../../models/fourth_complete_model.dart';
@@ -89,11 +90,9 @@ class AddListingFourthDetailsController extends GetxController{
           context,
           residanceId
 
-
-
       );
       if (data?.status == "success") {
-
+        Get.to(()=>PredictPriceScreen(resId: residanceId,));
       }
     } catch (e) {
       String errorMessage = " $e";

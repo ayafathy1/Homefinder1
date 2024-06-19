@@ -28,6 +28,7 @@ class ApiService {
 
       if (method == 'GET') {
         request = await httpClient.getUrl(uri);
+        request.headers.contentType = ContentType.json;
       } else if (method == 'POST') {
         request = await httpClient.postUrl(uri);
         request.headers.contentType = ContentType.json;
@@ -71,7 +72,7 @@ class ApiService {
       }
     } catch (e, stackTrace) {
       String message = "$e";
-      String part = message.substring(28, message.length-2);
+      String part = message.substring(0, message.length);
       print("Error: $part");
       print("StackTrace: $stackTrace");
       if (errorDialog == null && errorMessage == null) {

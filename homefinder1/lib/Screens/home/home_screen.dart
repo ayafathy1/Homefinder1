@@ -434,7 +434,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             InkWell(
                               onTap:(){
-                                controller.getDataOfOneResidences(controller.residences?[index].id??"", context);
+                                controller.getDataOfOneResidences(controller.residences?[index].residenceId??"", context);
                               }
                               ,
                               child: Container(
@@ -564,6 +564,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               Container(
                                                 width:100,
                                                 child: Text(
+                                                  
                                                   "\$${controller.residences?[index].salePrice}",
                                                   overflow: TextOverflow.ellipsis,
                                                   style: TextStyle(
@@ -580,12 +581,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     onTap: () {
                                                       controller.favSelectedIndex=index;
                                                       if(controller.residences?[controller.favSelectedIndex]?.isLiked==true){
-                                                      controller.removeResidenceFromFav(controller.residences![index]!.id!,context);
+                                                      controller.removeResidenceFromFav(controller.residences![index]!.residenceId!,context);
                                                       controller.getDataOfResidences(context);
                                                         setState(() {
 
                                                         });}else{
-                                                        controller.addResidenceToFav(controller.residences![index]!.id!, context);
+                                                        controller.addResidenceToFav(controller.residences![index]!.residenceId!, context);
                                                         controller.getDataOfResidences(context);
                                                         setState(() {
 

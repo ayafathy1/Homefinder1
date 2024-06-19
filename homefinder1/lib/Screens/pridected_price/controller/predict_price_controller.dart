@@ -1,0 +1,43 @@
+import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
+import 'package:homefinder1/models/price_prediction_model.dart';
+
+import '../../../services/residences_services.dart';
+
+class PredictPriceController extends GetxController{
+  @override
+  void onInit() async{
+    super.onInit();
+    await predictResidencePrice(context);
+  }
+  BuildContext context;
+  PredictPriceController(this.context,this.resId);
+  String resId;
+  int? predictedPrice;
+  bool isLoading=true;
+  predictResidencePrice(BuildContext context) async {
+    try {
+      PricePeridectionModel? response = await ResidenceServices.pricePrediction( resId, context);
+      print("API Response Status: ${response?.status}");
+
+      if (response == null) {
+        print("Some error occurred: Response is null");
+      } else {
+        predictedPrice = response.predictedPrice ;
+        print("hiiiiiiiiiiiiiiiii");
+
+
+        // Print or access other properties as needed
+        print("Number of residences: ${predictedPrice}");
+      }
+
+      isLoading = false;
+      update();
+    } catch (e) {
+      print("Exception occurred: $e");
+      isLoading = false;
+    }
+
+  }
+
+}

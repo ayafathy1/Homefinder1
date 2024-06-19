@@ -10,8 +10,9 @@ import 'package:homefinder1/utilities/constants.dart';
 import '../../utilities/colors.dart';
 
 class AddListingThirdDetailsScreen extends StatefulWidget {
-  const AddListingThirdDetailsScreen({super.key , required this.residanceId});
-  final String residanceId;
+  String residanceId;
+   AddListingThirdDetailsScreen({super.key , required this.residanceId});
+
 
   @override
   State<AddListingThirdDetailsScreen> createState() =>

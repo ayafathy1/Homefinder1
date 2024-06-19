@@ -33,7 +33,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProfileController>(
-        init: ProfileController(),
+        init: ProfileController(context),
         builder: (ProfileController controller) {
           return Scaffold(
             bottomNavigationBar: CustomBottomNavigationBarWidget(
@@ -270,9 +270,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       controller.selectedIndex = index;
                                       print(controller.selectedIndex);
                                       controller.pendingListingSold();
+                                      setState(() {
+
+                                      });
                                       print(controller.listViewItem.length);
                                       controller.getDataOfApprovedResidences();
-                                      controller.getDataOfpendingResidences();
+                                      controller.getDataOfpendingResidences(context);
                                       controller.getDataOfSoldResidences();
                                       setState(() {});
                                     },
@@ -345,9 +348,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               width: 20,
                             );
                           },
-                          itemCount: controller.listViewItem.length),
+                          itemCount: controller.selectedIndex==0?controller.pendingResidences?.length??0:controller.selectedIndex==1?controller.approvedResidences?.length??0:controller.soldResidences?.length??0,
                     )
-                  ],
+                    )],
                 )),
           );
         });

@@ -118,6 +118,8 @@ class FeatureEstatesController extends GetxController {
       if (data?.status == "success") {
 
         print(data?.message);
+        getDataOfResidences();
+        update();
 
       }
     } catch (e) {

@@ -1,37 +1,41 @@
 // To parse this JSON data, do
 //
-//     final getOneResidencesModel = getOneResidencesModelFromJson(jsonString);
+//     final recommendationModel = recommendationModelFromJson(jsonString);
 
 import 'dart:convert';
 
-GetOneResidencesModel getOneResidencesModelFromJson(String str) => GetOneResidencesModel.fromJson(json.decode(str));
+RecommendationModel recommendationModelFromJson(String str) => RecommendationModel.fromJson(json.decode(str));
 
-String getOneResidencesModelToJson(GetOneResidencesModel data) => json.encode(data.toJson());
+String recommendationModelToJson(RecommendationModel data) => json.encode(data.toJson());
 
-class GetOneResidencesModel {
+class RecommendationModel {
   String? status;
-  Residence? residence;
+  List<Datum>? data;
 
-  GetOneResidencesModel({
+  RecommendationModel({
     this.status,
-    this.residence,
+    this.data,
   });
 
-  factory GetOneResidencesModel.fromJson(Map<String, dynamic> json) => GetOneResidencesModel(
+  factory RecommendationModel.fromJson(Map<String, dynamic> json) => RecommendationModel(
     status: json["status"],
-    residence: json["residence"] == null ? null : Residence.fromJson(json["residence"]),
+    data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "status": status,
-    "residence": residence?.toJson(),
+    "data": data == null ? [] : List<dynamic>.from(data!.map((x) => x.toJson())),
   };
 }
 
-class Residence {
+class Datum {
   bool? isLiked;
   Location? location;
-  String? residenceId;
+  int? avgRating;
+  List<String>? reviews;
+  List<dynamic>? likedUsers;
+  String? alley;
+  String? datumId;
   int? id;
   String? title;
   String? category;
@@ -45,8 +49,7 @@ class Residence {
   bool? hasBasement;
   DateTime? createdAt;
   DateTime? updatedAt;
-  List<ImageElement>? images;
-  String? msSubClass;
+  int? msSubClass;
   String? mszoning;
   int? lotFrontage;
   int? lotArea;
@@ -85,8 +88,8 @@ class Residence {
   int? bedroomAbvGr;
   String? kitchenQual;
   int? totRmsAbvGrd;
-  int? fireplaces;
   String? fireplaceQu;
+  int? fireplaces;
   String? garageType;
   String? garageFinish;
   int? garageCars;
@@ -102,17 +105,18 @@ class Residence {
   int? houseremodelage;
   int? totalsf;
   int? totalarea;
-  int? totalbaths;
+  double? totalbaths;
   int? totalporchsf;
-  String? alley;
-  int? avgRating;
-  List<dynamic>? likedUsers;
-  List<Review>? reviews;
+  List<Image>? images;
 
-  Residence({
+  Datum({
     this.isLiked,
     this.location,
-    this.residenceId,
+    this.avgRating,
+    this.reviews,
+    this.likedUsers,
+    this.alley,
+    this.datumId,
     this.id,
     this.title,
     this.category,
@@ -126,7 +130,6 @@ class Residence {
     this.hasBasement,
     this.createdAt,
     this.updatedAt,
-    this.images,
     this.msSubClass,
     this.mszoning,
     this.lotFrontage,
@@ -166,8 +169,8 @@ class Residence {
     this.bedroomAbvGr,
     this.kitchenQual,
     this.totRmsAbvGrd,
-    this.fireplaces,
     this.fireplaceQu,
+    this.fireplaces,
     this.garageType,
     this.garageFinish,
     this.garageCars,
@@ -185,16 +188,17 @@ class Residence {
     this.totalarea,
     this.totalbaths,
     this.totalporchsf,
-    this.alley,
-    this.avgRating,
-    this.likedUsers,
-    this.reviews,
+    this.images,
   });
 
-  factory Residence.fromJson(Map<String, dynamic> json) => Residence(
+  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
     isLiked: json["isLiked"],
     location: json["location"] == null ? null : Location.fromJson(json["location"]),
-    residenceId: json["_id"],
+    avgRating: json["avgRating"],
+    reviews: json["reviews"] == null ? [] : List<String>.from(json["reviews"]!.map((x) => x)),
+    likedUsers: json["likedUsers"] == null ? [] : List<dynamic>.from(json["likedUsers"]!.map((x) => x)),
+    alley: json["alley"],
+    datumId: json["_id"],
     id: json["Id"],
     title: json["title"],
     category: json["category"],
@@ -208,7 +212,6 @@ class Residence {
     hasBasement: json["hasBasement"],
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
-    images: json["images"] == null ? [] : List<ImageElement>.from(json["images"]!.map((x) => ImageElement.fromJson(x))),
     msSubClass: json["msSubClass"],
     mszoning: json["mszoning"],
     lotFrontage: json["lotFrontage"],
@@ -234,7 +237,7 @@ class Residence {
     masVnrArea: json["masVnrArea"],
     exterQual: json["exterQual"],
     exterCond: json["exterCond"],
-    foundation: json["foundation"],
+    foundation:json["foundation"],
     bsmtQual: json["bsmtQual"],
     bsmtCond: json["bsmtCond"],
     bsmtExposure: json["bsmtExposure"],
@@ -243,15 +246,15 @@ class Residence {
     heating: json["heating"],
     heatingQc: json["heatingQc"],
     centralAir: json["centralAir"],
-    electrical: json["electrical"],
+    electrical:json["electrical"],
     lowQualFinSf: json["lowQualFinSF"],
     bedroomAbvGr: json["bedroomAbvGr"],
     kitchenQual: json["kitchenQual"],
     totRmsAbvGrd: json["totRmsAbvGrd"],
-    fireplaces: json["fireplaces"],
     fireplaceQu: json["fireplaceQu"],
+    fireplaces: json["fireplaces"],
     garageType: json["garageType"],
-    garageFinish: json["garageFinish"],
+    garageFinish:json["garageFinish"],
     garageCars: json["garageCars"],
     garageQual: json["garageQual"],
     pavedDrive: json["pavedDrive"],
@@ -265,18 +268,19 @@ class Residence {
     houseremodelage: json["houseremodelage"],
     totalsf: json["totalsf"],
     totalarea: json["totalarea"],
-    totalbaths: json["totalbaths"],
+    totalbaths: json["totalbaths"]?.toDouble(),
     totalporchsf: json["totalporchsf"],
-    alley: json["alley"],
-    avgRating: json["avgRating"],
-    likedUsers: json["likedUsers"] == null ? [] : List<dynamic>.from(json["likedUsers"]!.map((x) => x)),
-    reviews: json["reviews"] == null ? [] : List<Review>.from(json["reviews"]!.map((x) => Review.fromJson(x))),
+    images: json["images"] == null ? [] : List<Image>.from(json["images"]!.map((x) => Image.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "isLiked": isLiked,
     "location": location?.toJson(),
-    "_id": residenceId,
+    "avgRating": avgRating,
+    "reviews": reviews == null ? [] : List<dynamic>.from(reviews!.map((x) => x)),
+    "likedUsers": likedUsers == null ? [] : List<dynamic>.from(likedUsers!.map((x) => x)),
+    "alley": alley,
+    "_id": datumId,
     "Id": id,
     "title": title,
     "category": category,
@@ -288,9 +292,8 @@ class Residence {
     "hasGarage": hasGarage,
     "hasFireplace": hasFireplace,
     "hasBasement": hasBasement,
-    "createdAt": createdAt?.toIso8601String(),
-    "updatedAt": updatedAt?.toIso8601String(),
-    "images": images == null ? [] : List<dynamic>.from(images!.map((x) => x.toJson())),
+    "createdAt": createdAt,
+    "updatedAt": updatedAt,
     "msSubClass": msSubClass,
     "mszoning": mszoning,
     "lotFrontage": lotFrontage,
@@ -322,7 +325,7 @@ class Residence {
     "bsmtExposure": bsmtExposure,
     "bsmtFinType1": bsmtFinType1,
     "bsmtUnfSF": bsmtUnfSf,
-    "heating": heating,
+    "heating":heating,
     "heatingQc": heatingQc,
     "centralAir": centralAir,
     "electrical": electrical,
@@ -330,8 +333,8 @@ class Residence {
     "bedroomAbvGr": bedroomAbvGr,
     "kitchenQual": kitchenQual,
     "totRmsAbvGrd": totRmsAbvGrd,
+    "fireplaceQu":fireplaceQu,
     "fireplaces": fireplaces,
-    "fireplaceQu": fireplaceQu,
     "garageType": garageType,
     "garageFinish": garageFinish,
     "garageCars": garageCars,
@@ -349,23 +352,23 @@ class Residence {
     "totalarea": totalarea,
     "totalbaths": totalbaths,
     "totalporchsf": totalporchsf,
-    "alley": alley,
-    "avgRating": avgRating,
-    "likedUsers": likedUsers == null ? [] : List<dynamic>.from(likedUsers!.map((x) => x)),
-    "reviews": reviews == null ? [] : List<dynamic>.from(reviews!.map((x) => x.toJson())),
+    "images": images == null ? [] : List<dynamic>.from(images!.map((x) => x.toJson())),
   };
 }
 
-class ImageElement {
+
+
+
+class Image {
   String? id;
   String? url;
 
-  ImageElement({
+  Image({
     this.id,
     this.url,
   });
 
-  factory ImageElement.fromJson(Map<String, dynamic> json) => ImageElement(
+  factory Image.fromJson(Map<String, dynamic> json) => Image(
     id: json["_id"],
     url: json["url"],
   );
@@ -375,6 +378,8 @@ class ImageElement {
     "url": url,
   };
 }
+
+
 
 class Location {
   String? type;
@@ -412,106 +417,3 @@ class Location {
   };
 }
 
-class Review {
-  String? id;
-  String? residenceId;
-  UserId? userId;
-  int? rating;
-  int? likes;
-  int? unLikes;
-  List<dynamic>? likedBy;
-  List<dynamic>? unLikedBy;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  int? v;
-  String? comment;
-
-  Review({
-    this.id,
-    this.residenceId,
-    this.userId,
-    this.rating,
-    this.likes,
-    this.unLikes,
-    this.likedBy,
-    this.unLikedBy,
-    this.createdAt,
-    this.updatedAt,
-    this.v,
-    this.comment,
-  });
-
-  factory Review.fromJson(Map<String, dynamic> json) => Review(
-    id: json["_id"],
-    residenceId: json["residenceId"],
-    userId: json["userId"] == null ? null : UserId.fromJson(json["userId"]),
-    rating: json["rating"],
-    likes: json["likes"],
-    unLikes: json["unLikes"],
-    likedBy: json["likedBy"] == null ? [] : List<dynamic>.from(json["likedBy"]!.map((x) => x)),
-    unLikedBy: json["unLikedBy"] == null ? [] : List<dynamic>.from(json["unLikedBy"]!.map((x) => x)),
-    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
-    updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
-    v: json["__v"],
-    comment: json["comment"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "_id": id,
-    "residenceId": residenceId,
-    "userId": userId?.toJson(),
-    "rating": rating,
-    "likes": likes,
-    "unLikes": unLikes,
-    "likedBy": likedBy == null ? [] : List<dynamic>.from(likedBy!.map((x) => x)),
-    "unLikedBy": unLikedBy == null ? [] : List<dynamic>.from(unLikedBy!.map((x) => x)),
-    "createdAt": createdAt?.toIso8601String(),
-    "updatedAt": updatedAt?.toIso8601String(),
-    "__v": v,
-    "comment": comment,
-  };
-}
-
-class UserId {
-  UserIdImage? image;
-  String? id;
-  String? username;
-
-  UserId({
-    this.image,
-    this.id,
-    this.username,
-  });
-
-  factory UserId.fromJson(Map<String, dynamic> json) => UserId(
-    image: json["image"] == null ? null : UserIdImage.fromJson(json["image"]),
-    id: json["_id"],
-    username: json["username"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "image": image?.toJson(),
-    "_id": id,
-    "username": username,
-  };
-}
-
-class UserIdImage {
-  String? url;
-  String? publicId;
-
-  UserIdImage({
-    this.url,
-    this.publicId,
-  });
-
-  factory UserIdImage.fromJson(Map<String, dynamic> json) => UserIdImage(
-    url: json["url"],
-    publicId: json["public_id"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "url": url,
-    "public_id": publicId,
-  };
-}

@@ -18,7 +18,7 @@ class Box extends StatelessWidget{
     return  InkWell(
       onTap: onTap??(){},
       child: Container(
-        height:Get.height*0.9,
+        height:Get.height*0.91,
         width: Get.width*0.4,
         decoration: BoxDecoration(
           boxShadow: [BoxShadow(color: Colors.grey.shade200,blurRadius: 15)],
@@ -29,51 +29,58 @@ class Box extends StatelessWidget{
           children: [
             ClipRRect(
               child:  Image(image: NetworkImage(image??"" ) ,fit: BoxFit.cover,
-                height: 140,
+                height: 141,
                 width: double.infinity,
               ),
 
               borderRadius: BorderRadius.only(topLeft: Radius.circular(16) , topRight: Radius.circular(16)),
             ),
-            SizedBox(height: 5,),
 
               Center(
                 child: ClipRRect(
                   child: Container(
-                    height: 105,
+                    height:106,
                     width: 180,
                     decoration: BoxDecoration(
                         color: Colors.white
                     ),
 
                     child: Padding(
-                      padding: const EdgeInsets.all(6.0),
+                      padding: const EdgeInsets.only(top: 5.0,left: 3),
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(title??"", style: TextStyle(fontWeight: FontWeight.w500 ,fontSize: 20),),
-                            SizedBox(height: 15,),
+
                             Text(price??"" , style: TextStyle( fontSize: 12,color: Color(0xff6C63FF)),),
-                            SizedBox(height: 5,),
-                            Row(
-                              children: [
-                                Icon(Icons.location_on , color: Color(0xffB9B9B9)),
-                                Container(width:Get.width*0.245,child: Text(location ??"",overflow: TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.w300 ,fontSize: 12, color: Color(0xffB9B9B9)),)),
-                               SizedBox(width: 18,),
-                                Positioned(
-                                  top: 10,
-                                  right: 10,
-                                  child: InkWell(
-                                    onTap: (){},
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.transparent,
-                                      ),
-                                      child: IconButton(onPressed:onPressed ,icon: Icon(Icons.favorite_border , color: favCol,)),
-                                    ),
+
+                            Container(
+                              width: Get.width,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(Icons.location_on , color: Color(0xffB9B9B9)),
+                                      Container(width:Get.width*0.245,child: Text(location ??"",overflow: TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.w300 ,fontSize: 12, color: Color(0xffB9B9B9)),)),
+                                    ],
                                   ),
-                                ) ,
-                              ],
+
+                                  Positioned(
+                                    top: 10,
+                                    right: 10,
+                                    child: InkWell(
+                                      onTap: (){},
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.transparent,
+                                        ),
+                                        child: IconButton(onPressed:onPressed ,icon: Icon(Icons.favorite_rounded , color: favCol,)),
+                                      ),
+                                    ),
+                                  ) ,
+                                ],
+                              ),
                             ), ]
                       ),
                     ),

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:cool_alert/cool_alert.dart';
+import 'package:flutter/widgets.dart';
 import 'package:homefinder1/Screens/edit_profile/controller/edit_profile_controller.dart';
 import 'package:homefinder1/models/get_sold_for_profile_model.dart'as d;
 import 'package:homefinder1/services/auth_service.dart';
@@ -7,6 +8,7 @@ import 'package:homefinder1/services/residences_services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../models/gat_pending_for_user.dart';
 import '../../../models/get_user_model.dart';
 import '../../../utilities/colors.dart';
 import '../../../utilities/constants.dart';
@@ -21,7 +23,8 @@ import '../../settings/controller/settings_controller4.dart';
 
 class ProfileController extends GetxController{
   Uint8List? imageBytes;
-
+       BuildContext context;
+ProfileController(this.context);
   User? data ;
   GetUserModel? data1;
   bool isLoading=true;
@@ -41,12 +44,12 @@ class ProfileController extends GetxController{
   ScrollController scrollController=ScrollController();
 
   @override
-  void onInit() {
+  void onInit()async {
     super.onInit();
     scrollController=ScrollController();
     getdata();
     getDataOfSoldResidences();
-    getDataOfpendingResidences();
+    await getDataOfpendingResidences(context);
     getDataOfApprovedResidences();
     pendingListingSold();
     scrollController.addListener(loadMoreDataOfSoldResidences);
@@ -190,47 +193,63 @@ class ProfileController extends GetxController{
 
   }
 
-  List<dynamic>? soldResidences ;
-  int counterOfSoldResidences=1;
+  List<Residence>? soldResidences ;
+  int counterOfSoldResidences=0;
   bool isLoadingMoreDataOfSoldResidences=false;
   int maxNoOfPagesOfSoldResidences=1;
   int soldResidenceCount=0;
 
+
   getDataOfSoldResidences() async
   {
-    if(
-    counterOfSoldResidences==1
-    ) {
-      var response = await ResidenceServices.fetchUserSoldData(counterOfSoldResidences);
+    isLoading=true;
+    if (counterOfSoldResidences == 0) {
+      try {
+        GetPendingForProfileModel? response = await ResidenceServices.fetchUserSoldData(counterOfSoldResidences, context);
+        print("API Response Status: ${response?.status}");
 
-      if (response == null) {
-        print("some error occured");
-      } else {
-        soldResidenceCount=response.count??0;
-        soldResidences= response.residences;
+        if (response == null) {
+          print("Some error occurred: Response is null");
+        } else {
+          soldResidences = response.residences ?? [];
+          soldResidenceCount = response.count ?? 0;
 
-      }
-
-      isLoading = false;
-
-      update();
-
-    }else{
-      if(counterOfSoldResidences<= (maxNoOfPagesOfSoldResidences??0)){
-        var response = await ResidenceServices.fetchUserSoldData(counterOfSoldResidences);
-        if(response==null){
-          print("some error occured");
-        }else{
-          soldResidences?.addAll(response!.residences!);
+          // Print or access other properties as needed
+          print("Number of residences: ${soldResidences?.length}");
         }
-        isLoadingMoreDataOfSoldResidences= false;
+
+        isLoading = false;
         update();
+      } catch (e) {
+        print("Exception occurred: $e");
+        isLoading = false;
       }
+    } else {
+      if (counterOfSoldResidences <= (maxNoOfPagesOfSoldResidences ?? 0)) {
+        try {
+          var response = await ResidenceServices.fetchUserSoldData(counterOfSoldResidences, context);
+          print("API Response Status: ${response?.status}");
 
+          if (response == null) {
+            print("Some error occurred: Response is null");
+          } else {
+            var newResidences = response.residences ?? [];
+            soldResidences?.addAll(newResidences);
 
+            // Print or access other properties as needed
+            print("Number of additional residences fetched: ${newResidences.length}");
+          }
 
+          isLoadingMoreDataOfSoldResidences = false;
+          update();
+        } catch (e) {
+          print("Exception occurred: $e");
+          isLoadingMoreDataOfSoldResidences = false;
+        }
+      }
     }
   }
+
 
   void loadMoreDataOfSoldResidences(){
     if((scrollController.position.pixels)==(scrollController.position.maxScrollExtent))
@@ -242,45 +261,58 @@ class ProfileController extends GetxController{
 
     }
   }
-  List<dynamic>? pendingResidences ;
-  int counterOfpendingResidences=1;
+  List<Residence>? pendingResidences ;
+  int counterOfpendingResidences=0;
   bool isLoadingMoreDataOfpendingResidences=false;
   int maxNoOfPagesOfpendingResidences=1;
 int pendingResidenceCount=0;
 
-  getDataOfpendingResidences() async
-  {
-    if(
-    counterOfpendingResidences==1
-    ) {
-      var response = await ResidenceServices.fetchUserpendingData(counterOfpendingResidences);
+  getDataOfpendingResidences(BuildContext context) async {
+             isLoading=true;
+    if (counterOfpendingResidences == 0) {
+      try {
+        GetPendingForProfileModel? response = await AuthServices.fetchUserPendingData(counterOfpendingResidences, context);
+        print("API Response Status: ${response?.status}");
 
-      if (response == null) {
-        print("some error occured");
-      } else {
-        pendingResidences= response.residences;
-        pendingResidenceCount=response.count??0;
+        if (response == null) {
+          print("Some error occurred: Response is null");
+        } else {
+          pendingResidences = response.residences ?? [];
+          pendingResidenceCount = response.count ?? 0;
 
-      }
-
-      isLoading = false;
-
-      update();
-
-    }else{
-      if(counterOfpendingResidences<= (maxNoOfPagesOfpendingResidences??0)){
-        var response = await ResidenceServices.fetchUserpendingData(counterOfpendingResidences);
-        if(response==null){
-          print("some error occured");
-        }else{
-          soldResidences?.addAll(response!.residences!);
+          // Print or access other properties as needed
+          print("Number of residences: ${pendingResidences?.length}");
         }
-        isLoadingMoreDataOfpendingResidences= false;
+
+        isLoading = false;
         update();
+      } catch (e) {
+        print("Exception occurred: $e");
+        isLoading = false;
       }
+    } else {
+      if (counterOfpendingResidences <= (maxNoOfPagesOfpendingResidences ?? 0)) {
+        try {
+          var response = await AuthServices.fetchUserPendingData(counterOfpendingResidences, context);
+          print("API Response Status: ${response?.status}");
 
+          if (response == null) {
+            print("Some error occurred: Response is null");
+          } else {
+            var newResidences = response.residences ?? [];
+            pendingResidences?.addAll(newResidences);
 
+            // Print or access other properties as needed
+            print("Number of additional residences fetched: ${newResidences.length}");
+          }
 
+          isLoadingMoreDataOfpendingResidences = false;
+          update();
+        } catch (e) {
+          print("Exception occurred: $e");
+          isLoadingMoreDataOfpendingResidences = false;
+        }
+      }
     }
   }
 
@@ -295,7 +327,7 @@ int pendingResidenceCount=0;
     }
   }
 
-  List<dynamic>? approvedResidences ;
+  List<Residence>? approvedResidences ;
   int counterOfApprovedResidences=1;
   bool isLoadingMoreDataOfApprovedResidences=false;
   int maxNoOfPagesOfApprovedResidences=1;
@@ -303,37 +335,51 @@ int pendingResidenceCount=0;
 
   getDataOfApprovedResidences() async
   {
-    if(
-    counterOfApprovedResidences==1
-    ) {
-      var response = await ResidenceServices.fetchUserapprovedData(counterOfApprovedResidences);
+    isLoading=true;
+    if (counterOfApprovedResidences == 0) {
+      try {
+        GetPendingForProfileModel? response = await ResidenceServices.fetchUserapprovedData(counterOfApprovedResidences, context);
+        print("API Response Status: ${response?.status}");
 
-      if (response == null) {
-        print("some error occured");
-      } else {
-        approvedResidences= response.residences;
-        approvedResidenceCount=response.count??0;
+        if (response == null) {
+          print("Some error occurred: Response is null");
+        } else {
+          approvedResidences = response.residences ?? [];
+          approvedResidenceCount = response.count ?? 0;
 
-      }
-
-      isLoading = false;
-
-      update();
-
-    }else{
-      if(counterOfApprovedResidences<= (maxNoOfPagesOfApprovedResidences??0)){
-        var response = await ResidenceServices.fetchUserapprovedData(counterOfApprovedResidences);
-        if(response==null){
-          print("some error occured");
-        }else{
-          approvedResidences?.addAll(response!.residences!);
+          // Print or access other properties as needed
+          print("Number of residences: ${approvedResidences?.length}");
         }
-        isLoadingMoreDataOfApprovedResidences= false;
+
+        isLoading = false;
         update();
+      } catch (e) {
+        print("Exception occurred: $e");
+        isLoading = false;
       }
+    } else {
+      if (counterOfApprovedResidences <= (maxNoOfPagesOfApprovedResidences ?? 0)) {
+        try {
+          var response = await ResidenceServices.fetchUserapprovedData(counterOfApprovedResidences, context);
+          print("API Response Status: ${response?.status}");
 
+          if (response == null) {
+            print("Some error occurred: Response is null");
+          } else {
+            var newResidences = response.residences ?? [];
+            approvedResidences?.addAll(newResidences);
 
+            // Print or access other properties as needed
+            print("Number of additional residences fetched: ${newResidences.length}");
+          }
 
+          isLoadingMoreDataOfApprovedResidences = false;
+          update();
+        } catch (e) {
+          print("Exception occurred: $e");
+          isLoadingMoreDataOfApprovedResidences = false;
+        }
+      }
     }
   }
 
@@ -348,487 +394,462 @@ int pendingResidenceCount=0;
     }
   }
 
-  pendingListingSold(){
-    int counter=pendingResidenceCount;
-    int counter1=approvedResidenceCount;
-    int counter2=soldResidenceCount;
-    if(counter > 0 && selectedIndex == 0){
-      listViewItem = [];
-      for(var index = 0 ; index<counter-1;index=index+1){
-        listViewItem.add(InkWell(
-          onTap:(){
+  pendingListingSold() {
+    int counter = pendingResidences?.length??0;
+    int counter1 = approvedResidences?.length??0;
+    int counter2 = soldResidences?.length??0;
 
-          } ,
-          child: Container(
-            padding: EdgeInsets.only(left: 10,right: 10,bottom: 10,top: 5
-            ),
-            width: 180,
-            decoration: BoxDecoration(
-                color: Color(0xffF5F4F8),
-                borderRadius: BorderRadius.circular(25)),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Center(
-                  child: Container(
-                    width: 155,
-                    height: 160,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        image: DecorationImage(
-                            image: AssetImage(
-                                housesPhotos[index]),
-                            fit: BoxFit.fill)),
-                    child: Column(
-                      mainAxisAlignment:
-                      MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment:
-                      CrossAxisAlignment.end,
-                      children: [
-                        Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.end,
-                          children: [
-                            InkWell(
-                              onTap:(){
-                                selectedIndex1=index;
-                                update();
-                              },
-                              child: Container(
-                                  margin: EdgeInsets.only(
-                                      top: 7, right: 7),
-                                  width: 30,
-                                  height: 30,
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius:
-                                      BorderRadius.circular(
-                                          50)),
-                                  child: Center(
-                                    child: Icon(
-                                      selectedIndex1==index? Icons.favorite:Icons
-                                          .favorite_border_outlined,
-                                      color:selectedIndex1==index? kPrimaryColor:Color(0xff234F68),
-                                      size: 14,
-                                    ),
-                                  )),
-                            )
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.end,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(
-                                  bottom: 7, right: 7),
-                              padding: EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                  color: Color(0xff1F4C6B)
-                                      .withOpacity(0.6),
-                                  borderRadius:
-                                  BorderRadius.circular(8)),
-                              child: Center(
-                                child: Text(
-                                  "Rent",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: kRegularFont,
-                                      fontSize: 12,
-                                      fontWeight:
-                                      FontWeight.w800),
+    if (counter > 0 && selectedIndex == 0) {
+      listViewItem = [];
+      for (var index = 0; index < 4; index++) {
+        if (pendingResidences != null && (pendingResidences?.length??0) > index) {
+          listViewItem.add(InkWell(
+            onTap: () {},
+            child: Container(
+              padding: EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 5),
+              width: 180,
+              decoration: BoxDecoration(
+                  color: Color(0xffF5F4F8),
+                  borderRadius: BorderRadius.circular(25)),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Center(
+                    child: Container(
+                      width: 155,
+                      height: 160,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          image: DecorationImage(
+                              image: NetworkImage(
+                                  pendingResidences?[index].images?[0].url ?? ""),
+                              fit: BoxFit.fill)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  selectedIndex1 = index;
+                                  update();
+                                },
+                                child: Container(
+                                    margin: EdgeInsets.only(top: 7, right: 7),
+                                    width: 30,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(50)),
+                                    child: Center(
+                                      child: Icon(
+                                        selectedIndex1 == index
+                                            ? Icons.favorite
+                                            : Icons.favorite_border_outlined,
+                                        color: selectedIndex1 == index
+                                            ? kPrimaryColor
+                                            : Color(0xff234F68),
+                                        size: 14,
+                                      ),
+                                    )),
+                              )
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Container(
+                                margin:
+                                EdgeInsets.only(bottom: 7, right: 7),
+                                padding: EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                    color: Color(0xff1F4C6B).withOpacity(0.6),
+                                    borderRadius: BorderRadius.circular(8)),
+                                child: Center(
+                                  child: Text(
+                                    pendingResidences?[index].type ?? "",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: kRegularFont,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w800),
+                                  ),
                                 ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Container(
+                      child: Text(
+                        pendingResidences?[index].title ?? "",
+                        overflow: TextOverflow.visible,
+                        style: TextStyle(
+                            color: kDarkBlueColor,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 12,
+                            fontFamily: kRegularFont),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5.0),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.access_time_filled_outlined,
+                          color: Color(0xff8BC83F),
+                          size: 13,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 3.0),
+                          child: Row(
+                            children: [
+                              Text(
+                                pendingResidences?[index].createdAt ?? "",
+                                style: TextStyle(
+                                    color: Color(0xff53587A),
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 8,
+                                    fontFamily: kRegularFont),
                               ),
-                            )
-                          ],
+                            ],
+                          ),
                         )
                       ],
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Container(
-
-                    child: Text(
-                      housesNames[index],
-                      overflow: TextOverflow.visible,
-                      style: TextStyle(
-                          color: kDarkBlueColor,
-                          fontWeight: FontWeight.w900,
-                          fontSize: 12,
-                          fontFamily: kRegularFont),
+                  )
+                ],
+              ),
+            ),
+          ));
+        }
+      }
+    } else if (counter == 0) {
+      listViewItem = [];
+      for (var index = 0; index < 3; index++) {
+        listViewItem.add(SizedBox());
+      }
+    } else if (counter1 > 0 && selectedIndex == 1) {
+      listViewItem = [];
+      for (var index = 0; index < 3; index++) {
+        if (approvedResidences != null && (approvedResidences?.length??0) > index) {
+          listViewItem.add(InkWell(
+            onTap: () {},
+            child: Container(
+              padding: EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 5),
+              width: 180,
+              decoration: BoxDecoration(
+                  color: Color(0xffF5F4F8),
+                  borderRadius: BorderRadius.circular(25)),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Center(
+                    child: Container(
+                      width: 155,
+                      height: 160,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          image: DecorationImage(
+                              image: NetworkImage(
+                                  approvedResidences?[index].images?[0].url ?? ""),
+                              fit: BoxFit.fill)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              InkWell(
+                                onTap: () {},
+                                child: Container(
+                                    margin: EdgeInsets.only(top: 7, left: 7),
+                                    width: 30,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                        color: kPrimaryColor,
+                                        borderRadius: BorderRadius.circular(50)),
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.edit,
+                                        color: Colors.white,
+                                        size: 14,
+                                      ),
+                                    )),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  selectedIndex1 = index;
+                                  update();
+                                },
+                                child: Container(
+                                    margin: EdgeInsets.only(top: 7, right: 7),
+                                    width: 30,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(50)),
+                                    child: Center(
+                                      child: Icon(
+                                        selectedIndex1 == index
+                                            ? Icons.favorite
+                                            : Icons.favorite_border_outlined,
+                                        color: selectedIndex1 == index
+                                            ? kPrimaryColor
+                                            : Color(0xff234F68),
+                                        size: 14,
+                                      ),
+                                    )),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Container(
+                                margin:
+                                EdgeInsets.only(bottom: 7, right: 7),
+                                padding: EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                    color: Color(0xff1F4C6B).withOpacity(0.6),
+                                    borderRadius: BorderRadius.circular(8)),
+                                child: Center(
+                                  child: Text(
+                                    "\$ ${approvedResidences?[index].salePrice} /month",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: kRegularFont,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w800),
+                                  ),
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 5.0),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.access_time_filled_outlined,
-                        color: Color(0xff8BC83F),
-                        size: 13,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Container(
+                      child: Text(
+                        approvedResidences?[index].title ?? "",
+                        overflow: TextOverflow.visible,
+                        style: TextStyle(
+                            color: kDarkBlueColor,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 12,
+                            fontFamily: kRegularFont),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 3.0),
-                        child: Row(
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5.0),
+                    child: Row(
+                      children: [
+                        Row(
                           children: [
-                            Text("November",
+                            Icon(
+                              Icons.star,
+                              color: Color(0xff234F68).withOpacity(0.9),
+                              size: 13,
+                            ),
+                            Text(
+                              "${approvedResidences?[index].avgRating ?? 0}",
                               style: TextStyle(
-                                  color: Color(0xff53587A),
-                                  fontWeight: FontWeight.w500,
+                                  fontFamily: kRegularFont,
                                   fontSize: 8,
-                                  fontFamily: kRegularFont),),
-                            Text("21, 2021",
-                              style: TextStyle(
-                                  color: Color(0xff53587A),
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 8,
-                                  fontFamily: kRegularFont),),
+                                  fontWeight: FontWeight.w900,
+                                  color: Color(0xff53587A)),
+                            ),
                           ],
                         ),
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-        ));
-      }
-
-    }else if(counter==0){
-      listViewItem = [];
-      for(var index = 0 ; index<counter;index=index+1){ listViewItem.add(SizedBox());}
-    }else if(counter1 > 0 && selectedIndex == 1){
-      listViewItem = [];
-
-      for(var index = 0 ; index<counter1;index=index+1){listViewItem.add(InkWell(
-        onTap:(){
-
-        } ,
-        child: Container(
-          padding: EdgeInsets.only(left: 10,right: 10,bottom: 10,top: 5
-          ),
-          width: 180,
-          decoration: BoxDecoration(
-              color: Color(0xffF5F4F8),
-              borderRadius: BorderRadius.circular(25)),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Center(
-                child: Container(
-                  width: 155,
-                  height: 160,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      image: DecorationImage(
-                          image: AssetImage(
-                              housesPhotos[index]),
-                          fit: BoxFit.fill)),
-                  child: Column(
-                    mainAxisAlignment:
-                    MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment:
-                    CrossAxisAlignment.end,
-                    children: [
-                      Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment.spaceBetween,
-                        children: [
-                          InkWell(
-                            onTap:(){
-
-                            },
-                            child: Container(
-                                margin: EdgeInsets.only(
-                                    top: 7, left: 7),
-                                width: 30,
-                                height: 30,
-                                decoration: BoxDecoration(
-                                    color: kPrimaryColor,
-                                    borderRadius:
-                                    BorderRadius.circular(
-                                        50)),
-                                child: Center(
-                                  child: Icon(
-                                    Icons.edit,
-                                    color:Colors.white,
-                                    size: 14,
-                                  ),
-                                )),
-                          ),
-                          InkWell(
-                            onTap:(){
-                              selectedIndex1=index;
-                              update();
-                            },
-                            child: Container(
-                                margin: EdgeInsets.only(
-                                    top: 7, right: 7),
-                                width: 30,
-                                height: 30,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius:
-                                    BorderRadius.circular(
-                                        50)),
-                                child: Center(
-                                  child: Icon(
-                                    selectedIndex1==index? Icons.favorite:Icons
-                                        .favorite_border_outlined,
-                                    color:selectedIndex1==index? kPrimaryColor:Color(0xff234F68),
-                                    size: 14,
-                                  ),
-                                )),
-                          ),
-
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment.end,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(
-                                bottom: 7, right: 7),
-                            padding: EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                                color: Color(0xff1F4C6B)
-                                    .withOpacity(0.6),
-                                borderRadius:
-                                BorderRadius.circular(8)),
-                            child: Center(
-                              child: Text(
-                                "\$ ${prices[index]} /month",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: kRegularFont,
-                                    fontSize: 12,
-                                    fontWeight:
-                                    FontWeight.w800),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 3.0),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.location_on_sharp,
+                                color: Color(0xff1F4C6B),
+                                size: 13,
                               ),
-                            ),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Container(
-
-                  child: Text(
-                    listingHousesNames[index],
-                    overflow: TextOverflow.visible,
-                    style: TextStyle(
-                        color: kDarkBlueColor,
-                        fontWeight: FontWeight.w900,
-                        fontSize: 12,
-                        fontFamily: kRegularFont),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 5.0),
-                child: Row(
-                  children: [
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.star,
-                          color: Color(0xff234F68).withOpacity(0.9),
-                          size: 13,
-                        ),
-                        Text("4",style: TextStyle(fontFamily: kRegularFont,fontSize: 8,
-                            fontWeight: FontWeight.w900,color: Color(0xff53587A)),),
+                              Text(
+                                approvedResidences?[index].location?.type ?? "",
+                                style: TextStyle(
+                                    color: Color(0xff53587A),
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 8,
+                                    fontFamily: kRegularFont),
+                              ),
+                            ],
+                          ),
+                        )
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 3.0),
-                      child: Row(
-                        children: [
-                          Icon(Icons.location_on_sharp,color: Color(0xff1F4C6B),size:13 ,),
-                          Text("Jakarta, Indonesia1",
-                            style: TextStyle(
-                                color: Color(0xff53587A),
-                                fontWeight: FontWeight.w500,
-                                fontSize: 8,
-                                fontFamily: kRegularFont),),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-      ));}
-
-    }else if(counter1==0){
+                  )
+                ],
+              ),
+            ),
+          ));
+        }
+      }
+    } else if (counter1 == 0) {
       listViewItem = [];
-      for(var index = 0 ; index<counter1;index=index+1){listViewItem.add(SizedBox());}
-    }
-      else if(counter2 > 0 && selectedIndex == 2)
-    { listViewItem = [];
-
-    for(var index = 0 ; index<counter2;index=index+1)
-      {listViewItem.add(InkWell(
-        onTap:(){
-
-        } ,
-        child: Container(
-          padding: EdgeInsets.only(left: 10,right: 10,bottom: 10,top: 5
-          ),
-          width: 180,
-          decoration: BoxDecoration(
-              color: Color(0xffF5F4F8),
-              borderRadius: BorderRadius.circular(25)),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Center(
-                child: Container(
-                  width: 155,
-                  height: 160,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      image: DecorationImage(
-                          image: AssetImage(
-                              housesPhotos[index]),
-                          fit: BoxFit.fill)),
-                  child: Column(
-                    mainAxisAlignment:
-                    MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment:
-                    CrossAxisAlignment.end,
-                    children: [
-                      Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment.end,
+      for (var index = 0; index < 3; index++) {
+        listViewItem.add(SizedBox());
+      }
+    } else if (counter2 > 0 && selectedIndex == 2) {
+      listViewItem = [];
+      for (var index = 0; index < 3; index++) {
+        if (soldResidences != null && (soldResidences?.length??0) > index) {
+          listViewItem.add(InkWell(
+            onTap: () {},
+            child: Container(
+              padding: EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 5),
+              width: 180,
+              decoration: BoxDecoration(
+                  color: Color(0xffF5F4F8),
+                  borderRadius: BorderRadius.circular(25)),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Center(
+                    child: Container(
+                      width: 155,
+                      height: 160,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          image: DecorationImage(
+                              image: NetworkImage(
+                                  soldResidences?[index].images?[0].url ?? ""),
+                              fit: BoxFit.fill)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          InkWell(
-                            onTap:(){
-                              selectedIndex1=index;
-                              update();
-                            },
-                            child: Container(
-                                margin: EdgeInsets.only(
-                                    top: 7, right: 7),
-                                width: 30,
-                                height: 30,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  selectedIndex1 = index;
+                                  update();
+                                },
+                                child: Container(
+                                    margin: EdgeInsets.only(top: 7, right: 7),
+                                    width: 30,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(50)),
+                                    child: Center(
+                                      child: Icon(
+                                        selectedIndex1 == index
+                                            ? Icons.favorite
+                                            : Icons.favorite_border_outlined,
+                                        color: selectedIndex1 == index
+                                            ? kPrimaryColor
+                                            : Color(0xff234F68),
+                                        size: 14,
+                                      ),
+                                    )),
+                              )
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Container(
+                                margin:
+                                EdgeInsets.only(bottom: 7, right: 7),
+                                padding: EdgeInsets.all(5),
                                 decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius:
-                                    BorderRadius.circular(
-                                        50)),
+                                    color: Color(0xff1F4C6B).withOpacity(0.6),
+                                    borderRadius: BorderRadius.circular(8)),
                                 child: Center(
-                                  child: Icon(
-                                    Icons
-                                        .favorite_border_outlined,
-                                    color:selectedIndex1==index? kPrimaryColor:Color(0xff234F68),
-                                    size: 14,
+                                  child: Text(
+                                    soldResidences?[index].type ?? "",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: kRegularFont,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w800),
                                   ),
-                                )),
+                                ),
+                              )
+                            ],
                           )
                         ],
                       ),
-                      Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment.end,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(
-                                bottom: 7, right: 7),
-                            padding: EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                                color: Color(0xff1F4C6B)
-                                    .withOpacity(0.6),
-                                borderRadius:
-                                BorderRadius.circular(8)),
-                            child: Center(
-                              child: Text(
-                                "Rent",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: kRegularFont,
-                                    fontSize: 12,
-                                    fontWeight:
-                                    FontWeight.w800),
-                              ),
-                            ),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Container(
-
-                  child: Text(
-                    housesNames[index],
-                    overflow: TextOverflow.visible,
-                    style: TextStyle(
-                        color: kDarkBlueColor,
-                        fontWeight: FontWeight.w900,
-                        fontSize: 12,
-                        fontFamily: kRegularFont),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 5.0),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.access_time_filled_outlined,
-                      color: Color(0xff8BC83F),
-                      size: 13,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 3.0),
-                      child: Row(
-                        children: [
-                          Text("November",
-                            style: TextStyle(
-                                color: Color(0xff53587A),
-                                fontWeight: FontWeight.w500,
-                                fontSize: 8,
-                                fontFamily: kRegularFont),),
-                          Text("21, 2021",
-                            style: TextStyle(
-                                color: Color(0xff53587A),
-                                fontWeight: FontWeight.w500,
-                                fontSize: 8,
-                                fontFamily: kRegularFont),),
-                        ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Container(
+                      child: Text(
+                        soldResidences?[index].title ?? "",
+                        overflow: TextOverflow.visible,
+                        style: TextStyle(
+                            color: kDarkBlueColor,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 12,
+                            fontFamily: kRegularFont),
                       ),
-                    )
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-
-      ));}
-
-    }else if(counter2==0){
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5.0),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.access_time_filled_outlined,
+                          color: Color(0xff8BC83F),
+                          size: 13,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 3.0),
+                          child: Row(
+                            children: [
+                              Text(
+                                soldResidences?[index].createdAt ?? "",
+                                style: TextStyle(
+                                    color: Color(0xff53587A),
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 8,
+                                    fontFamily: kRegularFont),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ));
+        }
+      }
+    } else if (counter2 == 0) {
       listViewItem = [];
-      for(var index = 0 ; index<counter2;index=index+1){listViewItem.add(SizedBox());}
+      for (var index = 0; index < 3; index++) {
+        listViewItem.add(SizedBox());
+      }
     }
-    update();
 
+    update();
   }
+
 }

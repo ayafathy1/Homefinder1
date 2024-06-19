@@ -2,14 +2,18 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:homefinder1/Screens/add_listing/controller/add_listing_controller.dart';
 import 'package:homefinder1/models/first_complete_model.dart';
 import 'package:homefinder1/models/fourth_complete_model.dart';
-import 'package:homefinder1/models/get_sold_for_profile_model.dart';
+import 'package:homefinder1/models/get_all_reviews_of_residence_model.dart';
+import 'package:homefinder1/models/get_sold_for_profile_model.dart'as gs;
+import 'package:homefinder1/models/like_review_model.dart';
+import 'package:homefinder1/models/price_prediction_model.dart';
 import 'package:homefinder1/models/third_complete_model.dart';
 import '../models/create_residence_first.dart';
-import '../models/get_all_reesidences_model.dart';
-import '../models/get_one_residence_model.dart';
+import '../models/gat_pending_for_user.dart';
+import '../models/get_all_reesidences_model.dart'as rr;
+import '../models/get_one_residence_model.dart'as r;
+import '../models/get_residence_images_model.dart';
 import '../models/get_user_favorite_model.dart';
 import '../models/respose_model.dart';
 import '../models/second_complete_model.dart';
@@ -19,11 +23,10 @@ import '../utilities/services.dart';
 import 'package:http/http.dart' as http;
 
 class ResidenceServices {
-  String? houseId;
+
   static ApiService api = ApiService();
 
-  static Future<CreateResidence?> createResidence(String title, String type,
-      String category, BuildContext context,) async {
+  static Future<CreateResidence?> createResidence(String title, String type,String category, BuildContext context,) async {
     print(title + "," + type + "," + category + ",");
     print(Services.createResidence);
 
@@ -43,7 +46,6 @@ class ResidenceServices {
     }
     return null;
   }
-
   static Future<FirstCompleteModel?> FirstComplete(String neighborhood,
       String mszoning,
       String saleCondition, int moSold, int salePrice,
@@ -83,8 +85,8 @@ class ResidenceServices {
     }
     return null;
   }
-
-  static Future<SecondCompleteModel?> secondComplete(String roofStyle,
+  static Future<SecondCompleteModel?> secondComplete(
+      String roofStyle,
       String roofMatl,
       String houseStyle
       , String msSubClass,
@@ -108,7 +110,7 @@ class ResidenceServices {
         .getToken;
     print(token);
     var data = await api.request(context: context,
-        Services.secondCompleteEndPoint + residanceId,
+        Services.secondCompleteEndPoint+residanceId,
         "POST",
         data: {
           "roofStyle": roofStyle,
@@ -136,7 +138,6 @@ class ResidenceServices {
     }
     return null;
   }
-
   static Future<ThirdCompleteModel?> thirdComplete(
       bool hasGarage,
       String garageType,
@@ -194,7 +195,6 @@ class ResidenceServices {
     }
     return null;
   }
-
   static Future<FourthCompleteModel?> fourthComplete(String lotConfig,
       String landContour,
       String landSlope,
@@ -245,9 +245,7 @@ class ResidenceServices {
     }
     return null;
   }
-
-  static Future<FourthCompleteModel?> deleteOneResidence(BuildContext context,
-      String residanceId,) async {
+  static Future<FourthCompleteModel?> deleteOneResidence(BuildContext context,String residanceId,) async {
     var token = Get
         .find<StorageService>()
         .getToken;
@@ -264,106 +262,57 @@ class ResidenceServices {
     }
     return null;
   }
-
-  static Future<GetSoldForProfileModel?> fetchUserSoldData(int counter,
-      {int page = 1}) async {
-    const String getUserEndPoint = 'https://home-finder-back-end-i7ca.onrender.com/api/v1/residence/sold';
+  static Future<GetPendingForProfileModel?> fetchUserSoldData(int counter, BuildContext context) async {
+    const String endPoint = 'residence/sold';
 
     try {
-      final response = await http.get(
-        Uri.parse('$getUserEndPoint?page=$page'),
+      final response = await ApiService().request(
+        '$endPoint?page=$counter',
+        'GET',
         headers: {
-          "Authorization": await Get
-              .find<StorageService>()
-              .getToken, // Replace with your token retrieval method
+          "Authorization": await Get.find<StorageService>().getToken, // Ensure token retrieval is correct
         },
+        context: context,
       );
 
-      if (response.statusCode == 200) {
-        final jsonData = jsonDecode(response.body);
-
-        if (jsonData['status'] == 'success') {
-          return GetSoldForProfileModel.fromJson(jsonData);
-        } else {
-          print('API Error: ${jsonData['message']}');
-        }
+      if (response != null && response['status'] == 'success') {
+        print(response);
+        return GetPendingForProfileModel.fromJson(response);
       } else {
-        print('Request failed with status: ${response.statusCode}');
+        print('API Error: ${response['message']}');
       }
     } catch (e) {
-      print('Error fetching user data: $e');
+      print('Error fetching residences data: $e');
     }
 
     return null;
   }
-
-  static Future<GetSoldForProfileModel?> fetchUserpendingData(
-      int counter) async {
-    const String getUserEndPoint = 'https://home-finder-back-end-i7ca.onrender.com/api/v1/residence/pending';
+  static Future<GetPendingForProfileModel?> fetchUserapprovedData(int counter, BuildContext context) async {
+    const String endPoint = 'residence/approved';
 
     try {
-      final response = await http.get(
-        Uri.parse('$getUserEndPoint?page=$counter'),
+      final response = await ApiService().request(
+        '$endPoint?page=$counter',
+        'GET',
         headers: {
-          "Authorization": await Get
-              .find<StorageService>()
-              .getToken, // Replace with your token retrieval method
+          "Authorization": await Get.find<StorageService>().getToken, // Ensure token retrieval is correct
         },
+        context: context,
       );
 
-      if (response.statusCode == 200) {
-        final jsonData = jsonDecode(response.body);
-
-        if (jsonData['status'] == 'success') {
-          return GetSoldForProfileModel.fromJson(jsonData);
-        } else {
-          print('API Error: ${jsonData['message']}');
-        }
+      if (response != null && response['status'] == 'success') {
+        print(response);
+        return GetPendingForProfileModel.fromJson(response);
       } else {
-        print('Request failed with status: ${response.statusCode}');
+        print('API Error: ${response['message']}');
       }
     } catch (e) {
-      print('Error fetching user data: $e');
+      print('Error fetching residences data: $e');
     }
 
     return null;
   }
-
-  static Future<GetSoldForProfileModel?> fetchUserapprovedData(
-      int counter) async {
-    const String getUserEndPoint = 'https://home-finder-back-end-i7ca.onrender.com/api/v1/residence/approved';
-
-    try {
-      final response = await http.get(
-        Uri.parse('$getUserEndPoint?page=$counter'),
-        headers: {
-          "Authorization": await Get
-              .find<StorageService>()
-              .getToken, // Replace with your token retrieval method
-        },
-      );
-
-      if (response.statusCode == 200) {
-        final jsonData = jsonDecode(response.body);
-
-        if (jsonData['status'] == 'success') {
-          return GetSoldForProfileModel.fromJson(jsonData);
-        } else {
-          print('API Error: ${jsonData['message']}');
-        }
-      } else {
-        print('Request failed with status: ${response.statusCode}');
-      }
-    } catch (e) {
-      print('Error fetching user data: $e');
-    }
-
-    return null;
-  }
-
-
-// Adjusted getDataOfResidences method to handle pagination and merging responses
-  static Future<GetAllResidencesModel?> fetchAllResidences(int counter, BuildContext context) async {
+  static Future<rr.GetAllResidencesModel?> fetchAllResidences(int counter, BuildContext context) async {
     const String endPoint = 'residence/all';
 
     try {
@@ -378,7 +327,7 @@ class ResidenceServices {
 
       if (response != null && response['status'] == 'success') {
         print(response);
-        return GetAllResidencesModel.fromJson(response);
+        return rr.GetAllResidencesModel.fromJson(response);
       } else {
         print('API Error: ${response['message']}');
       }
@@ -388,7 +337,7 @@ class ResidenceServices {
 
     return null;
   }
-  static Future<GetOneResidencesModel?> fetchOneResidences(String resId, BuildContext context) async {
+  static Future<r.GetOneResidencesModel?> fetchOneResidences(String resId, BuildContext context) async {
     const String endPoint = 'residence/get/';
 
     try {
@@ -403,7 +352,7 @@ class ResidenceServices {
 
       if (response != null && response['status'] == 'success') {
         print(response);
-        return GetOneResidencesModel.fromJson(response);
+        return r.GetOneResidencesModel.fromJson(response);
       } else {
         print('API Error: ${response['message']}');
       }
@@ -413,8 +362,6 @@ class ResidenceServices {
 
     return null;
   }
-
-
   static Future<ResponseModel?> addFavorite(String resId,BuildContext context) async {
     var data = await api.request(context: context,Services.addFavEndPoint+resId, "GET",
         headers: {
@@ -474,6 +421,138 @@ class ResidenceServices {
       return ResponseModel.fromJson(data);
 
     }
+    return null;
+  }
+  static Future<GetResidencesImagesModel?> fetchImagesOfResidences( String resId,BuildContext context) async {
+   String endPoint = "residence/images/${resId}";
+
+    try {
+      final response = await ApiService().request(
+        '$endPoint',
+        'GET',
+        headers: {
+          "Authorization": await Get.find<StorageService>().getToken, // Ensure token retrieval is correct
+        },
+        context: context,
+      );
+
+      if (response != null && response['status'] == 'success') {
+        print(response);
+        return GetResidencesImagesModel.fromJson(response);
+      } else {
+        print('API Error: ${response['message']}');
+      }
+    } catch (e) {
+      print('Error fetching residences data: $e');
+    }
+
+    return null;
+  }
+  static Future<GetAllReviewsOfResidenceModel?> fetchReviewsOfResidences( String resId,BuildContext context) async {
+    String endPoint = "review/get/${resId}";
+
+    try {
+      final response = await ApiService().request(
+        '$endPoint',
+        'GET',
+        headers: {
+          "Authorization": await Get.find<StorageService>().getToken, // Ensure token retrieval is correct
+        },
+        context: context,
+      );
+
+      if (response != null && response['status'] == 'success') {
+        print(response);
+        return GetAllReviewsOfResidenceModel.fromJson(response);
+      } else {
+        print('API Error: ${response['message']}');
+      }
+    } catch (e) {
+      print('Error fetching residences data: $e');
+    }
+
+    return null;
+  }
+  static Future<LikeReviewModel?> addLikeToReview(String reviewId,BuildContext context) async {
+    var data = await api.request(context: context,"review/like/${reviewId}", "GET",
+        headers: {
+          "Authorization":await Get.find<StorageService>().getToken,
+
+        });
+    if (data != null) {
+      return LikeReviewModel.fromJson(data);
+
+    }
+    return null;
+  }
+  static Future<LikeReviewModel?> removeLikeToReview(String reviewId,BuildContext context) async {
+    var data = await api.request(context: context,"review/remove-like/${reviewId}", "GET",
+        headers: {
+          "Authorization":await Get.find<StorageService>().getToken,
+
+        });
+    if (data != null) {
+      return LikeReviewModel.fromJson(data);
+
+    }
+    return null;
+  }
+  static Future<LikeReviewModel?> addUnLikeToReview(String reviewId,BuildContext context) async {
+    var data = await api.request(context: context,"review/unlike/${reviewId}", "GET",
+        headers: {
+          "Authorization":await Get.find<StorageService>().getToken,
+
+        });
+    if (data != null) {
+      return LikeReviewModel.fromJson(data);
+
+    }
+    return null;
+  }
+  static Future<LikeReviewModel?> removeUnLikeToReview(String reviewId,BuildContext context) async {
+    var data = await api.request(context: context,"review/remove-unlike/${reviewId}", "GET",
+        headers: {
+          "Authorization":await Get.find<StorageService>().getToken,
+
+        });
+    if (data != null) {
+      return LikeReviewModel.fromJson(data);
+
+    }
+    return null;
+  }
+ // Import for jsonEncode
+
+  static Future<PricePeridectionModel?> pricePrediction(
+      String resId, BuildContext context) async {
+    const String endPoint = 'residence/predict/';
+
+    try {
+      final String token = await Get.find<StorageService>().getToken;
+
+      final response = await ApiService().request(
+        "$endPoint$resId",
+        'GET',
+        headers: {
+          "Authorization": 'Bearer $token',
+        },
+        context: context,
+      );
+
+      if (response != null) {
+        if (response['status'] == 'success') {
+          print(response);
+          return PricePeridectionModel.fromJson(response);
+        } else {
+          print('API Error: ${response['message']}');
+        }
+      } else {
+        print('Error: No response from the API');
+      }
+    } catch (e) {
+      print('Error fetching residences data: $e');
+    }
+
     return null;
   }
 

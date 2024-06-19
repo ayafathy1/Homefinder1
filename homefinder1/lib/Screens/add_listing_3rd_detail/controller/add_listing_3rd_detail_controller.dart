@@ -10,7 +10,8 @@ import 'package:homefinder1/services/residences_services.dart';
 
 class AddListingThirdDetailsController extends GetxController {
   ScrollController scroll = ScrollController();
-  final String residanceId;
+   String residanceId;
+  AddListingThirdDetailsController(this.residanceId);
   int counter1 = 1;
   int counter2 = 1;
   int counterBedroom = 1;
@@ -99,7 +100,7 @@ class AddListingThirdDetailsController extends GetxController {
 
   }
 
-  AddListingThirdDetailsController(this.residanceId);
+
   final formkey = GlobalKey<FormState>();
   final TextEditingController basementAreaController = TextEditingController();
   final List<bool> hasGarage = [true , false];
@@ -126,8 +127,6 @@ class AddListingThirdDetailsController extends GetxController {
   ];
   String garageQualitySelected = "excellent";
   int selectedGarageQualityIndex = 0;
-
-
 
   final List<String> garageFinish = [
     "finished",

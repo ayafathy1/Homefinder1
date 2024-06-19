@@ -98,27 +98,26 @@ class _FeaturedEstatesState extends State<FeaturedEstates> {
                             itemCount: controller.residences?.length ?? 0,
                             itemBuilder: (_, int index) {
                               return Box(
+
                                 onTap:(){
-                                  controller.getDataOfOneResidence(controller.residences?[index]?.id??"");
+                                  controller.getDataOfOneResidence(controller.residences?[index].residenceId??"");
                                 },
-                                favCol: controller.favCol,
+                                favCol: controller.residences?[index].isLiked==true?kPrimaryColor:Colors.grey,
                                 onPressed: (){
-                              controller.favSelectedIndex=index;
-                              if(controller.residences?[controller.favSelectedIndex??0]?.isLiked==true){
-                              controller.addResidenceToFav(controller.residences![index]!.id!,context);
-                              controller.getDataOfResidences();
-                              controller.residences?[index].isLiked==true?controller.favCol=kPrimaryColor:Colors.grey;
-                              setState(() {
+                                  controller.favSelectedIndex=index;
+                                  if(controller.residences?[controller.favSelectedIndex??0].isLiked==true){
+                                    controller.removeResidenceFromFav(controller.residences![index].residenceId??"",context);
+                                    controller.getDataOfResidences();
+                                    setState(() {
 
-                              });}else{
-                              controller.removeResidenceFromFav(controller.residences![index]!.id!, context);
-                              controller.getDataOfResidences();
-                              controller.residences?[index].isLiked==true?controller.favCol=kPrimaryColor:Colors.grey;
-                              setState(() {
+                                    });}else{
+                                    controller.addResidenceToFav(controller.residences?[index].residenceId??"", context);
+                                    controller.getDataOfResidences();
+                                    setState(() {
 
-                              });
-                              }
-                              },
+                                    });
+                                  }
+                                },
                                 location: "${controller.residences?[index].location?.city}, ${controller.residences?[index].location?.state}, ${controller.residences?[index].location?.country}",
                                 price:"\$ ${ controller.residences?[index].salePrice}",
                                 title:controller.residences?[index].title ,

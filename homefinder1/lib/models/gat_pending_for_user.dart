@@ -1,30 +1,34 @@
 // To parse this JSON data, do
 //
-//     final secondCompleteModel = secondCompleteModelFromJson(jsonString);
+//     final getPendingForProfileModel = getPendingForProfileModelFromJson(jsonString);
 
 import 'dart:convert';
 
-SecondCompleteModel secondCompleteModelFromJson(String str) => SecondCompleteModel.fromJson(json.decode(str));
+GetPendingForProfileModel getPendingForProfileModelFromJson(String str) => GetPendingForProfileModel.fromJson(json.decode(str));
 
-String secondCompleteModelToJson(SecondCompleteModel data) => json.encode(data.toJson());
+String getPendingForProfileModelToJson(GetPendingForProfileModel data) => json.encode(data.toJson());
 
-class SecondCompleteModel {
+class GetPendingForProfileModel {
   String? status;
-  Residence? residence;
+  int? count;
+  List<Residence>? residences;
 
-  SecondCompleteModel({
+  GetPendingForProfileModel({
     this.status,
-    this.residence,
+    this.count,
+    this.residences,
   });
 
-  factory SecondCompleteModel.fromJson(Map<String, dynamic> json) => SecondCompleteModel(
+  factory GetPendingForProfileModel.fromJson(Map<String, dynamic> json) => GetPendingForProfileModel(
     status: json["status"],
-    residence: json["residence"] == null ? null : Residence.fromJson(json["residence"]),
+    count: json["count"],
+    residences: json["residences"] == null ? [] : List<Residence>.from(json["residences"]!.map((x) => Residence.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "status": status,
-    "residence": residence?.toJson(),
+    "count": count,
+    "residences": residences == null ? [] : List<dynamic>.from(residences!.map((x) => x.toJson())),
   };
 }
 
@@ -32,7 +36,7 @@ class Residence {
   bool? isLiked;
   Location? location;
   String? residenceId;
-  String? ownerId;
+  OwnerId? ownerId;
   int? id;
   bool? isSold;
   bool? isCompleted;
@@ -72,7 +76,7 @@ class Residence {
   int? totalbaths;
   int? houseage;
   int? houseremodelage;
-  List<Image>? images;
+  List<ImageElement>? images;
   String? createdAt;
   String? updatedAt;
   String? electrical;
@@ -99,6 +103,16 @@ class Residence {
   String? roofMatl;
   String? roofStyle;
   String? street;
+  int? kitchenAbvGr;
+  int? bedroomAbvGr;
+  String? kitchenQual;
+  int? totRmsAbvGrd;
+  String? landContour;
+  String? landSlope;
+  String? lotConfig;
+  int? overallCond;
+  int? overallQual;
+  String? pavedDrive;
 
   Residence({
     this.isLiked,
@@ -171,13 +185,23 @@ class Residence {
     this.roofMatl,
     this.roofStyle,
     this.street,
+    this.kitchenAbvGr,
+    this.bedroomAbvGr,
+    this.kitchenQual,
+    this.totRmsAbvGrd,
+    this.landContour,
+    this.landSlope,
+    this.lotConfig,
+    this.overallCond,
+    this.overallQual,
+    this.pavedDrive,
   });
 
   factory Residence.fromJson(Map<String, dynamic> json) => Residence(
     isLiked: json["isLiked"],
     location: json["location"] == null ? null : Location.fromJson(json["location"]),
     residenceId: json["_id"],
-    ownerId: json["ownerId"],
+    ownerId: json["ownerId"] == null ? null : OwnerId.fromJson(json["ownerId"]),
     id: json["Id"],
     isSold: json["isSold"],
     isCompleted: json["isCompleted"],
@@ -217,7 +241,7 @@ class Residence {
     totalbaths: json["totalbaths"],
     houseage: json["houseage"],
     houseremodelage: json["houseremodelage"],
-    images: json["images"] == null ? [] : List<Image>.from(json["images"]!.map((x) => Image.fromJson(x))),
+    images: json["images"] == null ? [] : List<ImageElement>.from(json["images"]!.map((x) => ImageElement.fromJson(x))),
     createdAt: json["createdAt"],
     updatedAt: json["updatedAt"],
     electrical: json["electrical"],
@@ -244,13 +268,23 @@ class Residence {
     roofMatl: json["roofMatl"],
     roofStyle: json["roofStyle"],
     street: json["street"],
+    kitchenAbvGr: json["KitchenAbvGr"],
+    bedroomAbvGr: json["bedroomAbvGr"],
+    kitchenQual: json["kitchenQual"],
+    totRmsAbvGrd: json["totRmsAbvGrd"],
+    landContour: json["landContour"],
+    landSlope: json["landSlope"],
+    lotConfig: json["lotConfig"],
+    overallCond: json["overallCond"],
+    overallQual: json["overallQual"],
+    pavedDrive: json["pavedDrive"],
   );
 
   Map<String, dynamic> toJson() => {
     "isLiked": isLiked,
     "location": location?.toJson(),
     "_id": residenceId,
-    "ownerId": ownerId,
+    "ownerId": ownerId?.toJson(),
     "Id": id,
     "isSold": isSold,
     "isCompleted": isCompleted,
@@ -317,21 +351,31 @@ class Residence {
     "roofMatl": roofMatl,
     "roofStyle": roofStyle,
     "street": street,
+    "KitchenAbvGr": kitchenAbvGr,
+    "bedroomAbvGr": bedroomAbvGr,
+    "kitchenQual": kitchenQual,
+    "totRmsAbvGrd": totRmsAbvGrd,
+    "landContour": landContour,
+    "landSlope": landSlope,
+    "lotConfig": lotConfig,
+    "overallCond": overallCond,
+    "overallQual": overallQual,
+    "pavedDrive": pavedDrive,
   };
 }
 
-class Image {
+class ImageElement {
   String? url;
   String? publicId;
   String? id;
 
-  Image({
+  ImageElement({
     this.url,
     this.publicId,
     this.id,
   });
 
-  factory Image.fromJson(Map<String, dynamic> json) => Image(
+  factory ImageElement.fromJson(Map<String, dynamic> json) => ImageElement(
     url: json["url"],
     publicId: json["public_id"],
     id: json["_id"],
@@ -361,5 +405,49 @@ class Location {
   Map<String, dynamic> toJson() => {
     "type": type,
     "coordinates": coordinates == null ? [] : List<dynamic>.from(coordinates!.map((x) => x)),
+  };
+}
+
+class OwnerId {
+  OwnerIdImage? image;
+  String? id;
+  String? username;
+
+  OwnerId({
+    this.image,
+    this.id,
+    this.username,
+  });
+
+  factory OwnerId.fromJson(Map<String, dynamic> json) => OwnerId(
+    image: json["image"] == null ? null : OwnerIdImage.fromJson(json["image"]),
+    id: json["_id"],
+    username: json["username"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "image": image?.toJson(),
+    "_id": id,
+    "username": username,
+  };
+}
+
+class OwnerIdImage {
+  String? url;
+  String? publicId;
+
+  OwnerIdImage({
+    this.url,
+    this.publicId,
+  });
+
+  factory OwnerIdImage.fromJson(Map<String, dynamic> json) => OwnerIdImage(
+    url: json["url"],
+    publicId: json["public_id"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "url": url,
+    "public_id": publicId,
   };
 }

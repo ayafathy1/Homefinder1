@@ -10,8 +10,9 @@ import '../../utilities/constants.dart';
 import 'controller/add_listing_second_details_controller.dart';
 
 class AddListingSecondDetailsScreen extends StatefulWidget {
-  const AddListingSecondDetailsScreen({super.key, required this.residanceId});
-  final String residanceId;
+   String residanceId;
+   AddListingSecondDetailsScreen({super.key, required this.residanceId});
+
   @override
 
   @override
@@ -357,6 +358,51 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                   }, separatorBuilder: (context, index) {
                 return SizedBox(width: Get.width*0.02,);
               }, itemCount: controller.street.length ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 12.0,top: 15),
+              child: Text("Alley",
+                style: TextStyle(
+                    color: kVeryDarkBlueColor,
+                    fontFamily: kRegularFont,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w900
+                ),),
+            ),
+            Container(
+              margin: EdgeInsets.only(left: 12,top: 15,bottom: 10),
+              width: Get.width,
+              height: Get.height*0.065,
+              child: ListView.separated(
+                  controller: controller.scroll,
+                  scrollDirection: Axis.horizontal,
+                  physics: BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return InkWell(onTap: (){
+                      controller.selectedAlleyIndex=index;
+                      controller.alleySelected=controller.alley[controller.selectedAlleyIndex];
+                      setState(() {
+
+                      });
+                    },child: Container(
+                      height: Get.height*0.05,
+                      decoration: BoxDecoration(
+                        color: controller.selectedAlleyIndex==index?kPrimaryColor:Color(0xffF5F4F8),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20.0,right: 20,top: 12,bottom: 12),
+                        child: Center(child: Text(controller.alley[index], style: TextStyle(
+                            color: controller.selectedAlleyIndex==index?Colors.white:kVeryDarkBlueColor,
+                            fontFamily: kRegularFont,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600
+                        ),),),
+                      ),
+                    ));
+                  }, separatorBuilder: (context, index) {
+                return SizedBox(width: Get.width*0.02,);
+              }, itemCount: controller.alley.length ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 12.0,top: 15),
