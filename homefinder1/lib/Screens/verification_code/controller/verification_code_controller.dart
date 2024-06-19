@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:async';
 import 'dart:convert';
 
@@ -28,7 +30,7 @@ class VerficationCodeController extends GetxController {
   }
 
   void startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 1), (Timer timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
       if (remainingTimeInSeconds <= 0) {
         _timer.cancel();
       } else {
@@ -62,6 +64,7 @@ class VerficationCodeController extends GetxController {
       print('Error fetching verification code: $e');
       return null;
     }
+    return null;
   }
 
   Future<void> resendVerificationCode() async {

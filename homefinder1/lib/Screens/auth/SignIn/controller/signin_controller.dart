@@ -1,7 +1,8 @@
+// ignore_for_file: avoid_print, use_build_context_synchronously, non_constant_identifier_names
+
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:homefinder1/Screens/home/home_screen.dart';
 
 import '../../../../models/auth_model.dart';
@@ -32,6 +33,7 @@ String? emailValidator (email) {
   else {
     return "   Enter Correct Email";
   }
+  return null;
 }
 
 
@@ -43,6 +45,7 @@ String? passwordValidator(password) {
   } else {
     return "   Enter Correct password";
   }
+  return null;
 }
 
 saveAndValidate() {
@@ -65,7 +68,7 @@ saveAndValidate() {
       if (data?.status == "success") {
         await Get.find<StorageService>().saveAccountId(data?.userId ?? "");
         await Get.find<StorageService>().saveAccountToken(data?.token ?? "");
-        Get.to(() => HomeScreen());
+        Get.to(() => const HomeScreen());
       }
     } catch (e) {
       // Handle bad request error

@@ -1,5 +1,4 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Widget/custom_elevated_button_widget.dart';
@@ -52,6 +51,7 @@ class SingleDetailController extends GetxController{
   ];
   @override
   void onInit() {
+    super.onInit();
     descriptionGalleryReview();
   }
 
@@ -65,11 +65,11 @@ class SingleDetailController extends GetxController{
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.only(left: 25,),
+              margin: const EdgeInsets.only(left: 25,),
                 width: Get.width,
                 height: 69.95,
                 child:ListView.separated(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context , index){
                       return Container(
@@ -77,11 +77,11 @@ class SingleDetailController extends GetxController{
                         height: 69.95,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12),
-                            color: Color(0xfffffbfe),
+                            color: const Color(0xfffffbfe),
                             boxShadow: [
                               BoxShadow(
                                   color: Colors.grey.shade300,
-                                  offset: Offset(0, 16),
+                                  offset: const Offset(0, 16),
                                   blurRadius: 10)
                             ]),
                         child:Column(
@@ -98,7 +98,7 @@ class SingleDetailController extends GetxController{
                                     fontSize: 10,
                                     fontWeight: FontWeight.w600,
                                     fontFamily: kRegularFont,
-                                    color: Color(0xff53587A)),
+                                    color: const Color(0xff53587A)),
                               ),
                             ),
                             Text(
@@ -107,14 +107,14 @@ class SingleDetailController extends GetxController{
                                   fontSize: 10,
                                   fontWeight: FontWeight.w600,
                                   fontFamily: kRegularFont,
-                                  color: Color(0xff53587A)),
+                                  color: const Color(0xff53587A)),
                             ),
                           ],
                         ) ,
                       ) ;
                     },
                     separatorBuilder:  (context, index) {
-                      return SizedBox(
+                      return const SizedBox(
                         width: 15,
                       );
                     },
@@ -124,7 +124,7 @@ class SingleDetailController extends GetxController{
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
-                  margin: EdgeInsets.only(left: 10),
+                  margin: const EdgeInsets.only(left: 10),
                   width: 110,
                   height: 40,
                   child: Center(
@@ -154,7 +154,7 @@ class SingleDetailController extends GetxController{
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
                         ),
-                        child: Image(image: AssetImage("lib/assets/images/AgetPhoto.png"),),
+                        child: const Image(image: AssetImage("lib/assets/images/AgetPhoto.png"),),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 10.0),
@@ -173,7 +173,7 @@ class SingleDetailController extends GetxController{
                                 fontWeight: FontWeight.w500,
                                 fontSize: 11,
                                 fontFamily: kRegularFont,
-                                color: Color(0xff8C8C8C)
+                                color: const Color(0xff8C8C8C)
                             ),)
                           ],
                         ),
@@ -181,7 +181,7 @@ class SingleDetailController extends GetxController{
                     ],
                   ),
                   IconButton(onPressed: (){},
-                      icon: Image(image: AssetImage(
+                      icon: const Image(image: AssetImage(
                         "lib/assets/images/message.png"
                       ),))
                 ],
@@ -190,7 +190,7 @@ class SingleDetailController extends GetxController{
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Container(
+                SizedBox(
 
                   width: 110,
                   height: 40,
@@ -210,13 +210,13 @@ class SingleDetailController extends GetxController{
             ),
             Center(
               child: Container(
-                  margin: EdgeInsets.only(left: 15),
+                  margin: const EdgeInsets.only(left: 15),
                   width: Get.width,
                   height:150,
                   child:Padding(
                     padding: const EdgeInsets.only(left: 15.0),
                     child: GridView.builder(
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context , index){
                         return Container(
@@ -225,11 +225,11 @@ class SingleDetailController extends GetxController{
                           height: 75,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
-                              color: Color(0xfffffbfe),
+                              color: const Color(0xfffffbfe),
                               boxShadow: [
                                 BoxShadow(
                                     color: Colors.grey.shade300,
-                                    offset: Offset(0, 16),
+                                    offset: const Offset(0, 16),
 
                                     blurRadius: 10)
                               ]),
@@ -240,7 +240,7 @@ class SingleDetailController extends GetxController{
                                 child: Image(image: AssetImage( homeFacilitiesIcons[index])),
                               ),
 
-                              Container(
+                              SizedBox(
                                 width:100,
                                 child: Center(
                                   child: Text(
@@ -249,7 +249,7 @@ class SingleDetailController extends GetxController{
                                         fontSize: 10,
                                         fontWeight: FontWeight.w600,
                                         fontFamily: kRegularFont,
-                                        color: Color(0xff6B6B6B)),
+                                        color: const Color(0xff6B6B6B)),
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
@@ -259,7 +259,7 @@ class SingleDetailController extends GetxController{
                         ) ;
                       },
                       itemCount: homeFacilitiesIcons.length, gridDelegate:
-                    SliverGridDelegateWithFixedCrossAxisCount(
+                    const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                     crossAxisSpacing: 10,
                       mainAxisSpacing:22
@@ -272,7 +272,7 @@ class SingleDetailController extends GetxController{
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Container(
+                  SizedBox(
                     width:120,
                     child: Center(
                       child: Text("Location",
@@ -290,16 +290,16 @@ class SingleDetailController extends GetxController{
             Padding(
               padding: const EdgeInsets.only(bottom: 20.0),
               child: Center(
-                child: Container(
+                child: SizedBox(
                   height: Get.height*0.29,
                   width: Get.width*0.85,
                   child:Column(
                     children: [
-                      Container(
+                      SizedBox(
                         height: Get.height*0.22,
                         width: Get.width*0.85,
                         child: Image(
-                          image: AssetImage("lib/assets/images/map12.png"),
+                          image: const AssetImage("lib/assets/images/map12.png"),
                           fit: BoxFit.fill,
                           height: Get.height*0.2,
                           width: Get.width*0.85,
@@ -311,7 +311,7 @@ class SingleDetailController extends GetxController{
                         child: Container(
                           width: Get.width*0.85,
                           height: Get.height*0.07,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Color(0xffD9D9D9),
                             borderRadius: BorderRadius.only(
                               bottomRight: Radius.circular(25),
@@ -345,14 +345,14 @@ class SingleDetailController extends GetxController{
               height: Get.height*0.1,
               decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                       topRight: Radius.circular(20),
                       topLeft:  Radius.circular(20),
                   ),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.shade300,
-                    offset: Offset(0,-12),
+                    offset: const Offset(0,-12),
                     blurRadius: 15
                   )
                 ]
@@ -390,7 +390,7 @@ class SingleDetailController extends GetxController{
                               fontFamily: kRegularFont,
                               fontSize:15,
                               fontWeight: FontWeight.w700,
-                              color: Color(0xff8C8C8C)
+                              color: const Color(0xff8C8C8C)
                             ),)
                           ],
                         ),
@@ -405,7 +405,7 @@ class SingleDetailController extends GetxController{
                         fontSize: 17,
                         fontFamily: kRegularFont
                       ), style: ElevatedButton.styleFrom(
-                        fixedSize: Size(165, 46),
+                        fixedSize: const Size(165, 46),
                         backgroundColor: kPrimaryColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)
@@ -446,14 +446,14 @@ class SingleDetailController extends GetxController{
                  ],
                ),
              ),
-             Container(
+             SizedBox(
                width: Get.width*0.95,
                height: Get.height*0.8,
                child: GridView.builder(
                  scrollDirection: Axis.vertical,
-                 physics: NeverScrollableScrollPhysics(),
+                 physics: const NeverScrollableScrollPhysics(),
                    itemCount: homeDetailImages.length,
-                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                  crossAxisCount: 2,crossAxisSpacing: 10,mainAxisSpacing: 10
                ), itemBuilder:(context,index){
                  return Container(
@@ -476,14 +476,14 @@ class SingleDetailController extends GetxController{
                height: Get.height*0.1,
                decoration: BoxDecoration(
                    color: Colors.white,
-                   borderRadius: BorderRadius.only(
+                   borderRadius: const BorderRadius.only(
                      topRight: Radius.circular(20),
                      topLeft:  Radius.circular(20),
                    ),
                    boxShadow: [
                      BoxShadow(
                          color: Colors.grey.shade300,
-                         offset: Offset(0,-12),
+                         offset: const Offset(0,-12),
                          blurRadius: 15
                      )
                    ]
@@ -521,7 +521,7 @@ class SingleDetailController extends GetxController{
                                    fontFamily: kRegularFont,
                                    fontSize:15,
                                    fontWeight: FontWeight.w700,
-                                   color: Color(0xff8C8C8C)
+                                   color: const Color(0xff8C8C8C)
                                ),)
                            ],
                          ),
@@ -536,7 +536,7 @@ class SingleDetailController extends GetxController{
                            fontSize: 17,
                            fontFamily: kRegularFont
                        ), style: ElevatedButton.styleFrom(
-                           fixedSize: Size(165, 46),
+                           fixedSize: const Size(165, 46),
                            backgroundColor: kPrimaryColor,
                            shape: RoundedRectangleBorder(
                                borderRadius: BorderRadius.circular(20)
@@ -555,7 +555,7 @@ class SingleDetailController extends GetxController{
       descriptionOrGalleryOrReview="Review";
       for(var index = 0 ; index<2;index=index+1){
         listViewItem.add(
-          Column(
+          const Column(
 
           )
         );

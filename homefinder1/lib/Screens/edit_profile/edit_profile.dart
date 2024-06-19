@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Widget/custom_arrow_back.dart';
 import 'package:homefinder1/Widget/custom_elevated_button_widget.dart';
@@ -22,7 +20,7 @@ class UploadPhotoScreen extends StatelessWidget {
               fontSize: 20,
               fontFamily: kRegularFont),
         ),
-        leading: CustomArrowBack(),
+        leading: const CustomArrowBack(),
         leadingWidth: 80,
       ),
       body: Column(
@@ -32,7 +30,7 @@ class UploadPhotoScreen extends StatelessWidget {
             child: Container(
               height: 110,
               width: 110,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage("lib/assets/images/Profile.png"),
                       fit: BoxFit.fill)),
@@ -49,7 +47,7 @@ class UploadPhotoScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(100),
                           border: Border.all(color: Colors.transparent),
                           color: kPrimaryColor),
-                      child: Center(
+                      child: const Center(
                         child: Icon(
                           Icons.close,
                           color: Colors.white,
@@ -107,7 +105,7 @@ class UploadPhotoScreen extends StatelessWidget {
                               child: Text(
                                 "First Name",
                                 style: TextStyle(
-                                    color: Color(0xff888888),
+                                    color: const Color(0xff888888),
                                     fontFamily: kRegularFont,
                                     fontSize: 15,
                                     fontWeight: FontWeight.w700),
@@ -131,22 +129,22 @@ class UploadPhotoScreen extends StatelessWidget {
                                 decoration: InputDecoration(
                                     enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                             color: Colors.transparent)),
                                     focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                             color: Colors.transparent)),
                                     disabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                             color: Colors.transparent)),
                                     border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                             color: Colors.transparent)),
                                     filled: true,
-                                    fillColor: Color(0xffF2F7FF)),
+                                    fillColor: const Color(0xffF2F7FF)),
                               ),
                             )
                           ],
@@ -162,7 +160,7 @@ class UploadPhotoScreen extends StatelessWidget {
                               child: Text(
                                 "Last Name",
                                 style: TextStyle(
-                                    color: Color(0xff888888),
+                                    color: const Color(0xff888888),
                                     fontFamily: kRegularFont,
                                     fontSize: 15,
                                     fontWeight: FontWeight.w700),
@@ -186,22 +184,22 @@ class UploadPhotoScreen extends StatelessWidget {
                                 decoration: InputDecoration(
                                     enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                             color: Colors.transparent)),
                                     focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                             color: Colors.transparent)),
                                     disabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                             color: Colors.transparent)),
                                     border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                             color: Colors.transparent)),
                                     filled: true,
-                                    fillColor: Color(0xffF2F7FF)),
+                                    fillColor: const Color(0xffF2F7FF)),
                               ),
                             )
                           ],
@@ -211,7 +209,7 @@ class UploadPhotoScreen extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.only(left: 15),
+                  padding: const EdgeInsets.only(left: 15),
                   width: Get.width,
                   height: Get.height * 0.13,
                   child: Column(
@@ -222,7 +220,7 @@ class UploadPhotoScreen extends StatelessWidget {
                         child: Text(
                           "User Name*",
                           style: TextStyle(
-                              color: Color(0xff888888),
+                              color: const Color(0xff888888),
                               fontFamily: kRegularFont,
                               fontSize: 15,
                               fontWeight: FontWeight.w700),
@@ -247,28 +245,28 @@ class UploadPhotoScreen extends StatelessWidget {
                               enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
                                   borderSide:
-                                      BorderSide(color: Colors.transparent)),
+                                      const BorderSide(color: Colors.transparent)),
                               focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
                                   borderSide:
-                                      BorderSide(color: Colors.transparent)),
+                                      const BorderSide(color: Colors.transparent)),
                               disabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
                                   borderSide:
-                                      BorderSide(color: Colors.transparent)),
+                                      const BorderSide(color: Colors.transparent)),
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
                                   borderSide:
-                                      BorderSide(color: Colors.transparent)),
+                                      const BorderSide(color: Colors.transparent)),
                               filled: true,
-                              fillColor: Color(0xffF2F7FF)),
+                              fillColor: const Color(0xffF2F7FF)),
                         ),
                       )
                     ],
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.only(left: 15),
+                  padding: const EdgeInsets.only(left: 15),
                   width: Get.width,
                   height: Get.height * 0.13,
                   child: Column(
@@ -279,7 +277,7 @@ class UploadPhotoScreen extends StatelessWidget {
                         child: Text(
                           "Phone Number*",
                           style: TextStyle(
-                              color: Color(0xff888888),
+                              color: const Color(0xff888888),
                               fontFamily: kRegularFont,
                               fontSize: 15,
                               fontWeight: FontWeight.w700),
@@ -304,28 +302,28 @@ class UploadPhotoScreen extends StatelessWidget {
                               enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
                                   borderSide:
-                                      BorderSide(color: Colors.transparent)),
+                                      const BorderSide(color: Colors.transparent)),
                               focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
                                   borderSide:
-                                      BorderSide(color: Colors.transparent)),
+                                      const BorderSide(color: Colors.transparent)),
                               disabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
                                   borderSide:
-                                      BorderSide(color: Colors.transparent)),
+                                      const BorderSide(color: Colors.transparent)),
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
                                   borderSide:
-                                      BorderSide(color: Colors.transparent)),
+                                      const BorderSide(color: Colors.transparent)),
                               filled: true,
-                              fillColor: Color(0xffF2F7FF)),
+                              fillColor: const Color(0xffF2F7FF)),
                         ),
                       )
                     ],
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.only(left: 15),
+                  padding: const EdgeInsets.only(left: 15),
                   width: Get.width,
                   height: Get.height * 0.13,
                   child: Column(
@@ -336,7 +334,7 @@ class UploadPhotoScreen extends StatelessWidget {
                         child: Text(
                           "Gender*",
                           style: TextStyle(
-                              color: Color(0xff888888),
+                              color: const Color(0xff888888),
                               fontFamily: kRegularFont,
                               fontSize: 15,
                               fontWeight: FontWeight.w700),
@@ -361,21 +359,21 @@ class UploadPhotoScreen extends StatelessWidget {
                               enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
                                   borderSide:
-                                      BorderSide(color: Colors.transparent)),
+                                      const BorderSide(color: Colors.transparent)),
                               focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
                                   borderSide:
-                                      BorderSide(color: Colors.transparent)),
+                                      const BorderSide(color: Colors.transparent)),
                               disabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
                                   borderSide:
-                                      BorderSide(color: Colors.transparent)),
+                                      const BorderSide(color: Colors.transparent)),
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
                                   borderSide:
-                                      BorderSide(color: Colors.transparent)),
+                                      const BorderSide(color: Colors.transparent)),
                               filled: true,
-                              fillColor: Color(0xffF2F7FF)),
+                              fillColor: const Color(0xffF2F7FF)),
                         ),
                       )
                     ],

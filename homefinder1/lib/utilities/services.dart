@@ -38,4 +38,13 @@ class Services {
  static String addingCommentEndPoint = "review/new";//post
  static String getCommentEndPoint = "review";//post
  static String forgetPasswordEndPoint = "/api/v1/auth/forgot-pass";//post
+ static String getUserChatListEndPoint = "/api/v1/chat//get-conversations";//get
+  static String getUserConversationEndPoint = "/api/v1/chat/get-conversation/";//get
+ static String searchUserChatListEndPoint = "/api/v1/chat/search-users?";//get
+ static String sendMessageEndPoint = "/api/v1/chat/send/";//post
+ static String editMessageEndPoint = "/api/v1/chat/edit-message/";//patch
+ static String deleteMessageEndPoint = "/api/v1/chat/delete-message/";//delete
+ static String deleteConversationEndPoint = "/api/v1/chat/delete-conversation/";//delete
+
+
 }

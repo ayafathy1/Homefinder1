@@ -1,30 +1,30 @@
+// ignore_for_file: avoid_print, library_private_types_in_public_api
+
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImagePickerExample extends StatefulWidget {
+  const ImagePickerExample({super.key});
+
   @override
   _ImagePickerExampleState createState() => _ImagePickerExampleState();
 }
 
 class _ImagePickerExampleState extends State<ImagePickerExample> {
-  List<Uint8List> _images = [];
+  final List<Uint8List> _images = [];
 
   // Function to pick images from gallery
   Future<void> _pickImagesFromGallery() async {
     List<XFile>? pickedFiles = await ImagePicker().pickMultiImage();
 
-    if (pickedFiles != null) {
-      for (var pickedFile in pickedFiles) {
-        Uint8List bytes = await pickedFile.readAsBytes();
-        setState(() {
-          _images.add(bytes);
-        });
-      }
-    } else {
-      print('No images selected.');
+    for (var pickedFile in pickedFiles) {
+      Uint8List bytes = await pickedFile.readAsBytes();
+      setState(() {
+        _images.add(bytes);
+      });
     }
-  }
+    }
 
   // Function to pick image from camera
   Future<void> _pickImageFromCamera() async {
@@ -44,14 +44,14 @@ class _ImagePickerExampleState extends State<ImagePickerExample> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Image Picker Example'),
+        title: const Text('Image Picker Example'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             _images.isEmpty
-                ? Text('No images selected.')
+                ? const Text('No images selected.')
                 : Expanded(
               child: GridView.count(
                 crossAxisCount: 3,
@@ -60,14 +60,14 @@ class _ImagePickerExampleState extends State<ImagePickerExample> {
                 }),
               ),
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: _pickImagesFromGallery,
-              child: Text('Pick Images from Gallery'),
+              child: const Text('Pick Images from Gallery'),
             ),
             ElevatedButton(
               onPressed: _pickImageFromCamera,
-              child: Text('Take a Picture'),
+              child: const Text('Take a Picture'),
             ),
           ],
         ),

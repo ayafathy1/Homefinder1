@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, duplicate_ignore
+
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
@@ -19,6 +21,7 @@ class ForgotPasswordController extends GetxController{
     else {
       return "   Enter Correct Email";
     }
+    return null;
   }
 
 
@@ -30,12 +33,14 @@ class ForgotPasswordController extends GetxController{
     } else {
       return "   Enter Correct password";
     }
+    return null;
   }
 
   saveAndValidate() {
     var formdata = formkey.currentState;
     if (formdata!.validate()) {
       formdata.save();
+      // ignore: avoid_print
       print("valide");
     }
     else {

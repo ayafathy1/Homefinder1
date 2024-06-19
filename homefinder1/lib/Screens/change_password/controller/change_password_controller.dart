@@ -1,7 +1,10 @@
+// ignore_for_file: curly_braces_in_flow_control_structures
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class ChangePasswordController extends GetxController{
+  @override
   void onInit() {
     super.onInit();
     oldPasswordVisible = false;
@@ -25,6 +28,7 @@ class ChangePasswordController extends GetxController{
     } else {
       return "   Enter Correct password";
     }
+    return null;
   }
   String? confirmValidator (String? val){
     if(val!.isEmpty)

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/Featured%20Estates/widget/box_widget.dart';
@@ -7,6 +6,8 @@ import 'package:homefinder1/Widget/custom_arrow_back.dart';
 import '../../Widget/custom_bottom_navigation_bar_widget.dart';
 
 class FeaturedEstates extends StatelessWidget{
+  const FeaturedEstates({super.key});
+
   @override
   Widget build(BuildContext context) {
 
@@ -74,7 +75,7 @@ class FeaturedEstates extends StatelessWidget{
         child: Column(
           children:<Widget> [
             SizedBox(height: Get.height*0.06,),
-            Row(
+            const Row(
               children: [
                 CustomArrowBack(),
                 SizedBox(width: 20,),
@@ -82,29 +83,29 @@ class FeaturedEstates extends StatelessWidget{
 
               ],
             ),
-            SizedBox(height: 15,),
+            const SizedBox(height: 15,),
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: TextField(
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   filled: true,
-                    fillColor: Color(0xffF4F4F4),
+                    fillColor: const Color(0xffF4F4F4),
                   hintText: "Search House, Apartment , etc",
-                  prefixIcon: Icon(Icons.search_outlined , color: Colors.black,),
+                  prefixIcon: const Icon(Icons.search_outlined , color: Colors.black,),
                   suffixIcon: InkWell(
                       onTap: (){},
-                      child: Image(image: AssetImage('lib/assets/images/options.png'))),
+                      child: const Image(image: AssetImage('lib/assets/images/options.png'))),
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0xffF4F4F4),
                         width: 3,
                       )
                   ),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0xff6C63FF),
                         width: 3,
                       )
@@ -112,7 +113,7 @@ class FeaturedEstates extends StatelessWidget{
                 ),
               ),
             ),
-            SizedBox(height: 5,),
+            const SizedBox(height: 5,),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -120,51 +121,51 @@ class FeaturedEstates extends StatelessWidget{
                   Container(
                     width: 90,
                     height: 60,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                       color: Color(0xff6C63FF)
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
+                    child: const Padding(
+                      padding: EdgeInsets.all(15.0),
                       child: Center(child: Text("House" , style: TextStyle(color: Colors.white),)),
                     ),
                   ),
-                    SizedBox(width: 10,),
+                    const SizedBox(width: 10,),
                   Container(
                     width: 90,
                     height: 60,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                         color: Color(0xffF4F4F4)
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
                       child: Center(child: Text("Apartment" , style: TextStyle(color: Colors.grey),)),
                     ),
                   ),
-                   SizedBox(width: 10,),
+                   const SizedBox(width: 10,),
                   Container(
                     width: 90,
                     height: 60,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                         color: Color(0xffF4F4F4)
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
+                    child: const Padding(
+                      padding: EdgeInsets.all(15.0),
                       child: Center(child: Text("Hotel" , style: TextStyle(color: Colors.grey),)),
                     ),
                   ),
-                    SizedBox(width: 10,),
+                    const SizedBox(width: 10,),
                   Container(
                     width: 90,
                     height: 60,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                         color: Color(0xffF4F4F4)
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
+                    child: const Padding(
+                      padding: EdgeInsets.all(15.0),
                       child: Center(child: Text("Villa" , style: TextStyle(color: Colors.grey),)),
                     ),
                   ),
@@ -177,12 +178,12 @@ class FeaturedEstates extends StatelessWidget{
             Center(
               child: Container(
                 height: 540,
-                color: Color(0xffF7F7F7),
+                color: const Color(0xffF7F7F7),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Padding(
                     padding:  EdgeInsets.only(bottom:Get.height*0.07),
-                    child: GridView.builder(gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2 ,crossAxisSpacing: 20 , mainAxisSpacing: 20 ,mainAxisExtent: 250 ),
+                    child: GridView.builder(gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2 ,crossAxisSpacing: 20 , mainAxisSpacing: 20 ,mainAxisExtent: 250 ),
                       itemCount: gridView.length,
                       itemBuilder: (_, int index) {
                       return  Box(gridView: gridView ,index: index,);
@@ -195,7 +196,7 @@ class FeaturedEstates extends StatelessWidget{
           ],
         ),
       ),
-      bottomNavigationBar: CustomBottomNavigationBarWidget(),
+      bottomNavigationBar: const CustomBottomNavigationBarWidget(),
     );
   }
 

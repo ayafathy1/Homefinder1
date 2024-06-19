@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Widget/custom_arrow_back.dart';
@@ -24,14 +23,14 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     builder: (ChangePasswordController controller) {
     return  Scaffold(
       appBar: AppBar(
-        leading: CustomArrowBack(),
+        leading: const CustomArrowBack(),
         leadingWidth: 75,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin: EdgeInsets.only(right: 5,left: 20,top: 15),
+            margin: const EdgeInsets.only(right: 5,left: 20,top: 15),
             width: Get.width*0.5,
             height: Get.height*0.14,
             child: Center(
@@ -45,7 +44,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(left: 20),
+            margin: const EdgeInsets.only(left: 20),
             width: Get.width*0.59,
             height: Get.height*0.1,
             child: Text("Select which contact details should we use to Change your password",
@@ -67,13 +66,13 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       BoxShadow(
                         blurRadius:18,
                         color: Colors.grey.withOpacity(0.15),
-                        offset: Offset(3,3),
+                        offset: const Offset(3,3),
 
                       )
                     ]
                 ),
                 child: CustomTextFieldWidget(
-                  formColor: Color(0xffF3F3F3),
+                  formColor: const Color(0xffF3F3F3),
                   Controller: controller.oldPasswordController,
                   validator: controller.passwordValidator,
                   keyboardType: TextInputType.visiblePassword,
@@ -110,13 +109,13 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       BoxShadow(
                         blurRadius:18,
                         color: Colors.grey.withOpacity(0.15),
-                        offset: Offset(3,3),
+                        offset: const Offset(3,3),
 
                       )
                     ]
                 ),
                 child: CustomTextFieldWidget(
-                  formColor: Color(0xffF3F3F3),
+                  formColor: const Color(0xffF3F3F3),
                   Controller: controller.newPasswordController,
                   validator: controller.passwordValidator,
                   keyboardType: TextInputType.visiblePassword,
@@ -153,13 +152,13 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       BoxShadow(
                         blurRadius:18,
                         color: Colors.grey.withOpacity(0.15),
-                        offset: Offset(3,3),
+                        offset: const Offset(3,3),
 
                       )
                     ]
                 ),
                 child: CustomTextFieldWidget(
-                  formColor: Color(0xffF3F3F3),
+                  formColor: const Color(0xffF3F3F3),
                   Controller: controller.confirmPasswordController,
                   validator: controller.confirmValidator,
                   keyboardType: TextInputType.visiblePassword,
@@ -185,7 +184,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               ),
             ),
           ),
-          Container(
+          SizedBox(
             height: Get.height*0.25,
             child: Center(
               child: CustomElevatedButtonWidget(
@@ -204,7 +203,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)
                     ),
-                    fixedSize: Size(180, 65)
+                    fixedSize: const Size(180, 65)
                   )),
             ),
           )

@@ -1,29 +1,29 @@
+// ignore_for_file: library_private_types_in_public_api, avoid_print
+
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImagePickerExample1 extends StatefulWidget {
+  const ImagePickerExample1({super.key});
+
   @override
   _ImagePickerExampleState1 createState() => _ImagePickerExampleState1();
 }
 
 class _ImagePickerExampleState1 extends State<ImagePickerExample1> {
-  List<Uint8List> _images = [];
+  final List<Uint8List> _images = [];
 
   Future<void> _pickImagesFromGallery() async {
     List<XFile>? pickedFiles = await ImagePicker().pickMultiImage();
 
-    if (pickedFiles != null) {
-      for (var pickedFile in pickedFiles) {
-        Uint8List bytes = await pickedFile.readAsBytes();
-        setState(() {
-          _images.add(bytes);
-        });
-      }
-    } else {
-      print('No images selected.');
+    for (var pickedFile in pickedFiles) {
+      Uint8List bytes = await pickedFile.readAsBytes();
+      setState(() {
+        _images.add(bytes);
+      });
     }
-  }
+    }
 
   Future<void> _pickImageFromCamera() async {
     XFile? pickedFile = await ImagePicker().pickImage(source: ImageSource.camera);
@@ -43,22 +43,22 @@ class _ImagePickerExampleState1 extends State<ImagePickerExample1> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Select Image Source'),
+          title: const Text('Select Image Source'),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
                 GestureDetector(
-                  child: Text('Gallery'),
+                  child: const Text('Gallery'),
                   onTap: () {
                     Navigator.of(context).pop();
                     _pickImagesFromGallery();
                   },
                 ),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.all(8.0),
                 ),
                 GestureDetector(
-                  child: Text('Camera'),
+                  child: const Text('Camera'),
                   onTap: () {
                     Navigator.of(context).pop();
                     _pickImageFromCamera();
@@ -76,14 +76,14 @@ class _ImagePickerExampleState1 extends State<ImagePickerExample1> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Image Picker Example'),
+        title: const Text('Image Picker Example'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             _images.isEmpty
-                ? Text('No images selected.')
+                ? const Text('No images selected.')
                 : Expanded(
               child: GridView.count(
                 crossAxisCount: 3,
@@ -92,10 +92,10 @@ class _ImagePickerExampleState1 extends State<ImagePickerExample1> {
                 }),
               ),
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: _showImagePickerDialog,
-              child: Text('Select Image'),
+              child: const Text('Select Image'),
             ),
           ],
         ),

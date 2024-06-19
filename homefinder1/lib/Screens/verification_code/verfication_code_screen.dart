@@ -1,16 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/auth/CompleteSignUp/complete_sign_up.dart';
-import 'package:homefinder1/Screens/auth/SignIn/signin.dart';
 import 'package:homefinder1/Widget/custom_arrow_back.dart';
 import 'package:timer_builder/timer_builder.dart';
 
 import 'controller/verification_code_controller.dart';
 
 class VerficationCode extends StatefulWidget {
+  const VerficationCode({super.key});
+
   @override
   State<VerficationCode> createState() => _VerficationCodeState();
 }
@@ -24,7 +23,7 @@ class _VerficationCodeState extends State<VerficationCode> {
         return Scaffold(
           appBar: AppBar(
             leadingWidth: Get.width*0.2,
-            leading:  CustomArrowBack(),
+            leading:  const CustomArrowBack(),
             toolbarHeight: Get.height*0.12,
             backgroundColor: Colors.transparent,
             elevation: 0,
@@ -33,23 +32,23 @@ class _VerficationCodeState extends State<VerficationCode> {
             crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Container(
+              SizedBox(
                 height: Get.height*0.17,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text(
+                    const Text(
                       "Enter 6-digit",
                       style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                     ),
-                    Text(
+                    const Text(
                       "Verification Code",
                       style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                     ),
 
-                    Text("Code sent to your email. Code will expire in:"),
+                    const Text("Code sent to your email. Code will expire in:"),
                     TimerBuilder.periodic(
-                      Duration(seconds: 1),
+                      const Duration(seconds: 1),
                       builder: (context) {
                         // Calculate remaining time
                         Duration remainingTime = controller.calculateRemainingTime();
@@ -58,7 +57,7 @@ class _VerficationCodeState extends State<VerficationCode> {
                         // Return the formatted time widget
                         return Text(
                           formattedTime,
-                          style: TextStyle(fontSize: 20),
+                          style: const TextStyle(fontSize: 20),
                         );
                       },
                     ),
@@ -83,11 +82,11 @@ class _VerficationCodeState extends State<VerficationCode> {
                               FilteringTextInputFormatter.digitsOnly,
                             ],
                             decoration: InputDecoration(
-                              fillColor: Color(0xffF4F4F4),
+                              fillColor: const Color(0xffF4F4F4),
                               filled: true,
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Color(0xffF4F4F4),
                                   width: 3,
                                 ),
@@ -98,15 +97,15 @@ class _VerficationCodeState extends State<VerficationCode> {
 
                         Row(
                           children: [
-                            SizedBox(width: 50,),
-                            Text("Didn't receive a code?", style: TextStyle(fontSize: 20),),
+                            const SizedBox(width: 50,),
+                            const Text("Didn't receive a code?", style: TextStyle(fontSize: 20),),
                             TextButton(
                               onPressed: () async {
                                 controller.resendCode();
                               },
                               child: Text(
                                 "Resend",
-                                style: TextStyle(color:controller.remainingTimeInSeconds==0?Color(0xff6C63FF):Colors.grey, fontSize: 20),
+                                style: TextStyle(color:controller.remainingTimeInSeconds==0?const Color(0xff6C63FF):Colors.grey, fontSize: 20),
                               ),
                             ),
                           ],
@@ -120,14 +119,21 @@ class _VerficationCodeState extends State<VerficationCode> {
                 onPressed: () async {
                   String? verificationCode = await controller.fetchVerificationCode();
                   if (verificationCode == controller.verificationCodeController.text) {
-                    Get.to(() => CompleteSignUp());
+                    Get.to(() => const CompleteSignUp());
                   } else {
                     // Verification code doesn't match
                     // Handle invalid verification code
-                    print('Invalid verification code');
                   }
                 },
-                child: Row(
+                style: ElevatedButton.styleFrom(
+                  fixedSize:const Size(190, 65),
+                  backgroundColor: const Color(0xff6C63FF),
+          
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                ),
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Center(
@@ -139,14 +145,6 @@ class _VerficationCodeState extends State<VerficationCode> {
                     SizedBox(width: 10,),
                     Icon(Icons.navigate_next, size: 30,),
                   ],
-                ),
-                style: ElevatedButton.styleFrom(
-                  fixedSize:Size(190, 65),
-                  backgroundColor: Color(0xff6C63FF),
-          
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25),
-                  ),
                 ),
               ),
             ],

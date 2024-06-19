@@ -1,10 +1,8 @@
-import 'dart:math';
 
-import 'package:animated_splash_screen/animated_splash_screen.dart';
+// ignore_for_file: file_names, use_key_in_widget_constructors
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_arc_text/flutter_arc_text.dart';
-import 'package:splash_view/source/presentation/pages/pages.dart';
 import 'package:splash_view/source/presentation/presentation.dart';
 
 import '../WelcomeScreen/welcomescreen.dart';
@@ -13,16 +11,16 @@ class SplashScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return SplashView(
-      backgroundColor: Color(0xff6C63FF),
-      duration: Duration(seconds: 6),
-      done: Done(Welcomescreen()),
+      backgroundColor: const Color(0xff6C63FF),
+      duration: const Duration(seconds: 6),
+      done: Done(const Welcomescreen()),
 
-      logo: Stack(
+      logo: const Stack(
         alignment: Alignment.topCenter,
           children:[
             Image(image: AssetImage('lib/assets/images/Minimalist Modern Real Estate Agent Logo (3) 1.png')),
          Padding(
-           padding: const EdgeInsets.all(50.0),
+           padding: EdgeInsets.all(50.0),
            child: 
              Image(image: AssetImage('lib/assets/images/HomeFinder.png'))
            // ArcText(radius: 110,

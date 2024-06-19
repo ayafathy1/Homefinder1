@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/WelcomeScreen/welcomescreen.dart';
 import 'package:homefinder1/Widget/custom_arrow_back.dart';
@@ -34,7 +32,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
               fontSize: 25,
               fontWeight: FontWeight.w900),
         ),
-        leading: CustomArrowBack(),
+        leading: const CustomArrowBack(),
         leadingWidth: 75,
       ),
       body: Column(
@@ -50,7 +48,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0,top: 30,bottom: 25),
-                    child: Container(
+                    child: SizedBox(
                         width: Get.width*0.6,
                         height: Get.height*0.1,
                         child: Text("Enter your password to delete the account",style: TextStyle(
@@ -70,7 +68,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                             BoxShadow(
                               blurRadius:20,
                               color: Colors.grey.withOpacity(0.15),
-                              offset: Offset(3,3),
+                              offset: const Offset(3,3),
 
                             )
                           ]
@@ -80,7 +78,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                           validator: controller.passwordValidator,
                           keyboardType: TextInputType.visiblePassword,
                           textfieldHint: "Enter Your Password",
-                          textfieldIcon: Image(
+                          textfieldIcon: const Image(
                             image: AssetImage("lib/assets/images/LockIcon.png"),
                           ),
                           ispasswordField: true,
@@ -114,7 +112,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
               child: CustomElevatedButtonWidget(text: "Delete",
                   onPressed: (){
                 if(controller.formkey.currentState!.validate()){
-                  Get.to(()=>Welcomescreen());
+                  Get.to(()=>const Welcomescreen());
                 }
                   }, textStyle: TextStyle(
                     color: Colors.white,
@@ -122,7 +120,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                     fontSize: 16,
                     fontWeight: FontWeight.w900
                   ), style: ElevatedButton.styleFrom(
-                    fixedSize:Size (172.21,57),
+                    fixedSize:const Size (172.21,57),
                     backgroundColor: kPrimaryColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)

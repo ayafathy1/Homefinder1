@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,7 +11,7 @@ Color deActiveContainerColor=kLightGreyColor;
 Color activeTextColor=Colors.white;
 Color deActiveTextColor=kDarkBlueColor;
 int selectedIndex=2;
-SfRangeValues values = SfRangeValues(100.0, 5000.0);
+SfRangeValues values = const SfRangeValues(100.0, 5000.0);
 final List<String> labels=["\$100","\$500","\$1000","\$1500","\$3000","\$5000"];
 List<double> rate=[5,4,3,2];
 String? selectedOption = '3';
@@ -30,7 +29,7 @@ void restFilter(){
   selectedIndex1=0;
   selectedIndex2=0;
   selectedOption="3";
-  values=SfRangeValues(100, 5000);
+  values=const SfRangeValues(100, 5000);
   update();
 }
 }

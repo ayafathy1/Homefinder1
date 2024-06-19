@@ -2,10 +2,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:homefinder1/Screens/auth/Signup/signup.dart';
 import 'package:homefinder1/utilities/memory.dart';
 
-import 'Screens/verification_code/verfication_code_screen.dart';
+import 'Screens/home/home_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,10 +22,10 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    return GetMaterialApp(
+    return const GetMaterialApp(
      debugShowCheckedModeBanner: false,
         color: Colors.transparent,
-      home: VerficationCode(),
+      home: HomeScreen(),
     );
   }
 }

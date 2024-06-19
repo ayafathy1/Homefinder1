@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
@@ -6,7 +7,6 @@ import 'package:homefinder1/Widget/custom_arrow_back.dart';
 import 'package:homefinder1/utilities/colors.dart';
 import 'package:homefinder1/utilities/constants.dart';
 
-import '../../Widget/custom_elevated_button_widget.dart';
 
 class AddReviewScreen extends StatelessWidget {
   const AddReviewScreen({super.key});
@@ -18,26 +18,26 @@ class AddReviewScreen extends StatelessWidget {
           child: Column(
         children: [
           Container(
-            padding: EdgeInsets.only(top: 25),
+            padding: const EdgeInsets.only(top: 25),
             height: Get.height * 0.22,
             width: Get.width,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                CustomArrowBack(),
-              ],
-            ),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20)),
                 image: DecorationImage(
                     image: AssetImage("lib/assets/images/reviewHouse.png"),
                     fit: BoxFit.fill)),
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                CustomArrowBack(),
+              ],
+            ),
           ),
-          Center(
-            child: Container(
+          const Center(
+            child: SizedBox(
               height: 120,
               width: 120,
               child: Image(
@@ -56,22 +56,20 @@ class AddReviewScreen extends StatelessWidget {
                   color: kVeryDarkBlueColor),
             ),
           ),
-          Container(
+          SizedBox(
             height: 80,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Center(
-                  child: Container(
-                    child: Center(
-                      child: Text(
-                        "Agent",
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontFamily: kRegularFont,
-                            fontWeight: FontWeight.w500,
-                            color: kGreyColor),
-                      ),
+                  child: Center(
+                    child: Text(
+                      "Agent",
+                      style: TextStyle(
+                          fontSize: 12,
+                          fontFamily: kRegularFont,
+                          fontWeight: FontWeight.w500,
+                          color: kGreyColor),
                     ),
                   ),
                 ),
@@ -86,11 +84,11 @@ class AddReviewScreen extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 20.0, right: 20, top: 10),
+          const Padding(
+            padding: EdgeInsets.only(left: 20.0, right: 20, top: 10),
             child: Divider(),
           ),
-          Container(
+          SizedBox(
             height: 60,
             child: Center(
               child: Text(
@@ -121,7 +119,7 @@ class AddReviewScreen extends StatelessWidget {
             ),
           ),
           Container(
-            padding: EdgeInsets.only(left: 25),
+            padding: const EdgeInsets.only(left: 25),
             height: 50,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -139,13 +137,13 @@ class AddReviewScreen extends StatelessWidget {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 10),
+            margin: const EdgeInsets.only(top: 10),
             height: Get.height * 0.15,
             width: Get.width * 0.92,
             decoration: BoxDecoration(boxShadow: [
               BoxShadow(
                   color: Colors.grey.shade300,
-                  offset: Offset(0, 0),
+                  offset: const Offset(0, 0),
                   blurRadius: 5)
             ]),
             child: Center(
@@ -153,8 +151,8 @@ class AddReviewScreen extends StatelessWidget {
               textAlignVertical: TextAlignVertical.top,
               decoration: InputDecoration(
                   contentPadding:
-                      EdgeInsets.symmetric(vertical: 100.0, horizontal: 15.0),
-                  fillColor: Color(0xffF4F6F9),
+                      const EdgeInsets.symmetric(vertical: 100.0, horizontal: 15.0),
+                  fillColor: const Color(0xffF4F6F9),
                   filled: true,
                   hintText: "Enter here",
                   hintTextDirection: TextDirection.ltr,
@@ -164,7 +162,7 @@ class AddReviewScreen extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                       fontFamily: kRegularFont),
                   enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                       ),
                       borderRadius: BorderRadius.circular(10))),
@@ -172,7 +170,7 @@ class AddReviewScreen extends StatelessWidget {
           ),
           Center(
             child: Container(
-              margin: EdgeInsets.only(top: 20),
+              margin: const EdgeInsets.only(top: 20),
               width: 220,
               height: 60,
               child:ElevatedButton(
@@ -180,7 +178,7 @@ class AddReviewScreen extends StatelessWidget {
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-              fixedSize: Size(215,53)
+              fixedSize: const Size(215,53)
               ,backgroundColor: kPrimaryColor,
               ), child: Text("Submit",style:
               TextStyle(

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class DeleteAccountController extends GetxController{
+  @override
   void onInit() {
     super.onInit();
     passwordVisible = false;
@@ -19,5 +20,6 @@ class DeleteAccountController extends GetxController{
     } else {
       return "   Enter Correct password";
     }
+    return null;
   }
 }

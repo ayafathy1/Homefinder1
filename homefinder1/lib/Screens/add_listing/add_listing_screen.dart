@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:homefinder1/Widget/custom_elevated_button_widget.dart';
 import 'package:homefinder1/utilities/colors.dart';
 import 'package:homefinder1/utilities/constants.dart';
 
@@ -10,7 +7,7 @@ import '../../Widget/custom_arrow_back.dart';
 
 class AddListing extends StatefulWidget {
 
-   AddListing({super.key});
+   const AddListing({super.key});
 
   @override
   State<AddListing> createState() => _AddListingState();
@@ -48,14 +45,14 @@ class _AddListingState extends State<AddListing> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: SingleChildScrollView(
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start,children: [SizedBox(height: Get.width*0.13),Row(children: [CustomArrowBack(),SizedBox(width: Get.width*0.1,),Text("Add Listing",style: TextStyle(fontFamily: kRegularFont,fontWeight: FontWeight.w900,fontSize: 23,color: kDarkBlueColor),),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start,children: [SizedBox(height: Get.width*0.13),Row(children: [const CustomArrowBack(),SizedBox(width: Get.width*0.1,),Text("Add Listing",style: TextStyle(fontFamily: kRegularFont,fontWeight: FontWeight.w900,fontSize: 23,color: kDarkBlueColor),),
          ],), SizedBox(height: Get.height*0.09,),
         Row(children: [SizedBox(width: Get.width*0.02,),Text(" Fill detail of your ",
           style: TextStyle(fontSize: 20,fontFamily: kRegularFont,fontWeight: FontWeight.w600,color: kDarkBlueColor),),
           Text("real estate ",style: TextStyle(fontWeight: FontWeight.w900,fontSize: 20,color: kDarkBlueColor,fontFamily: kRegularFont),)],),
         SizedBox(height: Get.height*0.05,),Padding(
           padding: const EdgeInsets.only(left: 21.0),
-          child: Container(
+          child: SizedBox(
             height: Get.height*0.15,
             width: Get.width*0.87,
             child: TextField(
@@ -63,22 +60,22 @@ class _AddListingState extends State<AddListing> {
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.only(top:Get.height*0.075),
                 filled: true,
-                fillColor: Color(0xffF4F4F4),
+                fillColor: const Color(0xffF4F4F4),
                 hintText: "      The Lodge House",
                 hintStyle: TextStyle(color: kDarkBlueColor,fontFamily: kRegularFont,fontWeight: FontWeight.w800,
                 fontSize: 15),
 
-                suffixIcon: Image(image: AssetImage('lib/assets/images/HouseSerchIcon.png')),
+                suffixIcon: const Image(image: AssetImage('lib/assets/images/HouseSerchIcon.png')),
                 enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Color(0xffF4F4F4),
                       width: 3,
                     )
                 ),
                 focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Color(0xff6C63FF),
                       width: 3,
                     )
@@ -181,9 +178,9 @@ class _AddListingState extends State<AddListing> {
           width: 210,
           height: 64,
           decoration: BoxDecoration(color: kPrimaryColor,border: Border.all(color: kPrimaryColor,width: 1),borderRadius: BorderRadius.circular(20)),
-          child: ElevatedButton(child:Text( "Next",style: TextStyle(color: Colors.white,fontFamily: kRegularFont,fontSize: 20,fontWeight: FontWeight.w700,),), onPressed: (){},
+          child: ElevatedButton(onPressed: (){},
               style: ElevatedButton.styleFrom(backgroundColor: kPrimaryColor,
-              fixedSize: Size(200,70))),
+              fixedSize: const Size(200,70)), child:Text( "Next",style: TextStyle(color: Colors.white,fontFamily: kRegularFont,fontSize: 20,fontWeight: FontWeight.w700,),)),
         ),
       )],),
     ),);

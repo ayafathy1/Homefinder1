@@ -1,21 +1,17 @@
-import 'dart:convert';
+// ignore_for_file: use_build_context_synchronously, curly_braces_in_flow_control_structures, avoid_print
+
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/verification_code/verfication_code_screen.dart';
 import 'package:homefinder1/models/auth_model.dart';
 import 'package:homefinder1/services/auth_service.dart';
 import 'package:homefinder1/utilities/memory.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../utilities/api_service.dart';
 
 class SignUpController extends GetxController {
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   final formkey = GlobalKey<FormState>();
 
@@ -66,6 +62,7 @@ class SignUpController extends GetxController {
     } else {
       return "   Enter Correct User Name";
     }
+    return null;
   }
 
   String? emailValidator(email) {
@@ -75,6 +72,7 @@ class SignUpController extends GetxController {
     } else {
       return "   Enter Correct Email";
     }
+    return null;
   }
 
   String? passwordValidator(password) {
@@ -84,9 +82,9 @@ class SignUpController extends GetxController {
     } else {
       return "   Enter Correct password";
     }
+    return null;
   }
 
-  @override
   saveAndValidate() {
     var formdata = formkey.currentState;
     if (formdata!.validate()) {
@@ -122,11 +120,7 @@ class SignUpController extends GetxController {
       if (data?.status == "success") {
         await Get.find<StorageService>().saveAccountId(data?.userId ?? "");
         await Get.find<StorageService>().saveAccountToken(data?.token ?? "");
-        AuthModel? code = await AuthServices.SendingVerificationCose(
-           StorageKeys.userId,
-            context
-        );
-        Get.to(() => VerficationCode());
+        Get.to(() => const VerficationCode());
       }
     } catch (e) {
       // Handle bad request error
@@ -145,7 +139,6 @@ class SignUpController extends GetxController {
     }
 
   }
-  @override
   Widget build(BuildContext context) {
     return Container();
   }

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_unnecessary_containers, duplicate_ignore
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -35,11 +37,11 @@ class ProfileController extends GetxController{
 
           } ,
           child: Container(
-            padding: EdgeInsets.only(left: 10,right: 10,bottom: 10,top: 5
+            padding: const EdgeInsets.only(left: 10,right: 10,bottom: 10,top: 5
             ),
             width: 180,
             decoration: BoxDecoration(
-                color: Color(0xffF5F4F8),
+                color: const Color(0xffF5F4F8),
                 borderRadius: BorderRadius.circular(25)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,7 +73,7 @@ class ProfileController extends GetxController{
                                 update();
                               },
                               child: Container(
-                                  margin: EdgeInsets.only(
+                                  margin: const EdgeInsets.only(
                                       top: 7, right: 7),
                                   width: 30,
                                   height: 30,
@@ -84,7 +86,7 @@ class ProfileController extends GetxController{
                                     child: Icon(
                                       selectedIndex1==index? Icons.favorite:Icons
                                           .favorite_border_outlined,
-                                      color:selectedIndex1==index? kPrimaryColor:Color(0xff234F68),
+                                      color:selectedIndex1==index? kPrimaryColor:const Color(0xff234F68),
                                       size: 14,
                                     ),
                                   )),
@@ -96,11 +98,11 @@ class ProfileController extends GetxController{
                           MainAxisAlignment.end,
                           children: [
                             Container(
-                              margin: EdgeInsets.only(
+                              margin: const EdgeInsets.only(
                                   bottom: 7, right: 7),
-                              padding: EdgeInsets.all(5),
+                              padding: const EdgeInsets.all(5),
                               decoration: BoxDecoration(
-                                  color: Color(0xff1F4C6B)
+                                  color: const Color(0xff1F4C6B)
                                       .withOpacity(0.6),
                                   borderRadius:
                                   BorderRadius.circular(8)),
@@ -124,6 +126,7 @@ class ProfileController extends GetxController{
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0),
+                  // ignore: avoid_unnecessary_containers
                   child: Container(
 
                     child: Text(
@@ -141,7 +144,7 @@ class ProfileController extends GetxController{
                   padding: const EdgeInsets.only(left: 5.0),
                   child: Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.access_time_filled_outlined,
                         color: Color(0xff8BC83F),
                         size: 13,
@@ -152,13 +155,13 @@ class ProfileController extends GetxController{
                           children: [
                             Text("November",
                               style: TextStyle(
-                                  color: Color(0xff53587A),
+                                  color: const Color(0xff53587A),
                                   fontWeight: FontWeight.w500,
                                   fontSize: 8,
                                   fontFamily: kRegularFont),),
                             Text("21, 2021",
                               style: TextStyle(
-                                  color: Color(0xff53587A),
+                                  color: const Color(0xff53587A),
                                   fontWeight: FontWeight.w500,
                                   fontSize: 8,
                                   fontFamily: kRegularFont),),
@@ -182,11 +185,11 @@ class ProfileController extends GetxController{
 
         } ,
         child: Container(
-          padding: EdgeInsets.only(left: 10,right: 10,bottom: 10,top: 5
+          padding: const EdgeInsets.only(left: 10,right: 10,bottom: 10,top: 5
           ),
           width: 180,
           decoration: BoxDecoration(
-              color: Color(0xffF5F4F8),
+              color: const Color(0xffF5F4F8),
               borderRadius: BorderRadius.circular(25)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -217,7 +220,7 @@ class ProfileController extends GetxController{
 
                             },
                             child: Container(
-                                margin: EdgeInsets.only(
+                                margin: const EdgeInsets.only(
                                     top: 7, left: 7),
                                 width: 30,
                                 height: 30,
@@ -226,7 +229,7 @@ class ProfileController extends GetxController{
                                     borderRadius:
                                     BorderRadius.circular(
                                         50)),
-                                child: Center(
+                                child: const Center(
                                   child: Icon(
                                     Icons.edit,
                                     color:Colors.white,
@@ -240,7 +243,7 @@ class ProfileController extends GetxController{
                               update();
                             },
                             child: Container(
-                                margin: EdgeInsets.only(
+                                margin: const EdgeInsets.only(
                                     top: 7, right: 7),
                                 width: 30,
                                 height: 30,
@@ -253,7 +256,7 @@ class ProfileController extends GetxController{
                                   child: Icon(
                                     selectedIndex1==index? Icons.favorite:Icons
                                         .favorite_border_outlined,
-                                    color:selectedIndex1==index? kPrimaryColor:Color(0xff234F68),
+                                    color:selectedIndex1==index? kPrimaryColor:const Color(0xff234F68),
                                     size: 14,
                                   ),
                                 )),
@@ -266,11 +269,11 @@ class ProfileController extends GetxController{
                         MainAxisAlignment.end,
                         children: [
                           Container(
-                            margin: EdgeInsets.only(
+                            margin: const EdgeInsets.only(
                                 bottom: 7, right: 7),
-                            padding: EdgeInsets.all(5),
+                            padding: const EdgeInsets.all(5),
                             decoration: BoxDecoration(
-                                color: Color(0xff1F4C6B)
+                                color: const Color(0xff1F4C6B)
                                     .withOpacity(0.6),
                                 borderRadius:
                                 BorderRadius.circular(8)),
@@ -315,21 +318,21 @@ class ProfileController extends GetxController{
                       children: [
                         Icon(
                           Icons.star,
-                          color: Color(0xff234F68).withOpacity(0.9),
+                          color: const Color(0xff234F68).withOpacity(0.9),
                           size: 13,
                         ),
                         Text("4",style: TextStyle(fontFamily: kRegularFont,fontSize: 8,
-                            fontWeight: FontWeight.w900,color: Color(0xff53587A)),),
+                            fontWeight: FontWeight.w900,color: const Color(0xff53587A)),),
                       ],
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 3.0),
                       child: Row(
                         children: [
-                          Icon(Icons.location_on_sharp,color: Color(0xff1F4C6B),size:13 ,),
+                          const Icon(Icons.location_on_sharp,color: Color(0xff1F4C6B),size:13 ,),
                           Text("Jakarta, Indonesia1",
                             style: TextStyle(
-                                color: Color(0xff53587A),
+                                color: const Color(0xff53587A),
                                 fontWeight: FontWeight.w500,
                                 fontSize: 8,
                                 fontFamily: kRegularFont),),
@@ -352,11 +355,11 @@ class ProfileController extends GetxController{
 
         } ,
         child: Container(
-          padding: EdgeInsets.only(left: 10,right: 10,bottom: 10,top: 5
+          padding: const EdgeInsets.only(left: 10,right: 10,bottom: 10,top: 5
           ),
           width: 180,
           decoration: BoxDecoration(
-              color: Color(0xffF5F4F8),
+              color: const Color(0xffF5F4F8),
               borderRadius: BorderRadius.circular(25)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -388,7 +391,7 @@ class ProfileController extends GetxController{
                               update();
                             },
                             child: Container(
-                                margin: EdgeInsets.only(
+                                margin: const EdgeInsets.only(
                                     top: 7, right: 7),
                                 width: 30,
                                 height: 30,
@@ -401,7 +404,7 @@ class ProfileController extends GetxController{
                                   child: Icon(
                                     Icons
                                         .favorite_border_outlined,
-                                    color:selectedIndex1==index? kPrimaryColor:Color(0xff234F68),
+                                    color:selectedIndex1==index? kPrimaryColor:const Color(0xff234F68),
                                     size: 14,
                                   ),
                                 )),
@@ -413,11 +416,11 @@ class ProfileController extends GetxController{
                         MainAxisAlignment.end,
                         children: [
                           Container(
-                            margin: EdgeInsets.only(
+                            margin: const EdgeInsets.only(
                                 bottom: 7, right: 7),
-                            padding: EdgeInsets.all(5),
+                            padding: const EdgeInsets.all(5),
                             decoration: BoxDecoration(
-                                color: Color(0xff1F4C6B)
+                                color: const Color(0xff1F4C6B)
                                     .withOpacity(0.6),
                                 borderRadius:
                                 BorderRadius.circular(8)),
@@ -458,7 +461,7 @@ class ProfileController extends GetxController{
                 padding: const EdgeInsets.only(left: 5.0),
                 child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.access_time_filled_outlined,
                       color: Color(0xff8BC83F),
                       size: 13,
@@ -469,13 +472,13 @@ class ProfileController extends GetxController{
                         children: [
                           Text("November",
                             style: TextStyle(
-                                color: Color(0xff53587A),
+                                color: const Color(0xff53587A),
                                 fontWeight: FontWeight.w500,
                                 fontSize: 8,
                                 fontFamily: kRegularFont),),
                           Text("21, 2021",
                             style: TextStyle(
-                                color: Color(0xff53587A),
+                                color: const Color(0xff53587A),
                                 fontWeight: FontWeight.w500,
                                 fontSize: 8,
                                 fontFamily: kRegularFont),),

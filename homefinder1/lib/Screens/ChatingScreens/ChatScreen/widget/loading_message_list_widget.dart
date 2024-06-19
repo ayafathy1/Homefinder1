@@ -3,7 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-import '../../../utilities/colors.dart';
+import '../../../../utilities/colors.dart';
+
 
 class LoadingMessageListWidget extends StatelessWidget {
    LoadingMessageListWidget({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class LoadingMessageListWidget extends StatelessWidget {
         padding:  const EdgeInsets.symmetric(horizontal: 10),
         decoration:    BoxDecoration(
           color: kPrimaryColor,
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(30),
             topRight: Radius.circular(30),
           ),

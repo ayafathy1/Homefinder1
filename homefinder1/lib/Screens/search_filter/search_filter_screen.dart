@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
@@ -11,7 +10,7 @@ import '../../utilities/colors.dart';
 import '../../utilities/constants.dart';
 
 class SearchFilter extends StatefulWidget {
-  SearchFilter({super.key});
+  const SearchFilter({super.key});
 
   @override
   State<SearchFilter> createState() => _SearchFilterState();
@@ -26,7 +25,7 @@ class _SearchFilterState extends State<SearchFilter> {
           return Scaffold(
             appBar: AppBar(
               leadingWidth: 85,
-              leading: CustomArrowBack(),
+              leading: const CustomArrowBack(),
               title: Text(
                 "Filter",
                 style: TextStyle(
@@ -37,27 +36,27 @@ class _SearchFilterState extends State<SearchFilter> {
               ),
             ),
             body: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               controller: controller.sController,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 15),
+                    margin: const EdgeInsets.only(left: 15),
                     width: Get.width * 0.85,
                     height: Get.height * 0.06,
                     child: ListView.separated(
                         controller: controller.sController,
                         separatorBuilder: (context, index) {
-                          return SizedBox(
+                          return const SizedBox(
                             width: 5,
                           );
                         },
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         itemCount: 2,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
@@ -91,7 +90,7 @@ class _SearchFilterState extends State<SearchFilter> {
                           );
                         }),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Row(
@@ -112,7 +111,7 @@ class _SearchFilterState extends State<SearchFilter> {
                   SizedBox(
                     height: Get.height * 0.02,
                   ),
-                  Container(
+                  SizedBox(
                     width: Get.width * 0.98,
                     height: Get.height * 0.04,
                     child: SfRangeSlider(
@@ -121,7 +120,7 @@ class _SearchFilterState extends State<SearchFilter> {
                       min: controller.min,
                       max: controller.max,
                       activeColor: kPrimaryColor,
-                      inactiveColor: Color(0xffE2EBFF),
+                      inactiveColor: const Color(0xffE2EBFF),
                       interval: 500,
                       numberFormat: NumberFormat('\$'),
                       onChanged: (values) {
@@ -199,18 +198,18 @@ class _SearchFilterState extends State<SearchFilter> {
                           color: kVeryDarkBlueColor),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     height: Get.height * 0.25,
                     width: Get.width * 0.98,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
+                        SizedBox(
                           height: Get.height * 0.25,
                           width: Get.width * 0.7,
                           child: ListView.separated(
-                            padding: EdgeInsets.only(left: 10, top: 8),
+                            padding: const EdgeInsets.only(left: 10, top: 8),
                             itemBuilder: (context, index) {
                               return Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -220,7 +219,7 @@ class _SearchFilterState extends State<SearchFilter> {
                                   Row(
                                     children: [
                                       Container(
-                                        margin: EdgeInsets.only(right: 10),
+                                        margin: const EdgeInsets.only(right: 10),
                                         child: RatingBar.builder(
                                           initialRating: controller.rate[index],
                                           minRating: 1,
@@ -251,17 +250,17 @@ class _SearchFilterState extends State<SearchFilter> {
                               );
                             },
                             itemCount: 4,
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             scrollDirection: Axis.vertical,
                             separatorBuilder:
                                 (BuildContext context, int index) {
-                              return SizedBox(
+                              return const SizedBox(
                                 height: 11,
                               );
                             },
                           ),
                         ),
-                        Container(
+                        SizedBox(
                           height: Get.height * 0.3,
                           width: Get.width * 0.1,
                           child: Column(
@@ -323,12 +322,12 @@ class _SearchFilterState extends State<SearchFilter> {
                           color: kVeryDarkBlueColor),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     width: Get.width,
                     height: Get.height * 0.065,
                     child: ListView.separated(
                         controller: controller.sController,
-                        padding: EdgeInsets.only(left: 10, top: 10),
+                        padding: const EdgeInsets.only(left: 10, top: 10),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           return InkWell(
@@ -359,7 +358,7 @@ class _SearchFilterState extends State<SearchFilter> {
                           );
                         },
                         separatorBuilder: (context, index) {
-                          return SizedBox(
+                          return const SizedBox(
                             width: 7,
                           );
                         },
@@ -376,12 +375,12 @@ class _SearchFilterState extends State<SearchFilter> {
                           color: kVeryDarkBlueColor),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     width: Get.width,
                     height: Get.height * 0.065,
                     child: ListView.separated(
                         controller: controller.sController,
-                        padding: EdgeInsets.only(left: 10, top: 10),
+                        padding: const EdgeInsets.only(left: 10, top: 10),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           return InkWell(
@@ -412,7 +411,7 @@ class _SearchFilterState extends State<SearchFilter> {
                           );
                         },
                         separatorBuilder: (context, index) {
-                          return SizedBox(
+                          return const SizedBox(
                             width: 7,
                           );
                         },
@@ -431,8 +430,8 @@ class _SearchFilterState extends State<SearchFilter> {
                   ),
                   Center(
                     child: Container(
-                        padding: EdgeInsets.only(left: 20, right: 20),
-                        margin: EdgeInsets.only(top: 10),
+                        padding: const EdgeInsets.only(left: 20, right: 20),
+                        margin: const EdgeInsets.only(top: 10),
                         width: Get.width * 0.8,
                         height: Get.height * 0.06,
                         decoration: BoxDecoration(
@@ -461,11 +460,11 @@ class _SearchFilterState extends State<SearchFilter> {
                         )),
                   ),
                   Container(
-                    padding: EdgeInsets.only(left: 40,right: 40),
-                    margin: EdgeInsets.only(top: 25),
+                    padding: const EdgeInsets.only(left: 40,right: 40),
+                    margin: const EdgeInsets.only(top: 25),
                     height: 65,
                     width: Get.width,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: Color(0xfffffbfe),
                         boxShadow: [
                           BoxShadow(
@@ -487,7 +486,7 @@ class _SearchFilterState extends State<SearchFilter> {
                           fontWeight: FontWeight.w700,
                           color: kPrimaryColor),)),
 
-                      Container(
+                      SizedBox(
                         width: 150,
                         height: 50,
                         child: ElevatedButton(

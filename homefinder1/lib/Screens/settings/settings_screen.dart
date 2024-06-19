@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/settings/controller/settings_controller4.dart';
@@ -25,9 +24,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
         leading: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 5.0),
-              child: Container(
+            const Padding(
+              padding: EdgeInsets.only(left: 5.0),
+              child: SizedBox(
                 width: 59.5,
                 height: 58.88,
                 child: Image(
@@ -50,7 +49,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Text("ashfaksayem@gmail.com",
                     style: TextStyle(
                         fontSize: 12,
-                        color: Color(0xff535763),
+                        color: const Color(0xff535763),
                         fontWeight: FontWeight.w600,
                         fontFamily: kRegularFont))
               ],
@@ -59,17 +58,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
 
       ),
-      bottomNavigationBar: CustomBottomNavigationBarWidget(selectedOne:
+      bottomNavigationBar: const CustomBottomNavigationBarWidget(selectedOne:
       "lib/assets/images/homeIconButtonNavigationUnselected.png",selectedFifth: "lib/assets/images/SettingsIconButtomNavBar.png",),
       body: Column(
         children: [
           Center(
-            child: Container(
+            child: SizedBox(
               height: Get.height*0.8,
               width: Get.width*0.9,
               child: ListView.separated(
-                padding: EdgeInsets.only(top: 10),
-                physics: NeverScrollableScrollPhysics()
+                padding: const EdgeInsets.only(top: 10),
+                physics: const NeverScrollableScrollPhysics()
               ,itemBuilder: (context,index){return
                 InkWell(
                   onTap: (){
@@ -93,7 +92,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               boxShadow: [
                                 BoxShadow(
                                     color:  controller.selectedIndex==index?Colors.grey.shade300:Colors.transparent,
-                                    offset: Offset(0, 0),
+                                    offset: const Offset(0, 0),
                                     blurRadius: 30)
                               ]
                           ),
@@ -107,14 +106,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       Padding(
                         padding: const EdgeInsets.only(left: 10.0),
                         child: Text(controller.actions[index],style: TextStyle(
-                            color:  controller.selectedIndex==index?Colors.white:Color(0xff535763),fontFamily: kRegularFont,
+                            color:  controller.selectedIndex==index?Colors.white:const Color(0xff535763),fontFamily: kRegularFont,
                             fontWeight: FontWeight.w800,fontSize: 17
                         ),),
                       )
                     ],),
                   ),
                 );}, separatorBuilder: (context,index){return
-              SizedBox(height: 15,);}, itemCount: 7),
+              const SizedBox(height: 15,);}, itemCount: 7),
             )
           )
         ],

@@ -1,7 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Widget/custom_arrow_back.dart';
 import 'package:homefinder1/utilities/colors.dart';
@@ -27,7 +25,7 @@ class _AddListingFirstDetailScreenState extends State<AddListingFirstDetailScree
       appBar: AppBar(
         toolbarHeight: Get.height*0.1,
         leadingWidth: Get.width * 0.25,
-        leading: CustomArrowBack(),
+        leading: const CustomArrowBack(),
         title: Text(
           "Add Listing",
           style: TextStyle(
@@ -56,13 +54,13 @@ class _AddListingFirstDetailScreenState extends State<AddListingFirstDetailScree
                 ),),
             ),
             Container(
-              margin: EdgeInsets.only(left: 12,top: 15,bottom: 10),
+              margin: const EdgeInsets.only(left: 12,top: 15,bottom: 10),
               width: Get.width,
               height: Get.height*0.065,
               child: ListView.separated(
                   controller: controller.scroll,
                 scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                 return InkWell(onTap: (){
                   controller.selectedMsZoningIndex=index;
@@ -72,7 +70,7 @@ class _AddListingFirstDetailScreenState extends State<AddListingFirstDetailScree
                 },child: Container(
                   height: Get.height*0.05,
                   decoration: BoxDecoration(
-                    color: controller.selectedMsZoningIndex==index?kPrimaryColor:Color(0xffF5F4F8),
+                    color: controller.selectedMsZoningIndex==index?kPrimaryColor:const Color(0xffF5F4F8),
                     borderRadius: BorderRadius.circular(25),
                   ),
                   child: Padding(
@@ -100,13 +98,13 @@ class _AddListingFirstDetailScreenState extends State<AddListingFirstDetailScree
                 ),),
             ),
             Container(
-              margin: EdgeInsets.only(left: 12,top: 15,bottom: 10),
+              margin: const EdgeInsets.only(left: 12,top: 15,bottom: 10),
               width: Get.width,
               height: Get.height*0.065,
               child: ListView.separated(
                   controller: controller.scroll,
                   scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return InkWell(onTap: (){
                       controller.selectedSaleConditionIndex=index;
@@ -116,7 +114,7 @@ class _AddListingFirstDetailScreenState extends State<AddListingFirstDetailScree
                     },child: Container(
                       height: Get.height*0.05,
                       decoration: BoxDecoration(
-                        color: controller.selectedSaleConditionIndex==index?kPrimaryColor:Color(0xffF5F4F8),
+                        color: controller.selectedSaleConditionIndex==index?kPrimaryColor:const Color(0xffF5F4F8),
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: Padding(
@@ -137,7 +135,7 @@ class _AddListingFirstDetailScreenState extends State<AddListingFirstDetailScree
             Form(
               key: controller.formkey,
               child: Container(
-                margin: EdgeInsets.only(left: 20,right: 20),
+                margin: const EdgeInsets.only(left: 20,right: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -155,21 +153,21 @@ class _AddListingFirstDetailScreenState extends State<AddListingFirstDetailScree
                       controller: controller.monthOfSoldController,
                       keyboardType: TextInputType.datetime,
                       decoration: InputDecoration(
-                        fillColor: Color(0xffF5F4F8),
+                        fillColor: const Color(0xffF5F4F8),
                         filled: true,
                         hintText: "15/12/2000",
                         hintStyle: TextStyle(color: kVeryDarkBlueColor,
                         fontWeight: FontWeight.w700,fontSize: 12,fontFamily: kRegularFont),
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25),
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0xffF4F4F4),
                               width: 3,
                             )
                         ),
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25),
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0xff6C63FF),
                               width: 3,
                             )
@@ -210,21 +208,21 @@ class _AddListingFirstDetailScreenState extends State<AddListingFirstDetailScree
                           size: 20,
                           color: kVeryDarkBlueColor,
                         ),
-                        fillColor: Color(0xffF5F4F8),
+                        fillColor: const Color(0xffF5F4F8),
                         filled: true,
                         hintText: "\$ 180,000",
                         hintStyle: TextStyle(color: kVeryDarkBlueColor,
                             fontWeight: FontWeight.w700,fontSize: 12,fontFamily: kRegularFont),
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25),
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0xffF4F4F4),
                               width: 3,
                             )
                         ),
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25),
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0xff6C63FF),
                               width: 3,
                             )
@@ -261,13 +259,13 @@ class _AddListingFirstDetailScreenState extends State<AddListingFirstDetailScree
                 ),),
             ),
             Container(
-              margin: EdgeInsets.only(left: 12,top: 15,bottom: 10),
+              margin: const EdgeInsets.only(left: 12,top: 15,bottom: 10),
               width: Get.width,
               height: Get.height*0.065,
               child: ListView.separated(
                   controller: controller.scroll,
                   scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return InkWell(onTap: (){
                       controller.selectedPaymentPeriodIndex=index;
@@ -277,7 +275,7 @@ class _AddListingFirstDetailScreenState extends State<AddListingFirstDetailScree
                     },child: Container(
                       height: Get.height*0.05,
                       decoration: BoxDecoration(
-                        color: controller.selectedPaymentPeriodIndex==index?kPrimaryColor:Color(0xffF5F4F8),
+                        color: controller.selectedPaymentPeriodIndex==index?kPrimaryColor:const Color(0xffF5F4F8),
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: Padding(
@@ -349,7 +347,7 @@ class _AddListingFirstDetailScreenState extends State<AddListingFirstDetailScree
                             color: Colors.black26,
                             width: 2
                         ),
-                        color: Color(0xffffffff),
+                        color: const Color(0xffffffff),
                       ),
                       elevation: 2,
                     ),
@@ -365,13 +363,13 @@ class _AddListingFirstDetailScreenState extends State<AddListingFirstDetailScree
                       width: Get.width*0.9,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
-                        color: Color(0xffffffff),
+                        color: const Color(0xffffffff),
                       ),
                       offset: const Offset(0, 10), // Adjust the offset here
                       scrollbarTheme: ScrollbarThemeData(
                         radius: const Radius.circular(40),
-                        thickness: MaterialStateProperty.all<double>(6),
-                        thumbVisibility: MaterialStateProperty.all<bool>(true),
+                        thickness: WidgetStateProperty.all<double>(6),
+                        thumbVisibility: WidgetStateProperty.all<bool>(true),
                       ),
                     ),
                     menuItemStyleData: const MenuItemStyleData(
@@ -393,13 +391,13 @@ class _AddListingFirstDetailScreenState extends State<AddListingFirstDetailScree
                 ),),
             ),
             Container(
-              margin: EdgeInsets.only(left: 12,top: 15,bottom: 10),
+              margin: const EdgeInsets.only(left: 12,top: 15,bottom: 10),
               width: Get.width,
               height: Get.height*0.065,
               child: ListView.separated(
                   controller: controller.scroll,
                   scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return InkWell(onTap: (){
                       controller.selectedUtilitiesIndex=index;
@@ -409,7 +407,7 @@ class _AddListingFirstDetailScreenState extends State<AddListingFirstDetailScree
                     },child: Container(
                       height: Get.height*0.05,
                       decoration: BoxDecoration(
-                        color: controller.selectedUtilitiesIndex==index?kPrimaryColor:Color(0xffF5F4F8),
+                        color: controller.selectedUtilitiesIndex==index?kPrimaryColor:const Color(0xffF5F4F8),
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: Padding(
@@ -437,13 +435,13 @@ class _AddListingFirstDetailScreenState extends State<AddListingFirstDetailScree
                 ),),
             ),
             Container(
-              margin: EdgeInsets.only(left: 12,top: 15,bottom: 10),
+              margin: const EdgeInsets.only(left: 12,top: 15,bottom: 10),
               width: Get.width,
               height: Get.height*0.065,
               child: ListView.separated(
                   controller: controller.scroll,
                   scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return InkWell(onTap: (){
                       controller.selectedLotShapeIndex=index;
@@ -453,7 +451,7 @@ class _AddListingFirstDetailScreenState extends State<AddListingFirstDetailScree
                     },child: Container(
                       height: Get.height*0.05,
                       decoration: BoxDecoration(
-                        color: controller.selectedLotShapeIndex==index?kPrimaryColor:Color(0xffF5F4F8),
+                        color: controller.selectedLotShapeIndex==index?kPrimaryColor:const Color(0xffF5F4F8),
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: Padding(
@@ -524,7 +522,7 @@ class _AddListingFirstDetailScreenState extends State<AddListingFirstDetailScree
                             color: Colors.black26,
                             width: 2
                         ),
-                        color: Color(0xffffffff),
+                        color: const Color(0xffffffff),
                       ),
                       elevation: 2,
                     ),
@@ -540,13 +538,13 @@ class _AddListingFirstDetailScreenState extends State<AddListingFirstDetailScree
                       width: Get.width*0.9,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
-                        color: Color(0xffffffff),
+                        color: const Color(0xffffffff),
                       ),
                       offset: const Offset(0, 10), // Adjust the offset here
                       scrollbarTheme: ScrollbarThemeData(
                         radius: const Radius.circular(40),
-                        thickness: MaterialStateProperty.all<double>(6),
-                        thumbVisibility: MaterialStateProperty.all<bool>(true),
+                        thickness: WidgetStateProperty.all<double>(6),
+                        thumbVisibility: WidgetStateProperty.all<bool>(true),
                       ),
                     ),
                     menuItemStyleData: const MenuItemStyleData(
@@ -568,13 +566,13 @@ class _AddListingFirstDetailScreenState extends State<AddListingFirstDetailScree
                 ),),
             ),
             Container(
-              margin: EdgeInsets.only(left: 12,top: 15,bottom: 10),
+              margin: const EdgeInsets.only(left: 12,top: 15,bottom: 10),
               width: Get.width,
               height: Get.height*0.065,
               child: ListView.separated(
                   controller: controller.scroll,
                   scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return InkWell(onTap: (){
                       controller.selectedFoundationIndex=index;
@@ -584,7 +582,7 @@ class _AddListingFirstDetailScreenState extends State<AddListingFirstDetailScree
                     },child: Container(
                       height: Get.height*0.05,
                       decoration: BoxDecoration(
-                        color: controller.selectedFoundationIndex==index?kPrimaryColor:Color(0xffF5F4F8),
+                        color: controller.selectedFoundationIndex==index?kPrimaryColor:const Color(0xffF5F4F8),
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: Padding(
@@ -612,13 +610,13 @@ class _AddListingFirstDetailScreenState extends State<AddListingFirstDetailScree
                 ),),
             ),
             Container(
-              margin: EdgeInsets.only(left: 12,top: 15,bottom: 10),
+              margin: const EdgeInsets.only(left: 12,top: 15,bottom: 10),
               width: Get.width,
               height: Get.height*0.065,
               child: ListView.separated(
                   controller: controller.scroll,
                   scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return InkWell(onTap: (){
                       controller.selectedBuildingTypeIndex=index;
@@ -628,7 +626,7 @@ class _AddListingFirstDetailScreenState extends State<AddListingFirstDetailScree
                     },child: Container(
                       height: Get.height*0.05,
                       decoration: BoxDecoration(
-                        color: controller.selectedBuildingTypeIndex==index?kPrimaryColor:Color(0xffF5F4F8),
+                        color: controller.selectedBuildingTypeIndex==index?kPrimaryColor:const Color(0xffF5F4F8),
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: Padding(
@@ -645,7 +643,7 @@ class _AddListingFirstDetailScreenState extends State<AddListingFirstDetailScree
                 return SizedBox(width: Get.width*0.02,);
               }, itemCount: controller.buildingType.length ),
             ),
-            Container(
+            SizedBox(
               height: Get.height*0.1,
               child: Center(
                 child: CustomElevatedButtonWidget(text: 'Next', onPressed: () {  }, textStyle: TextStyle(

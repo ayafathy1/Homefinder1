@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/Upload%20Photo/upload_photo.dart';
@@ -7,9 +6,10 @@ import 'package:homefinder1/Widget/custom_arrow_back.dart';
 import 'package:homefinder1/Widget/custom_text_field_widget.dart';
 import 'package:homefinder1/services/auth_service.dart';
 
-import '../Signup/signup.dart';
 
 class CompleteSignUp extends StatefulWidget{
+  const CompleteSignUp({super.key});
+
   
 
   @override
@@ -24,7 +24,7 @@ class _CompleteSignUpState extends State<CompleteSignUp> {
       init: CompleteSignUpController(),
         builder:( CompleteSignUpController controller){
           return Scaffold(
-              appBar: AppBar(title: Text('                      Welcome!',
+              appBar: AppBar(title: const Text('                      Welcome!',
                   style: TextStyle(fontSize: 0, color: Colors.transparent)),
                 backgroundColor: Colors.transparent,
                 elevation: 0,
@@ -35,27 +35,27 @@ class _CompleteSignUpState extends State<CompleteSignUp> {
                         key: controller.formkey,
                         child: Column(
                             children: [
-                              CustomArrowBack(),
+                              const CustomArrowBack(),
 
-                              Text("Fill in bio to get" , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 40),),
-                              Row(
+                              const Text("Fill in bio to get" , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 40),),
+                              const Row(
                                 children: [
                                   Text("     started" , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 40),),
                                 ],
                               ),
-                              SizedBox(height: 15,),
-                              Text("  This data will be displayed in your account profile " , style: TextStyle(fontSize: 15),),
-                              Row(children:[
+                              const SizedBox(height: 15,),
+                              const Text("  This data will be displayed in your account profile " , style: TextStyle(fontSize: 15),),
+                              const Row(children:[
                                 Text("      for seccurity" , style: TextStyle(fontSize: 15),)
                               ] ),
 
 
-                            CustomTextFieldWidget(Controller: controller.fisrtnameController, validator: controller.fisrtnameValidator, keyboardType: TextInputType.text,textfieldHint: "First Name", textfieldIcon:Icon(Icons.abc,color: Colors.transparent,), ispasswordField:false, obscureText: false, suffixIcon: Icon(Icons.abc,color: Colors.transparent,),),
+                            CustomTextFieldWidget(Controller: controller.fisrtnameController, validator: controller.fisrtnameValidator, keyboardType: TextInputType.text,textfieldHint: "First Name", textfieldIcon:const Icon(Icons.abc,color: Colors.transparent,), ispasswordField:false, obscureText: false, suffixIcon: const Icon(Icons.abc,color: Colors.transparent,),),
                            // SizedBox(height: 2,),
 
-                            CustomTextFieldWidget(Controller: controller.lastnameController, validator: controller.lastnameValidator, keyboardType: TextInputType.text,textfieldHint: "Last Name", textfieldIcon: Icon(Icons.abc,color: Colors.transparent,), ispasswordField:false, obscureText: false, suffixIcon: Icon(Icons.abc,color: Colors.transparent,),),
-                              CustomTextFieldWidget(Controller: controller.genderController, validator: controller.genderValidator, keyboardType: TextInputType.text, textfieldHint: "Gender", textfieldIcon: Icon(Icons.abc,color: Colors.transparent,), ispasswordField: false, obscureText: false, suffixIcon: Icon(Icons.abc,color: Colors.transparent,),),
-                              CustomTextFieldWidget(Controller: controller.phoneController, validator: controller.phoneValidator, keyboardType: TextInputType.phone, textfieldHint: "Phone Number", textfieldIcon:Icon(Icons.abc,color: Colors.transparent,), ispasswordField: false, obscureText: false, suffixIcon: Icon(Icons.abc,color: Colors.transparent,),),
+                            CustomTextFieldWidget(Controller: controller.lastnameController, validator: controller.lastnameValidator, keyboardType: TextInputType.text,textfieldHint: "Last Name", textfieldIcon: const Icon(Icons.abc,color: Colors.transparent,), ispasswordField:false, obscureText: false, suffixIcon: const Icon(Icons.abc,color: Colors.transparent,),),
+                              CustomTextFieldWidget(Controller: controller.genderController, validator: controller.genderValidator, keyboardType: TextInputType.text, textfieldHint: "Gender", textfieldIcon: const Icon(Icons.abc,color: Colors.transparent,), ispasswordField: false, obscureText: false, suffixIcon: const Icon(Icons.abc,color: Colors.transparent,),),
+                              CustomTextFieldWidget(Controller: controller.phoneController, validator: controller.phoneValidator, keyboardType: TextInputType.phone, textfieldHint: "Phone Number", textfieldIcon:const Icon(Icons.abc,color: Colors.transparent,), ispasswordField: false, obscureText: false, suffixIcon: const Icon(Icons.abc,color: Colors.transparent,),),
 
 
                               SizedBox(
@@ -64,22 +64,22 @@ class _CompleteSignUpState extends State<CompleteSignUp> {
                                 child: ElevatedButton(onPressed: (){
                                   if (controller.formkey.currentState!.validate()) {
                                     AuthServices.completeSigningUp(controller.fisrtnameController.text, controller.lastnameController.text, controller.genderController.text, controller.phoneController.text,context);
-                                   Get.to(()=>  UploadPhoto(),
+                                   Get.to(()=>  const UploadPhoto(),
                                     );
 
                                   }
                                 },
-                                  child: Row(
+                                  style: ElevatedButton.styleFrom(backgroundColor:const Color(0xff6C63FF),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(28),
+                                    ) ,
+                                  ),
+                                  child: const Row(
                                     children: [
                                       Text("          Next" , style: TextStyle(color: Colors.white , fontSize: 20,fontWeight: FontWeight.bold),),
                                       SizedBox(width: 10,),
                                       Icon(Icons.navigate_next , size: 30,),
                                     ],
-                                  ),
-                                  style: ElevatedButton.styleFrom(backgroundColor:Color(0xff6C63FF),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(28),
-                                    ) ,
                                   ),
                                 ),
                               ),
