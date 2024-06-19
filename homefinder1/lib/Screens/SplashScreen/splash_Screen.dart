@@ -3,17 +3,22 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:homefinder1/Screens/home/home_screen.dart';
 import 'package:splash_view/source/presentation/presentation.dart';
 
+import '../../utilities/memory.dart';
 import '../WelcomeScreen/welcomescreen.dart';
 
 class SplashScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return SplashView(
+
       backgroundColor: const Color(0xff6C63FF),
       duration: const Duration(seconds: 6),
-      done: Done(const Welcomescreen()),
+      done: Done(
+          Get.find<StorageService>().checkUserIsSignedIn?const HomeScreen():const Welcomescreen()),
 
       logo: const Stack(
         alignment: Alignment.topCenter,

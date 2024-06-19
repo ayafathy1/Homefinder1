@@ -1,3 +1,5 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/settings/controller/settings_controller4.dart';
@@ -24,12 +26,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
         leading: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Padding(
-              padding: EdgeInsets.only(left: 5.0),
-              child: SizedBox(
+            Padding(
+              padding: const EdgeInsets.only(left: 5.0),
+              child: Container(
                 width: 59.5,
                 height: 58.88,
-                child: Image(
+                child: const Image(
                   image: AssetImage("lib/assets/images/Profile.png"),
                   fit: BoxFit.fill,
                 ),
@@ -63,7 +65,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       body: Column(
         children: [
           Center(
-            child: SizedBox(
+            child: Container(
               height: Get.height*0.8,
               width: Get.width*0.9,
               child: ListView.separated(
@@ -74,7 +76,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   onTap: (){
                     controller.selectedIndex=index;
                     setState(() {
-                      
+
                     });
                   },
                   child: Container(

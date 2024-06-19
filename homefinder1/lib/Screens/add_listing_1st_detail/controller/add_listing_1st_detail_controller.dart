@@ -1,10 +1,21 @@
-// ignore_for_file: non_constant_identifier_names
-
+// ignore_for_file: non_constant_identifier_names, use_build_context_synchronously
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:homefinder1/Screens/add_listing_second_details/add_listing_second_details_screen.dart';
+
+import '../../../models/first_complete_model.dart';
+import '../../../services/residences_services.dart';
 
 class AddListingFirstDetailController extends GetxController{
+   final String residanceId;
+   AddListingFirstDetailController(this.residanceId);
+  bool electricitySelected=true;
+  bool gas=false;
+  bool water=false;
+  List<String> utilitesSelected=[];
   ScrollController scroll= ScrollController();
+  TextEditingController neighborhoodController=TextEditingController();
   final List <String> msZoning=[
     "agricultural",
     "Commercial",
@@ -12,6 +23,7 @@ class AddListingFirstDetailController extends GetxController{
     "floating village"
   ];
   int selectedMsZoningIndex=0;
+  String msZoningSelected="agricultural";
   final List <String> SaleCondition=[
     "normal",
     "abnormal",
@@ -19,16 +31,17 @@ class AddListingFirstDetailController extends GetxController{
     "Allocation"
   ];
    int selectedSaleConditionIndex=0;
+   String SaleConditionSelected="normal";
   final TextEditingController monthOfSoldController=TextEditingController();
   final  formkey =  GlobalKey<FormState>();
   final TextEditingController sellPriceController=TextEditingController();
-final String monthOfSold='';
-final String sellPrice='';
+
 final List<String> paymentPeriod=[
   "monthly",
   "yearly"
 ];
   int selectedPaymentPeriodIndex=0;
+  String paymentPeriodSelected="monthly";
   final List<String> saleType=[
     "conventional",
     "cash",
@@ -42,18 +55,21 @@ final List<String> paymentPeriod=[
     "Other"
   ];
   String? selectedValue;
+  String saleTypeSelected="conventional";
   final List<String> utilities=[
-    "gas",
     "Electricity",
+    "gas",
     "water"
   ];
   int selectedUtilitiesIndex=0;
+  String utilitySelected="Electricity";
   final List<String> lotShape=[
     "regular",
     "irregular",
     "moderately"
   ];
   int selectedLotShapeIndex=0;
+  String lotShapeSelected="regular";
   final List<String> electricity=[
     "average",
     "poor",
@@ -62,7 +78,7 @@ final List<String> paymentPeriod=[
     "standard circuit breakers & romex",
   ];
   String? selectedValue1;
-
+String electricityLevelSelected="average";
   final List<String> foundation=[
     "slab",
     "stone",
@@ -70,6 +86,7 @@ final List<String> paymentPeriod=[
     "brick and tile",
     "poured contrete'"
   ];
+  String foundationSelected="slab";
   int selectedFoundationIndex=0;
   final List<String> buildingType=[
     "single family",
@@ -79,4 +96,47 @@ final List<String> paymentPeriod=[
     "2 family conversion"
   ];
   int selectedBuildingTypeIndex=0;
+  String buildingTypeSelected="single family";
+  Future<void> firstComplete(String neighborhood,String mszoning,
+      String saleCondition,int moSold,int salePrice,
+      String paymentPeriod,String saleType,
+      List<String> utilities,
+      String lotShape,
+      String electrical,
+      String foundation,
+      String bldgType
+      ,BuildContext context,
+      ) async {
+    try {
+      FirstCompleteModel? data = await ResidenceServices.FirstComplete(
+       neighborhoodController.text,
+       msZoningSelected,
+          SaleConditionSelected,
+           int.parse(monthOfSoldController.text),
+        int.parse(sellPriceController.text),
+        paymentPeriodSelected,
+        saleTypeSelected,
+        utilitesSelected,
+        lotShapeSelected,
+        electricityLevelSelected,
+        foundationSelected,
+        buildingTypeSelected,
+        context,
+          residanceId
+      );
+      if (data?.status == "success") {
+        Get.to(() =>AddListingSecondDetailsScreen(residanceId:data?.residence?.id??residanceId,));
+      }
+    } catch (e) {
+      String errorMessage = " $e";
+      String part = errorMessage.substring(26, 35);
+      CoolAlert.show(
+        context: context,
+        type: CoolAlertType.error,
+        title: "Error",
+        text: part,
+      );
+    }
+
+  }
 }

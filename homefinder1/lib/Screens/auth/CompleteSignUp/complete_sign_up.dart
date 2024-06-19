@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:homefinder1/Screens/Upload%20Photo/upload_photo.dart';
 import 'package:homefinder1/Screens/auth/CompleteSignUp/controller/complete_sign_up_controller.dart';
 import 'package:homefinder1/Widget/custom_arrow_back.dart';
 import 'package:homefinder1/Widget/custom_text_field_widget.dart';
-import 'package:homefinder1/services/auth_service.dart';
 
 
 class CompleteSignUp extends StatefulWidget{
@@ -24,8 +22,10 @@ class _CompleteSignUpState extends State<CompleteSignUp> {
       init: CompleteSignUpController(),
         builder:( CompleteSignUpController controller){
           return Scaffold(
-              appBar: AppBar(title: const Text('                      Welcome!',
-                  style: TextStyle(fontSize: 0, color: Colors.transparent)),
+
+              appBar: AppBar(
+                leading: const CustomArrowBack(),
+                leadingWidth: Get.width*0.3,
                 backgroundColor: Colors.transparent,
                 elevation: 0,
               ),
@@ -35,7 +35,7 @@ class _CompleteSignUpState extends State<CompleteSignUp> {
                         key: controller.formkey,
                         child: Column(
                             children: [
-                              const CustomArrowBack(),
+
 
                               const Text("Fill in bio to get" , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 40),),
                               const Row(
@@ -63,9 +63,9 @@ class _CompleteSignUpState extends State<CompleteSignUp> {
                                 width: 200,
                                 child: ElevatedButton(onPressed: (){
                                   if (controller.formkey.currentState!.validate()) {
-                                    AuthServices.completeSigningUp(controller.fisrtnameController.text, controller.lastnameController.text, controller.genderController.text, controller.phoneController.text,context);
-                                   Get.to(()=>  const UploadPhoto(),
-                                    );
+
+                                   controller.CompleteSignUp(context);
+
 
                                   }
                                 },

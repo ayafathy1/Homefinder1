@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/utilities/memory.dart';
+import 'package:homefinder1/Screens/SplashScreen/splash_Screen.dart';
 
-import 'Screens/home/home_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,10 +22,12 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    return const GetMaterialApp(
+    return  GetMaterialApp(
      debugShowCheckedModeBanner: false,
         color: Colors.transparent,
-      home: HomeScreen(),
+
+      home: SplashScreen(),
+
     );
   }
 }

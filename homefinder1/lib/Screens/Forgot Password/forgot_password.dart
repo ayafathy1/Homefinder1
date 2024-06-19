@@ -3,10 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/Forgot%20Password/controller/forgot_password_controller.dart';
-import 'package:homefinder1/Screens/Succes%20Notification/success_notification.dart';
 import 'package:homefinder1/Widget/custom_text_field_widget.dart';
 
-import '../../services/auth_service.dart';
 
 class ForgotPassword extends StatelessWidget{
   @override
@@ -43,9 +41,8 @@ class ForgotPassword extends StatelessWidget{
                 height: 50,
                 width: 200,
                 child: ElevatedButton(onPressed: (){
-                  AuthServices.forgetPassword(controller.emailaddressController.text,context);
-                  Get.to(
-                          () =>  SuccessNotification());
+                         controller.forgotPassword(context);
+
                 }
                   ,
                   child: const Row(

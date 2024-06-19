@@ -1,33 +1,29 @@
+// To parse this JSON data, do
+//
+//     final responseModel = responseModelFromJson(jsonString);
+
 import 'dart:convert';
 
-Welcome welcomeFromJson(String str) => Welcome.fromJson(json.decode(str));
+ResponseModel responseModelFromJson(String str) => ResponseModel.fromJson(json.decode(str));
 
-String welcomeToJson(Welcome data) => json.encode(data.toJson());
+String responseModelToJson(ResponseModel data) => json.encode(data.toJson());
 
-class Welcome {
-  String status;
-  String message;
-  String token;
-  String userId;
+class ResponseModel {
+  String? status;
+  String? message;
 
-  Welcome({
-    required this.status,
-    required this.message,
-    required this.token,
-    required this.userId,
+  ResponseModel({
+    this.status,
+    this.message,
   });
 
-  factory Welcome.fromJson(Map<String, dynamic> json) => Welcome(
+  factory ResponseModel.fromJson(Map<String, dynamic> json) => ResponseModel(
     status: json["status"],
     message: json["message"],
-    token: json["token"],
-    userId: json["userId"],
   );
 
   Map<String, dynamic> toJson() => {
     "status": status,
     "message": message,
-    "token": token,
-    "userId": userId,
   };
 }

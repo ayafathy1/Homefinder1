@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, curly_braces_in_flow_control_structures, avoid_print
 
+
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -118,9 +119,11 @@ class SignUpController extends GetxController {
         context
       );
       if (data?.status == "success") {
+
         await Get.find<StorageService>().saveAccountId(data?.userId ?? "");
         await Get.find<StorageService>().saveAccountToken(data?.token ?? "");
         Get.to(() => const VerficationCode());
+
       }
     } catch (e) {
       // Handle bad request error
@@ -139,7 +142,14 @@ class SignUpController extends GetxController {
     }
 
   }
-  Widget build(BuildContext context) {
-    return Container();
+
+  @override
+  void dispose() {
+    usernameController.dispose();
+    emailaddressController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
   }
+
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:homefinder1/Screens/auth/CompleteSignUp/complete_sign_up.dart';
 import 'package:homefinder1/Widget/custom_arrow_back.dart';
 import 'package:timer_builder/timer_builder.dart';
 
+import '../../utilities/memory.dart';
 import 'controller/verification_code_controller.dart';
 
 class VerficationCode extends StatefulWidget {
@@ -18,7 +18,7 @@ class _VerficationCodeState extends State<VerficationCode> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<VerficationCodeController>(
-      init: VerficationCodeController(),
+      init: VerficationCodeController(  Get.find<StorageService>().getId),
       builder: (VerficationCodeController controller) {
         return Scaffold(
           appBar: AppBar(
@@ -69,6 +69,7 @@ class _VerficationCodeState extends State<VerficationCode> {
                 padding: const EdgeInsets.only(bottom: 15.0,right: 10,left: 10),
                 child: SingleChildScrollView(
                   child: Form(
+                    key: controller.formkey,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -79,7 +80,8 @@ class _VerficationCodeState extends State<VerficationCode> {
                             maxLength: 6,
                             keyboardType: TextInputType.number,
                             inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly,
+                              FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                              FilteringTextInputFormatter.digitsOnly
                             ],
                             decoration: InputDecoration(
                               fillColor: const Color(0xffF4F4F4),
@@ -101,7 +103,7 @@ class _VerficationCodeState extends State<VerficationCode> {
                             const Text("Didn't receive a code?", style: TextStyle(fontSize: 20),),
                             TextButton(
                               onPressed: () async {
-                                controller.resendCode();
+                                controller.resendVerificationCode(context);
                               },
                               child: Text(
                                 "Resend",
@@ -117,12 +119,10 @@ class _VerficationCodeState extends State<VerficationCode> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  String? verificationCode = await controller.fetchVerificationCode();
-                  if (verificationCode == controller.verificationCodeController.text) {
-                    Get.to(() => const CompleteSignUp());
-                  } else {
-                    // Verification code doesn't match
-                    // Handle invalid verification code
+
+                  if (controller.formkey.currentState!
+                      .validate()) {
+                    controller.sendVerificationCode(context,int.parse(controller.verificationCodeController.text));
                   }
                 },
                 style: ElevatedButton.styleFrom(

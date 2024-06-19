@@ -3,10 +3,9 @@
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:homefinder1/Screens/edit_profile/edit_profile.dart';
-
 import '../../../../models/auth_model.dart';
 import '../../../../services/auth_service.dart';
+import '../../../Upload Photo/upload_photo.dart';
 
 class CompleteSignUpController extends GetxController{
 
@@ -76,7 +75,8 @@ Future<void> CompleteSignUp(BuildContext context) async {
         context
     );
     if (data?.status == "success") {
-      Get.to(() =>const UploadPhotoScreen());
+
+      Get.to(() =>const UploadPhoto());
     }
   } catch (e) {
     String errorMessage = " $e";

@@ -4,7 +4,6 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/home/home_screen.dart';
-
 import '../../../../models/auth_model.dart';
 import '../../../../services/auth_service.dart';
 import '../../../../utilities/memory.dart';
@@ -83,6 +82,12 @@ saveAndValidate() {
       );
     }
 
+  }
+  @override
+  void dispose() {
+    emailaddressController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 
 }

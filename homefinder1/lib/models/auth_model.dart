@@ -10,6 +10,7 @@ class AuthModel {
   String? token;
   String? userId;
   int? statusCode;
+  bool? isVerified;
 
   AuthModel({
     this.status,
@@ -17,6 +18,7 @@ class AuthModel {
     this.token,
     this.userId,
     this.statusCode,
+    this.isVerified
   });
 
   factory AuthModel.fromJson(Map<String, dynamic> json) => AuthModel(
@@ -24,7 +26,8 @@ class AuthModel {
     message: json["message"],
     token: json["token"],
     userId: json["userId"],
-    statusCode: json['statusCode'],
+    statusCode: json["statusCode"],
+     isVerified: json["isVerified"]
   );
 
   Map<String, dynamic> toJson() => {
@@ -32,6 +35,7 @@ class AuthModel {
     "message": message,
     "token": token,
     "userId": userId,
-    "statusCode":statusCode
+    "statusCode":statusCode,
+    "isVerified":isVerified
   };
 }

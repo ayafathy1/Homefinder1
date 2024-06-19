@@ -1,7 +1,15 @@
+// ignore_for_file: use_build_context_synchronously, avoid_print
+
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:homefinder1/Screens/add_listing_3rd_detail/add_listing_3rd_detail_screen.dart';
+import 'package:homefinder1/models/second_complete_model.dart';
+import '../../../services/residences_services.dart';
 
 class AddListingSecondDetailController extends GetxController{
+   String residanceId;
+  AddListingSecondDetailController(this.residanceId);
   ScrollController scroll= ScrollController();
   final List <String> roofStyle=[
     "Flat",
@@ -11,8 +19,9 @@ class AddListingSecondDetailController extends GetxController{
     "Shed"
   ];
   int selectedRoofStyleIndex=0;
+  String roofStyleSelected="Flat";
   final List <String> roofMaterial=[
-    "'clay or tile",
+    "clay or tile",
     "standard shingle",
     "membran",
     "roll",
@@ -21,9 +30,9 @@ class AddListingSecondDetailController extends GetxController{
 
   ];
   int selectedRoofMaterialIndex=0;
+  String roofMaterialSelected="clay or tile";
   final TextEditingController masonryVeneerAreaController=TextEditingController();
   final  formkey =  GlobalKey<FormState>();
-  final String masonryVeneerArea='';
   final List<String> houseStyle=[
     "1Story",
     "1.5Fin",
@@ -33,6 +42,7 @@ class AddListingSecondDetailController extends GetxController{
     "SLvl"
   ];
   int selectedHouseStyleIndex=0;
+  String houseStyleSelected="1Story";
   final List<String> typeOfResidence=[
     "2 family conversion",
     "multilevel and split",
@@ -46,23 +56,26 @@ class AddListingSecondDetailController extends GetxController{
     "1story and newer"
   ];
   String? selectedValue;
+  String typeOfResidenceSelected="2 family conversion";
   final List<String> centralAir=[
-    "Yes",
-    "No",
+    "yes",
+    "no",
   ];
   int selectedCentralAirIndex=0;
+  String centralAirSelected="yes";
   final List<String> street=[
     "paved",
     "gravel",
   ];
   int selectedStreetIndex=0;
+  String streetSelected="paved";
   final List<String> alley=[
     "Paved",
     "Gravel",
     "no alley accesss",
   ];
   int selectedAlleyIndex=0;
-
+  String alleySelected="Paved";
   final List<String> exteriorCoveringOnHouse1=[
     "asbestos shingles",
     "asphalt shingles",
@@ -84,6 +97,7 @@ class AddListingSecondDetailController extends GetxController{
     "Other"
   ];
   String? selectedValue1;
+  String exteriorCoveringOnHouse1Selected="asbestos shingles";
   final List<String> exteriorCoveringOnHouse2=[
     "asbestos shingles",
     "asphalt shingles",
@@ -105,7 +119,7 @@ class AddListingSecondDetailController extends GetxController{
     "Other"
   ];
   String? selectedValue2;
-
+  String exteriorCoveringOnHouse2Selected="asbestos shingles";
   final List<String> heating=[
     "floor",
     "gas",
@@ -115,6 +129,7 @@ class AddListingSecondDetailController extends GetxController{
     "Wall"
   ];
   int selectedHeatingIndex=0;
+  String heatingSelected="floor";
   final List<String> heatingQuality=[
     "excellent",
     "good",
@@ -123,7 +138,7 @@ class AddListingSecondDetailController extends GetxController{
 
   ];
   int selectedHeatingQualityIndex=0;
-  int selectedMasonryVeneerTypeIndex=0;
+  String heatingQualitySelected="excellent";
   final List<String> masonryVeneerType=[
     "brick face",
     "brick common",
@@ -132,14 +147,17 @@ class AddListingSecondDetailController extends GetxController{
     "None",
 
   ];
-  int selectedExteriorConditionIndex=0;
+  int selectedMasonryVeneerTypeIndex=0;
+  String masonryVeneerTypeSelected="brick face";
+
   final List<String> exteriorCondition=[
     "excellent",
     "good",
     "average",
     "fair",
   ];
-  int selectedExteriorQualityIndex=0;
+  int selectedExteriorConditionIndex=0;
+  String exteriorConditionSelected="excellent";
   final List<String> exteriorQuality=[
     "excellent",
     "good",
@@ -147,8 +165,9 @@ class AddListingSecondDetailController extends GetxController{
     "fair",
     "poor"
   ];
+  int selectedExteriorQualityIndex=0;
+  String exteriorQualitySelected="excellent";
 
-  String? selectedValue3;
   final List<String> condition1=[
     "normal",
     "adjacent to feeder street",
@@ -161,7 +180,8 @@ class AddListingSecondDetailController extends GetxController{
     "near positive off-site feature",
 
   ];
-  String? selectedValue4;
+  String? selectedValue3;
+  String condition1Selected="normal";
   final List<String> condition2=[
     "normal",
     "adjacent to feeder street",
@@ -174,4 +194,52 @@ class AddListingSecondDetailController extends GetxController{
     "near positive off-site feature",
 
   ];
+  String? selectedValue4;
+  String condition2Selected="normal";
+
+  Future<void> secondComplete(
+      BuildContext context
+      ) async {
+    try {
+  SecondCompleteModel? data = await ResidenceServices.secondComplete(
+   roofStyleSelected,
+    roofMaterialSelected,
+    houseStyleSelected,
+    typeOfResidenceSelected,
+    centralAirSelected,
+    streetSelected,
+    alleySelected,
+    heatingSelected,
+    heatingQualitySelected,
+    masonryVeneerTypeSelected,
+      int.parse(masonryVeneerAreaController.text),
+    exteriorCoveringOnHouse1Selected,
+    exteriorCoveringOnHouse2Selected,
+    exteriorConditionSelected,
+    exteriorQualitySelected,
+    condition1Selected,
+    condition2Selected,
+    context,
+      residanceId
+
+
+
+      );
+      if (data?.status == "success") {
+        Get.to(() =>AddListingThirdDetailsScreen(residanceId: residanceId,));
+        print(data);
+      }
+    } catch (e) {
+      String errorMessage = " $e";
+      String part = errorMessage.substring(0, errorMessage.length);
+      CoolAlert.show(
+        context: context,
+        type: CoolAlertType.error,
+        title: "Error",
+        text: part,
+      );
+    }
+
+  }
+
 }

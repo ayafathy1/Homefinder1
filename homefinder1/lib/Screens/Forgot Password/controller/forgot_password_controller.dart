@@ -1,7 +1,12 @@
-// ignore_for_file: avoid_print, duplicate_ignore
+// ignore_for_file: avoid_print, duplicate_ignore, use_build_context_synchronously
+
+import 'package:cool_alert/cool_alert.dart';
 
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:get/get.dart';
+import 'package:homefinder1/Screens/verifiction_code_forget_password/verification_code_forget_password.dart';
+import '../../../models/forget_password_model.dart';
+import '../../../services/auth_service.dart';
 
 class ForgotPasswordController extends GetxController{
 
@@ -42,10 +47,35 @@ class ForgotPasswordController extends GetxController{
       formdata.save();
       // ignore: avoid_print
       print("valide");
+
     }
     else {
-      print("not valide");
+      print("not valid");
     }
   }
+  Future<void> forgotPassword(BuildContext context) async {
+    try {
+      ForgetPaaswordModel? data = await AuthServices.forgetPassword(
+          emailaddressController.text,
+          context
+      );
+      if (data?.status == "success") {
+        Get.to(()=>VerficationCodeForget(email: emailaddressController.text));
+      }
+    } catch (e) {
+      // Handle bad request error
+      String errorMessage = " $e";
+      String part = errorMessage.substring(26, 35);
+      // Show error message on the screen
+      CoolAlert.show(
+        context: context,
+        type: CoolAlertType.error,
+        title: "Error",
+        text: part,
+      );
+    }
+
+  }
+
 
 }

@@ -5,7 +5,6 @@ import 'package:homefinder1/Screens/auth/SignIn/controller/signin_controller.dar
 import 'package:homefinder1/Screens/auth/Signup/signup.dart';
 import 'package:homefinder1/Widget/custom_elevated_button_widget.dart';
 import 'package:homefinder1/Widget/custom_text_field_widget.dart';
-import 'package:homefinder1/services/auth_service.dart';
 import 'package:homefinder1/utilities/colors.dart';
 import 'package:homefinder1/utilities/constants.dart';
 
@@ -151,9 +150,9 @@ class _SignInState extends State<SignIn> {
                                 onPressed: () {
                                   if (controller.formkey.currentState!
                                       .validate()) {
-                                    AuthServices.signingIn(
-                                        controller.emailaddressController.text,
-                                        controller.passwordController.text,context);
+                                    controller.SignInWithEmail(
+                                        context);
+
 
                                   }
                                 },

@@ -1,9 +1,6 @@
-
-
 class Services {
  static String baseEndPoint = "https://home-finder-back-end-i7ca.onrender.com";
  static String resendVerificationEndPoint = "/api/v1/auth/resend-code/65ef8459c2bd7a5646b05034"; //Post
-
  static String verificationCodeEndPoint = "/api/v1/auth/verification/65ef8459c2bd7a5646b05034";//post
  static String shopEndPoint = "shop"; //Post
  static String productEndPoint = "item"; //Post
@@ -45,6 +42,27 @@ class Services {
  static String editMessageEndPoint = "/api/v1/chat/edit-message/";//patch
  static String deleteMessageEndPoint = "/api/v1/chat/delete-message/";//delete
  static String deleteConversationEndPoint = "/api/v1/chat/delete-conversation/";//delete
-
-
+ static String resendVerificationForgetEndPoint = "auth/resend-pass-otp/"; //Post
+ static String verificationCodeForgetEndPoint = "auth/verify-pass-otp/";//post
+ static String addFavEndPoint = "user/favorites/add/"; //get
+ static String deleteFavEndPoint = "user/favorites/delete/"; //delete
+ static String deleteAllFavEndPoint = "user/favorites/delete"; //delete
+ static String signOutEndPoint = "auth/logout"; //get
+ static String resetPasswordEndPoint = "auth/reset-pass/";//patch
+ static String deleteAccountEndPoint = "user/delete-user";//delete
+ static String uploadImageEndPoint = "user/upload-image";//post
+ static String changePasswordEndPoint = "user/change-password";//patch
+ static String getUserEndPoint = "user/get-user";//get
+ static String updateUserEndPoint = "user/update-user";//patch
+ static String deleteAccountPhotoEndPoint = "user/delete-profile-picture";//delete
+ static String createResidence = "residence/create"; //Post
+ static String firstCompleteEndPoint = "residence/complete/1st/";
+ static String secondCompleteEndPoint = "residence/complete/2nd/";
+ static String thirdCompleteEndPoint = "residence/complete/3rd/";
+ static String fourthCompleteEndPoint = "residence/complete/4th/";
+ static String deleteOneResidenceEndPoint = "residence/delete/";//delete
+ static String getSoldForProfileEndPoint = "residence/sold";//get
+ static String getResidencesPhotosEndPoint = "residence/images/";//get
+ static String getAllReviewsOfOneResidenceEndPoint = "review/get/";//get
+ static String addReviewEndPoint = "review/";//post
 }

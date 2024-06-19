@@ -9,7 +9,10 @@ import '../../utilities/constants.dart';
 import 'controller/add_listing_second_details_controller.dart';
 
 class AddListingSecondDetailsScreen extends StatefulWidget {
-  const AddListingSecondDetailsScreen({super.key});
+   String residanceId;
+   AddListingSecondDetailsScreen({super.key, required this.residanceId});
+
+  @override
 
   @override
   State<AddListingSecondDetailsScreen> createState() => _AddListingSecondDetailsScreenState();
@@ -19,7 +22,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
   @override
   Widget build(BuildContext context) {
     return  GetBuilder<AddListingSecondDetailController>(
-        init: AddListingSecondDetailController(),
+        init: AddListingSecondDetailController(widget.residanceId),
     builder: (AddListingSecondDetailController controller) {
     return  Scaffold(
       appBar: AppBar(
@@ -63,6 +66,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                   itemBuilder: (context, index) {
                     return InkWell(onTap: (){
                       controller.selectedRoofStyleIndex=index;
+                      controller.roofStyleSelected=controller.roofStyle[controller.selectedRoofStyleIndex];
                       setState(() {
 
                       });
@@ -107,6 +111,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                   itemBuilder: (context, index) {
                     return InkWell(onTap: (){
                       controller.selectedRoofMaterialIndex=index;
+                      controller.roofMaterialSelected=controller.roofMaterial[controller.selectedRoofMaterialIndex];
                       setState(() {
 
                       });
@@ -151,6 +156,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                   itemBuilder: (context, index) {
                     return InkWell(onTap: (){
                       controller.selectedHouseStyleIndex=index;
+                      controller.houseStyleSelected=controller.houseStyle[controller.selectedHouseStyleIndex];
                       setState(() {
 
                       });
@@ -187,7 +193,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                         ),
                         Expanded(
                           child: Text(
-                            'Sale Type',
+                            'type Of Residence',
                             style: TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.w700,
@@ -216,6 +222,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                     onChanged: (String? value) {
                       setState(() {
                         controller.selectedValue = value;
+                        controller.typeOfResidenceSelected=controller.selectedValue!;
                       });
                     },
                     buttonStyleData: ButtonStyleData(
@@ -282,6 +289,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                   itemBuilder: (context, index) {
                     return InkWell(onTap: (){
                       controller.selectedCentralAirIndex=index;
+                      controller.centralAirSelected=controller.centralAir[controller.selectedCentralAirIndex];
                       setState(() {
 
                       });
@@ -326,6 +334,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                   itemBuilder: (context, index) {
                     return InkWell(onTap: (){
                       controller.selectedStreetIndex=index;
+                      controller.streetSelected=controller.street[controller.selectedStreetIndex];
                       setState(() {
 
                       });
@@ -351,6 +360,51 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
             ),
             Padding(
               padding: const EdgeInsets.only(left: 12.0,top: 15),
+              child: Text("Alley",
+                style: TextStyle(
+                    color: kVeryDarkBlueColor,
+                    fontFamily: kRegularFont,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w900
+                ),),
+            ),
+            Container(
+              margin: const EdgeInsets.only(left: 12,top: 15,bottom: 10),
+              width: Get.width,
+              height: Get.height*0.065,
+              child: ListView.separated(
+                  controller: controller.scroll,
+                  scrollDirection: Axis.horizontal,
+                  physics: const BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return InkWell(onTap: (){
+                      controller.selectedAlleyIndex=index;
+                      controller.alleySelected=controller.alley[controller.selectedAlleyIndex];
+                      setState(() {
+
+                      });
+                    },child: Container(
+                      height: Get.height*0.05,
+                      decoration: BoxDecoration(
+                        color: controller.selectedAlleyIndex==index?kPrimaryColor:const Color(0xffF5F4F8),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20.0,right: 20,top: 12,bottom: 12),
+                        child: Center(child: Text(controller.alley[index], style: TextStyle(
+                            color: controller.selectedAlleyIndex==index?Colors.white:kVeryDarkBlueColor,
+                            fontFamily: kRegularFont,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600
+                        ),),),
+                      ),
+                    ));
+                  }, separatorBuilder: (context, index) {
+                return SizedBox(width: Get.width*0.02,);
+              }, itemCount: controller.alley.length ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 12.0,top: 15),
               child: Text("Heating",
                 style: TextStyle(
                     color: kVeryDarkBlueColor,
@@ -369,7 +423,8 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                   physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return InkWell(onTap: (){
-                      controller.selectedHeatingIndex;
+                      controller.selectedHeatingIndex=index;
+                      controller.heatingSelected=controller.heating[controller.selectedHeatingIndex];
                       setState(() {
 
                       });
@@ -414,6 +469,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                   itemBuilder: (context, index) {
                     return InkWell(onTap: (){
                       controller.selectedHeatingQualityIndex=index;
+                      controller.heatingQualitySelected=controller.heatingQuality[controller.selectedHeatingQualityIndex];
                       setState(() {
 
                       });
@@ -437,9 +493,19 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                 return SizedBox(width: Get.width*0.02,);
               }, itemCount: controller.heatingQuality.length ),
             ),
-
+            Padding(
+              padding: const EdgeInsets.only(left: 12.0,top: 15,bottom: 15),
+              child: Text("Masonry Veneer Type",
+                style: TextStyle(
+                    color: kVeryDarkBlueColor,
+                    fontFamily: kRegularFont,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w900
+                ),),
+            ),
             Container(
-              margin: const EdgeInsets.only(left: 12,bottom: 5),
+
+              margin: const EdgeInsets.only(left: 12,bottom: 15),
               width: Get.width,
               height: Get.height*0.065,
               child: ListView.separated(
@@ -448,7 +514,8 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                   physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return InkWell(onTap: (){
-                      controller.selectedMasonryVeneerTypeIndex;
+                      controller.selectedMasonryVeneerTypeIndex=index;
+                      controller.masonryVeneerTypeSelected=controller.masonryVeneerType[controller.selectedMasonryVeneerTypeIndex];
                       setState(() {
 
                       });
@@ -460,7 +527,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                       ),
                       child: Padding(
                         padding: const EdgeInsets.only(left: 20.0,right: 20,top: 12,bottom: 12),
-                        child: Center(child: Text(controller.masonryVeneerArea[index], style: TextStyle(
+                        child: Center(child: Text(controller.masonryVeneerType[index], style: TextStyle(
                             color: controller.selectedMasonryVeneerTypeIndex==index?Colors.white:kVeryDarkBlueColor,
                             fontFamily: kRegularFont,
                             fontSize: 12,
@@ -470,7 +537,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                     ));
                   }, separatorBuilder: (context, index) {
                 return SizedBox(width: Get.width*0.02,);
-              }, itemCount: controller.masonryVeneerArea.length ),
+              }, itemCount: controller.masonryVeneerType.length ),
             ),
             Form(
               key: controller.formkey,
@@ -491,7 +558,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                     ),
                     TextFormField(
                       controller: controller.masonryVeneerAreaController,
-                      keyboardType: TextInputType.datetime,
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         fillColor: const Color(0xffF5F4F8),
                         filled: true,
@@ -577,6 +644,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                     onChanged: (String? value) {
                       setState(() {
                         controller.selectedValue1 = value;
+                        controller.exteriorCoveringOnHouse1Selected=controller.selectedValue1!;
                       });
                     },
                     buttonStyleData: ButtonStyleData(
@@ -664,6 +732,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                     onChanged: (String? value) {
                       setState(() {
                         controller.selectedValue2 = value;
+                        controller.exteriorCoveringOnHouse2Selected=controller.selectedValue2!;
                       });
                     },
                     buttonStyleData: ButtonStyleData(
@@ -730,6 +799,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                   itemBuilder: (context, index) {
                     return InkWell(onTap: (){
                       controller.selectedExteriorConditionIndex=index;
+                      controller.exteriorConditionSelected=controller.exteriorCondition[controller.selectedExteriorConditionIndex];
                       setState(() {
 
                       });
@@ -774,6 +844,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                   itemBuilder: (context, index) {
                     return InkWell(onTap: (){
                       controller.selectedExteriorQualityIndex=index;
+                      controller.exteriorQualitySelected=controller.exteriorQuality[controller.selectedExteriorQualityIndex];
                       setState(() {
 
                       });
@@ -839,6 +910,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                     onChanged: (String? value) {
                       setState(() {
                         controller.selectedValue3 = value;
+                        controller.condition1Selected=controller.selectedValue3!;
                       });
                     },
                     buttonStyleData: ButtonStyleData(
@@ -926,6 +998,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                     onChanged: (String? value) {
                       setState(() {
                         controller.selectedValue4 = value;
+                        controller.condition2Selected=controller.selectedValue4!;
                       });
                     },
                     buttonStyleData: ButtonStyleData(
@@ -971,10 +1044,17 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                 ),
               ),
             ),
-            SizedBox(
-              height: Get.height*0.12,
+
+            Container(
+              margin: const EdgeInsets.only(bottom: 15),
+              padding: const EdgeInsets.only(bottom: 15),
+              height: Get.height*0.15,
               child: Center(
-                child: CustomElevatedButtonWidget(text: 'Next', onPressed: () {  }, textStyle: TextStyle(
+                child: CustomElevatedButtonWidget(text: 'Next', onPressed: () {
+                  if(controller.formkey.currentState!.validate()){
+                     controller.secondComplete(context);
+                  }
+                }, textStyle: TextStyle(
                     color: Colors.white,
                     fontFamily: kRegularFont,
                     fontSize: 16,
