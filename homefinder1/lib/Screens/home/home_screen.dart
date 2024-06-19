@@ -443,8 +443,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         return Column(
                           children: [
                             InkWell(
+
                               onTap:(){
-                                controller.getDataOfOneResidences(controller.residences?[index].residenceId??"", context);
+                                controller.SelectedResidenceIndex=index;
+                                setState(() {
+
+                                });
+
+                                controller.getDataOfOneResidences(controller.residences?[controller.SelectedResidenceIndex??0].id??0,controller.residences?[controller.SelectedResidenceIndex??0].residenceId??"", context);
+
                               }
                               ,
                               child: Container(

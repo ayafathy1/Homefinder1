@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_interpolation_to_compose_strings, avoid_print, non_constant_identifier_names, use_build_context_synchronously, unnecessary_string_interpolations, unnecessary_brace_in_string_interps
-
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -8,6 +6,7 @@ import 'package:homefinder1/models/fourth_complete_model.dart';
 import 'package:homefinder1/models/get_all_reviews_of_residence_model.dart';
 import 'package:homefinder1/models/like_review_model.dart';
 import 'package:homefinder1/models/price_prediction_model.dart';
+import 'package:homefinder1/models/recomendation_model.dart';
 import 'package:homefinder1/models/third_complete_model.dart';
 import '../models/create_residence_first.dart';
 import '../models/gat_pending_for_user.dart';
@@ -261,7 +260,7 @@ class ResidenceServices {
     }
     return null;
   }
-  static Future<GetPendingForProfileModel?> fetchUserSoldData(int counter, BuildContext context) async {
+  static Future<GetPendingResidencesModel?> fetchUserSoldData(int counter, BuildContext context) async {
     const String endPoint = 'residence/sold';
 
     try {
@@ -276,7 +275,7 @@ class ResidenceServices {
 
       if (response != null && response['status'] == 'success') {
         print(response);
-        return GetPendingForProfileModel.fromJson(response);
+        return GetPendingResidencesModel.fromJson(response);
       } else {
         print('API Error: ${response['message']}');
       }
@@ -286,7 +285,7 @@ class ResidenceServices {
 
     return null;
   }
-  static Future<GetPendingForProfileModel?> fetchUserapprovedData(int counter, BuildContext context) async {
+  static Future<GetPendingResidencesModel?> fetchUserapprovedData(int counter, BuildContext context) async {
     const String endPoint = 'residence/approved';
 
     try {
@@ -301,7 +300,7 @@ class ResidenceServices {
 
       if (response != null && response['status'] == 'success') {
         print(response);
-        return GetPendingForProfileModel.fromJson(response);
+        return GetPendingResidencesModel.fromJson(response);
       } else {
         print('API Error: ${response['message']}');
       }
@@ -423,11 +422,11 @@ class ResidenceServices {
     return null;
   }
   static Future<GetResidencesImagesModel?> fetchImagesOfResidences( String resId,BuildContext context) async {
-   String endPoint = "residence/images/${resId}";
+   String endPoint = "residence/images/";
 
     try {
       final response = await ApiService().request(
-        '$endPoint',
+        '$endPoint$resId',
         'GET',
         headers: {
           "Authorization": Get.find<StorageService>().getToken, // Ensure token retrieval is correct
@@ -448,7 +447,7 @@ class ResidenceServices {
     return null;
   }
   static Future<GetAllReviewsOfResidenceModel?> fetchReviewsOfResidences( String resId,BuildContext context) async {
-    String endPoint = "review/get/${resId}";
+    String endPoint = "review/get/$resId";
 
     try {
       final response = await ApiService().request(
@@ -520,10 +519,7 @@ class ResidenceServices {
     }
     return null;
   }
- // Import for jsonEncode
-
-  static Future<PricePeridectionModel?> pricePrediction(
-      String resId, BuildContext context) async {
+  static Future<PricePeridectionModel?> pricePrediction(String resId, BuildContext context) async {
     const String endPoint = 'residence/predict/';
 
     try {
@@ -554,7 +550,28 @@ class ResidenceServices {
 
     return null;
   }
-
+  static Future<RecommendationModel?> fetchRecommendedResidences( int Id,BuildContext context) async {
+    const String endPoint = 'residence/recommend/';
+    try {
+      final response = await ApiService().request(
+        '$endPoint${Id}',
+        'GET',
+        headers: {
+          "Authorization": await Get.find<StorageService>().getToken, // Ensure token retrieval is correct
+        },
+        context: context,
+      );
+      if (response != null && response['status'] == 'success') {
+        print(response);
+        return RecommendationModel.fromJson(response);
+      } else {
+        print('API Error: ${response['message']}');
+      }
+    } catch (e) {
+      print('Error fetching residences data: $e');
+    }
+    return null;
+  }
 }
 
 

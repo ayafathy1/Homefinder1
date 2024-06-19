@@ -207,7 +207,7 @@ ProfileController(this.context);
     isLoading=true;
     if (counterOfSoldResidences == 0) {
       try {
-        GetPendingForProfileModel? response = await ResidenceServices.fetchUserSoldData(counterOfSoldResidences, context);
+        GetPendingResidencesModel? response = await ResidenceServices.fetchUserSoldData(counterOfSoldResidences, context);
         print("API Response Status: ${response?.status}");
 
         if (response == null) {
@@ -273,7 +273,7 @@ int pendingResidenceCount=0;
              isLoading=true;
     if (counterOfpendingResidences == 0) {
       try {
-        GetPendingForProfileModel? response = await AuthServices.fetchUserPendingData(counterOfpendingResidences, context);
+        GetPendingResidencesModel? response = await AuthServices.fetchUserPendingData(counterOfpendingResidences, context);
         print("API Response Status: ${response?.status}");
 
         if (response == null) {
@@ -340,7 +340,7 @@ int pendingResidenceCount=0;
     isLoading=true;
     if (counterOfApprovedResidences == 0) {
       try {
-        GetPendingForProfileModel? response = await ResidenceServices.fetchUserapprovedData(counterOfApprovedResidences, context);
+        GetPendingResidencesModel? response = await ResidenceServices.fetchUserapprovedData(counterOfApprovedResidences, context);
         print("API Response Status: ${response?.status}");
 
         if (response == null) {

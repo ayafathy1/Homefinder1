@@ -10,9 +10,9 @@ import '../../utilities/colors.dart';
 
 class SingleDetailScreen extends StatefulWidget{
 
-  const SingleDetailScreen({super.key, this.resId});
-  final String? resId;
-
+  String resId;
+  int Id;
+  SingleDetailScreen( this.Id,this.resId);
 
   @override
   State<SingleDetailScreen> createState() => _SingleDetailScreenState();
@@ -22,7 +22,7 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SingleDetailController>(
-      init: SingleDetailController(widget.resId,context),
+      init: SingleDetailController(widget.Id,widget.resId,context),
         builder: (SingleDetailController controller){
         return Scaffold(
           body: SingleChildScrollView(
@@ -42,8 +42,12 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
                           top: 50,
                           left: 20,
                           child:InkWell(
-                            onTap: (){},
-                            child: const Image(image: AssetImage("lib/assets/images/Icon Back.png")),
+
+                            onTap: (){
+                              Get.back();
+                            },
+                            child: Image(image: AssetImage("lib/assets/images/Icon Back.png")),
+
                           )
                       ),
 

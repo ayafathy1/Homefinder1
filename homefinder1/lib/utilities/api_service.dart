@@ -74,7 +74,7 @@ class ApiService {
       }
     } catch (e, stackTrace) {
       String message = "$e";
-      String part = message.substring(0, message.length);
+      String part = message.substring(28, message.length-2);
       print("Error: $part");
       print("StackTrace: $stackTrace");
       if (errorDialog == null && errorMessage == null) {

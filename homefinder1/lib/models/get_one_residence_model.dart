@@ -1,13 +1,6 @@
-// To parse this JSON data, do
-//
-//     final getOneResidencesModel = getOneResidencesModelFromJson(jsonString);
-
 import 'dart:convert';
-
 GetOneResidencesModel getOneResidencesModelFromJson(String str) => GetOneResidencesModel.fromJson(json.decode(str));
-
 String getOneResidencesModelToJson(GetOneResidencesModel data) => json.encode(data.toJson());
-
 class GetOneResidencesModel {
   String? status;
   Residence? residence;
@@ -27,7 +20,6 @@ class GetOneResidencesModel {
     "residence": residence?.toJson(),
   };
 }
-
 class Residence {
   bool? isLiked;
   Location? location;
@@ -45,8 +37,7 @@ class Residence {
   bool? hasBasement;
   DateTime? createdAt;
   DateTime? updatedAt;
-  List<ImageElement>? images;
-  String? msSubClass;
+  List<Image>? images;
   String? mszoning;
   int? lotFrontage;
   int? lotArea;
@@ -107,7 +98,7 @@ class Residence {
   String? alley;
   int? avgRating;
   List<dynamic>? likedUsers;
-  List<Review>? reviews;
+  List<dynamic>? reviews;
 
   Residence({
     this.isLiked,
@@ -127,7 +118,6 @@ class Residence {
     this.createdAt,
     this.updatedAt,
     this.images,
-    this.msSubClass,
     this.mszoning,
     this.lotFrontage,
     this.lotArea,
@@ -208,8 +198,7 @@ class Residence {
     hasBasement: json["hasBasement"],
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
-    images: json["images"] == null ? [] : List<ImageElement>.from(json["images"]!.map((x) => ImageElement.fromJson(x))),
-    msSubClass: json["msSubClass"],
+    images: json["images"] == null ? [] : List<Image>.from(json["images"]!.map((x) => Image.fromJson(x))),
     mszoning: json["mszoning"],
     lotFrontage: json["lotFrontage"],
     lotArea: json["lotArea"],
@@ -270,7 +259,7 @@ class Residence {
     alley: json["alley"],
     avgRating: json["avgRating"],
     likedUsers: json["likedUsers"] == null ? [] : List<dynamic>.from(json["likedUsers"]!.map((x) => x)),
-    reviews: json["reviews"] == null ? [] : List<Review>.from(json["reviews"]!.map((x) => Review.fromJson(x))),
+    reviews: json["reviews"] == null ? [] : List<dynamic>.from(json["reviews"]!.map((x) => x)),
   );
 
   Map<String, dynamic> toJson() => {
@@ -291,7 +280,6 @@ class Residence {
     "createdAt": createdAt?.toIso8601String(),
     "updatedAt": updatedAt?.toIso8601String(),
     "images": images == null ? [] : List<dynamic>.from(images!.map((x) => x.toJson())),
-    "msSubClass": msSubClass,
     "mszoning": mszoning,
     "lotFrontage": lotFrontage,
     "lotArea": lotArea,
@@ -352,20 +340,19 @@ class Residence {
     "alley": alley,
     "avgRating": avgRating,
     "likedUsers": likedUsers == null ? [] : List<dynamic>.from(likedUsers!.map((x) => x)),
-    "reviews": reviews == null ? [] : List<dynamic>.from(reviews!.map((x) => x.toJson())),
+    "reviews": reviews == null ? [] : List<dynamic>.from(reviews!.map((x) => x)),
   };
 }
-
-class ImageElement {
+class Image {
   String? id;
   String? url;
 
-  ImageElement({
+  Image({
     this.id,
     this.url,
   });
 
-  factory ImageElement.fromJson(Map<String, dynamic> json) => ImageElement(
+  factory Image.fromJson(Map<String, dynamic> json) => Image(
     id: json["_id"],
     url: json["url"],
   );
@@ -375,7 +362,6 @@ class ImageElement {
     "url": url,
   };
 }
-
 class Location {
   String? type;
   List<double>? coordinates;
@@ -409,109 +395,5 @@ class Location {
     "city": city,
     "state": state,
     "country": country,
-  };
-}
-
-class Review {
-  String? id;
-  String? residenceId;
-  UserId? userId;
-  int? rating;
-  int? likes;
-  int? unLikes;
-  List<dynamic>? likedBy;
-  List<dynamic>? unLikedBy;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  int? v;
-  String? comment;
-
-  Review({
-    this.id,
-    this.residenceId,
-    this.userId,
-    this.rating,
-    this.likes,
-    this.unLikes,
-    this.likedBy,
-    this.unLikedBy,
-    this.createdAt,
-    this.updatedAt,
-    this.v,
-    this.comment,
-  });
-
-  factory Review.fromJson(Map<String, dynamic> json) => Review(
-    id: json["_id"],
-    residenceId: json["residenceId"],
-    userId: json["userId"] == null ? null : UserId.fromJson(json["userId"]),
-    rating: json["rating"],
-    likes: json["likes"],
-    unLikes: json["unLikes"],
-    likedBy: json["likedBy"] == null ? [] : List<dynamic>.from(json["likedBy"]!.map((x) => x)),
-    unLikedBy: json["unLikedBy"] == null ? [] : List<dynamic>.from(json["unLikedBy"]!.map((x) => x)),
-    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
-    updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
-    v: json["__v"],
-    comment: json["comment"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "_id": id,
-    "residenceId": residenceId,
-    "userId": userId?.toJson(),
-    "rating": rating,
-    "likes": likes,
-    "unLikes": unLikes,
-    "likedBy": likedBy == null ? [] : List<dynamic>.from(likedBy!.map((x) => x)),
-    "unLikedBy": unLikedBy == null ? [] : List<dynamic>.from(unLikedBy!.map((x) => x)),
-    "createdAt": createdAt?.toIso8601String(),
-    "updatedAt": updatedAt?.toIso8601String(),
-    "__v": v,
-    "comment": comment,
-  };
-}
-
-class UserId {
-  UserIdImage? image;
-  String? id;
-  String? username;
-
-  UserId({
-    this.image,
-    this.id,
-    this.username,
-  });
-
-  factory UserId.fromJson(Map<String, dynamic> json) => UserId(
-    image: json["image"] == null ? null : UserIdImage.fromJson(json["image"]),
-    id: json["_id"],
-    username: json["username"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "image": image?.toJson(),
-    "_id": id,
-    "username": username,
-  };
-}
-
-class UserIdImage {
-  String? url;
-  String? publicId;
-
-  UserIdImage({
-    this.url,
-    this.publicId,
-  });
-
-  factory UserIdImage.fromJson(Map<String, dynamic> json) => UserIdImage(
-    url: json["url"],
-    publicId: json["public_id"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "url": url,
-    "public_id": publicId,
   };
 }

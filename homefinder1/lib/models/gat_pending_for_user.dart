@@ -1,25 +1,25 @@
 // To parse this JSON data, do
 //
-//     final getPendingForProfileModel = getPendingForProfileModelFromJson(jsonString);
+//     final getPendingResidencesModel = getPendingResidencesModelFromJson(jsonString);
 
 import 'dart:convert';
 
-GetPendingForProfileModel getPendingForProfileModelFromJson(String str) => GetPendingForProfileModel.fromJson(json.decode(str));
+GetPendingResidencesModel getPendingResidencesModelFromJson(String str) => GetPendingResidencesModel.fromJson(json.decode(str));
 
-String getPendingForProfileModelToJson(GetPendingForProfileModel data) => json.encode(data.toJson());
+String getPendingResidencesModelToJson(GetPendingResidencesModel data) => json.encode(data.toJson());
 
-class GetPendingForProfileModel {
+class GetPendingResidencesModel {
   String? status;
   int? count;
   List<Residence>? residences;
 
-  GetPendingForProfileModel({
+  GetPendingResidencesModel({
     this.status,
     this.count,
     this.residences,
   });
 
-  factory GetPendingForProfileModel.fromJson(Map<String, dynamic> json) => GetPendingForProfileModel(
+  factory GetPendingResidencesModel.fromJson(Map<String, dynamic> json) => GetPendingResidencesModel(
     status: json["status"],
     count: json["count"],
     residences: json["residences"] == null ? [] : List<Residence>.from(json["residences"]!.map((x) => Residence.fromJson(x))),
@@ -35,6 +35,7 @@ class GetPendingForProfileModel {
 class Residence {
   bool? isLiked;
   Location? location;
+  List<dynamic>? bookedBy;
   String? residenceId;
   OwnerId? ownerId;
   int? id;
@@ -65,7 +66,7 @@ class Residence {
   int? bsmtUnfSf;
   String? masVnrType;
   int? masVnrArea;
-  int? msSubClass;
+  String? msSubClass;
   int? totalporchsf;
   int? lotFrontage;
   int? lotArea;
@@ -117,6 +118,7 @@ class Residence {
   Residence({
     this.isLiked,
     this.location,
+    this.bookedBy,
     this.residenceId,
     this.ownerId,
     this.id,
@@ -200,6 +202,7 @@ class Residence {
   factory Residence.fromJson(Map<String, dynamic> json) => Residence(
     isLiked: json["isLiked"],
     location: json["location"] == null ? null : Location.fromJson(json["location"]),
+    bookedBy: json["bookedBy"] == null ? [] : List<dynamic>.from(json["bookedBy"]!.map((x) => x)),
     residenceId: json["_id"],
     ownerId: json["ownerId"] == null ? null : OwnerId.fromJson(json["ownerId"]),
     id: json["Id"],
@@ -283,6 +286,7 @@ class Residence {
   Map<String, dynamic> toJson() => {
     "isLiked": isLiked,
     "location": location?.toJson(),
+    "bookedBy": bookedBy == null ? [] : List<dynamic>.from(bookedBy!.map((x) => x)),
     "_id": residenceId,
     "ownerId": ownerId?.toJson(),
     "Id": id,
@@ -391,20 +395,36 @@ class ImageElement {
 class Location {
   String? type;
   List<double>? coordinates;
+  String? fullAddress;
+  String? city;
+  String? state;
+  String? country;
 
   Location({
     this.type,
     this.coordinates,
+    this.fullAddress,
+    this.city,
+    this.state,
+    this.country,
   });
 
   factory Location.fromJson(Map<String, dynamic> json) => Location(
     type: json["type"],
     coordinates: json["coordinates"] == null ? [] : List<double>.from(json["coordinates"]!.map((x) => x?.toDouble())),
+    fullAddress: json["fullAddress"],
+    city: json["city"],
+    state: json["state"],
+    country: json["country"],
   );
 
   Map<String, dynamic> toJson() => {
     "type": type,
     "coordinates": coordinates == null ? [] : List<dynamic>.from(coordinates!.map((x) => x)),
+    "fullAddress": fullAddress,
+    "city": city,
+    "state": state,
+    "country": country,
   };
 }
 
