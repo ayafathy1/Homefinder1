@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/pridected_price/controller/predict_price_controller.dart';
@@ -29,11 +30,9 @@ crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
-                    child: Image(
-                      image:
-                          AssetImage("lib/assets/images/SuccessfullyIllustration.png"),
-                    ),
+                  const Image(
+                    image:
+                        AssetImage("lib/assets/images/SuccessfullyIllustration.png"),
                   ),
                   Column(
                     children: [
@@ -73,7 +72,7 @@ crossAxisAlignment: CrossAxisAlignment.center,
               borderRadius: BorderRadius.circular(20),
               boxShadow: [BoxShadow(
                 color: Colors.grey.shade300,
-                offset: Offset(0, -12),
+                offset: const Offset(0, -12),
                 blurRadius: 15
               )]
             ),
@@ -101,7 +100,7 @@ crossAxisAlignment: CrossAxisAlignment.center,
                 ),
                 style: ElevatedButton.styleFrom(
                     fixedSize: Size(Get.width*0.4, Get.height*0.08),
-                    backgroundColor: Color(0xffF5F4F8),
+                    backgroundColor: const Color(0xffF5F4F8),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)
                     )
@@ -110,7 +109,7 @@ crossAxisAlignment: CrossAxisAlignment.center,
               CustomElevatedButtonWidget(
                 text: "Finish",
                 onPressed: (){
-                  Get.to(()=>HomeScreen());
+                  Get.to(()=>const HomeScreen());
 
                 },
                 textStyle: TextStyle(

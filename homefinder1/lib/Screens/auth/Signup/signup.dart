@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/auth/SignIn/signin.dart';
-import 'package:homefinder1/Screens/verification_code/verfication_code_screen.dart';
 import 'package:homefinder1/Widget/custom_text_field_widget.dart';
 import 'package:homefinder1/Screens/auth/Signup/controller/signup_controller.dart';
 import 'package:homefinder1/utilities/colors.dart';
 
-import '../../../utilities/api_service.dart';
 import '../../../utilities/constants.dart';
 
 class SignUp extends StatefulWidget {
+  const SignUp({super.key});
+
   @override
   State<SignUp> createState() => _SignUpState();
 }
 
 class _SignUpState extends State<SignUp> {
-  @override
-
   bool rememberMe = false;
 
   void _onRememberMeChanged(bool? newValue) => setState(() {
@@ -40,7 +38,7 @@ class _SignUpState extends State<SignUp> {
           return Scaffold(
               body: SafeArea(
             child: Container(
-              color: Color(0xffFFFFFF),
+              color: const Color(0xffFFFFFF),
               width: Get.width,
               height: Get.height,
               child: SingleChildScrollView(
@@ -54,7 +52,7 @@ class _SignUpState extends State<SignUp> {
                         Stack(
                           alignment: AlignmentDirectional.bottomCenter,
                           children: [
-                            Container(
+                            SizedBox(
                               width: 250,
                               height: 240,
                               child: Image.asset(
@@ -75,10 +73,10 @@ class _SignUpState extends State<SignUp> {
                           ],
                         ),
 
-                        Row(
+                        const Row(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(
+                              padding: EdgeInsets.only(
                                 left: 110.0,
                               ),
                               child: Text(
@@ -90,16 +88,18 @@ class _SignUpState extends State<SignUp> {
                         ),
                         CustomTextFieldWidget(
                           Controller: controller.usernameController,
-                          validator: (e){},
+                          validator: (e){
+                            return null;
+                          },
                           keyboardType: TextInputType.text,
                           textfieldHint: "User Name",
-                          textfieldIcon: Image(
+                          textfieldIcon: const Image(
                             image:
                                 AssetImage("lib/assets/images/ProfileIcon.png"),
                           ),
                           ispasswordField: false,
                           obscureText: false,
-                          suffixIcon: Icon(
+                          suffixIcon: const Icon(
                             Icons.abc,
                             color: Colors.transparent,
                           ),
@@ -109,13 +109,13 @@ class _SignUpState extends State<SignUp> {
                           validator: controller.emailValidator,
                           keyboardType: TextInputType.emailAddress,
                           textfieldHint: "EmailAddress",
-                          textfieldIcon: Image(
+                          textfieldIcon: const Image(
                             image:
                                 AssetImage("lib/assets/images/MessageIcon.png"),
                           ),
                           ispasswordField: false,
                           obscureText: false,
-                          suffixIcon: Icon(
+                          suffixIcon: const Icon(
                             Icons.abc,
                             color: Colors.transparent,
                           ),
@@ -125,7 +125,7 @@ class _SignUpState extends State<SignUp> {
                           validator: controller.passwordValidator,
                           keyboardType: TextInputType.visiblePassword,
                           textfieldHint: "Password",
-                          textfieldIcon: Image(
+                          textfieldIcon: const Image(
                             image: AssetImage("lib/assets/images/LockIcon.png"),
                           ),
                           ispasswordField: true,
@@ -151,7 +151,7 @@ class _SignUpState extends State<SignUp> {
                           validator: controller.confirmValidator,
                           keyboardType: TextInputType.visiblePassword,
                           textfieldHint: "Confirm Password",
-                          textfieldIcon: Image(
+                          textfieldIcon: const Image(
                             image: AssetImage("lib/assets/images/LockIcon.png"),
                           ),
                           ispasswordField: true,
@@ -172,22 +172,22 @@ class _SignUpState extends State<SignUp> {
                             },
                           ),
                         ),
-                        Container(
+                        SizedBox(
                           width: Get.width,
                           height: Get.height*0.05,
                           child: Row(children: [
                             Checkbox(
                                 value: rememberMe, onChanged: _onRememberMeChanged),
-                            Text(
+                            const Text(
                               "by checking the box you agree to our",
                               style: TextStyle(fontSize: 12),
                             ),
-                            Text(
+                            const Text(
                               "Terms",
                               style: TextStyle(color: Color(0xff6C63FF)),
                             ),
-                            Text("and"),
-                            Text(
+                            const Text("and"),
+                            const Text(
                               "Conditions",
                               style: TextStyle(color: Color(0xff6C63FF)),
                             ),
@@ -202,6 +202,12 @@ class _SignUpState extends State<SignUp> {
                                 controller.registerWithEmail(context);
                               }
                             },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xff6C63FF),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(28),
+                              ),
+                            ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -213,33 +219,30 @@ class _SignUpState extends State<SignUp> {
                                       fontWeight: FontWeight.w900,
                                   fontFamily: kRegularFont),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
-                                Icon(
+                                const Icon(
                                   Icons.navigate_next,
                                   size: 30,
                                 ),
                               ],
                             ),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xff6C63FF),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(28),
-                              ),
-                            ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         Container(
                           height: 55,
                           width: 302,
+                          decoration: BoxDecoration(
+                              color: const Color(0xffC4C4C4).withOpacity(0.7),
+                              borderRadius: BorderRadius.circular(25)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Container(
+                              const SizedBox(
                                 width: 25,
                                 height: 25,
                                 child: Image(
@@ -261,19 +264,16 @@ class _SignUpState extends State<SignUp> {
                               ),
                             ],
                           ),
-                          decoration: BoxDecoration(
-                              color: Color(0xffC4C4C4).withOpacity(0.7),
-                              borderRadius: BorderRadius.circular(25)),
                         ),
 
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
+                            const Text(
                                 "Already a member?"),
                             TextButton(
-                              onPressed: () { Get.to(()=>SignIn()); },
-                              child: Text(
+                              onPressed: () { Get.to(()=>const SignIn()); },
+                              child: const Text(
                                 "Log In",
                                 style: TextStyle(color: Color(0xff6C63FF)),
                               ),

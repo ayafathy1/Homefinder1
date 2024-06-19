@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -88,8 +90,10 @@ int? SelectedHouse;
       o.GetOneResidencesModel? response = await ResidenceServices.fetchOneResidences(resId, context!);
       if (response != null) {
         residence = response.residence;
+
         Get.to(() => SingleDetailScreen(Id,resId));
         print("Residence details: ${residence}");
+
       } else {
         print("Some error occurred: Response is null");
       }

@@ -2,17 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:homefinder1/Screens/SplashScreen/splash_Screen.dart';
-import 'package:homefinder1/Screens/add_listing_3rd_detail/add_listing_3rd_detail_screen.dart';
-import 'package:homefinder1/Screens/add_listing_fourth_details/add_listing_fourth_details_screen.dart';
-import 'package:homefinder1/Screens/auth/SignIn/signin.dart';
-import 'package:homefinder1/Screens/auth/Signup/signup.dart';
 import 'package:homefinder1/utilities/memory.dart';
-
-import 'Screens/Upload Photo/upload_photo.dart';
-import 'Screens/add listing - photos/adding_photos.dart';
-import 'Screens/add listing - photos/upload_photo.dart';
-import 'Screens/add listing - photos/widget/photos.dart';
+import 'package:homefinder1/Screens/SplashScreen/splash_Screen.dart';
 
 
 Future<void> main() async {
@@ -31,10 +22,12 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    return GetMaterialApp(
+    return  GetMaterialApp(
      debugShowCheckedModeBanner: false,
         color: Colors.transparent,
+
       home: SplashScreen(),
+
     );
   }
 }

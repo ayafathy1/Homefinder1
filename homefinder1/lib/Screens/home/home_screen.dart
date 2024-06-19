@@ -1,14 +1,15 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/Featured%20Estates/featured_estates.dart';
-import 'package:homefinder1/Screens/add_listing/add_listing_screen.dart';
 import 'package:homefinder1/Screens/home/controller/home_controller.dart';
 import 'package:homefinder1/Screens/popular_nearest_you/popular_nearest_you_screen.dart';
 import 'package:homefinder1/utilities/colors.dart';
 import 'package:homefinder1/utilities/constants.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../Widget/custom_bottom_navigation_bar_widget.dart';
+import '../ChatingScreens/chatlist/chats_list_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -33,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.only(top: 10.0),
               child: IconButton(
                   onPressed: () {},
-                  icon: Image(
+                  icon: const Image(
                     image: AssetImage("lib/assets/images/locationIcon 1.png"),
                     width: 28,
                     height: 28,
@@ -68,21 +69,13 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-        actions: [Container(
+        actions: [SizedBox(
         width: Get.width*0.3,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             InkWell(
               child: Container(
-                child: Center(
-                    child: Image(
-                      image: AssetImage(
-                          "lib/assets/images/ion_notifications-outline.png"),
-                      width: 28,
-                      height: 28,
-                      fit: BoxFit.fill,
-                    )),
                 width: 52,
                 height: 52,
                 decoration: BoxDecoration(
@@ -92,14 +85,34 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: 1.5,
                     ),
                     borderRadius: BorderRadius.circular(55)),
+                child: const Center(
+                    child: Image(
+                      image: AssetImage(
+                          "lib/assets/images/ion_notifications-outline.png"),
+                      width: 28,
+                      height: 28,
+                      fit: BoxFit.fill,
+                    )),
               ),
             ),
             InkWell(
+              onTap: (){
+                Get.to(()=>const ChatsListScreen());
+              },
               child: Container(
+                width: 52,
+                height: 52,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(
+                      color: kPrimaryColor,
+                      width: 1.5,
+                    ),
+                    borderRadius: BorderRadius.circular(55)),
                 child: Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 4.0),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 4.0),
                       child: Image(
                         image: AssetImage(
                             "lib/assets/images/ChatNotifIcon.png"),
@@ -116,15 +129,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     )
                   ],
                 ),
-                width: 52,
-                height: 52,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(
-                      color: kPrimaryColor,
-                      width: 1.5,
-                    ),
-                    borderRadius: BorderRadius.circular(55)),
               ),
             ),
           ],
@@ -146,11 +150,11 @@ class _HomeScreenState extends State<HomeScreen> {
         child: SizedBox(
           height: Get.height*0.85,
           child: SingleChildScrollView(
-             physics: BouncingScrollPhysics(),
+             physics: const BouncingScrollPhysics(),
             controller: controller.scroll,
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Container(
@@ -191,10 +195,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 47,
                       ),
-                      Image(
+                      const Image(
                         image: AssetImage("lib/assets/images/HomeRecImage.png"),
                       )
                     ],
@@ -204,7 +208,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       border: Border.all(color: kDarkBlueColor),
                       borderRadius: BorderRadius.circular(20)),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 Container(
@@ -214,36 +218,38 @@ class _HomeScreenState extends State<HomeScreen> {
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Color(0xffF4F4F4),
+                      fillColor: const Color(0xffF4F4F4),
                       hintText: "Search House, Apartment , etc",
-                      prefixIcon: Icon(
+                      prefixIcon: const Icon(
                         Icons.search_outlined,
                         color: Colors.black,
                       ),
                       suffixIcon: InkWell(
                           onTap: () {},
-                          child: Image(
+                          child: const Image(
                               image: AssetImage('lib/assets/images/options.png'))),
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Color(0xffF4F4F4),
                             width: 3,
                           )),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Color(0xff6C63FF),
                             width: 3,
                           )),
                     ),
                   ),
+
                 ),
+
 
 
                 Row(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Text(
@@ -254,11 +260,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontWeight: FontWeight.w900,
                           fontSize: 20),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 85,
                     ),
                     TextButton(
-                        onPressed: () {Get.to(()=>PopularNearestYou());},
+                        onPressed: () {Get.to(()=>const PopularNearestYou());},
                         child: Text(
                           "View All",
                           style: TextStyle(
@@ -272,28 +278,30 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   child: ListView.builder(
                     controller: controller.scroll,
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     itemCount: controller.itemCount1,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       return Row(
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           InkWell(
 
                             child: Container(
                               decoration: BoxDecoration(
-                                  border: Border.all(color: Color(0xffF5F5F5)),
+                                  border: Border.all(color: const Color(0xffF5F5F5)),
                                   borderRadius: BorderRadius.circular(20),
                                   color: kVeryLightGreyColor),
                               width: 250,
                               height: Get.height * 0.27,
                               child: Column(
+
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
+
                                   Container(
                                     height: 130,
                                     width: 250,
@@ -301,7 +309,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       borderRadius: BorderRadius.circular(20),
                                       child: Image(
                                         image: NetworkImage(
-                                          controller.residences?[index].images?[0]?.url??""),
+                                          controller.residences?[index].images?[0].url??""),
                                         width: 280,
                                         height: 140,
                                         fit: BoxFit.fill,
@@ -313,13 +321,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                     child: Text(
                                       controller.residences?[index].title??"",
                                       style: TextStyle(
-                                          color: Color(0xff2F2F2F),
+                                          color: const Color(0xff2F2F2F),
                                           fontFamily: kRegularFont,
                                           fontWeight: FontWeight.w600,
                                           fontSize: 17),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 2,
                                   ),
                                   Padding(
@@ -336,7 +344,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 8,
                                         height: 3,
                                       ),
@@ -363,8 +371,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 fontWeight: FontWeight.w500),
                                           ),
                                         ),
+
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 50,
                                       ),
                                       IconButton(
@@ -383,7 +392,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(
+
+                          const SizedBox(
                             width: 5,
                           ),
                         ],
@@ -395,7 +405,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 Row(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Text(
@@ -406,11 +416,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontWeight: FontWeight.w900,
                           fontSize: 20),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 120,
                     ),
                     TextButton(
-                        onPressed: () {Get.to(()=>FeaturedEstates());},
+                        onPressed: () {Get.to(()=>const FeaturedEstates());},
                         child: Text(
                           "View All",
                           style: TextStyle(
@@ -427,7 +437,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: ListView.builder(
                     controller: controller.scroll,
                       itemCount: controller.itemCount2,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
                         return Column(
@@ -451,7 +461,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(15),
                                     border: Border.all(color: Colors.white),
-                                    boxShadow: [
+                                    boxShadow: const [
                                       BoxShadow(
                                           color: Colors.grey,
                                           offset: Offset(0, 0),
@@ -460,7 +470,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    SizedBox(width: 5,),
+                                    const SizedBox(width: 5,),
                                     Container(
                                         width: 105,
                                         height: 110,
@@ -469,7 +479,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           borderRadius: BorderRadius.circular(15),
                                           child: Image(
                                             image:
-                                                NetworkImage(controller.residences?[index].images?[0]?.url??""),
+                                                NetworkImage(controller.residences?[index].images?[0].url??""),
                                             fit: BoxFit.fill,
                                           ),
                                         )),
@@ -477,19 +487,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                       mainAxisAlignment: MainAxisAlignment.start,
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 3,
                                         ),
                                         Row(
                                           children: [
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 5,
                                             ),
-                                            Icon(
+                                            const Icon(
                                               Icons.star,
                                               color: Color(0xffEEA651),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 2,
                                             ),
                                             Text(
@@ -499,16 +509,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   fontFamily: kRegularFont,
                                                   fontWeight: FontWeight.w600),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 148,
                                             ),
                                             Container(
                                               height: 30,
                                               width: 90,
                                               decoration: BoxDecoration(
-                                                  color: Color(0xffF4F6F9),
+                                                  color: const Color(0xffF4F6F9),
                                                   border: Border.all(
-                                                    color: Color(0xffF4F6F9),
+                                                    color: const Color(0xffF4F6F9),
                                                   ),
                                                   borderRadius:
                                                       BorderRadius.circular(25)),
@@ -527,7 +537,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                         Row(
                                           children: [
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 5,
                                             ),
                                             Text(
@@ -542,10 +552,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                         Row(
                                           children: [
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 5,
                                             ),
-                                            Icon(
+                                            const Icon(
                                               Icons.location_on,
                                               color: Color(0xff415770),
                                               size: 17,
@@ -553,7 +563,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             Text(
                                               "${controller.residences?[index].location?.city??""}, ${controller.residences?[index].location?.state??""}, ${controller.residences?[index].location?.country??""}",
                                               style: TextStyle(
-                                                  color: Color(0xff415770),
+                                                  color: const Color(0xff415770),
                                                   fontSize: 12,
                                                   fontFamily: kRegularFont,
                                                   fontWeight: FontWeight.w500),
@@ -562,7 +572,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                         Container(
                                           width: Get.width*0.65,
-                                          margin: EdgeInsets.only(left: 10),
+                                          margin: const EdgeInsets.only(left: 10),
                                           child: Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             crossAxisAlignment: CrossAxisAlignment.end,
@@ -587,13 +597,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 child: InkWell(
                                                     onTap: () {
                                                       controller.favSelectedIndex=index;
-                                                      if(controller.residences?[controller.favSelectedIndex]?.isLiked==true){
-                                                      controller.removeResidenceFromFav(controller.residences![index]!.residenceId!,context);
+                                                      if(controller.residences?[controller.favSelectedIndex].isLiked==true){
+                                                      controller.removeResidenceFromFav(controller.residences![index].residenceId!,context);
                                                       controller.getDataOfResidences(context);
                                                         setState(() {
 
                                                         });}else{
-                                                        controller.addResidenceToFav(controller.residences![index]!.residenceId!, context);
+                                                        controller.addResidenceToFav(controller.residences![index].residenceId!, context);
                                                         controller.getDataOfResidences(context);
                                                         setState(() {
 
@@ -602,7 +612,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     },
                                                     child: Icon(
                                                       Icons.favorite_rounded,
-                                                      color: controller.residences?[index]?.isLiked==true?kPrimaryColor:Colors.grey,
+                                                      color: controller.residences?[index].isLiked==true?kPrimaryColor:Colors.grey,
                                                       size: 25,
                                                     )),
                                               )
@@ -615,7 +625,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             )
                           ],

@@ -1,3 +1,4 @@
+// ignore_for_file: non_constant_identifier_names, use_build_context_synchronously
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -5,7 +6,6 @@ import 'package:homefinder1/Screens/add_listing_second_details/add_listing_secon
 
 import '../../../models/first_complete_model.dart';
 import '../../../services/residences_services.dart';
-import '../../add_listing_3rd_detail/add_listing_3rd_detail_screen.dart';
 
 class AddListingFirstDetailController extends GetxController{
    final String residanceId;

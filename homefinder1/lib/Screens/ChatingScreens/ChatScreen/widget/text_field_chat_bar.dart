@@ -39,9 +39,9 @@ class TextFieldChatBar extends StatelessWidget {
                     width: MediaQuery.of(context).size.width*0.9,
 
                     decoration: BoxDecoration(
-                        color: Color(0xffDEEAFD),
+                        color: const Color(0xffDEEAFD),
                       borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Color(0xffDEEAFD),width: 1),
+                      border: Border.all(color: const Color(0xffDEEAFD),width: 1),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

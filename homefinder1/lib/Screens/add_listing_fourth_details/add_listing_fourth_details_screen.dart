@@ -1,11 +1,9 @@
-import 'dart:ui';
+// ignore_for_file: sized_box_for_whitespace
 
-import 'package:flutter/cupertino.dart';
+
+// ignore: unnecessary_import
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:homefinder1/Screens/add_listing/add_listing_screen.dart';
-import 'package:homefinder1/Screens/home/home_screen.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import '../../Widget/custom_arrow_back.dart';
 import '../../Widget/custom_elevated_button_widget.dart';
 import '../../utilities/colors.dart';
@@ -30,7 +28,7 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
       appBar: AppBar(
         toolbarHeight: Get.height*0.1,
         leadingWidth: Get.width * 0.25,
-        leading: CustomArrowBack(),
+        leading: const CustomArrowBack(),
         title: Text(
           "Add Listing",
           style: TextStyle(
@@ -42,11 +40,12 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
         ),
 
       ),
+
       body: Container(
         width: Get.width,
         height: Get.height-Get.height*0.18,
         child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           controller: controller.scroll,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -63,13 +62,13 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
                   ),),
               ),
               Container(
-                margin: EdgeInsets.only(left: 12,top: 15,bottom: 10),
+                margin: const EdgeInsets.only(left: 12,top: 15,bottom: 10),
                 width: Get.width,
                 height: Get.height*0.065,
                 child: ListView.separated(
                     controller: controller.scroll,
                     scrollDirection: Axis.horizontal,
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
                       return InkWell(onTap: (){
                         controller.selectedLotConfigIndex=index;
@@ -79,7 +78,7 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
                       },child: Container(
                         height: Get.height*0.05,
                         decoration: BoxDecoration(
-                          color: controller.selectedLotConfigIndex==index?kPrimaryColor:Color(0xffF5F4F8),
+                          color: controller.selectedLotConfigIndex==index?kPrimaryColor:const Color(0xffF5F4F8),
                           borderRadius: BorderRadius.circular(25),
                         ),
                         child: Padding(
@@ -107,13 +106,13 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
                   ),),
               ),
               Container(
-                margin: EdgeInsets.only(left: 12,top: 15,bottom: 10),
+                margin: const EdgeInsets.only(left: 12,top: 15,bottom: 10),
                 width: Get.width,
                 height: Get.height*0.065,
                 child: ListView.separated(
                     controller: controller.scroll,
                     scrollDirection: Axis.horizontal,
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
                       return InkWell(onTap: (){
                         controller.selectedLandContourIndex=index;
@@ -123,7 +122,7 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
                       },child: Container(
                         height: Get.height*0.05,
                         decoration: BoxDecoration(
-                          color: controller.selectedLandContourIndex==index?kPrimaryColor:Color(0xffF5F4F8),
+                          color: controller.selectedLandContourIndex==index?kPrimaryColor:const Color(0xffF5F4F8),
                           borderRadius: BorderRadius.circular(25),
                         ),
                         child: Padding(
@@ -151,13 +150,13 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
                   ),),
               ),
               Container(
-                margin: EdgeInsets.only(left: 12,top: 15,bottom: 10),
+                margin: const EdgeInsets.only(left: 12,top: 15,bottom: 10),
                 width: Get.width,
                 height: Get.height*0.065,
                 child: ListView.separated(
                     controller: controller.scroll,
                     scrollDirection: Axis.horizontal,
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
                       return InkWell(onTap: (){
                         controller.selectedLandSlopeIndex=index;
@@ -167,7 +166,7 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
                       },child: Container(
                         height: Get.height*0.05,
                         decoration: BoxDecoration(
-                          color: controller.selectedLandSlopeIndex==index?kPrimaryColor:Color(0xffF5F4F8),
+                          color: controller.selectedLandSlopeIndex==index?kPrimaryColor:const Color(0xffF5F4F8),
                           borderRadius: BorderRadius.circular(25),
                         ),
                         child: Padding(
@@ -195,13 +194,13 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
                   ),),
               ),
               Container(
-                margin: EdgeInsets.only(left: 12,top: 15,bottom: 10),
+                margin: const EdgeInsets.only(left: 12,top: 15,bottom: 10),
                 width: Get.width,
                 height: Get.height*0.065,
                 child: ListView.separated(
                     controller: controller.scroll,
                     scrollDirection: Axis.horizontal,
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
                       return InkWell(onTap: (){
                         controller.selectedPavedDriveIndex;
@@ -211,7 +210,7 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
                       },child: Container(
                         height: Get.height*0.05,
                         decoration: BoxDecoration(
-                          color: controller.selectedPavedDriveIndex==index?kPrimaryColor:Color(0xffF5F4F8),
+                          color: controller.selectedPavedDriveIndex==index?kPrimaryColor:const Color(0xffF5F4F8),
                           borderRadius: BorderRadius.circular(25),
                         ),
                         child: Padding(
@@ -231,7 +230,7 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
               Form(
                 key: controller.formkey,
                 child: Container(
-                  margin: EdgeInsets.only(left: 20,right: 20),
+                  margin: const EdgeInsets.only(left: 20,right: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -249,21 +248,21 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
                         controller: controller.poolAreaController,
                         keyboardType: TextInputType.datetime,
                         decoration: InputDecoration(
-                          fillColor: Color(0xffF5F4F8),
+                          fillColor: const Color(0xffF5F4F8),
                           filled: true,
                           hintText: "10",
                           hintStyle: TextStyle(color: kVeryDarkBlueColor,
                               fontWeight: FontWeight.w700,fontSize: 12,fontFamily: kRegularFont),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0xffF4F4F4),
                                 width: 3,
                               )
                           ),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0xff6C63FF),
                                 width: 3,
                               )
@@ -285,6 +284,7 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
 
                         ),
                       ),
+
                       Padding(
                         padding: const EdgeInsets.only(top: 15,bottom: 10),
                         child: Text("Overall quality",
@@ -299,21 +299,21 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
                         controller: controller.overallQualityontroller,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          fillColor: Color(0xffF5F4F8),
+                          fillColor: const Color(0xffF5F4F8),
                           filled: true,
                           hintText: "10",
                           hintStyle: TextStyle(color: kVeryDarkBlueColor,
                               fontWeight: FontWeight.w700,fontSize: 12,fontFamily: kRegularFont),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0xffF4F4F4),
                                 width: 3,
                               )
                           ),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0xff6C63FF),
                                 width: 3,
                               )
@@ -335,6 +335,7 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
 
                         ),
                       ),
+
                       Padding(
                         padding: const EdgeInsets.only(top: 15,bottom: 10),
                         child: Text("Overall Condition",
@@ -349,21 +350,21 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
                         controller: controller.overallConditionController,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          fillColor: Color(0xffF5F4F8),
+                          fillColor: const Color(0xffF5F4F8),
                           filled: true,
                           hintText: "10",
                           hintStyle: TextStyle(color: kVeryDarkBlueColor,
                               fontWeight: FontWeight.w700,fontSize: 12,fontFamily: kRegularFont),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0xffF4F4F4),
                                 width: 3,
                               )
                           ),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0xff6C63FF),
                                 width: 3,
                               )
@@ -385,6 +386,7 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
 
                         ),
                       ),
+
                       Padding(
                         padding: const EdgeInsets.only(top: 15,bottom: 10),
                         child: Text("Total area",
@@ -400,21 +402,21 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
 
-                          fillColor: Color(0xffF5F4F8),
+                          fillColor: const Color(0xffF5F4F8),
                           filled: true,
                           hintText: "10",
                           hintStyle: TextStyle(color: kVeryDarkBlueColor,
                               fontWeight: FontWeight.w700,fontSize: 12,fontFamily: kRegularFont),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0xffF4F4F4),
                                 width: 3,
                               )
                           ),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0xff6C63FF),
                                 width: 3,
                               )
@@ -436,6 +438,7 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
 
                         ),
                       ),
+
                       Padding(
                         padding: const EdgeInsets.only(top: 15,bottom: 10),
                         child: Text("Total property area",
@@ -450,21 +453,21 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
                         controller: controller.totalPropertyAreaController,
                         keyboardType: TextInputType.datetime,
                         decoration: InputDecoration(
-                          fillColor: Color(0xffF5F4F8),
+                          fillColor: const Color(0xffF5F4F8),
                           filled: true,
                           hintText: "10",
                           hintStyle: TextStyle(color: kVeryDarkBlueColor,
                               fontWeight: FontWeight.w700,fontSize: 12,fontFamily: kRegularFont),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0xffF4F4F4),
                                 width: 3,
                               )
                           ),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0xff6C63FF),
                                 width: 3,
                               )
@@ -486,6 +489,7 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
 
                         ),
                       ),
+
                       Padding(
                         padding: const EdgeInsets.only(top: 15,bottom: 10),
                         child: Text("Lot area",
@@ -500,21 +504,21 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
                         controller: controller.lotAreaController,
                         keyboardType: TextInputType.datetime,
                         decoration: InputDecoration(
-                          fillColor: Color(0xffF5F4F8),
+                          fillColor: const Color(0xffF5F4F8),
                           filled: true,
                           hintText: "10",
                           hintStyle: TextStyle(color: kVeryDarkBlueColor,
                               fontWeight: FontWeight.w700,fontSize: 12,fontFamily: kRegularFont),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0xffF4F4F4),
                                 width: 3,
                               )
                           ),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0xff6C63FF),
                                 width: 3,
                               )
@@ -551,21 +555,22 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
 
-                          fillColor: Color(0xffF5F4F8),
+
+                          fillColor: const Color(0xffF5F4F8),
                           filled: true,
                           hintText: "10",
                           hintStyle: TextStyle(color: kVeryDarkBlueColor,
                               fontWeight: FontWeight.w700,fontSize: 12,fontFamily: kRegularFont),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0xffF4F4F4),
                                 width: 3,
                               )
                           ),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0xff6C63FF),
                                 width: 3,
                               )
@@ -587,6 +592,7 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
 
                         ),
                       ),
+
                       Padding(
                         padding: const EdgeInsets.only(top: 15,bottom: 10),
                         child: Text("Total square feet",
@@ -601,21 +607,21 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
                         controller: controller.totalSquareFeetController,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          fillColor: Color(0xffF5F4F8),
+                          fillColor: const Color(0xffF5F4F8),
                           filled: true,
                           hintText: "10",
                           hintStyle: TextStyle(color: kVeryDarkBlueColor,
                               fontWeight: FontWeight.w700,fontSize: 12,fontFamily: kRegularFont),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0xffF4F4F4),
                                 width: 3,
                               )
                           ),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0xff6C63FF),
                                 width: 3,
                               )
@@ -637,6 +643,7 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
 
                         ),
                       ),
+
                       Padding(
                         padding: const EdgeInsets.only(top: 15,bottom: 10),
                         child: Text("Low quality square feet",
@@ -652,21 +659,21 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
 
-                          fillColor: Color(0xffF5F4F8),
+                          fillColor: const Color(0xffF5F4F8),
                           filled: true,
                           hintText: "10",
                           hintStyle: TextStyle(color: kVeryDarkBlueColor,
                               fontWeight: FontWeight.w700,fontSize: 12,fontFamily: kRegularFont),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0xffF4F4F4),
                                 width: 3,
                               )
                           ),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0xff6C63FF),
                                 width: 3,
                               )
@@ -703,21 +710,21 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
 
-                          fillColor: Color(0xffF5F4F8),
+                          fillColor: const Color(0xffF5F4F8),
                           filled: true,
                           hintText: "10",
                           hintStyle: TextStyle(color: kVeryDarkBlueColor,
                               fontWeight: FontWeight.w700,fontSize: 12,fontFamily: kRegularFont),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0xffF4F4F4),
                                 width: 3,
                               )
                           ),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0xff6C63FF),
                                 width: 3,
                               )
@@ -753,21 +760,21 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
                         controller: controller.houseAgeController,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          fillColor: Color(0xffF5F4F8),
+                          fillColor: const Color(0xffF5F4F8),
                           filled: true,
                           hintText: "10",
                           hintStyle: TextStyle(color: kVeryDarkBlueColor,
                               fontWeight: FontWeight.w700,fontSize: 12,fontFamily: kRegularFont),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0xffF4F4F4),
                                 width: 3,
                               )
                           ),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0xff6C63FF),
                                 width: 3,
                               )
@@ -803,21 +810,21 @@ class _AddListingFourthDetailsScreenState extends State<AddListingFourthDetailsS
                         controller: controller.houseRemodelageController,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          fillColor: Color(0xffF5F4F8),
+                          fillColor: const Color(0xffF5F4F8),
                           filled: true,
                           hintText: "10",
                           hintStyle: TextStyle(color: kVeryDarkBlueColor,
                               fontWeight: FontWeight.w700,fontSize: 12,fontFamily: kRegularFont),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0xffF4F4F4),
                                 width: 3,
                               )
                           ),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0xff6C63FF),
                                 width: 3,
                               )

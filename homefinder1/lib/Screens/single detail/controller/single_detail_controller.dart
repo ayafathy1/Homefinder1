@@ -1,5 +1,5 @@
+
 import 'package:cool_alert/cool_alert.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Widget/custom_elevated_button_widget.dart';
@@ -277,6 +277,7 @@ class SingleDetailController extends GetxController {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
+
                 margin: EdgeInsets.only(
                   left: 25,
                 ),
@@ -309,12 +310,14 @@ class SingleDetailController extends GetxController {
                             padding: const EdgeInsets.only(top: 5.0),
                             child: Text(
                               homeDeatilsNo[index],
+
                               style: TextStyle(
                                   fontSize: 10,
                                   fontWeight: FontWeight.w600,
                                   fontFamily: kRegularFont,
-                                  color: Color(0xff53587A)),
+                                  color: const Color(0xff53587A)),
                             ),
+
                           ),
                           Text(
                             homeDetailsTitles[index],
@@ -334,12 +337,13 @@ class SingleDetailController extends GetxController {
                     );
                   },
                   itemCount: homeDetailsTitles.length,
+
                 )),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
-                  margin: EdgeInsets.only(left: 10),
+                  margin: const EdgeInsets.only(left: 10),
                   width: 110,
                   height: 40,
                   child: Center(
@@ -368,15 +372,18 @@ class SingleDetailController extends GetxController {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
                         ),
+
                         child: Image(
                           image: AssetImage("lib/assets/images/AgetPhoto.png"),
                         ),
+
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 10.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+
                             Text(
                               "Sandeep S.",
                               style: TextStyle(
@@ -403,13 +410,16 @@ class SingleDetailController extends GetxController {
                       icon: Image(
                         image: AssetImage("lib/assets/images/message.png"),
                       ))
+z
                 ],
               ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+
                 Container(
+
                   width: 110,
                   height: 40,
                   child: Center(
@@ -427,13 +437,13 @@ class SingleDetailController extends GetxController {
             ),
             Center(
               child: Container(
-                  margin: EdgeInsets.only(left: 15),
+                  margin: const EdgeInsets.only(left: 15),
                   width: Get.width,
                   height: 150,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 15.0),
                     child: GridView.builder(
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return Container(
@@ -441,11 +451,13 @@ class SingleDetailController extends GetxController {
                           height: 75,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
-                              color: Color(0xfffffbfe),
+                              color: const Color(0xfffffbfe),
                               boxShadow: [
                                 BoxShadow(
                                     color: Colors.grey.shade300,
+
                                     offset: Offset(0, 16),
+
                                     blurRadius: 10)
                               ]),
                           child: Column(
@@ -457,8 +469,10 @@ class SingleDetailController extends GetxController {
                                     image:
                                         AssetImage(homeFacilitiesIcons[index])),
                               ),
+
                               Container(
                                 width: 100,
+
                                 child: Center(
                                   child: Text(
                                     homeFacilitiesTitles[index],
@@ -466,7 +480,7 @@ class SingleDetailController extends GetxController {
                                         fontSize: 10,
                                         fontWeight: FontWeight.w600,
                                         fontFamily: kRegularFont,
-                                        color: Color(0xff6B6B6B)),
+                                        color: const Color(0xff6B6B6B)),
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
@@ -475,11 +489,13 @@ class SingleDetailController extends GetxController {
                           ),
                         );
                       },
+
                       itemCount: homeFacilitiesIcons.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: 10,
                           mainAxisSpacing: 22),
+
                     ),
                   )),
             ),
@@ -488,8 +504,10 @@ class SingleDetailController extends GetxController {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+
                   Container(
                     width: 120,
+
                     child: Center(
                       child: Text(
                         "Location",
@@ -507,6 +525,7 @@ class SingleDetailController extends GetxController {
             Padding(
               padding: const EdgeInsets.only(bottom: 20.0),
               child: Center(
+
                 child: Container(
                   height: Get.height * 0.29,
                   width: Get.width * 0.85,
@@ -515,8 +534,9 @@ class SingleDetailController extends GetxController {
                       Container(
                         height: Get.height * 0.22,
                         width: Get.width * 0.85,
+
                         child: Image(
-                          image: AssetImage("lib/assets/images/map12.png"),
+                          image: const AssetImage("lib/assets/images/map12.png"),
                           fit: BoxFit.fill,
                           height: Get.height * 0.2,
                           width: Get.width * 0.85,
@@ -525,6 +545,7 @@ class SingleDetailController extends GetxController {
                       InkWell(
                         onTap: () {},
                         child: Container(
+
                           width: Get.width * 0.85,
                           height: Get.height * 0.07,
                           decoration: BoxDecoration(
@@ -533,6 +554,7 @@ class SingleDetailController extends GetxController {
                                 bottomRight: Radius.circular(25),
                                 bottomLeft: Radius.circular(25),
                               )),
+
                           child: Center(
                             child: TextButton(
                               onPressed: () {},
@@ -558,6 +580,7 @@ class SingleDetailController extends GetxController {
               height: Get.height * 0.1,
               decoration: BoxDecoration(
                   color: Colors.white,
+
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(20),
                     topLeft: Radius.circular(20),
@@ -568,6 +591,7 @@ class SingleDetailController extends GetxController {
                         offset: Offset(0, -12),
                         blurRadius: 15)
                   ]),
+
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -590,6 +614,7 @@ class SingleDetailController extends GetxController {
                         padding: const EdgeInsets.only(bottom: 10.0),
                         child: Row(
                           children: [
+
                             Text(
                               "\$350",
                               style: TextStyle(
@@ -606,6 +631,7 @@ class SingleDetailController extends GetxController {
                                   fontWeight: FontWeight.w700,
                                   color: Color(0xff8C8C8C)),
                             )
+
                           ],
                         ),
                       )
@@ -615,6 +641,7 @@ class SingleDetailController extends GetxController {
                       text: "Book Now",
                       onPressed: () {},
                       textStyle: TextStyle(
+<
                           color: Colors.white,
                           fontWeight: FontWeight.w700,
                           fontSize: 17,
@@ -624,6 +651,7 @@ class SingleDetailController extends GetxController {
                           backgroundColor: kPrimaryColor,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20))))
+
                 ],
               ),
             )
@@ -632,6 +660,7 @@ class SingleDetailController extends GetxController {
       }
     } else if (selectedIndex == 1) {
       listViewItem = [];
+
       descriptionOrGalleryOrReview = "Gallery";
       for (var index = 0; index < 2; index = index + 1) {
         listViewItem.add(Column(
@@ -759,13 +788,16 @@ class SingleDetailController extends GetxController {
               ),
             )
           ],
+
         ));
       }
     } else if (selectedIndex == 2) {
       listViewItem = [];
+
       descriptionOrGalleryOrReview = "Review";
       for (var index = 0; index <= 2; index = index + 1) {
         listViewItem.add(Column());
+
       }
     }
   }

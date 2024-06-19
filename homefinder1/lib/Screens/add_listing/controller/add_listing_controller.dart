@@ -1,7 +1,8 @@
+// ignore_for_file: use_build_context_synchronously, avoid_print
+
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:homefinder1/Screens/add_listing_1st_detail/add_listing_1st_detail_screen.dart';
 import 'package:homefinder1/services/residences_services.dart';
 
 import '../../../models/create_residence_first.dart';
@@ -28,7 +29,7 @@ class AddListingController extends GetxController{
          if (data?.status == "success") {
             AddListingController.houseId=data?.residence?.id;
             print(houseId);
-            Get.to(() =>ImagePickerExample1(data?.residence?.id??"",));
+            Get.to(() =>ImagePickerExample1( residenceId: data?.residence?.id??"",));
          }
       } catch (e) {
          String errorMessage = " $e";

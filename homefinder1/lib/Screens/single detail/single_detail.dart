@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: unrelated_type_equality_checks
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/single%20detail/controller/single_detail_controller.dart';
 import 'package:homefinder1/utilities/constants.dart';
@@ -9,9 +9,11 @@ import 'package:homefinder1/utilities/constants.dart';
 import '../../utilities/colors.dart';
 
 class SingleDetailScreen extends StatefulWidget{
+
   String resId;
   int Id;
   SingleDetailScreen( this.Id,this.resId);
+
   @override
   State<SingleDetailScreen> createState() => _SingleDetailScreenState();
 }
@@ -25,27 +27,27 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
         return Scaffold(
           body: SingleChildScrollView(
             controller: controller.scroll,
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             child: Column(
               children: [
-                Container(
+                SizedBox(
                   height: 400,
                   child: Stack(
                     children:  <Widget> [
-                      Container(
-                          child:
-                          Image(image: AssetImage('lib/assets/images/apartment.png'),
-                            width: double.infinity,
-                            fit: BoxFit.cover,)),
+                      const Image(image: AssetImage('lib/assets/images/apartment.png'),
+                        width: double.infinity,
+                        fit: BoxFit.cover,),
 
                       Positioned(
                           top: 50,
                           left: 20,
                           child:InkWell(
+
                             onTap: (){
                               Get.back();
                             },
                             child: Image(image: AssetImage("lib/assets/images/Icon Back.png")),
+
                           )
                       ),
 
@@ -54,7 +56,7 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
                         right: 20,
                         child: InkWell(
                           onTap: (){},
-                          child: Image(image: AssetImage('lib/assets/images/greyheart.png')),
+                          child: const Image(image: AssetImage('lib/assets/images/greyheart.png')),
                         ),
                       ),
                       Container(
@@ -62,22 +64,22 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
                         child: InkWell(
                             onTap: (){},
                             child:
-                            Image(image: AssetImage('lib/assets/images/complete-apartment.png'))),
+                            const Image(image: AssetImage('lib/assets/images/complete-apartment.png'))),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 Row(
                     children: [
-                      SizedBox(width: 35,),
-                      Icon(Icons.star,color:Color(0xffEEA651),)
-                      ,SizedBox(width: 2,),
+                      const SizedBox(width: 35,),
+                      const Icon(Icons.star,color:Color(0xffEEA651),)
+                      ,const SizedBox(width: 2,),
                       Text("4 (6.8K review)",style: TextStyle(color:kGreyColor,fontFamily: kRegularFont,fontWeight: FontWeight.w600),
                       ),
-                      SizedBox(width: 130,),
-                      Container(height: 30,width: 90,decoration: BoxDecoration(color: Color(0xffF4F6F9),border:
-                      Border.all(color: Color(0xffF4F6F9),),borderRadius:
+                      const SizedBox(width: 130,),
+                      Container(height: 30,width: 90,decoration: BoxDecoration(color: const Color(0xffF4F6F9),border:
+                      Border.all(color: const Color(0xffF4F6F9),),borderRadius:
                       BorderRadius.circular(25)),child: Center(
                         child: Text("Apartment",
                           style: TextStyle(color: kPrimaryColor,fontSize: 12,fontWeight: FontWeight.w600,fontFamily: kRegularFont),),
@@ -85,10 +87,10 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
                     ]
                 ),
 
-                SizedBox(height: 5,),
+                const SizedBox(height: 5,),
                 Row(
                   children: [
-                    SizedBox(width: 25,),
+                    const SizedBox(width: 25,),
                     Text("Woodland Apartment" , style: TextStyle(color: kDarkBlueColor,fontFamily: kRegularFont,fontWeight: FontWeight.w700
                         ,fontSize: 20),),
                   ],
@@ -96,8 +98,8 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
 
                 Row(
                   children: [
-                    SizedBox(width: 25,),
-                    Text("1012 Ocean avaneu, New york, USA" , style: TextStyle(color: Color(0xff415770),fontSize: 12,fontFamily:kRegularFont,fontWeight: FontWeight.w500) )
+                    const SizedBox(width: 25,),
+                    Text("1012 Ocean avaneu, New york, USA" , style: TextStyle(color: const Color(0xff415770),fontSize: 12,fontFamily:kRegularFont,fontWeight: FontWeight.w500) )
                   ],
                 ),
 
@@ -105,7 +107,7 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
 
                 Center(
                     child: Container(
-                      margin: EdgeInsets.only(top: 5),
+                      margin: const EdgeInsets.only(top: 5),
                       width: Get.width * 0.93,
                       height: 60,
                       decoration: BoxDecoration(
@@ -114,9 +116,9 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
                       child: Center(
                         child: ListView.separated(
 
-                            padding: EdgeInsets.only(
+                            padding: const EdgeInsets.only(
                                 left: 10, right: 10, top: 0, bottom: 0),
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
                               return InkWell(
@@ -141,7 +143,7 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
                             },
                             dragStartBehavior:DragStartBehavior.down ,
                             separatorBuilder: (context, index) {
-                              return SizedBox(width: 60);
+                              return const SizedBox(width: 60);
                             },
                             itemCount: controller.pOrLOrS.length),
                       ),
@@ -155,7 +157,7 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
                 ),
 
                 Container(
-                  margin: EdgeInsets.only(left: 0, right: 0, top: 0),
+                  margin: const EdgeInsets.only(left: 0, right: 0, top: 0),
                   width: Get.width,
 
                   child: Center(child: controller.listViewItem[controller.selectedIndex])

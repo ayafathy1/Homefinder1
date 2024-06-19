@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, avoid_print
+
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -57,7 +59,6 @@ class SettingsController extends GetxController {
       "Log out",
       "Delete account"
    ];
-   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
    Future<void> signOut(BuildContext context) async {
       try {

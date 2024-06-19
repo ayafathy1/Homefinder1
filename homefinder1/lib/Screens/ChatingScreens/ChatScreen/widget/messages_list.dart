@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:homefinder1/utilities/colors.dart';
-
+import '../../../../models/conversation_model.dart';
 import '../controller/chat_screen_controller.dart';
 import 'chatting_cell.dart';
 class MessagesList extends StatelessWidget {
    const MessagesList({Key? key, required this.listOfMessages, required this.receiverId}) : super(key: key);
-   final List<String>? listOfMessages ;
+   final List<Message>? listOfMessages ;
    final String receiverId;
 
 
@@ -15,12 +14,12 @@ class MessagesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ChatScreenController>(
-      init: ChatScreenController(receiverId),
+      init: ChatScreenController(receiverId,context),
       builder: (controller) =>  Expanded(
         child: Container(
           padding:  const EdgeInsets.symmetric(horizontal: 10),
-          decoration:    BoxDecoration(
-            color: kPrimaryColor,
+          decoration:    const BoxDecoration(
+            color: Colors.white,
 
           ),
           child: ClipRRect(
@@ -34,9 +33,9 @@ class MessagesList extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   itemCount: listOfMessages?.length,
                   itemBuilder: (context, int index) {
-                    return Column(
+                    return  Column(
                       children: [
-                        ChattingCell(messageText: "listOfMessages?[index].msg??""", sender: "controller.detectWhoWroteTheMessage(listOfMessages?[index].to??0), "==""?true:false,messageTime: "listOfMessages?[index].date??"""),
+                        ChattingCell(messageText: listOfMessages?[index].messageContent??"", sender:controller.detectWhoWroteTheMessage(listOfMessages?[index].senderId??0),messageTime: controller.returnDateAndTime(listOfMessages?[index].createdAt), longPress: () {controller.takeActionWithTheMessage(listOfMessages?[index].messageContent??"",listOfMessages?[index].id??"");  },),
 
 
                       ],

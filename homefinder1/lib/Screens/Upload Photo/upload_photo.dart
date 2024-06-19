@@ -1,7 +1,9 @@
+
+// ignore_for_file: unnecessary_null_comparison, no_leading_underscores_for_local_identifiers, avoid_print, use_build_context_synchronously
+
 import 'dart:convert';
 import 'dart:io';
 import 'package:cool_alert/cool_alert.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/Upload%20Preview/upload_preview.dart';
@@ -13,6 +15,8 @@ import 'package:http/http.dart' as http;
 import '../../utilities/memory.dart';
 
 class UploadPhoto extends StatefulWidget {
+  const UploadPhoto({super.key});
+
   @override
   State<UploadPhoto> createState() => _UploadPhotoState();
 }
@@ -25,19 +29,19 @@ class _UploadPhotoState extends State<UploadPhoto> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Select Image Source'),
+          title: const Text('Select Image Source'),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
                 GestureDetector(
-                  child: Text('Gallery'),
+                  child: const Text('Gallery'),
                   onTap: () {
                     Navigator.of(context).pop(ImageSource.gallery);
                   },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 GestureDetector(
-                  child: Text('Camera'),
+                  child: const Text('Camera'),
                   onTap: () {
                     Navigator.of(context).pop(ImageSource.camera);
                   },
@@ -80,7 +84,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
     File imageFile = File(image.path);
 
     // Retrieve authorization token
-    String? token = await Get.find<StorageService>().getToken;
+    String? token =  Get.find<StorageService>().getToken;
     if (token == null) {
       print('Authorization token is null.');
       return;
@@ -123,23 +127,24 @@ class _UploadPhotoState extends State<UploadPhoto> {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: CustomArrowBack(),
+        leading: const CustomArrowBack(),
         leadingWidth: Get.width * 0.2,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Text(
+            const Text(
               "Upload Your Photo",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
             ),
-            Row(
+            const Row(
               children: [
                 Text(
                   "     Profile",
@@ -147,15 +152,15 @@ class _UploadPhotoState extends State<UploadPhoto> {
                 ),
               ],
             ),
-            SizedBox(height: 15),
-            Text(
+            const SizedBox(height: 15),
+            const Text(
               "  This data will be displayed in your account profile ",
               style: TextStyle(fontSize: 15),
             ),
-            Row(children: [
+            const Row(children: [
               Text("      for security", style: TextStyle(fontSize: 15)),
             ]),
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: GestureDetector(
@@ -165,23 +170,25 @@ class _UploadPhotoState extends State<UploadPhoto> {
                 child: Container(
                   height: 135,
                   width: Get.width * 0.9,
-                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.shade400,
-                        offset: Offset(0, 0),
+                        offset: const Offset(0, 0),
                         blurRadius: 15,
                       ),
                     ],
-                    color: Color(0xffF4F4F4),
+                    color: const Color(0xffF4F4F4),
                     borderRadius: BorderRadius.circular(18),
                     border: Border.all(
-                      color: Color(0xffF4F4F4),
+
+                      color: const Color(0xffF4F4F4),
                       width: 3,
                     ),
                   ),
-                  child: Center(
+
+                  child: const Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -200,7 +207,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
                 ),
               ),
             ),
-            SizedBox(height: 200),
+            const SizedBox(height: 200),
             SizedBox(
               height: 50,
               width: 200,
@@ -217,7 +224,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
                     );
                   }
                 },
-                child: Row(
+                child: const Row(
                   children: [
                     Text(
                       "          Next",
@@ -228,7 +235,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
                   ],
                 ),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xff6C63FF),
+                  backgroundColor: const Color(0xff6C63FF),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(28),
                   ),
@@ -237,7 +244,7 @@ class _UploadPhotoState extends State<UploadPhoto> {
             ),
             TextButton(
               onPressed: () {},
-              child: Text(
+              child: const Text(
                 "skip now",
                 style: TextStyle(color: Color(0xff6C63FF)),
               ),

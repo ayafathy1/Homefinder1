@@ -1,10 +1,11 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: non_constant_identifier_names, prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class GridView1 extends StatelessWidget{
-  GridView1( {Key?Key , required this.gridView, required this.index});
+  GridView1( {super.key, Key?Key , required this.gridView, required this.index});
   int index;
   var gridView;
 
@@ -15,7 +16,7 @@ class GridView1 extends StatelessWidget{
         width: Get.width*0.4,
         decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-    color:  Color(0xffF7F7F7),),
+    color:  const Color(0xffF7F7F7),),
       child:Stack(
         children:
             [
@@ -32,10 +33,10 @@ class GridView1 extends StatelessWidget{
                 top: 5,
                 right: 3,
                 child: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.transparent,
                     ),
-                    child: InkWell(
+                    child: const InkWell(
                       child: Image(image: AssetImage("lib/assets/images/close_button.png")),
                     )
                 ),
