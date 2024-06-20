@@ -410,7 +410,7 @@ class SingleDetailController extends GetxController {
                       icon: Image(
                         image: AssetImage("lib/assets/images/message.png"),
                       ))
-z
+
                 ],
               ),
             ),
@@ -641,7 +641,7 @@ z
                       text: "Book Now",
                       onPressed: () {},
                       textStyle: TextStyle(
-<
+
                           color: Colors.white,
                           fontWeight: FontWeight.w700,
                           fontSize: 17,

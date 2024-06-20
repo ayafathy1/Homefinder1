@@ -133,13 +133,16 @@ class ChattingScreen extends StatelessWidget {
               //massage list used to display massages
               controller.isLoading?LoadingMessageListWidget():MessagesList( listOfMessages:  controller.chatList?.chat?.messages,receiverId: reciverId,),
               //Main widget at the end of screen
-             TextFieldChatBar(sendMassage: (value){
-               if(controller.isEditingTheMessage){
-                 controller.editTheMessage();
-               }else {
-                 controller.sendMessage();
-               }
-              }, myController:  controller.msgController,)
+             Padding(
+               padding: const EdgeInsets.only(bottom: 50),
+               child: TextFieldChatBar(sendMassage: (value){
+                 if(controller.isEditingTheMessage){
+                   controller.editTheMessage();
+                 }else {
+                   controller.sendMessage();
+                 }
+                }, myController:  controller.msgController,),
+             )
 
 
             ],
