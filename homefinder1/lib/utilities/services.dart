@@ -1,7 +1,7 @@
 class Services {
- static String baseEndPoint = "https://home-finder-back-end-i7ca.onrender.com";
- static String resendVerificationEndPoint = "/api/v1/auth/resend-code/65ef8459c2bd7a5646b05034"; //Post
- static String verificationCodeEndPoint = "/api/v1/auth/verification/65ef8459c2bd7a5646b05034";//post
+ static String baseEndPoint = "https://home-finder-back-end-i7ca.onrender.com/api/v1/";
+ static String resendVerificationEndPoint = "auth/resend-code/65ef8459c2bd7a5646b05034"; //Post
+ static String verificationCodeEndPoint = "auth/verification/65ef8459c2bd7a5646b05034";//post
  static String shopEndPoint = "shop"; //Post
  static String productEndPoint = "item"; //Post
   static String productPagenationEndPoint = "item_pagination"; //Post
@@ -11,9 +11,9 @@ class Services {
  static String advertismentEndPoint = "slider"; //Post
  static String advertismentHasBeenUsedEndPoint = "slider_click"; //Post
  static String linksEndPoint = "social"; //Post
- static String signingUpEndPoint = "/api/v1/auth/signup"; //Post
- static String completeSigningUpEndPoint = "/api/v1/auth/complete-signup";
- static String signingInEndPoint = "/api/v1/auth/login"; //Post
+ static String signingUpEndPoint = "auth/signup"; //Post
+ static String completeSigningUpEndPoint = "auth/complete-signup";
+ static String signingInEndPoint = "auth/login"; //Post
  static String editingMemberDataEndPoint = "member/edit"; //Post
  static String editingMemberPasswordEndPoint = "member/change_password"; //Post
  static String getUserDataEndPoint = "member"; //Post
@@ -34,14 +34,14 @@ class Services {
  static String statsEndPoint = "order/new";//post
  static String addingCommentEndPoint = "review/new";//post
  static String getCommentEndPoint = "review";//post
- static String forgetPasswordEndPoint = "/api/v1/auth/forgot-pass";//post
- static String getUserChatListEndPoint = "/api/v1/chat//get-conversations";//get
-  static String getUserConversationEndPoint = "/api/v1/chat/get-conversation/";//get
- static String searchUserChatListEndPoint = "/api/v1/chat/search-users?";//get
- static String sendMessageEndPoint = "/api/v1/chat/send/";//post
- static String editMessageEndPoint = "/api/v1/chat/edit-message/";//patch
- static String deleteMessageEndPoint = "/api/v1/chat/delete-message/";//delete
- static String deleteConversationEndPoint = "/api/v1/chat/delete-conversation/";//delete
+ static String forgetPasswordEndPoint = "auth/forgot-pass";//post
+ static String getUserChatListEndPoint = "chat//get-conversations";//get
+  static String getUserConversationEndPoint = "chat/get-conversation/";//get
+ static String searchUserChatListEndPoint = "chat/search-users?";//get
+ static String sendMessageEndPoint = "chat/send/";//post
+ static String editMessageEndPoint = "chat/edit-message/";//patch
+ static String deleteMessageEndPoint = "chat/delete-message/";//delete
+ static String deleteConversationEndPoint = "chat/delete-conversation/";//delete
  static String resendVerificationForgetEndPoint = "auth/resend-pass-otp/"; //Post
  static String verificationCodeForgetEndPoint = "auth/verify-pass-otp/";//post
  static String addFavEndPoint = "user/favorites/add/"; //get
