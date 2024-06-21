@@ -3,16 +3,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:homefinder1/Screens/add_review/controller/add_review_controller.dart';
 import 'package:homefinder1/Widget/custom_arrow_back.dart';
 import 'package:homefinder1/utilities/colors.dart';
 import 'package:homefinder1/utilities/constants.dart';
+//////
+
+
+
+
 
 
 class AddReviewScreen extends StatelessWidget {
-  const AddReviewScreen({super.key});
-
+   AddReviewScreen({super.key,required this.resId});
+String resId;
   @override
   Widget build(BuildContext context) {
+    return GetBuilder<AddReviewController>(
+        init: AddReviewController(context,resId),
+    builder: (AddReviewController controller) {
     return Scaffold(
       body: SingleChildScrollView(
           child: Column(
@@ -36,19 +45,25 @@ class AddReviewScreen extends StatelessWidget {
               ],
             ),
           ),
-          const Center(
-            child: SizedBox(
+
+
+          Center(
+            child: Container(
+
               height: 120,
               width: 120,
-              child: Image(
-                image: AssetImage("lib/assets/images/profileAddReview.png"),
-                fit: BoxFit.fill,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(50),
+                child: Image(
+                  image: NetworkImage(controller.data?.image?.url??""),
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
           ),
           Center(
             child: Text(
-              "Raj Kumar",
+              controller.data?.fullName??"",
               style: TextStyle(
                   fontFamily: kRegularFont,
                   fontSize: 18,
@@ -74,7 +89,7 @@ class AddReviewScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "How was your experience with Raj?",
+                  "How was your experience with ${controller.data?.firstName}",
                   style: TextStyle(
                       fontFamily: kRegularFont,
                       color: kVeryDarkBlueColor,
@@ -114,6 +129,7 @@ class AddReviewScreen extends StatelessWidget {
                 color: Color(0xffEEA651),
               ),
               onRatingUpdate: (rating) {
+                controller.rating=rating.toInt();
                 print(rating);
               },
             ),
@@ -148,6 +164,7 @@ class AddReviewScreen extends StatelessWidget {
             ]),
             child: Center(
                 child: TextFormField(
+                  controller: controller.commentController,
               textAlignVertical: TextAlignVertical.top,
               decoration: InputDecoration(
                   contentPadding:
@@ -174,8 +191,10 @@ class AddReviewScreen extends StatelessWidget {
               width: 220,
               height: 60,
               child:ElevatedButton(
-             
-                onPressed: () {},
+
+                onPressed: () {
+                  controller.addReview(context);
+                },
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
               fixedSize: const Size(215,53)
@@ -191,6 +210,6 @@ class AddReviewScreen extends StatelessWidget {
           )
         ],
       )),
-    );
+    );});
   }
 }

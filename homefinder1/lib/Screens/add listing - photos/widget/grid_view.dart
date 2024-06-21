@@ -5,10 +5,13 @@ import 'package:get/get.dart';
 
 // ignore: must_be_immutable
 class GridView1 extends StatelessWidget{
-  GridView1( {super.key, Key?Key , required this.gridView, required this.index});
+
+  GridView1( {super.key, Key?Key ,  this.OnTap,required this.gridView, required this.index});
+
+
   int index;
   var gridView;
-
+  void Function()? OnTap;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,8 +38,10 @@ class GridView1 extends StatelessWidget{
                 child: Container(
                     decoration: const BoxDecoration(
                       color: Colors.transparent,
-                    ),
-                    child: const InkWell(
+
+                    ),child:  InkWell(
+                     onTap:OnTap,
+
                       child: Image(image: AssetImage("lib/assets/images/close_button.png")),
                     )
                 ),

@@ -7,6 +7,7 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/Upload%20Preview/upload_preview.dart';
+import 'package:homefinder1/Screens/home/home_screen.dart';
 import 'package:homefinder1/Widget/custom_arrow_back.dart';
 import 'dart:typed_data' show Uint8List;
 import 'package:image_picker/image_picker.dart';
@@ -243,8 +244,14 @@ class _UploadPhotoState extends State<UploadPhoto> {
               ),
             ),
             TextButton(
-              onPressed: () {},
+
+
+              onPressed: () {
+                Get.to(()=>HomeScreen());
+              },
               child: const Text(
+
+
                 "skip now",
                 style: TextStyle(color: Color(0xff6C63FF)),
               ),

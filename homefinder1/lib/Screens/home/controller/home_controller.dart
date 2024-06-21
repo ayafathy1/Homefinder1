@@ -8,7 +8,10 @@ import 'package:homefinder1/utilities/colors.dart';
 
 import '../../../models/get_all_reesidences_model.dart'as a;
 
+import '../../../models/get_all_reviews_of_residence_model.dart' as c;
+
 import '../../../models/get_one_residence_model.dart'as o;
+import '../../../models/get_residence_images_model.dart'as a;
 import '../../../models/respose_model.dart';
 import '../../../services/residences_services.dart';
 import 'package:flutter/material.dart';
@@ -38,11 +41,62 @@ int itemCount1=0;
     super.onInit();
     searchController = TextEditingController();
     await getDataOfResidences(context!);
-    scroll.addListener(loadMoreDataOfResidences);
+
 
   }
+List<a.Image>?images;
 
 
+  getPhotosOfResidence(String resId,BuildContext context) async {
+    try {
+      isLoading=true;
+      a.GetResidencesImagesModel? response =
+      await ResidenceServices.fetchImagesOfResidences(
+          resId, context);
+      print("API Response Status: ${response?.status}");
+
+      if (response == null) {
+        print("Some error occurred: Response is null");
+      } else {
+        images = response.images ?? [];
+        print(images);
+
+        // Print or access other properties as needed
+        print("Number of residences: ${images?.length}");
+      }
+
+      isLoading = false;
+      update();
+    } catch (e) {
+      print("Exception occurred: $e");
+      isLoading = false;
+    }
+  }
+List<c.Review>?reviews;
+  getReviewsOfResidence(String resId,BuildContext context) async {
+    try {
+      isLoading=true;
+      c.GetAllReviewsOfResidenceModel? response =
+      await ResidenceServices.fetchReviewsOfResidences(
+          resId, context);
+      print("API Response Status: ${response?.status}");
+
+      if (response == null) {
+        print("Some error occurred: Response is null");
+      } else {
+        reviews = response.reviews ?? [];
+
+        // Print or access other properties as needed
+        print("Number of residences: ${images?.length}");
+      }
+
+      isLoading = false;
+      update();
+    } catch (e) {
+      print("Exception occurred: $e");
+      isLoading = false;
+    }
+  }
   getDataOfResidences(BuildContext context) async {
 
     if (counterOfResidences == 5) {
@@ -108,7 +162,10 @@ int itemCount1=0;
           residence = response.residence ;
 
 
+         update();
         Get.to(()=>SingleDetailScreen(Id,resId));
+          update();
+
 
           // Print or access other properties as needed
           print("Number of residences: $residence");
@@ -177,12 +234,7 @@ int itemCount1=0;
 
 
 
-  void loadMoreDataOfResidences() {
-    if (scroll.position.pixels == scroll.position.maxScrollExtent && counterOfResidences < maxNoOfPagesOfResidences) {
-      counterOfResidences += 1;
-      getDataOfResidences(context!);
-    }
-  }
+
 }
 
 
