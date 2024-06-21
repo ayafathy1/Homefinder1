@@ -5,6 +5,7 @@ import 'package:homefinder1/Screens/Featured%20Estates/featured_estates.dart';
 import 'package:homefinder1/Screens/add_listing/add_listing_screen.dart';
 import 'package:homefinder1/Screens/home/controller/home_controller.dart';
 import 'package:homefinder1/Screens/popular_nearest_you/popular_nearest_you_screen.dart';
+import 'package:homefinder1/Screens/single%20detail/single_detail.dart';
 import 'package:homefinder1/utilities/colors.dart';
 import 'package:homefinder1/utilities/constants.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -434,7 +435,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             InkWell(
                               onTap:(){
-                                controller.getDataOfOneResidences(controller.residences?[index].id??"", context);
+                         controller.SelectedResidenceIndex=index;
+                                setState(() {
+
+                                });
+
+                               Get.to(()=>SingleDetailScreen(controller.residences?[controller.SelectedResidenceIndex??0].id??0,controller.residences?[controller.SelectedResidenceIndex??0].residenceId??""));
+
                               }
                               ,
                               child: Container(

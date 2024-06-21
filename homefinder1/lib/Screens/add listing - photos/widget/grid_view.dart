@@ -4,10 +4,11 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class GridView1 extends StatelessWidget{
-  GridView1( {Key?Key , required this.gridView, required this.index});
+  GridView1( {super.key, Key?Key ,  this.OnTap,required this.gridView, required this.index});
+
   int index;
   var gridView;
-
+  void Function()? OnTap;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,8 +35,8 @@ class GridView1 extends StatelessWidget{
                 child: Container(
                     decoration: BoxDecoration(
                       color: Colors.transparent,
-                    ),
-                    child: InkWell(
+                    ),child:  InkWell(
+                     onTap:OnTap,
                       child: Image(image: AssetImage("lib/assets/images/close_button.png")),
                     )
                 ),

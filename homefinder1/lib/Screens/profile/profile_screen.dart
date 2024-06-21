@@ -312,7 +312,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            controller.selectedIndex==0?" ${controller.data1?.pendingCount??0}   ":controller.selectedIndex==1?" ${controller.data1?.approvedCount??0}   ":" ${controller.data1?.soldCount??0}   ",
+                            controller.selectedIndex==0?" ${controller.pendingResidenceCount}   ":controller.selectedIndex==1?" ${controller.approvedResidenceCount}   ":" ${controller.soldResidenceCount}   ",
                             style: TextStyle(
                                 color: kDarkBlueColor,
                                 fontWeight: FontWeight.w900,
@@ -333,6 +333,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       margin: EdgeInsets.only(left: 15, right: 15, top: 5),
                       width: Get.width,
                       height: Get.height * 0.3,
+
                       child: ListView.separated(
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
@@ -348,6 +349,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           itemCount: controller.listViewItem.length),
                     )
                   ],
+
+                      child:controller.listViewItem[controller.selectedIndex]
+                    )],
+
                 )),
           );
         });
