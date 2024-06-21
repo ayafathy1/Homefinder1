@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, use_build_context_synchronously
+
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -28,6 +30,7 @@ class ApiService {
 
       if (method == 'GET') {
         request = await httpClient.getUrl(uri);
+        request.headers.contentType = ContentType.json;
       } else if (method == 'POST') {
         request = await httpClient.postUrl(uri);
         request.headers.contentType = ContentType.json;

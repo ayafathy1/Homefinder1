@@ -1,9 +1,10 @@
+// ignore_for_file: library_private_types_in_public_api, avoid_print, unnecessary_null_comparison, use_build_context_synchronously, sized_box_for_whitespace
+
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:homefinder1/Screens/add_listing/add_listing_screen.dart';
 import 'package:homefinder1/Screens/add_listing_1st_detail/add_listing_1st_detail_screen.dart';
 import 'package:homefinder1/Widget/custom_arrow_back.dart';
 import 'package:homefinder1/utilities/colors.dart';
@@ -14,29 +15,28 @@ import 'package:http/http.dart' as http;
 import '../../../utilities/memory.dart';
 
 class ImagePickerExample1 extends StatefulWidget {
+  const ImagePickerExample1({super.key, required this.residenceId});
+
+
   final String residenceId;
-  ImagePickerExample1(this.residenceId);
+
   @override
   _ImagePickerExampleState1 createState() => _ImagePickerExampleState1();
 }
 
 class _ImagePickerExampleState1 extends State<ImagePickerExample1> {
-  List<Uint8List> _images = [];
+  final List<Uint8List> _images = [];
 
   Future<void> _pickImagesFromGallery() async {
     List<XFile>? pickedFiles = await ImagePicker().pickMultiImage();
 
-    if (pickedFiles != null) {
-      for (var pickedFile in pickedFiles) {
-        Uint8List bytes = await pickedFile.readAsBytes();
-        setState(() {
-          _images.add(bytes);
-        });
-      }
-    } else {
-      print('No images selected.');
+    for (var pickedFile in pickedFiles) {
+      Uint8List bytes = await pickedFile.readAsBytes();
+      setState(() {
+        _images.add(bytes);
+      });
     }
-  }
+    }
 
   Future<void> _pickImageFromCamera() async {
     XFile? pickedFile = await ImagePicker().pickImage(source: ImageSource.camera);
@@ -56,22 +56,22 @@ class _ImagePickerExampleState1 extends State<ImagePickerExample1> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Select Image Source'),
+          title: const Text('Select Image Source'),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
                 GestureDetector(
-                  child: Text('Gallery'),
+                  child: const Text('Gallery'),
                   onTap: () {
                     Navigator.of(context).pop();
                     _pickImagesFromGallery();
                   },
                 ),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.all(8.0),
                 ),
                 GestureDetector(
-                  child: Text('Camera'),
+                  child: const Text('Camera'),
                   onTap: () {
                     Navigator.of(context).pop();
                     _pickImageFromCamera();
@@ -102,7 +102,7 @@ class _ImagePickerExampleState1 extends State<ImagePickerExample1> {
     try {
       // Create multipart request
       var request = http.MultipartRequest('POST', Uri.parse(apiUrl));
-      String? token = await Get.find<StorageService>().getToken;
+      String? token = Get.find<StorageService>().getToken;
       if (token == null) {
         print('Authorization token is null.');
         return;
@@ -147,9 +147,10 @@ class _ImagePickerExampleState1 extends State<ImagePickerExample1> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+
         toolbarHeight: Get.height * 0.1,
         leadingWidth: Get.width * 0.2,
-        leading: CustomArrowBack(),
+        leading: const CustomArrowBack(),
         title: Text(
           'Add Listing',
           style: TextStyle(
@@ -199,7 +200,8 @@ class _ImagePickerExampleState1 extends State<ImagePickerExample1> {
               ],
             ),
             _images.isEmpty
-                ? Center(child: Text('No images selected.'))
+
+                ? const Center(child: Text('No images selected.'))
                 : Container(
               height: Get.height * 0.55,
               width: Get.width,
@@ -210,7 +212,7 @@ class _ImagePickerExampleState1 extends State<ImagePickerExample1> {
                     alignment: Alignment.topRight,
                     children: [
                       Container(
-                        margin: EdgeInsets.only(right: 4, left: 4, top: 5),
+                        margin: const EdgeInsets.only(right: 4, left: 4, top: 5),
                         width: 159,
                         height: 161,
                         decoration: BoxDecoration(
@@ -234,10 +236,10 @@ class _ImagePickerExampleState1 extends State<ImagePickerExample1> {
                           width: 30,
                           height: 30,
                           decoration: BoxDecoration(
-                            color: Color(0xff9292FD),
+                            color: const Color(0xff9292FD),
                             borderRadius: BorderRadius.circular(50),
                           ),
-                          child: Center(
+                          child: const Center(
                             child: Icon(
                               Icons.close,
                               color: Colors.white,
@@ -251,11 +253,12 @@ class _ImagePickerExampleState1 extends State<ImagePickerExample1> {
                 }),
               ),
             ),
+
             Center(
               child: ElevatedButton(
                 onPressed: _showImagePickerDialog,
                 style: ElevatedButton.styleFrom(
-                    fixedSize: Size(100, 100),
+                    fixedSize: const Size(100, 100),
                     backgroundColor: kVeryLightGreyColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25),
@@ -273,7 +276,7 @@ class _ImagePickerExampleState1 extends State<ImagePickerExample1> {
               child: Container(
                 width: 210,
                 height: 64,
-                margin: EdgeInsets.only(top: 15),
+                margin: const EdgeInsets.only(top: 15),
                 decoration: BoxDecoration(
                     color: kPrimaryColor,
                     border: Border.all(color: kPrimaryColor, width: 1),
@@ -293,7 +296,7 @@ class _ImagePickerExampleState1 extends State<ImagePickerExample1> {
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: kPrimaryColor,
-                        fixedSize: Size(200, 70))),
+                        fixedSize: const Size(200, 70))),
               ),
             )
           ],

@@ -1,9 +1,9 @@
+
+// ignore_for_file: sized_box_for_whitespace, avoid_print
+
 import 'package:cool_alert/cool_alert.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:homefinder1/Widget/custom_arrow_back.dart';
 import 'package:homefinder1/Widget/custom_elevated_button_widget.dart';
 import 'package:homefinder1/utilities/colors.dart';
 import 'package:homefinder1/utilities/constants.dart';
@@ -17,6 +17,7 @@ class EditProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return GetBuilder(
         init: EditProfileController(),
         builder: (EditProfileController controller) {
@@ -33,12 +34,12 @@ class EditProfileScreen extends StatelessWidget {
               ),
               leading:Row(
                 children: [
-                  SizedBox(width: 25,),
+                  const SizedBox(width: 25,),
                   Container(
                     width: 50,
                     height: 55,
-                    decoration: BoxDecoration(color: Color(0xff9292FD).withOpacity(0.2),
-                        border: Border.all(color: Color(0xff9292FD).withOpacity(0.2)),borderRadius: BorderRadius.circular(15)),
+                    decoration: BoxDecoration(color: const Color(0xff9292FD).withOpacity(0.2),
+                        border: Border.all(color: const Color(0xff9292FD).withOpacity(0.2)),borderRadius: BorderRadius.circular(15)),
                     child:
                     Padding(
                       padding: const EdgeInsets.only(left: 5.0),
@@ -52,7 +53,7 @@ class EditProfileScreen extends StatelessWidget {
                         ss.getdata();
 
                         Get.back();
-                      }, icon: Icon(Icons.arrow_back_ios ,size: 20,color: Color(0xff6C63FF),) ,),
+                      }, icon: const Icon(Icons.arrow_back_ios ,size: 20,color: Color(0xff6C63FF),) ,),
                     ),
 
                   ),
@@ -107,7 +108,7 @@ class EditProfileScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(100),
                                     border: Border.all(color: Colors.transparent),
                                     color: kPrimaryColor),
-                                child: Center(
+                                child: const Center(
                                   child: Icon(
                                     Icons.close,
                                     color: Colors.white,
@@ -175,7 +176,7 @@ class EditProfileScreen extends StatelessWidget {
                                         child: Text(
                                           "First Name",
                                           style: TextStyle(
-                                              color: Color(0xff888888),
+                                              color: const Color(0xff888888),
                                               fontFamily: kRegularFont,
                                               fontSize: 15,
                                               fontWeight: FontWeight.w700),
@@ -200,22 +201,22 @@ class EditProfileScreen extends StatelessWidget {
                                           decoration: InputDecoration(
                                               enabledBorder: OutlineInputBorder(
                                                   borderRadius: BorderRadius.circular(15),
-                                                  borderSide: BorderSide(
+                                                  borderSide: const BorderSide(
                                                       color: Colors.transparent)),
                                               focusedBorder: OutlineInputBorder(
                                                   borderRadius: BorderRadius.circular(15),
-                                                  borderSide: BorderSide(
+                                                  borderSide: const BorderSide(
                                                       color: Colors.transparent)),
                                               disabledBorder: OutlineInputBorder(
                                                   borderRadius: BorderRadius.circular(15),
-                                                  borderSide: BorderSide(
+                                                  borderSide: const BorderSide(
                                                       color: Colors.transparent)),
                                               border: OutlineInputBorder(
                                                   borderRadius: BorderRadius.circular(15),
-                                                  borderSide: BorderSide(
+                                                  borderSide: const BorderSide(
                                                       color: Colors.transparent)),
                                               filled: true,
-                                              fillColor: Color(0xffF2F7FF)),
+                                              fillColor: const Color(0xffF2F7FF)),
                                         ),
                                       )
                                     ],
@@ -231,7 +232,7 @@ class EditProfileScreen extends StatelessWidget {
                                         child: Text(
                                           "Last Name",
                                           style: TextStyle(
-                                              color: Color(0xff888888),
+                                              color: const Color(0xff888888),
                                               fontFamily: kRegularFont,
                                               fontSize: 15,
                                               fontWeight: FontWeight.w700),
@@ -256,22 +257,22 @@ class EditProfileScreen extends StatelessWidget {
                                           decoration: InputDecoration(
                                               enabledBorder: OutlineInputBorder(
                                                   borderRadius: BorderRadius.circular(15),
-                                                  borderSide: BorderSide(
+                                                  borderSide: const BorderSide(
                                                       color: Colors.transparent)),
                                               focusedBorder: OutlineInputBorder(
                                                   borderRadius: BorderRadius.circular(15),
-                                                  borderSide: BorderSide(
+                                                  borderSide: const BorderSide(
                                                       color: Colors.transparent)),
                                               disabledBorder: OutlineInputBorder(
                                                   borderRadius: BorderRadius.circular(15),
-                                                  borderSide: BorderSide(
+                                                  borderSide: const BorderSide(
                                                       color: Colors.transparent)),
                                               border: OutlineInputBorder(
                                                   borderRadius: BorderRadius.circular(15),
-                                                  borderSide: BorderSide(
+                                                  borderSide: const BorderSide(
                                                       color: Colors.transparent)),
                                               filled: true,
-                                              fillColor: Color(0xffF2F7FF)),
+                                              fillColor: const Color(0xffF2F7FF)),
                                         ),
                                       )
                                     ],
@@ -281,7 +282,7 @@ class EditProfileScreen extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.only(left: 15),
+                            padding: const EdgeInsets.only(left: 15),
                             width: Get.width,
                             height: Get.height * 0.13,
                             child: Column(
@@ -292,7 +293,7 @@ class EditProfileScreen extends StatelessWidget {
                                   child: Text(
                                     "User Name*",
                                     style: TextStyle(
-                                        color: Color(0xff888888),
+                                        color: const Color(0xff888888),
                                         fontFamily: kRegularFont,
                                         fontSize: 15,
                                         fontWeight: FontWeight.w700),
@@ -318,28 +319,28 @@ class EditProfileScreen extends StatelessWidget {
                                         enabledBorder: OutlineInputBorder(
                                             borderRadius: BorderRadius.circular(15),
                                             borderSide:
-                                            BorderSide(color: Colors.transparent)),
+                                            const BorderSide(color: Colors.transparent)),
                                         focusedBorder: OutlineInputBorder(
                                             borderRadius: BorderRadius.circular(15),
                                             borderSide:
-                                            BorderSide(color: Colors.transparent)),
+                                            const BorderSide(color: Colors.transparent)),
                                         disabledBorder: OutlineInputBorder(
                                             borderRadius: BorderRadius.circular(15),
                                             borderSide:
-                                            BorderSide(color: Colors.transparent)),
+                                            const BorderSide(color: Colors.transparent)),
                                         border: OutlineInputBorder(
                                             borderRadius: BorderRadius.circular(15),
                                             borderSide:
-                                            BorderSide(color: Colors.transparent)),
+                                            const BorderSide(color: Colors.transparent)),
                                         filled: true,
-                                        fillColor: Color(0xffF2F7FF)),
+                                        fillColor: const Color(0xffF2F7FF)),
                                   ),
                                 )
                               ],
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.only(left: 15),
+                            padding: const EdgeInsets.only(left: 15),
                             width: Get.width,
                             height: Get.height * 0.13,
                             child: Column(
@@ -350,7 +351,7 @@ class EditProfileScreen extends StatelessWidget {
                                   child: Text(
                                     "Phone Number*",
                                     style: TextStyle(
-                                        color: Color(0xff888888),
+                                        color: const Color(0xff888888),
                                         fontFamily: kRegularFont,
                                         fontSize: 15,
                                         fontWeight: FontWeight.w700),
@@ -378,28 +379,28 @@ class EditProfileScreen extends StatelessWidget {
                                         enabledBorder: OutlineInputBorder(
                                             borderRadius: BorderRadius.circular(15),
                                             borderSide:
-                                            BorderSide(color: Colors.transparent)),
+                                            const BorderSide(color: Colors.transparent)),
                                         focusedBorder: OutlineInputBorder(
                                             borderRadius: BorderRadius.circular(15),
                                             borderSide:
-                                            BorderSide(color: Colors.transparent)),
+                                            const BorderSide(color: Colors.transparent)),
                                         disabledBorder: OutlineInputBorder(
                                             borderRadius: BorderRadius.circular(15),
                                             borderSide:
-                                            BorderSide(color: Colors.transparent)),
+                                            const BorderSide(color: Colors.transparent)),
                                         border: OutlineInputBorder(
                                             borderRadius: BorderRadius.circular(15),
                                             borderSide:
-                                            BorderSide(color: Colors.transparent)),
+                                            const BorderSide(color: Colors.transparent)),
                                         filled: true,
-                                        fillColor: Color(0xffF2F7FF)),
+                                        fillColor: const Color(0xffF2F7FF)),
                                   ),
                                 )
                               ],
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.only(left: 15),
+                            padding: const EdgeInsets.only(left: 15),
                             width: Get.width,
                             height: Get.height * 0.13,
                             child: Column(
@@ -410,7 +411,7 @@ class EditProfileScreen extends StatelessWidget {
                                   child: Text(
                                     "Gender*",
                                     style: TextStyle(
-                                        color: Color(0xff888888),
+                                        color: const Color(0xff888888),
                                         fontFamily: kRegularFont,
                                         fontSize: 15,
                                         fontWeight: FontWeight.w700),
@@ -437,21 +438,21 @@ class EditProfileScreen extends StatelessWidget {
                                         enabledBorder: OutlineInputBorder(
                                             borderRadius: BorderRadius.circular(15),
                                             borderSide:
-                                            BorderSide(color: Colors.transparent)),
+                                            const BorderSide(color: Colors.transparent)),
                                         focusedBorder: OutlineInputBorder(
                                             borderRadius: BorderRadius.circular(15),
                                             borderSide:
-                                            BorderSide(color: Colors.transparent)),
+                                            const BorderSide(color: Colors.transparent)),
                                         disabledBorder: OutlineInputBorder(
                                             borderRadius: BorderRadius.circular(15),
                                             borderSide:
-                                            BorderSide(color: Colors.transparent)),
+                                            const BorderSide(color: Colors.transparent)),
                                         border: OutlineInputBorder(
                                             borderRadius: BorderRadius.circular(15),
                                             borderSide:
-                                            BorderSide(color: Colors.transparent)),
+                                            const BorderSide(color: Colors.transparent)),
                                         filled: true,
-                                        fillColor: Color(0xffF2F7FF)),
+                                        fillColor: const Color(0xffF2F7FF)),
                                   ),
                                 )
                               ],

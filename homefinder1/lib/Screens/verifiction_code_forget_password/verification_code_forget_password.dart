@@ -1,14 +1,12 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/verifiction_code_forget_password/controller/verification_code_forget_controller.dart';
 import 'package:homefinder1/Widget/custom_arrow_back.dart';
-import 'package:homefinder1/services/auth_service.dart';
 import 'package:timer_builder/timer_builder.dart';
 
-import '../../utilities/memory.dart';
 
 
 
@@ -29,7 +27,7 @@ class _VerficationCodeState extends State<VerficationCodeForget> {
         return Scaffold(
           appBar: AppBar(
             leadingWidth: Get.width*0.2,
-            leading:  CustomArrowBack(),
+            leading:  const CustomArrowBack(),
             toolbarHeight: Get.height*0.12,
             backgroundColor: Colors.transparent,
             elevation: 0,
@@ -43,18 +41,18 @@ class _VerficationCodeState extends State<VerficationCodeForget> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text(
+                    const Text(
                       "Enter 6-digit",
                       style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                     ),
-                    Text(
+                    const Text(
                       "Verification Code",
                       style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                     ),
 
-                    Text("Code sent to your email. Code will expire in:"),
+                    const Text("Code sent to your email. Code will expire in:"),
                     TimerBuilder.periodic(
-                      Duration(seconds: 1),
+                      const Duration(seconds: 1),
                       builder: (context) {
                         // Calculate remaining time
                         Duration remainingTime = controller.calculateRemainingTime();
@@ -63,7 +61,7 @@ class _VerficationCodeState extends State<VerficationCodeForget> {
                         // Return the formatted time widget
                         return Text(
                           formattedTime,
-                          style: TextStyle(fontSize: 20),
+                          style: const TextStyle(fontSize: 20),
                         );
                       },
                     ),
@@ -90,11 +88,11 @@ class _VerficationCodeState extends State<VerficationCodeForget> {
                               FilteringTextInputFormatter.digitsOnly
                             ],
                             decoration: InputDecoration(
-                              fillColor: Color(0xffF4F4F4),
+                              fillColor: const Color(0xffF4F4F4),
                               filled: true,
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Color(0xffF4F4F4),
                                   width: 3,
                                 ),
@@ -105,15 +103,15 @@ class _VerficationCodeState extends State<VerficationCodeForget> {
 
                         Row(
                           children: [
-                            SizedBox(width: 50,),
-                            Text("Didn't receive a code?", style: TextStyle(fontSize: 20),),
+                            const SizedBox(width: 50,),
+                            const Text("Didn't receive a code?", style: TextStyle(fontSize: 20),),
                             TextButton(
                               onPressed: () async {
                                 controller.resendVerificationCode(context,widget.email);
                               },
                               child: Text(
                                 "Resend",
-                                style: TextStyle(color:controller.remainingTimeInSeconds==0?Color(0xff6C63FF):Colors.grey, fontSize: 20),
+                                style: TextStyle(color:controller.remainingTimeInSeconds==0?const Color(0xff6C63FF):Colors.grey, fontSize: 20),
                               ),
                             ),
                           ],
@@ -130,7 +128,7 @@ class _VerficationCodeState extends State<VerficationCodeForget> {
                     controller.sendVerificationCode(context, int.parse(controller.verificationCodeController.text));
                   }
                 },
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Center(
@@ -144,8 +142,8 @@ class _VerficationCodeState extends State<VerficationCodeForget> {
                   ],
                 ),
                 style: ElevatedButton.styleFrom(
-                  fixedSize:Size(190, 65),
-                  backgroundColor: Color(0xff6C63FF),
+                  fixedSize:const Size(190, 65),
+                  backgroundColor: const Color(0xff6C63FF),
 
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25),

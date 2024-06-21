@@ -3,16 +3,15 @@ import 'package:get/get.dart';
 import 'package:homefinder1/Screens/Forgot%20Password/forgot_password.dart';
 import 'package:homefinder1/Screens/auth/SignIn/controller/signin_controller.dart';
 import 'package:homefinder1/Screens/auth/Signup/signup.dart';
-import 'package:homefinder1/Screens/home/home_screen.dart';
 import 'package:homefinder1/Widget/custom_elevated_button_widget.dart';
 import 'package:homefinder1/Widget/custom_text_field_widget.dart';
-import 'package:homefinder1/services/auth_service.dart';
 import 'package:homefinder1/utilities/colors.dart';
 import 'package:homefinder1/utilities/constants.dart';
 
-import '../../verification_code/verfication_code_screen.dart';
 
 class SignIn extends StatefulWidget {
+  const SignIn({super.key});
+
   @override
   State<SignIn> createState() => _SignInState();
 }
@@ -38,7 +37,7 @@ class _SignInState extends State<SignIn> {
           return Scaffold(
               body: SafeArea(
             child: Container(
-              color: Color(0xffFFFFFF),
+              color: const Color(0xffFFFFFF),
               width: Get.width,
               height: Get.height,
               child: SingleChildScrollView(
@@ -52,7 +51,7 @@ class _SignInState extends State<SignIn> {
                           Stack(
                             alignment: AlignmentDirectional.bottomCenter,
                             children: [
-                              Container(
+                              SizedBox(
                                 width: 250,
                                 child: Image.asset(
                                   'lib/assets/images/logo-white.png',
@@ -69,32 +68,34 @@ class _SignInState extends State<SignIn> {
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
-                          Text(" sign in to acess your account"),
+                          const Text(" sign in to acess your account"),
                           CustomTextFieldWidget(
                             Controller: controller.emailaddressController,
                             validator: controller.emailValidator,
                             keyboardType: TextInputType.emailAddress,
                             textfieldHint: "Enter Your EmailAddress",
-                            textfieldIcon: Image(
+                            textfieldIcon: const Image(
                               image:
                                   AssetImage("lib/assets/images/MessageIcon.png"),
                             ),
                             ispasswordField: false,
                             obscureText: false,
-                            suffixIcon: Icon(
+                            suffixIcon: const Icon(
                               Icons.abc,
                               color: Colors.transparent,
                             ),
                           ),
                           CustomTextFieldWidget(
                             Controller: controller.passwordController,
-                            validator: (e) {},
+                            validator: (e) {
+                              return null;
+                            },
                             keyboardType: TextInputType.visiblePassword,
                             textfieldHint: "Enter Your Password",
-                            textfieldIcon: Image(
+                            textfieldIcon: const Image(
                               image: AssetImage("lib/assets/images/LockIcon.png"),
                             ),
                             ispasswordField: true,
@@ -123,7 +124,7 @@ class _SignInState extends State<SignIn> {
                                   Checkbox(
                                       value: rememberMe,
                                       onChanged: _onRememberMeChanged),
-                                  Text("Remember Me"),
+                                  const Text("Remember Me"),
                                 ],
                               ),
 
@@ -131,14 +132,14 @@ class _SignInState extends State<SignIn> {
                                 onPressed: () {
                                   Get.to(() => ForgotPassword());
                                 },
-                                child: Text(
+                                child: const Text(
                                   "Forget Password?",
                                   style: TextStyle(color: Color(0xff6C63FF)),
                                 ),
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                           SizedBox(
@@ -161,13 +162,13 @@ class _SignInState extends State<SignIn> {
                                     fontWeight: FontWeight.w900,
                                     fontFamily: kRegularFont),
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Color(0xff6C63FF),
+                                  backgroundColor: const Color(0xff6C63FF),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                 ),
                               )),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Row(
@@ -192,16 +193,19 @@ class _SignInState extends State<SignIn> {
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
                           Container(
                             height: 57,
                             width: 302,
+                            decoration: BoxDecoration(
+                                color: const Color(0xffC4C4C4).withOpacity(0.7),
+                                borderRadius: BorderRadius.circular(25)),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Container(
+                                const SizedBox(
                                   width: 25,
                                   height: 25,
                                   child: Image(
@@ -223,23 +227,20 @@ class _SignInState extends State<SignIn> {
                                 ),
                               ],
                             ),
-                            decoration: BoxDecoration(
-                                color: Color(0xffC4C4C4).withOpacity(0.7),
-                                borderRadius: BorderRadius.circular(25)),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
                           Row(
                             children: [
-                              Center(
+                              const Center(
                                   child: Text(
                                       "                              New Member?")),
                               TextButton(
                                   onPressed: () {
-                                    Get.to(() => SignUp());
+                                    Get.to(() => const SignUp());
                                   },
-                                  child: Text(
+                                  child: const Text(
                                     "Register Now",
                                     style: TextStyle(color: Color(0xff6C63FF)),
                                   ))

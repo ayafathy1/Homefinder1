@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 
 
@@ -22,9 +24,9 @@ class CustomTextFieldWidget extends StatelessWidget{
     return
 
     Padding(
-      padding:  EdgeInsets.all(10.0),
+      padding:  const EdgeInsets.all(10.0),
       child: TextFormField(
-        cursorColor: Color(0xff6C63FF),
+        cursorColor: const Color(0xff6C63FF),
         obscuringCharacter: '*',
         obscureText: obscureText,
         validator: validator,
@@ -32,21 +34,21 @@ class CustomTextFieldWidget extends StatelessWidget{
         keyboardType: keyboardType,
         decoration: InputDecoration(
           filled: true,
-          fillColor: formColor??Color(0xffF4F4F4),
+          fillColor: formColor??const Color(0xffF4F4F4),
           hintText: textfieldHint,
           suffixIcon: suffixIcon,
           prefixIcon:textfieldIcon,
-          prefixIconColor:  Color(0xff6C63FF),
+          prefixIconColor:  const Color(0xff6C63FF),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(
+              borderSide: const BorderSide(
                 color: Color(0xffF4F4F4),
                 width: 3,
               )
           ),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(
+              borderSide: const BorderSide(
                 color: Color(0xff6C63FF),
                 width: 3,
               )

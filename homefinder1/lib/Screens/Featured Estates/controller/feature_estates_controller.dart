@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -24,7 +26,7 @@ class FeatureEstatesController extends GetxController {
   int?favSelectedIndex;
   late TextEditingController searchController;
   Color? favCol;
-
+int? SelectedHouse;
   @override
   void onInit() {
     super.onInit();
@@ -80,7 +82,7 @@ class FeatureEstatesController extends GetxController {
     }
   }
 
-  Future<void> getDataOfOneResidence(String resId) async {
+  Future<void> getDataOfOneResidence(int Id,String resId) async {
     try {
       isLoading = true;
       update();
@@ -88,8 +90,10 @@ class FeatureEstatesController extends GetxController {
       o.GetOneResidencesModel? response = await ResidenceServices.fetchOneResidences(resId, context!);
       if (response != null) {
         residence = response.residence;
-        Get.to(() => SingleDetailScreen(resId));
+
+        Get.to(() => SingleDetailScreen(Id,resId));
         print("Residence details: ${residence}");
+
       } else {
         print("Some error occurred: Response is null");
       }
@@ -118,6 +122,8 @@ class FeatureEstatesController extends GetxController {
       if (data?.status == "success") {
 
         print(data?.message);
+        getDataOfResidences();
+        update();
 
       }
     } catch (e) {

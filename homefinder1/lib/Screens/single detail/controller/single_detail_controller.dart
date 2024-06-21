@@ -9,6 +9,7 @@ import 'package:homefinder1/Screens/prediction_price_for_detail/prediction_price
 import 'package:homefinder1/Widget/custom_elevated_button_widget.dart';
 import 'package:homefinder1/models/add_review_to_residence_model.dart';
 import 'package:homefinder1/models/get_all_reviews_of_residence_model.dart'as a;
+
 import 'package:homefinder1/models/get_residence_images_model.dart'as i;
 import 'package:homefinder1/models/like_review_model.dart';
 import 'package:homefinder1/models/respose_model.dart';
@@ -16,20 +17,25 @@ import '../../../models/get_one_residence_model.dart' as o;
 import '../../../models/get_one_review_model.dart'as or;
 import '../../../models/recomendation_model.dart'as r;
 import '../../../models/response_model.dart'as d;
+
 import '../../../services/auth_service.dart';
 import '../../../services/residences_services.dart';
 import '../../../utilities/colors.dart';
 import '../../../utilities/constants.dart';
 
 class SingleDetailController extends GetxController {
+<
 int? selectedDisLike;
 or.Review?review;
+
   int rating = 0;
   List<a.Review>? reviews;
   String userId;
   int Id;
   BuildContext? context;
+
 int? favSelectedIndex;
+
   SingleDetailController(this.Id,this.userId, this.context);
 
   o.Residence? residence;
@@ -63,8 +69,10 @@ int? favSelectedIndex;
 
   ];
   final List<String> homeFacilitiesTitles = [
+
     "Garage",
     "Basement",
+
     "Swimming pool",
     "Kitchen",
 
@@ -77,7 +85,9 @@ int? favSelectedIndex;
     "lib/assets/images/homeDeatail5.png",
     "lib/assets/images/homeDeatail6.png",
   ];
+
   List<i.Image>? images;
+
   int? selectedIndexOfReview;
   List<r.Datum>? data;
 
@@ -85,12 +95,14 @@ int? favSelectedIndex;
   void onInit() {
     super.onInit();
 
+
      getDataOfOneResidences(userId, context!);
      getPhotosOfResidence(userId,context!);
      getReviewsOfResidence(userId, context!);
 
 
   }
+
 
 
   getDataOfOneResidences(String resId, BuildContext context) async {
@@ -312,7 +324,136 @@ update();
       print(part);
 
     }
+  }
 
+  getPhotosOfResidence(String resId,BuildContext context) async {
+    try {
+      o.GetResidencesImagesModel? response =
+          await ResidenceServices.fetchImagesOfResidences(
+              resId, context);
+      print("API Response Status: ${response?.status}");
+
+      if (response == null) {
+        print("Some error occurred: Response is null");
+      } else {
+        images = response.images ?? [];
+        print(images);
+
+        // Print or access other properties as needed
+        print("Number of residences: ${images?.length}");
+      }
+
+      isLoading = false;
+      update();
+    } catch (e) {
+      print("Exception occurred: $e");
+      isLoading = false;
+    }
+  }
+
+  getReviewsOfResidence(String resId,BuildContext context) async {
+    try {
+      a.GetAllReviewsOfResidenceModel? response =
+          await ResidenceServices.fetchReviewsOfResidences(
+              resId, context);
+      print("API Response Status: ${response?.status}");
+
+      if (response == null) {
+        print("Some error occurred: Response is null");
+      } else {
+        reviews = response.reviews ?? [];
+
+        // Print or access other properties as needed
+        print("Number of residences: ${images?.length}");
+      }
+
+      isLoading = false;
+      update();
+    } catch (e) {
+      print("Exception occurred: $e");
+      isLoading = false;
+    }
+  }
+
+  Future<void> addReview(BuildContext context) async {
+    try {
+      AddReviewToResidenceModel? data = await AuthServices.addReview(rating,
+          commentController.text, residence?.residenceId ?? "", context);
+      if (data?.status == "success") {}
+    } catch (e) {
+      String errorMessage = " $e";
+      String part = errorMessage.substring(26, 35);
+      CoolAlert.show(
+        context: context,
+        type: CoolAlertType.error,
+        title: "Error",
+        text: part,
+      );
+    }
+  }
+
+  Future<void> addLikeToReview(BuildContext context) async {
+    try {
+      LikeReviewModel? data = await ResidenceServices.addLikeToReview(
+          reviews?[selectedIndexOfReview ?? 0].id ?? "", context);
+      if (data?.status == "success") {
+        print(data?.message);
+      }
+    } catch (e) {
+      // Handle bad request error
+      String errorMessage = " $e";
+      String part = errorMessage.substring(26, 35);
+      // Show error message on the screen
+      print(part);
+    }
+  }
+
+  Future<void> removeLikeToReview(BuildContext context) async {
+    try {
+      LikeReviewModel? data = await ResidenceServices.removeLikeToReview(
+          reviews?[selectedIndexOfReview ?? 0].id ?? "", context);
+      if (data?.status == "success") {
+        print(data?.message);
+      }
+    } catch (e) {
+      // Handle bad request error
+      String errorMessage = " $e";
+      String part = errorMessage.substring(26, 35);
+      // Show error message on the screen
+      print(part);
+    }
+  }
+
+  Future<void> addUnLikeToReview(BuildContext context) async {
+    try {
+      LikeReviewModel? data = await ResidenceServices.addUnLikeToReview(
+          reviews?[selectedIndexOfReview ?? 0].id ?? "", context);
+      if (data?.status == "success") {
+        print(data?.message);
+      }
+    } catch (e) {
+      // Handle bad request error
+      String errorMessage = " $e";
+      String part = errorMessage.substring(26, 35);
+      // Show error message on the screen
+      print(part);
+    }
+  }
+
+  Future<void> removeUnLikeToReview(BuildContext context) async {
+    try {
+      LikeReviewModel? data = await ResidenceServices.removeUnLikeToReview(
+          reviews?[selectedIndexOfReview ?? 0].id ?? "", context);
+      if (data?.status == "success") {
+        print(data?.message);
+      }
+    } catch (e) {
+      // Handle bad request error
+      String errorMessage = " $e";
+      String part = errorMessage.substring(26, 35);
+      // Show error message on the screen
+      print(part);
+    }
   }
 
   getDataOfRecommendationResidences(int Id,BuildContext context) async {
@@ -330,6 +471,7 @@ update();
 
         // Print or access other properties as needed
         print("Number of residences: ${data?.length}");
+
         descriptionGalleryReview();
 
       }
@@ -368,6 +510,7 @@ getReviewOneOfResidence(String resId,BuildContext context) async {
   descriptionGalleryReview(){
     if (selectedIndex == 0) {
 
+
       listViewItem = [];
       descriptionOrGalleryOrReview = "Description";
       for (var index = 0; index < 2; index = index + 1) {
@@ -382,6 +525,7 @@ getReviewOneOfResidence(String resId,BuildContext context) async {
                 ),
                 width: Get.width,
                 height: 69.95,
+
                 child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,children: [
                   Container(
                     width: 77.5,
@@ -493,10 +637,12 @@ getReviewOneOfResidence(String resId,BuildContext context) async {
                           child: Text(
                             "${residence?.totalbaths??0}" ,
 
+
                             style: TextStyle(
                                 fontSize: 10,
                                 fontWeight: FontWeight.w600,
                                 fontFamily: kRegularFont,
+
                                 color: const Color(0xff53587A)),
                           ),
 
@@ -513,6 +659,7 @@ getReviewOneOfResidence(String resId,BuildContext context) async {
                     ),
                   )
                 ],)),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -580,9 +727,11 @@ getReviewOneOfResidence(String resId,BuildContext context) async {
                     ],
                   ),
                   IconButton(
+
                       onPressed: () {
                         Get.to(()=>NewChatScreen());
                       },
+
                       icon: Image(
                         image: AssetImage("lib/assets/images/message.png"),
                       ))
@@ -613,6 +762,7 @@ getReviewOneOfResidence(String resId,BuildContext context) async {
             ),
             Center(
               child: Container(
+
                   margin: const EdgeInsets.only(left: 5,right: 5),
                   width: Get.width,
                   height: Get.height*0.12,
@@ -625,6 +775,7 @@ getReviewOneOfResidence(String resId,BuildContext context) async {
                       itemBuilder: (context, index) {
                         return Container(
                           width: 150,
+
                           height: 75,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
@@ -641,6 +792,7 @@ getReviewOneOfResidence(String resId,BuildContext context) async {
                             children: [
                               Padding(
                                 padding:
+
                                 const EdgeInsets.only(top: 8.0, bottom: 10),
                                 child: Image(
                                     image:
@@ -649,6 +801,7 @@ getReviewOneOfResidence(String resId,BuildContext context) async {
                               Text("${index==0?residence?.garageCars??0:index==1?residence?.bsmtUnfSf??0:index==2?residence?.poolArea??0:residence?.kitchenQual}")
                               ,Container(
                                 width:90,
+
                                 child: Center(
                                   child: Text(
                                     homeFacilitiesTitles[index],
@@ -668,9 +821,11 @@ getReviewOneOfResidence(String resId,BuildContext context) async {
 
                       itemCount: homeFacilitiesIcons.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+
                           crossAxisCount: 4,
                           crossAxisSpacing: 10,
                           mainAxisSpacing: 25),
+
 
                     ),
                   )),
@@ -751,6 +906,7 @@ getReviewOneOfResidence(String resId,BuildContext context) async {
                 ),
               ),
             ),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -1459,6 +1615,7 @@ getReviewOneOfResidence(String resId,BuildContext context) async {
             ),
             Container(
               margin: EdgeInsets.only(top: 15,bottom: 15),
+
               width: Get.width,
               height: Get.height * 0.1,
               decoration: BoxDecoration(
@@ -1499,13 +1656,17 @@ getReviewOneOfResidence(String resId,BuildContext context) async {
                           children: [
 
                             Text(
+
                               "\$${residence?.salePrice}",
+
                               style: TextStyle(
                                   color: kPrimaryColor,
                                   fontWeight: FontWeight.w600,
                                   fontSize: 17,
                                   fontFamily: kRegularFont),
                             ),
+
+
 
 
                           ],
@@ -1515,9 +1676,11 @@ getReviewOneOfResidence(String resId,BuildContext context) async {
                   ),
                   CustomElevatedButtonWidget(
                       text: "Book Now",
+
                       onPressed: () {
                           Get.to(()=>PredictionPriceForDetail(resId: residence?.residenceId??"",));
                       },
+
                       textStyle: TextStyle(
 
                           color: Colors.white,
@@ -1671,6 +1834,7 @@ getReviewOneOfResidence(String resId,BuildContext context) async {
       }
     } else if (selectedIndex == 2) {
       listViewItem = [];
+
 
       descriptionOrGalleryOrReview = "Review";
       for (var index = 0; index <= 2; index = index + 1) {
@@ -1894,5 +2058,6 @@ getReviewOneOfResidence(String resId,BuildContext context) async {
     update();
 
   }
+
 
 }

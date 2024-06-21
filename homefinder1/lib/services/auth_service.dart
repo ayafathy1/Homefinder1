@@ -1,5 +1,9 @@
 
+
+// ignore_for_file: non_constant_identifier_names, await_only_futures, avoid_print, use_build_context_synchronously, unnecessary_brace_in_string_interps
+
 import 'dart:convert';
+import 'package:homefinder1/models/add_review_to_residence_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,6 +14,7 @@ import '../models/auth_model.dart';
 import '../models/delete_account_model.dart';
 import '../models/delete_account_photo_model.dart';
 import '../models/forget_password_model.dart';
+import '../models/gat_pending_for_user.dart'as gp;
 import '../models/update_profile_data_model.dart';
 import '../utilities/api_service.dart';
 import '../utilities/memory.dart';
@@ -28,6 +33,32 @@ class AuthServices{
     }
     return null;
   }
+  static Future<gp.GetPendingResidencesModel?> fetchUserPendingData(int counter, BuildContext context) async {
+    const String endPoint = 'residence/pending';
+
+    try {
+      final response = await ApiService().request(
+        '$endPoint?page=$counter',
+        'GET',
+        headers: {
+          "Authorization": await Get.find<StorageService>().getToken, // Ensure token retrieval is correct
+        },
+        context: context,
+      );
+
+      if (response != null && response['status'] == 'success') {
+        print(response);
+        return gp.GetPendingResidencesModel.fromJson(response);
+      } else {
+        print('API Error: ${response['message']}');
+      }
+    } catch (e) {
+      print('Error fetching residences data: $e');
+    }
+
+    return null;
+  }
+
   static Future<AuthModel?> signingUp(String username,String email,String password,String confirmPass,BuildContext context) async {
     var data = await api.request(context: context,Services.signingUpEndPoint, "POST",data: {
      "username":username,
@@ -188,6 +219,18 @@ class AuthServices{
     });
     if (data != null) {
       return VerificationModel.fromJson(data);
+    }
+    return null;
+  }
+  static Future<AddReviewToResidenceModel?> addReview(int rating,String comment,String resId,BuildContext context) async {
+    var data = await api.request(context: context,"review/${resId}", "POST",data: {
+      "rating":rating,
+      "comment":comment,
+    },headers: {
+      "Authorization":await Get.find<StorageService>().getToken
+    });
+    if (data != null) {
+      return AddReviewToResidenceModel.fromJson(data);
     }
     return null;
   }

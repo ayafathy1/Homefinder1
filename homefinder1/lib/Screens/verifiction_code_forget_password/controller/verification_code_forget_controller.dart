@@ -1,5 +1,6 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,6 @@ import 'package:get/get.dart';
 import 'package:homefinder1/Screens/auth/CompleteSignUp/complete_sign_up.dart';
 import 'package:homefinder1/Screens/reset_password/reset_password_screen.dart';
 import 'package:homefinder1/models/serification_model.dart';
-import 'package:http/http.dart' as http;
 
 import '../../../services/auth_service.dart';
 
@@ -37,7 +37,7 @@ class VerficationCodeForgetController extends GetxController {
   }
 
   void startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 1), (Timer timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
       if (remainingTimeInSeconds <= 0) {
         _timer.cancel();
       } else {
@@ -97,7 +97,7 @@ class VerficationCodeForgetController extends GetxController {
 
       if (data?.status == "success") {
 
-        Get.to(() => CompleteSignUp());
+        Get.to(() => const CompleteSignUp());
       }
     } catch (e) {
       // Handle bad request error

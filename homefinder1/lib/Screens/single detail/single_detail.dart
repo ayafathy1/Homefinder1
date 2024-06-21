@@ -1,6 +1,8 @@
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/single%20detail/controller/single_detail_controller.dart';
 import 'package:homefinder1/utilities/constants.dart';
@@ -17,6 +19,8 @@ class SingleDetailScreen extends StatefulWidget {
   SingleDetailScreen(this.Id, this.resId);
 
 
+
+
   @override
   State<SingleDetailScreen> createState() => _SingleDetailScreenState();
 
@@ -26,6 +30,7 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SingleDetailController>(
+
         init: SingleDetailController(widget.Id, widget.resId, context),
         builder: (SingleDetailController controller) {
           return Scaffold(
@@ -159,6 +164,7 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
                                 fontWeight: FontWeight.w500)),
                       )
                     ],
+
 
                   ),
                   Row(

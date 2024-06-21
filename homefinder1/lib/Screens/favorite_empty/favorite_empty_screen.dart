@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Widget/custom_arrow_back.dart';
@@ -12,7 +11,7 @@ class FavoriteEmptyScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-         leading: CustomArrowBack(),
+         leading: const CustomArrowBack(),
         leadingWidth: 80,
         title: Text("Favourites",style: TextStyle(
           color: kDarkBlueColor,
@@ -27,10 +26,10 @@ class FavoriteEmptyScreen extends StatelessWidget {
             width: 50,
             height: 50,
             decoration: BoxDecoration(
-              color: Color(0xffF5F4F8),
+              color: const Color(0xffF5F4F8),
               borderRadius: BorderRadius.circular(50),
             ),
-            child: Center(
+            child: const Center(
               child: Image(image: AssetImage("lib/assets/images/Trash.png"),
               ),
             ),
@@ -40,8 +39,8 @@ class FavoriteEmptyScreen extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            margin: EdgeInsets.only(top: 25,left: 15),
-            padding: EdgeInsets.only(top: 15,left: 5),
+            margin: const EdgeInsets.only(top: 25,left: 15),
+            padding: const EdgeInsets.only(top: 15,left: 5),
             child: Row(
 
 
@@ -62,14 +61,14 @@ class FavoriteEmptyScreen extends StatelessWidget {
             ),
           ),
           Center(child: Container(
-            margin: EdgeInsets.only(top: 35),
+            margin: const EdgeInsets.only(top: 35),
             height: Get.height*0.3,
-            child: Center(
+            child: const Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(height: 151,width: 163,child: Image(image: AssetImage("lib/assets/images/SuccessIllustration.png"),fit: BoxFit.fill,height: 151,width: 163,)),
+                  SizedBox(height: 151,width: 163,child: Image(image: AssetImage("lib/assets/images/SuccessIllustration.png"),fit: BoxFit.fill,height: 151,width: 163,)),
 
                 ],
               ),
@@ -90,7 +89,7 @@ class FavoriteEmptyScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 25.0),
             child: Text("Click add button above to start exploring and",style: TextStyle(
-              color: Color(0xff53587A),
+              color: const Color(0xff53587A),
               fontSize: 12,
               fontFamily: kRegularFont,
               fontWeight: FontWeight.w500,
@@ -98,7 +97,7 @@ class FavoriteEmptyScreen extends StatelessWidget {
           ),
           Center(
             child: Text("choose your favorite estates.",style: TextStyle(
-              color: Color(0xff53587A),
+              color: const Color(0xff53587A),
               fontSize: 12,
               fontFamily: kRegularFont,
               fontWeight: FontWeight.w500,

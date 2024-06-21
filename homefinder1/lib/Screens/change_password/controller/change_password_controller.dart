@@ -1,14 +1,17 @@
+// ignore_for_file: curly_braces_in_flow_control_structures, use_build_context_synchronously
+
 import 'package:cool_alert/cool_alert.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/settings/settings_screen.dart';
 import 'package:homefinder1/services/auth_service.dart';
 
 import '../../../models/delete_account_model.dart';
-import '../../../utilities/memory.dart';
-import '../../home/home_screen.dart';
+
 
 class ChangePasswordController extends GetxController{
+  @override
   void onInit() {
     super.onInit();
     oldPasswordVisible = false;
@@ -32,6 +35,7 @@ class ChangePasswordController extends GetxController{
     } else {
       return "   Enter Correct password";
     }
+    return null;
   }
   String? confirmValidator (String? val){
     if(val!.isEmpty)
@@ -52,7 +56,7 @@ class ChangePasswordController extends GetxController{
           context
       );
       if (data?.status == "success") {
-        Get.to(() => SettingsScreen());
+        Get.to(() => const SettingsScreen());
       }
     } catch (e) {
       // Handle bad request error

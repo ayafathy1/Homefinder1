@@ -1,5 +1,4 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,8 +9,9 @@ import '../../utilities/constants.dart';
 import 'controller/add_listing_second_details_controller.dart';
 
 class AddListingSecondDetailsScreen extends StatefulWidget {
-  const AddListingSecondDetailsScreen({super.key, required this.residanceId});
-  final String residanceId;
+   String residanceId;
+   AddListingSecondDetailsScreen({super.key, required this.residanceId});
+
   @override
 
   @override
@@ -28,7 +28,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
       appBar: AppBar(
         toolbarHeight: Get.height*0.1,
         leadingWidth: Get.width * 0.25,
-        leading: CustomArrowBack(),
+        leading: const CustomArrowBack(),
         title: Text(
           "Add Listing",
           style: TextStyle(
@@ -56,13 +56,13 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                 ),),
             ),
             Container(
-              margin: EdgeInsets.only(left: 12,top: 15,bottom: 10),
+              margin: const EdgeInsets.only(left: 12,top: 15,bottom: 10),
               width: Get.width,
               height: Get.height*0.065,
               child: ListView.separated(
                   controller: controller.scroll,
                   scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return InkWell(onTap: (){
                       controller.selectedRoofStyleIndex=index;
@@ -73,7 +73,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                     },child: Container(
                       height: Get.height*0.05,
                       decoration: BoxDecoration(
-                        color: controller.selectedRoofStyleIndex==index?kPrimaryColor:Color(0xffF5F4F8),
+                        color: controller.selectedRoofStyleIndex==index?kPrimaryColor:const Color(0xffF5F4F8),
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: Padding(
@@ -101,13 +101,13 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                 ),),
             ),
             Container(
-              margin: EdgeInsets.only(left: 12,top: 15,bottom: 10),
+              margin: const EdgeInsets.only(left: 12,top: 15,bottom: 10),
               width: Get.width,
               height: Get.height*0.065,
               child: ListView.separated(
                   controller: controller.scroll,
                   scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return InkWell(onTap: (){
                       controller.selectedRoofMaterialIndex=index;
@@ -118,7 +118,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                     },child: Container(
                       height: Get.height*0.05,
                       decoration: BoxDecoration(
-                        color: controller.selectedRoofMaterialIndex==index?kPrimaryColor:Color(0xffF5F4F8),
+                        color: controller.selectedRoofMaterialIndex==index?kPrimaryColor:const Color(0xffF5F4F8),
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: Padding(
@@ -146,13 +146,13 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                 ),),
             ),
             Container(
-              margin: EdgeInsets.only(left: 12,top: 15,bottom: 10),
+              margin: const EdgeInsets.only(left: 12,top: 15,bottom: 10),
               width: Get.width,
               height: Get.height*0.065,
               child: ListView.separated(
                   controller: controller.scroll,
                   scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return InkWell(onTap: (){
                       controller.selectedHouseStyleIndex=index;
@@ -163,7 +163,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                     },child: Container(
                       height: Get.height*0.05,
                       decoration: BoxDecoration(
-                        color: controller.selectedHouseStyleIndex==index?kPrimaryColor:Color(0xffF5F4F8),
+                        color: controller.selectedHouseStyleIndex==index?kPrimaryColor:const Color(0xffF5F4F8),
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: Padding(
@@ -235,7 +235,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                             color: Colors.black26,
                             width: 2
                         ),
-                        color: Color(0xffffffff),
+                        color: const Color(0xffffffff),
                       ),
                       elevation: 2,
                     ),
@@ -251,13 +251,13 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                       width: Get.width*0.9,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
-                        color: Color(0xffffffff),
+                        color: const Color(0xffffffff),
                       ),
                       offset: const Offset(0, 10), // Adjust the offset here
                       scrollbarTheme: ScrollbarThemeData(
                         radius: const Radius.circular(40),
-                        thickness: MaterialStateProperty.all<double>(6),
-                        thumbVisibility: MaterialStateProperty.all<bool>(true),
+                        thickness: WidgetStateProperty.all<double>(6),
+                        thumbVisibility: WidgetStateProperty.all<bool>(true),
                       ),
                     ),
                     menuItemStyleData: const MenuItemStyleData(
@@ -279,13 +279,13 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                 ),),
             ),
             Container(
-              margin: EdgeInsets.only(left: 12,top: 15,bottom: 10),
+              margin: const EdgeInsets.only(left: 12,top: 15,bottom: 10),
               width: Get.width,
               height: Get.height*0.065,
               child: ListView.separated(
                   controller: controller.scroll,
                   scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return InkWell(onTap: (){
                       controller.selectedCentralAirIndex=index;
@@ -296,7 +296,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                     },child: Container(
                       height: Get.height*0.05,
                       decoration: BoxDecoration(
-                        color: controller.selectedCentralAirIndex==index?kPrimaryColor:Color(0xffF5F4F8),
+                        color: controller.selectedCentralAirIndex==index?kPrimaryColor:const Color(0xffF5F4F8),
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: Padding(
@@ -324,13 +324,13 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                 ),),
             ),
             Container(
-              margin: EdgeInsets.only(left: 12,top: 15,bottom: 10),
+              margin: const EdgeInsets.only(left: 12,top: 15,bottom: 10),
               width: Get.width,
               height: Get.height*0.065,
               child: ListView.separated(
                   controller: controller.scroll,
                   scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return InkWell(onTap: (){
                       controller.selectedStreetIndex=index;
@@ -341,7 +341,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                     },child: Container(
                       height: Get.height*0.05,
                       decoration: BoxDecoration(
-                        color: controller.selectedStreetIndex==index?kPrimaryColor:Color(0xffF5F4F8),
+                        color: controller.selectedStreetIndex==index?kPrimaryColor:const Color(0xffF5F4F8),
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: Padding(
@@ -360,6 +360,51 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
             ),
             Padding(
               padding: const EdgeInsets.only(left: 12.0,top: 15),
+              child: Text("Alley",
+                style: TextStyle(
+                    color: kVeryDarkBlueColor,
+                    fontFamily: kRegularFont,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w900
+                ),),
+            ),
+            Container(
+              margin: const EdgeInsets.only(left: 12,top: 15,bottom: 10),
+              width: Get.width,
+              height: Get.height*0.065,
+              child: ListView.separated(
+                  controller: controller.scroll,
+                  scrollDirection: Axis.horizontal,
+                  physics: const BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return InkWell(onTap: (){
+                      controller.selectedAlleyIndex=index;
+                      controller.alleySelected=controller.alley[controller.selectedAlleyIndex];
+                      setState(() {
+
+                      });
+                    },child: Container(
+                      height: Get.height*0.05,
+                      decoration: BoxDecoration(
+                        color: controller.selectedAlleyIndex==index?kPrimaryColor:const Color(0xffF5F4F8),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20.0,right: 20,top: 12,bottom: 12),
+                        child: Center(child: Text(controller.alley[index], style: TextStyle(
+                            color: controller.selectedAlleyIndex==index?Colors.white:kVeryDarkBlueColor,
+                            fontFamily: kRegularFont,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600
+                        ),),),
+                      ),
+                    ));
+                  }, separatorBuilder: (context, index) {
+                return SizedBox(width: Get.width*0.02,);
+              }, itemCount: controller.alley.length ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 12.0,top: 15),
               child: Text("Heating",
                 style: TextStyle(
                     color: kVeryDarkBlueColor,
@@ -369,13 +414,13 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                 ),),
             ),
             Container(
-              margin: EdgeInsets.only(left: 12,top: 15,bottom: 10),
+              margin: const EdgeInsets.only(left: 12,top: 15,bottom: 10),
               width: Get.width,
               height: Get.height*0.065,
               child: ListView.separated(
                   controller: controller.scroll,
                   scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return InkWell(onTap: (){
                       controller.selectedHeatingIndex=index;
@@ -386,7 +431,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                     },child: Container(
                       height: Get.height*0.05,
                       decoration: BoxDecoration(
-                        color: controller.selectedHeatingIndex==index?kPrimaryColor:Color(0xffF5F4F8),
+                        color: controller.selectedHeatingIndex==index?kPrimaryColor:const Color(0xffF5F4F8),
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: Padding(
@@ -414,13 +459,13 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                 ),),
             ),
             Container(
-              margin: EdgeInsets.only(left: 12,top: 15,bottom: 5),
+              margin: const EdgeInsets.only(left: 12,top: 15,bottom: 5),
               width: Get.width,
               height: Get.height*0.065,
               child: ListView.separated(
                   controller: controller.scroll,
                   scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return InkWell(onTap: (){
                       controller.selectedHeatingQualityIndex=index;
@@ -431,7 +476,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                     },child: Container(
                       height: Get.height*0.05,
                       decoration: BoxDecoration(
-                        color: controller.selectedHeatingQualityIndex==index?kPrimaryColor:Color(0xffF5F4F8),
+                        color: controller.selectedHeatingQualityIndex==index?kPrimaryColor:const Color(0xffF5F4F8),
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: Padding(
@@ -459,13 +504,14 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                 ),),
             ),
             Container(
-              margin: EdgeInsets.only(left: 12,bottom: 15),
+
+              margin: const EdgeInsets.only(left: 12,bottom: 15),
               width: Get.width,
               height: Get.height*0.065,
               child: ListView.separated(
                   controller: controller.scroll,
                   scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return InkWell(onTap: (){
                       controller.selectedMasonryVeneerTypeIndex=index;
@@ -476,7 +522,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                     },child: Container(
                       height: Get.height*0.05,
                       decoration: BoxDecoration(
-                        color: controller.selectedMasonryVeneerTypeIndex==index?kPrimaryColor:Color(0xffF5F4F8),
+                        color: controller.selectedMasonryVeneerTypeIndex==index?kPrimaryColor:const Color(0xffF5F4F8),
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: Padding(
@@ -496,7 +542,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
             Form(
               key: controller.formkey,
               child: Container(
-                margin: EdgeInsets.only(left: 20,right: 20,bottom: 20),
+                margin: const EdgeInsets.only(left: 20,right: 20,bottom: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -514,21 +560,21 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                       controller: controller.masonryVeneerAreaController,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        fillColor: Color(0xffF5F4F8),
+                        fillColor: const Color(0xffF5F4F8),
                         filled: true,
                         hintText: "152",
                         hintStyle: TextStyle(color: kVeryDarkBlueColor,
                             fontWeight: FontWeight.w700,fontSize: 12,fontFamily: kRegularFont),
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25),
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0xffF4F4F4),
                               width: 3,
                             )
                         ),
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25),
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0xff6C63FF),
                               width: 3,
                             )
@@ -611,7 +657,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                             color: Colors.black26,
                             width: 2
                         ),
-                        color: Color(0xffffffff),
+                        color: const Color(0xffffffff),
                       ),
                       elevation: 2,
                     ),
@@ -627,13 +673,13 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                       width: Get.width*0.9,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
-                        color: Color(0xffffffff),
+                        color: const Color(0xffffffff),
                       ),
                       offset: const Offset(0, 10), // Adjust the offset here
                       scrollbarTheme: ScrollbarThemeData(
                         radius: const Radius.circular(40),
-                        thickness: MaterialStateProperty.all<double>(6),
-                        thumbVisibility: MaterialStateProperty.all<bool>(true),
+                        thickness: WidgetStateProperty.all<double>(6),
+                        thumbVisibility: WidgetStateProperty.all<bool>(true),
                       ),
                     ),
                     menuItemStyleData: const MenuItemStyleData(
@@ -699,7 +745,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                             color: Colors.black26,
                             width: 2
                         ),
-                        color: Color(0xffffffff),
+                        color: const Color(0xffffffff),
                       ),
                       elevation: 2,
                     ),
@@ -715,13 +761,13 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                       width: Get.width*0.9,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
-                        color: Color(0xffffffff),
+                        color: const Color(0xffffffff),
                       ),
                       offset: const Offset(0, 10), // Adjust the offset here
                       scrollbarTheme: ScrollbarThemeData(
                         radius: const Radius.circular(40),
-                        thickness: MaterialStateProperty.all<double>(6),
-                        thumbVisibility: MaterialStateProperty.all<bool>(true),
+                        thickness: WidgetStateProperty.all<double>(6),
+                        thumbVisibility: WidgetStateProperty.all<bool>(true),
                       ),
                     ),
                     menuItemStyleData: const MenuItemStyleData(
@@ -743,13 +789,13 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                 ),),
             ),
             Container(
-              margin: EdgeInsets.only(left: 12,top: 15,bottom: 10),
+              margin: const EdgeInsets.only(left: 12,top: 15,bottom: 10),
               width: Get.width,
               height: Get.height*0.065,
               child: ListView.separated(
                   controller: controller.scroll,
                   scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return InkWell(onTap: (){
                       controller.selectedExteriorConditionIndex=index;
@@ -760,7 +806,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                     },child: Container(
                       height: Get.height*0.05,
                       decoration: BoxDecoration(
-                        color: controller.selectedExteriorConditionIndex==index?kPrimaryColor:Color(0xffF5F4F8),
+                        color: controller.selectedExteriorConditionIndex==index?kPrimaryColor:const Color(0xffF5F4F8),
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: Padding(
@@ -788,13 +834,13 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                 ),),
             ),
             Container(
-              margin: EdgeInsets.only(left: 12,top: 15,bottom: 10),
+              margin: const EdgeInsets.only(left: 12,top: 15,bottom: 10),
               width: Get.width,
               height: Get.height*0.065,
               child: ListView.separated(
                   controller: controller.scroll,
                   scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return InkWell(onTap: (){
                       controller.selectedExteriorQualityIndex=index;
@@ -805,7 +851,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                     },child: Container(
                       height: Get.height*0.05,
                       decoration: BoxDecoration(
-                        color: controller.selectedExteriorQualityIndex==index?kPrimaryColor:Color(0xffF5F4F8),
+                        color: controller.selectedExteriorQualityIndex==index?kPrimaryColor:const Color(0xffF5F4F8),
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: Padding(
@@ -877,7 +923,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                             color: Colors.black26,
                             width: 2
                         ),
-                        color: Color(0xffffffff),
+                        color: const Color(0xffffffff),
                       ),
                       elevation: 2,
                     ),
@@ -893,13 +939,13 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                       width: Get.width*0.9,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
-                        color: Color(0xffffffff),
+                        color: const Color(0xffffffff),
                       ),
                       offset: const Offset(0, 10), // Adjust the offset here
                       scrollbarTheme: ScrollbarThemeData(
                         radius: const Radius.circular(40),
-                        thickness: MaterialStateProperty.all<double>(6),
-                        thumbVisibility: MaterialStateProperty.all<bool>(true),
+                        thickness: WidgetStateProperty.all<double>(6),
+                        thumbVisibility: WidgetStateProperty.all<bool>(true),
                       ),
                     ),
                     menuItemStyleData: const MenuItemStyleData(
@@ -965,7 +1011,7 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                             color: Colors.black26,
                             width: 2
                         ),
-                        color: Color(0xffffffff),
+                        color: const Color(0xffffffff),
                       ),
                       elevation: 2,
                     ),
@@ -981,13 +1027,13 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                       width: Get.width*0.9,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
-                        color: Color(0xffffffff),
+                        color: const Color(0xffffffff),
                       ),
                       offset: const Offset(0, 10), // Adjust the offset here
                       scrollbarTheme: ScrollbarThemeData(
                         radius: const Radius.circular(40),
-                        thickness: MaterialStateProperty.all<double>(6),
-                        thumbVisibility: MaterialStateProperty.all<bool>(true),
+                        thickness: WidgetStateProperty.all<double>(6),
+                        thumbVisibility: WidgetStateProperty.all<bool>(true),
                       ),
                     ),
                     menuItemStyleData: const MenuItemStyleData(
@@ -998,9 +1044,10 @@ class _AddListingSecondDetailsScreenState extends State<AddListingSecondDetailsS
                 ),
               ),
             ),
+
             Container(
-              margin: EdgeInsets.only(bottom: 15),
-              padding: EdgeInsets.only(bottom: 15),
+              margin: const EdgeInsets.only(bottom: 15),
+              padding: const EdgeInsets.only(bottom: 15),
               height: Get.height*0.15,
               child: Center(
                 child: CustomElevatedButtonWidget(text: 'Next', onPressed: () {

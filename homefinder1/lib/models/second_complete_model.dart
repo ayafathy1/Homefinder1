@@ -1,12 +1,12 @@
 // To parse this JSON data, do
 //
-//     final welcome = welcomeFromJson(jsonString);
+//     final secondCompleteModel = secondCompleteModelFromJson(jsonString);
 
 import 'dart:convert';
 
-SecondCompleteModel welcomeFromJson(String str) => SecondCompleteModel.fromJson(json.decode(str));
+SecondCompleteModel secondCompleteModelFromJson(String str) => SecondCompleteModel.fromJson(json.decode(str));
 
-String welcomeToJson(SecondCompleteModel data) => json.encode(data.toJson());
+String secondCompleteModelToJson(SecondCompleteModel data) => json.encode(data.toJson());
 
 class SecondCompleteModel {
   String? status;
@@ -31,15 +31,17 @@ class SecondCompleteModel {
 class Residence {
   bool? isLiked;
   Location? location;
-  String? id;
+  String? residenceId;
   String? ownerId;
 
   List<dynamic>? bookedBy;
   int? id;
 
+
   bool? isSold;
   bool? isCompleted;
   String? status;
+  int? avgRating;
   String? title;
   String? type;
   String? category;
@@ -56,10 +58,12 @@ class Residence {
   int? fireplaces;
   String? bsmtExposure;
   String? bsmtFinType1;
+
+
   int? bsmtUnfSf;
   String? masVnrType;
   int? masVnrArea;
-  String? msSubClass;
+  int? msSubClass;
   int? totalporchsf;
   int? lotFrontage;
   int? lotArea;
@@ -70,12 +74,14 @@ class Residence {
   int? totalbaths;
   int? houseage;
   int? houseremodelage;
+
   List<dynamic>? images;
   DateTime? createdAt;
   DateTime? updatedAt;
   String? bldgType;
 
   String? electrical;
+
 
   String? foundation;
   String? lotShape;
@@ -105,15 +111,19 @@ class Residence {
     this.isLiked,
     this.location,
 
+
     this.residenceId,
     this.ownerId,
     this.bookedBy,
 
     this.id,
+
     this.ownerId,
+    this.id,
     this.isSold,
     this.isCompleted,
     this.status,
+    this.avgRating,
     this.title,
     this.type,
     this.category,
@@ -130,7 +140,9 @@ class Residence {
     this.fireplaces,
     this.bsmtExposure,
 
+
     this.bsmtFinType1,
+
 
     this.bsmtUnfSf,
     this.masVnrType,
@@ -149,9 +161,11 @@ class Residence {
     this.images,
     this.createdAt,
     this.updatedAt,
+
     this.bldgType,
 
     this.electrical,
+
 
     this.foundation,
     this.lotShape,
@@ -181,15 +195,18 @@ class Residence {
   factory Residence.fromJson(Map<String, dynamic> json) => Residence(
     isLiked: json["isLiked"],
     location: json["location"] == null ? null : Location.fromJson(json["location"]),
-    id: json["_id"],
+    residenceId: json["_id"],
     ownerId: json["ownerId"],
+
 
     bookedBy: json["bookedBy"] == null ? [] : List<dynamic>.from(json["bookedBy"]!.map((x) => x)),
     id: json["Id"],
 
+
     isSold: json["isSold"],
     isCompleted: json["isCompleted"],
     status: json["status"],
+    avgRating: json["avgRating"],
     title: json["title"],
     type: json["type"],
     category: json["category"],
@@ -206,7 +223,9 @@ class Residence {
     fireplaces: json["fireplaces"],
     bsmtExposure: json["bsmtExposure"],
 
+
     bsmtFinType1: json["bsmtFinType1"],
+
 
     bsmtUnfSf: json["bsmtUnfSF"],
     masVnrType: json["masVnrType"],
@@ -222,10 +241,12 @@ class Residence {
     totalbaths: json["totalbaths"],
     houseage: json["houseage"],
     houseremodelage: json["houseremodelage"],
+
     images: json["images"] == null ? [] : List<dynamic>.from(json["images"]!.map((x) => x)),
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
     bldgType: json["bldgType"],
+
     electrical: json["electrical"],
     foundation: json["foundation"],
     lotShape: json["lotShape"],
@@ -254,13 +275,16 @@ class Residence {
   Map<String, dynamic> toJson() => {
     "isLiked": isLiked,
     "location": location?.toJson(),
-    "_id": id,
+    "_id": residenceId,
     "ownerId": ownerId,
+
     "bookedBy": bookedBy == null ? [] : List<dynamic>.from(bookedBy!.map((x) => x)),
+
     "Id": id,
     "isSold": isSold,
     "isCompleted": isCompleted,
     "status": status,
+    "avgRating": avgRating,
     "title": title,
     "type": type,
     "category": category,
@@ -277,6 +301,7 @@ class Residence {
     "fireplaces": fireplaces,
     "bsmtExposure": bsmtExposure,
     "bsmtFinType1": bsmtFinType1,
+
     "bsmtUnfSF": bsmtUnfSf,
     "masVnrType": masVnrType,
     "masVnrArea": masVnrArea,
@@ -291,10 +316,12 @@ class Residence {
     "totalbaths": totalbaths,
     "houseage": houseage,
     "houseremodelage": houseremodelage,
+
     "images": images == null ? [] : List<dynamic>.from(images!.map((x) => x)),
     "createdAt": createdAt?.toIso8601String(),
     "updatedAt": updatedAt?.toIso8601String(),
     "bldgType": bldgType,
+
     "electrical": electrical,
     "foundation": foundation,
     "lotShape": lotShape,
@@ -319,6 +346,30 @@ class Residence {
     "roofMatl": roofMatl,
     "roofStyle": roofStyle,
     "street": street,
+  };
+}
+
+class Image {
+  String? url;
+  String? publicId;
+  String? id;
+
+  Image({
+    this.url,
+    this.publicId,
+    this.id,
+  });
+
+  factory Image.fromJson(Map<String, dynamic> json) => Image(
+    url: json["url"],
+    publicId: json["public_id"],
+    id: json["_id"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "url": url,
+    "public_id": publicId,
+    "_id": id,
   };
 }
 

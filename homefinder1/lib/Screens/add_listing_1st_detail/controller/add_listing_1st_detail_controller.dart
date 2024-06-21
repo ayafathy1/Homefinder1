@@ -1,3 +1,4 @@
+// ignore_for_file: non_constant_identifier_names, use_build_context_synchronously
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -104,7 +105,8 @@ String electricityLevelSelected="average";
       String electrical,
       String foundation,
       String bldgType
-      ,BuildContext context,) async {
+      ,BuildContext context,
+      ) async {
     try {
       FirstCompleteModel? data = await ResidenceServices.FirstComplete(
        neighborhoodController.text,
@@ -123,7 +125,7 @@ String electricityLevelSelected="average";
           residanceId
       );
       if (data?.status == "success") {
-        Get.to(() =>AddListingSecondDetailsScreen(residanceId: residanceId,));
+        Get.to(() =>AddListingSecondDetailsScreen(residanceId:data?.residence?.id??residanceId,));
       }
     } catch (e) {
       String errorMessage = " $e";

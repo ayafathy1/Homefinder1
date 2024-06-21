@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, use_build_context_synchronously, annotate_overrides
+
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -9,6 +11,7 @@ import '../../../utilities/memory.dart';
 import '../../SplashScreen/splash_Screen.dart';
 
 class DeleteAccountController extends GetxController{
+  @override
   void onInit() {
     super.onInit();
     passwordVisible = false;
@@ -26,8 +29,8 @@ class DeleteAccountController extends GetxController{
     } else {
       return "   Enter Correct password";
     }
+    return null;
   }
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   Future<void> deleteAccount(BuildContext context) async {
     try {

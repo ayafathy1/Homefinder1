@@ -1,27 +1,34 @@
 
+
+// ignore_for_file: prefer_typing_uninitialized_variables
+
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+
 
 import 'package:homefinder1/Screens/edit_listing/controller/edit_listing_controller.dart';
 import 'package:homefinder1/Screens/test.dart';
 
+
 import 'package:homefinder1/Widget/custom_arrow_back.dart';
 import 'package:homefinder1/utilities/colors.dart';
-
 import '../../utilities/constants.dart';
 import '../add listing - photos/widget/grid_view.dart';
+
 
 
 class EditListingScreen extends StatefulWidget {
 String resId;
 EditListingScreen(this.resId);
 
+
   @override
   State<EditListingScreen> createState() => _EditListingScreenState();
 }
 
 class _EditListingScreenState extends State<EditListingScreen> {
+
 
 
   final List gridview = [
@@ -284,10 +291,12 @@ class _EditListingScreenState extends State<EditListingScreen> {
                             fillColor: Color(0xffF4F4F4),
                             hintText: "      Schoolview House",
                             hintStyle: TextStyle(
+
                                 color: kDarkBlueColor,
                                 fontFamily: kRegularFont,
                                 fontWeight: FontWeight.w800,
                                 fontSize: 15),
+
                             suffixIcon: Image(
                                 image: AssetImage(
                                     'lib/assets/images/House.png')),
@@ -530,3 +539,4 @@ class _EditListingScreenState extends State<EditListingScreen> {
         });
   }
 }
+

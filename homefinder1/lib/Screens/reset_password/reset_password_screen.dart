@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Widget/custom_arrow_back.dart';
@@ -25,7 +26,7 @@ class _ChangePasswordScreenState extends State<ResetPasswordScreen> {
           return  Scaffold(
             appBar: AppBar(
               toolbarHeight: Get.height*0.11,
-              leading: CustomArrowBack(),
+              leading: const CustomArrowBack(),
               leadingWidth: 75,
             ),
             body: SingleChildScrollView(
@@ -35,7 +36,7 @@ class _ChangePasswordScreenState extends State<ResetPasswordScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(right: 5,left: 20,top: 5),
+                      margin: const EdgeInsets.only(right: 5,left: 20,top: 5),
                       width: Get.width*0.5,
                       height: Get.height*0.14,
                       child: Center(
@@ -49,7 +50,7 @@ class _ChangePasswordScreenState extends State<ResetPasswordScreen> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 20),
+                      margin: const EdgeInsets.only(left: 20),
                       width: Get.width*0.59,
                       height: Get.height*0.1,
                       child: Text("Select which contact details should we use to Change your password",
@@ -72,13 +73,13 @@ class _ChangePasswordScreenState extends State<ResetPasswordScreen> {
                                 BoxShadow(
                                   blurRadius:18,
                                   color: Colors.grey.withOpacity(0.15),
-                                  offset: Offset(3,3),
+                                  offset: const Offset(3,3),
 
                                 )
                               ]
                           ),
                           child: CustomTextFieldWidget(
-                            formColor: Color(0xffF3F3F3),
+                            formColor: const Color(0xffF3F3F3),
                             Controller: controller.newPasswordController,
                             validator: controller.passwordValidator,
                             keyboardType: TextInputType.visiblePassword,
@@ -115,13 +116,13 @@ class _ChangePasswordScreenState extends State<ResetPasswordScreen> {
                                 BoxShadow(
                                   blurRadius:18,
                                   color: Colors.grey.withOpacity(0.15),
-                                  offset: Offset(3,3),
+                                  offset: const Offset(3,3),
 
                                 )
                               ]
                           ),
                           child: CustomTextFieldWidget(
-                            formColor: Color(0xffF3F3F3),
+                            formColor: const Color(0xffF3F3F3),
                             Controller: controller.confirmPasswordController,
                             validator: controller.confirmValidator,
                             keyboardType: TextInputType.visiblePassword,
@@ -166,7 +167,7 @@ class _ChangePasswordScreenState extends State<ResetPasswordScreen> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20)
                                 ),
-                                fixedSize: Size(180, 65)
+                                fixedSize: const Size(180, 65)
                             )),
                       ),
                     )

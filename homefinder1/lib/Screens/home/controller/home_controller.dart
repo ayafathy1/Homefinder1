@@ -1,11 +1,15 @@
-import 'package:cool_alert/cool_alert.dart';
+// ignore_for_file: avoid_print, non_constant_identifier_names, use_build_context_synchronously
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/single%20detail/single_detail.dart';
+
 import 'package:homefinder1/utilities/colors.dart';
 
 import '../../../models/get_all_reesidences_model.dart'as a;
+
 import '../../../models/get_all_reviews_of_residence_model.dart' as c;
+
 import '../../../models/get_one_residence_model.dart'as o;
 import '../../../models/get_residence_images_model.dart'as a;
 import '../../../models/respose_model.dart';
@@ -15,14 +19,15 @@ import 'package:flutter/material.dart';
 
 class HomeController extends GetxController {
   final BuildContext? context;
-  String?resId;
+
+int? SelectedResidenceIndex;
   HomeController( this.context);
   ScrollController scroll = ScrollController();
   bool isLoading = true;
-  int counterOfResidences = 1;
+  int counterOfResidences = 5;
   int maxNoOfPagesOfResidences = 1;
   bool isLoadingMoreDataOfResidences = false;
-  List<Residence>? residences;
+  List<a.Residence>? residences;
   o.Residence? residence;
   int? ResidenceCount;
   late TextEditingController searchController;
@@ -94,9 +99,9 @@ List<c.Review>?reviews;
   }
   getDataOfResidences(BuildContext context) async {
 
-    if (counterOfResidences == 1) {
+    if (counterOfResidences == 5) {
       try {
-        GetAllResidencesModel? response = await ResidenceServices.fetchAllResidences(counterOfResidences, context);
+        a.GetAllResidencesModel? response = await ResidenceServices.fetchAllResidences(counterOfResidences, context);
         print("API Response Status: ${response?.status}");
 
         if (response == null) {
@@ -122,7 +127,7 @@ List<c.Review>?reviews;
         isLoading = false;
       }
     } else {
-      if (counterOfResidences <= (maxNoOfPagesOfResidences ?? 0)) {
+      if (counterOfResidences <= (maxNoOfPagesOfResidences)) {
         try {
           var response = await ResidenceServices.fetchAllResidences(counterOfResidences, context);
           print("API Response Status: ${response?.status}");
@@ -146,7 +151,7 @@ List<c.Review>?reviews;
       }
     }
   }
-  getDataOfOneResidences(String resId,BuildContext context) async {
+  getDataOfOneResidences(int Id,String resId,BuildContext context) async {
       try {
         o.GetOneResidencesModel? response = await ResidenceServices.fetchOneResidences( resId, context);
         print("API Response Status: ${response?.status}");
@@ -156,12 +161,14 @@ List<c.Review>?reviews;
         } else {
           residence = response.residence ;
 
+
          update();
         Get.to(()=>SingleDetailScreen(Id,resId));
           update();
 
+
           // Print or access other properties as needed
-          print("Number of residences: ${residence}");
+          print("Number of residences: $residence");
         }
 
         isLoading = false;
@@ -229,5 +236,6 @@ List<c.Review>?reviews;
 
 
 }
+
 
 

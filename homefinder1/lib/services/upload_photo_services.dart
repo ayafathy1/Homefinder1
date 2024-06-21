@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 import 'dart:io';
 import 'package:get/get.dart';
@@ -26,8 +28,8 @@ class ImageUploadService {
 
     // Attach the file to the request
     request.files.add(await http.MultipartFile.fromPath('file', imageFile.path));
-    request.headers['Authorization'] =  await Get.find<StorageService>().getToken;
-    request.fields['id'] =await Get.find<StorageService>().getId ;
+    request.headers['Authorization'] =   Get.find<StorageService>().getToken;
+    request.fields['id'] = Get.find<StorageService>().getId ;
 
     try {
       // Send the request

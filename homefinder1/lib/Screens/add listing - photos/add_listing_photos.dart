@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/add%20listing%20-%20photos/widget/grid_view.dart';
-import 'package:homefinder1/Widget/custom_elevated_button_widget.dart';
 
 
 import '../../Widget/custom_arrow_back.dart';
@@ -9,13 +8,13 @@ import '../../utilities/colors.dart';
 import '../../utilities/constants.dart';
 
 class AddListingPhotos extends StatefulWidget{
+  const AddListingPhotos({super.key});
+
     @override
   State<AddListingPhotos> createState() => _AddListingPhotosState();
 }
 
 class _AddListingPhotosState extends State<AddListingPhotos> {
-  @override
-
   final List gridview = [
     {
       "image" : "lib/assets/images/Shape1.png",
@@ -27,6 +26,7 @@ class _AddListingPhotosState extends State<AddListingPhotos> {
       "image" : "lib/assets/images/Shape3.png",
     }
   ];
+  @override
   Widget build(BuildContext context) {
     return  Scaffold(
         body: SingleChildScrollView(
@@ -34,7 +34,7 @@ class _AddListingPhotosState extends State<AddListingPhotos> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: Get.width*0.13),
-           Row(children: [CustomArrowBack(),
+           Row(children: [const CustomArrowBack(),
              SizedBox(width: Get.width*0.1,),
                Text("Add Listing",style: TextStyle(fontFamily: kRegularFont,fontWeight: FontWeight.w900,fontSize: 23,color: kDarkBlueColor),),
           ],),
@@ -58,10 +58,10 @@ class _AddListingPhotosState extends State<AddListingPhotos> {
           Center(
             child: Container(
               height: 450,
-              color: Color(0xffF7F7F7),
+              color: const Color(0xffF7F7F7),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                child: GridView.builder(gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                     crossAxisSpacing: 8 , mainAxisSpacing: 8 ,mainAxisExtent: 200
                 ),
@@ -80,9 +80,9 @@ class _AddListingPhotosState extends State<AddListingPhotos> {
               width: 210,
               height: 64,
               decoration: BoxDecoration(color: kPrimaryColor,border: Border.all(color: kPrimaryColor,width: 1),borderRadius: BorderRadius.circular(20)),
-              child: ElevatedButton(child:Text( "Next",style: TextStyle(color: Colors.white,fontFamily: kRegularFont,fontSize: 20,fontWeight: FontWeight.w700,),), onPressed: (){},
+              child: ElevatedButton(onPressed: (){},
                   style: ElevatedButton.styleFrom(backgroundColor: kPrimaryColor,
-                      fixedSize: Size(200,70))),
+                      fixedSize: const Size(200,70)), child:Text( "Next",style: TextStyle(color: Colors.white,fontFamily: kRegularFont,fontSize: 20,fontWeight: FontWeight.w700,),)),
             ),
           ),
         ])));

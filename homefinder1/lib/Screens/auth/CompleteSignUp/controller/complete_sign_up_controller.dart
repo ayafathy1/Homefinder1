@@ -1,12 +1,10 @@
+// ignore_for_file: non_constant_identifier_names, avoid_print, use_build_context_synchronously
+
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:homefinder1/Screens/edit_profile/edit_profile.dart';
-import 'package:homefinder1/Screens/home/home_screen.dart';
-
 import '../../../../models/auth_model.dart';
 import '../../../../services/auth_service.dart';
-import '../../../../utilities/memory.dart';
 import '../../../Upload Photo/upload_photo.dart';
 
 class CompleteSignUpController extends GetxController{
@@ -19,7 +17,6 @@ class CompleteSignUpController extends GetxController{
   final  phoneController = TextEditingController();
 
 
-  @override
   String? fisrtnameValidator (username){
     if (RegExp(
         r"^[\p{L} ,.'-]*$",
@@ -31,9 +28,9 @@ class CompleteSignUpController extends GetxController{
       return "   Enter Correct First Name";
 
     }
+    return null;
   }
 
-  @override
   String? lastnameValidator (username){
     if (RegExp(
         r"^[\p{L} ,.'-]*$",
@@ -45,23 +42,24 @@ class CompleteSignUpController extends GetxController{
       return "   Enter Correct last Name";
 
     }
+    return null;
   }
 
 
-@override
-  String? genderValidator (gender){
+String? genderValidator (gender){
     if( RegExp(r'^Female|female|Male|male').hasMatch(gender!)){
 
     } else {
       return "   Enter Correct Gender" ; }
+    return null;
   }
 
-  @override
   String? phoneValidator (phone){
     if( RegExp(r'^(?:[+0]9)?[0-9]{11}$').hasMatch(phone!)){
 
     } else {
       return "   Enter Correct Phone No." ; }
+    return null;
   }
 
 
@@ -77,7 +75,8 @@ Future<void> CompleteSignUp(BuildContext context) async {
         context
     );
     if (data?.status == "success") {
-      Get.to(() =>UploadPhoto());
+
+      Get.to(() =>const UploadPhoto());
     }
   } catch (e) {
     String errorMessage = " $e";
@@ -93,7 +92,6 @@ Future<void> CompleteSignUp(BuildContext context) async {
 }
 
 
-  @override
   saveAndValidate() {
     final  formkey =  GlobalKey<FormState>();
     var formdata = formkey.currentState;
