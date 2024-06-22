@@ -5,79 +5,37 @@ import 'package:homefinder1/Screens/edit_listing/widget/photos.dart';
 import 'package:homefinder1/models/update_residence_model.dart';
 import 'package:homefinder1/services/residences_services.dart';
 
+import '../../../models/get_one_residence_model.dart'as o;
 import '../../../utilities/colors.dart';
 
 class EditListingController extends GetxController{
+  getDataOfOneResidences(String resId, BuildContext context) async {
+    try {
+      o.GetOneResidencesModel? response =
+      await ResidenceServices.fetchOneResidences(resId, context);
+      print("API Response Status: ${response?.status}");
 
-  Color contColor1=kLightGreyColor;
+      if (response == null) {
+        print("Some error occurred: Response is null");
+      } else {
+        residence = response.residence;
 
-  Color contColor2=kLightGreyColor;
-
-  Color contColor3=kLightGreyColor;
-
-  Color contColor4=kLightGreyColor;
-
-  Color contColor5=kLightGreyColor;
-
-  Color contColor6=kLightGreyColor;
-
-  Color contColor7=kLightGreyColor;
-
-  Color textColor1 = kDarkBlueColor;
-
-  Color textColor2 = kDarkBlueColor;
-
-  Color textColor3 = kDarkBlueColor;
-
-  Color textColor4 = kDarkBlueColor;
-
-  Color textColor5 = kDarkBlueColor;
-
-  Color textColor6 = kDarkBlueColor;
-
-  Color textColor7 = kDarkBlueColor;
-
-  Color garden = kDarkBlueColor ;
-
-  Color gardenText = kDarkBlueColor;
-
-  Color gym = kDarkBlueColor ;
-
-  Color gymText = kDarkBlueColor;
-
-  Color homeTheatre = kDarkBlueColor ;
-
-  Color homeTheatreText = kDarkBlueColor;
-
-  Color kidsFriend = kDarkBlueColor ;
-
-  Color kidsFriendText = kDarkBlueColor;
-
-  Color hotel = kDarkBlueColor ;
-
-  Color hotelText = kDarkBlueColor;
-
-  Color villa = kDarkBlueColor ;
-
-  Color villaText = kDarkBlueColor;
-
-  Color cottege = kDarkBlueColor ;
-
-  Color cottegeText = kDarkBlueColor;
-
-  Color house = kDarkBlueColor ;
-
-  Color houseText = kDarkBlueColor;
-
-  Color apartment = kDarkBlueColor ;
-
-  Color apartmentText = kDarkBlueColor;
+        // Print or access other properties as needed
+        print("Number of residences: ${residence}");
 
 
-  Color bed2 = kDarkBlueColor;
 
-  Color bedtext2 = kDarkBlueColor;
+      }
 
+
+      update();
+    } catch (e) {
+      print("Exception occurred: $e");
+
+    }
+  }
+
+  String resId;
   final List gridview = [
     {
       "image" : "lib/assets/images/Shape1.png",
@@ -113,55 +71,9 @@ class EditListingController extends GetxController{
     },
   ];
 
+  EditListingController(this.resId);
 
-  var selectedIndex;
-
-  int counter1 = 1;
-  int counter2 = 1;
-  int counter3 = 1;
-
-  void incrementCounter1() {
-
-      counter1++;
-      update();
-
-  }
-
-  void decrementCounter1() {
-
-      counter1--;
-      update();
-
-  }
-
-  void incrementCounter2() {
-
-      counter2++;
-      update();
-
-  }
-
-  void decrementCounter2() {
-
-      counter2--;
-      update();
-
-  }
-
-  void incrementCounter3() {
-
-      counter3++;
-      update();
-  }
-
-  void decrementCounter3() {
-
-      counter3--;
-      update();
-
-  }
-
-
+  o.Residence? residence;
   static String? houseId;
   int selectedIndex1=0;
   TextEditingController propertyTitle=TextEditingController();
@@ -177,7 +89,8 @@ class EditListingController extends GetxController{
           propertyTitle.text,
           propertyType,
           propertyCategory,
-          context
+          context,
+        resId
       );
       if (data?.status == "success") {
         EditListingController.houseId=data?.residence?.id;

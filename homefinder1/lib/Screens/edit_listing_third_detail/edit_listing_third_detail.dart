@@ -1206,7 +1206,8 @@ class _EditListingThirdDetailsScreenState
                     ),
                   ),
                   Container(
-                    height: Get.height * 0.1,
+                    margin: EdgeInsets.only(bottom: 15),
+                    height: Get.height * 0.150,
                     child: Center(
                       child: CustomElevatedButtonWidget(
                         text: 'Next',

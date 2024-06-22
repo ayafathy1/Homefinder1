@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:homefinder1/Screens/ChatingScreens/chatlist/chats_list_screen.dart';
 import 'package:homefinder1/Screens/change_password/change_password_screen.dart';
 import 'package:homefinder1/Screens/delete_account/delete_account_screen.dart';
 import 'package:homefinder1/Screens/edit_profile/edit_profile.dart';
@@ -108,9 +109,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         InkWell(
                           onTap: (){
                             controller.selectedIndex=index;
-                            if(controller.selectedIndex==5){
+                            if(controller.selectedIndex==4){
                               controller.signOut(context);
-                            }else if(controller.selectedIndex==6){
+                            }else if(controller.selectedIndex==5){
                               Get.to(()=>DeleteAccountScreen());
                             }else if(controller.selectedIndex==1){
                               Get.to(()=>ChangePasswordScreen());
@@ -120,8 +121,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 Get.delete<ProfileController>();
                               }
                               Get.to(()=>EditProfileScreen());
-                            }else if(controller.selectedIndex==4){
+                            }else if(controller.selectedIndex==3){
                               Get.to(()=>FavoriteScreen());
+                            }else if(controller.selectedIndex==2){
+                              Get.to(()=>ChatsListScreen());
                             }
                             setState(() {
 
@@ -163,7 +166,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ],),
                           ),
                         );}, separatorBuilder: (context,index){return
-                        SizedBox(height: 15,);}, itemCount: 7),
+                        SizedBox(height: 15,);}, itemCount: 6),
                     )
                 )
               ],

@@ -62,7 +62,11 @@ class EditProfileController extends GetxController{
     } else {
       data= response.user;
       data1=response;
-
+      firtNameController.text=data?.firstName??"";
+      lastNameController.text=data?.lastName??"";
+      usernameController.text=data?.username??"";
+      phoneNumberController.text=data?.phone??"";
+      genderController.text=data?.gender??"";
 
     }
 

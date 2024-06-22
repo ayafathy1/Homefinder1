@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/add_review/controller/add_review_controller.dart';
+import 'package:homefinder1/Screens/single%20detail/controller/single_detail_controller.dart';
 import 'package:homefinder1/Widget/custom_arrow_back.dart';
 import 'package:homefinder1/utilities/colors.dart';
 import 'package:homefinder1/utilities/constants.dart';
@@ -194,7 +195,10 @@ String resId;
 
                 onPressed: () {
                   controller.addReview(context);
-                },
+                  bool test4 = Get.isRegistered<SingleDetailController>();
+                  if(test4){
+                  Get.delete<SingleDetailController>();
+                }},
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
               fixedSize: const Size(215,53)

@@ -224,7 +224,7 @@ class EditListingThirdDetailsController extends GetxController {
           counterKitchen, //counter for kitchen
           kitchenQualitySelected,
           counterRoomWithoutBathroom,
-          int.parse(basementAreaController.text),
+          basementAreaController.text,
           basementExposureSelected,
           ratingBasementSelected,
           heightOfBasementSelected,

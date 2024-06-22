@@ -1,8 +1,5 @@
 
 
-// ignore_for_file: prefer_typing_uninitialized_variables
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -72,7 +69,7 @@ class _EditListingScreenState extends State<EditListingScreen> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<EditListingController>(
-        init: EditListingController(widget.resId, context),
+        init: EditListingController(widget.resId),
         builder: (EditListingController controller) {
           return Scaffold(
             appBar: AppBar(
@@ -123,7 +120,7 @@ class _EditListingScreenState extends State<EditListingScreen> {
                                   child: Image(
                                     image:
                                     NetworkImage(
-                                        controller.residence?.images?[0].url ??
+                                        controller.residence?.images?[0].url??
                                             "https://www.thehouseplanshop.com/userfiles/photos/large/181232894dcbf09622300.jpg"),
                                     height: 115,
                                     fit: BoxFit.fill,
@@ -283,6 +280,7 @@ class _EditListingScreenState extends State<EditListingScreen> {
                         height: Get.height * 0.15,
                         width: Get.width * 0.93,
                         child: TextField(
+                          controller: controller.propertyTitle,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             contentPadding:

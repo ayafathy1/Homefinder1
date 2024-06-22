@@ -11,6 +11,8 @@ import 'package:homefinder1/services/residences_services.dart';
 
 
 class AddListingThirdDetailsController extends GetxController {
+  
+  
   ScrollController scroll = ScrollController();
    String residanceId;
   AddListingThirdDetailsController(this.residanceId);

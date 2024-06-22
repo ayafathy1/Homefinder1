@@ -48,40 +48,9 @@ class _FeaturedEstatesState extends State<FeaturedEstates> {
               child: Column(
                 children: [
 
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: TextField(
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: const Color(0xffF4F4F4),
-                        hintText: "Search House, Apartment , etc",
-                        prefixIcon: const Icon(
-                          Icons.search_outlined, color: Colors.black,),
-                        suffixIcon: InkWell(
-                            onTap: () {},
-                            child: const Image(image: AssetImage(
-                                'lib/assets/images/options.png'))),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            borderSide: const BorderSide(
-                              color: Color(0xffF4F4F4),
-                              width: 3,
-                            )
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            borderSide: const BorderSide(
-                              color: Color(0xff6C63FF),
-                              width: 3,
-                            )
-                        ),
-                      ),
-                    ),
-                  ),
                   Center(
                     child: Container(
-                      height: Get.height * 0.845,
+                      height: Get.height * 0.93,
                       color: const Color(0xffF7F7F7),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),

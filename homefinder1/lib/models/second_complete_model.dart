@@ -33,11 +33,8 @@ class Residence {
   Location? location;
   String? residenceId;
   String? ownerId;
-
   List<dynamic>? bookedBy;
   int? id;
-
-
   bool? isSold;
   bool? isCompleted;
   String? status;
@@ -55,15 +52,15 @@ class Residence {
   int? garageCars;
   String? garageFinish;
   String? garageType;
+  String? garageQual;
   int? fireplaces;
+  String? fireplaceQu;
   String? bsmtExposure;
   String? bsmtFinType1;
-
-
   int? bsmtUnfSf;
   String? masVnrType;
   int? masVnrArea;
-  int? msSubClass;
+  String? msSubClass;
   int? totalporchsf;
   int? lotFrontage;
   int? lotArea;
@@ -74,15 +71,11 @@ class Residence {
   int? totalbaths;
   int? houseage;
   int? houseremodelage;
-
   List<dynamic>? images;
   DateTime? createdAt;
   DateTime? updatedAt;
   String? bldgType;
-
   String? electrical;
-
-
   String? foundation;
   String? lotShape;
   int? moSold;
@@ -106,19 +99,17 @@ class Residence {
   String? roofMatl;
   String? roofStyle;
   String? street;
+  int? kitchenAbvGr;
+  int? bedroomAbvGr;
+  String? kitchenQual;
+  int? totRmsAbvGrd;
 
   Residence({
     this.isLiked,
     this.location,
-
-
     this.residenceId,
     this.ownerId,
     this.bookedBy,
-
-    this.id,
-
-    this.ownerId,
     this.id,
     this.isSold,
     this.isCompleted,
@@ -137,13 +128,11 @@ class Residence {
     this.garageCars,
     this.garageFinish,
     this.garageType,
+    this.garageQual,
     this.fireplaces,
+    this.fireplaceQu,
     this.bsmtExposure,
-
-
     this.bsmtFinType1,
-
-
     this.bsmtUnfSf,
     this.masVnrType,
     this.masVnrArea,
@@ -161,12 +150,8 @@ class Residence {
     this.images,
     this.createdAt,
     this.updatedAt,
-
     this.bldgType,
-
     this.electrical,
-
-
     this.foundation,
     this.lotShape,
     this.moSold,
@@ -190,6 +175,10 @@ class Residence {
     this.roofMatl,
     this.roofStyle,
     this.street,
+    this.kitchenAbvGr,
+    this.bedroomAbvGr,
+    this.kitchenQual,
+    this.totRmsAbvGrd,
   });
 
   factory Residence.fromJson(Map<String, dynamic> json) => Residence(
@@ -197,12 +186,8 @@ class Residence {
     location: json["location"] == null ? null : Location.fromJson(json["location"]),
     residenceId: json["_id"],
     ownerId: json["ownerId"],
-
-
     bookedBy: json["bookedBy"] == null ? [] : List<dynamic>.from(json["bookedBy"]!.map((x) => x)),
     id: json["Id"],
-
-
     isSold: json["isSold"],
     isCompleted: json["isCompleted"],
     status: json["status"],
@@ -220,13 +205,11 @@ class Residence {
     garageCars: json["garageCars"],
     garageFinish: json["garageFinish"],
     garageType: json["garageType"],
+    garageQual: json["garageQual"],
     fireplaces: json["fireplaces"],
+    fireplaceQu: json["fireplaceQu"],
     bsmtExposure: json["bsmtExposure"],
-
-
     bsmtFinType1: json["bsmtFinType1"],
-
-
     bsmtUnfSf: json["bsmtUnfSF"],
     masVnrType: json["masVnrType"],
     masVnrArea: json["masVnrArea"],
@@ -241,12 +224,10 @@ class Residence {
     totalbaths: json["totalbaths"],
     houseage: json["houseage"],
     houseremodelage: json["houseremodelage"],
-
     images: json["images"] == null ? [] : List<dynamic>.from(json["images"]!.map((x) => x)),
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
     bldgType: json["bldgType"],
-
     electrical: json["electrical"],
     foundation: json["foundation"],
     lotShape: json["lotShape"],
@@ -271,15 +252,18 @@ class Residence {
     roofMatl: json["roofMatl"],
     roofStyle: json["roofStyle"],
     street: json["street"],
+    kitchenAbvGr: json["KitchenAbvGr"],
+    bedroomAbvGr: json["bedroomAbvGr"],
+    kitchenQual: json["kitchenQual"],
+    totRmsAbvGrd: json["totRmsAbvGrd"],
   );
+
   Map<String, dynamic> toJson() => {
     "isLiked": isLiked,
     "location": location?.toJson(),
     "_id": residenceId,
     "ownerId": ownerId,
-
     "bookedBy": bookedBy == null ? [] : List<dynamic>.from(bookedBy!.map((x) => x)),
-
     "Id": id,
     "isSold": isSold,
     "isCompleted": isCompleted,
@@ -298,10 +282,11 @@ class Residence {
     "garageCars": garageCars,
     "garageFinish": garageFinish,
     "garageType": garageType,
+    "garageQual": garageQual,
     "fireplaces": fireplaces,
+    "fireplaceQu": fireplaceQu,
     "bsmtExposure": bsmtExposure,
     "bsmtFinType1": bsmtFinType1,
-
     "bsmtUnfSF": bsmtUnfSf,
     "masVnrType": masVnrType,
     "masVnrArea": masVnrArea,
@@ -316,12 +301,10 @@ class Residence {
     "totalbaths": totalbaths,
     "houseage": houseage,
     "houseremodelage": houseremodelage,
-
     "images": images == null ? [] : List<dynamic>.from(images!.map((x) => x)),
     "createdAt": createdAt?.toIso8601String(),
     "updatedAt": updatedAt?.toIso8601String(),
     "bldgType": bldgType,
-
     "electrical": electrical,
     "foundation": foundation,
     "lotShape": lotShape,
@@ -346,30 +329,10 @@ class Residence {
     "roofMatl": roofMatl,
     "roofStyle": roofStyle,
     "street": street,
-  };
-}
-
-class Image {
-  String? url;
-  String? publicId;
-  String? id;
-
-  Image({
-    this.url,
-    this.publicId,
-    this.id,
-  });
-
-  factory Image.fromJson(Map<String, dynamic> json) => Image(
-    url: json["url"],
-    publicId: json["public_id"],
-    id: json["_id"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "url": url,
-    "public_id": publicId,
-    "_id": id,
+    "KitchenAbvGr": kitchenAbvGr,
+    "bedroomAbvGr": bedroomAbvGr,
+    "kitchenQual": kitchenQual,
+    "totRmsAbvGrd": totRmsAbvGrd,
   };
 }
 

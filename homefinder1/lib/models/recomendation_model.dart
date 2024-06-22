@@ -31,10 +31,6 @@ class RecommendationModel {
 class Datum {
   bool? isLiked;
   Location? location;
-  int? avgRating;
-  List<String>? reviews;
-  List<dynamic>? likedUsers;
-  String? alley;
   String? datumId;
   int? id;
   String? title;
@@ -49,7 +45,8 @@ class Datum {
   bool? hasBasement;
   DateTime? createdAt;
   DateTime? updatedAt;
-  int? msSubClass;
+  int? salePrice;
+  String? msSubClass;
   String? mszoning;
   int? lotFrontage;
   int? lotArea;
@@ -100,7 +97,6 @@ class Datum {
   int? moSold;
   String? saleType;
   String? saleCondition;
-  double? salePrice;
   int? houseage;
   int? houseremodelage;
   int? totalsf;
@@ -108,14 +104,16 @@ class Datum {
   double? totalbaths;
   int? totalporchsf;
   List<Image>? images;
+  String? alley;
+  int? avgRating;
+  List<dynamic>? bookedBy;
+  List<dynamic>? likedUsers;
+  String? ownerId;
+  List<dynamic>? reviews;
 
   Datum({
     this.isLiked,
     this.location,
-    this.avgRating,
-    this.reviews,
-    this.likedUsers,
-    this.alley,
     this.datumId,
     this.id,
     this.title,
@@ -130,6 +128,7 @@ class Datum {
     this.hasBasement,
     this.createdAt,
     this.updatedAt,
+    this.salePrice,
     this.msSubClass,
     this.mszoning,
     this.lotFrontage,
@@ -181,7 +180,6 @@ class Datum {
     this.moSold,
     this.saleType,
     this.saleCondition,
-    this.salePrice,
     this.houseage,
     this.houseremodelage,
     this.totalsf,
@@ -189,15 +187,17 @@ class Datum {
     this.totalbaths,
     this.totalporchsf,
     this.images,
+    this.alley,
+    this.avgRating,
+    this.bookedBy,
+    this.likedUsers,
+    this.ownerId,
+    this.reviews,
   });
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
     isLiked: json["isLiked"],
     location: json["location"] == null ? null : Location.fromJson(json["location"]),
-    avgRating: json["avgRating"],
-    reviews: json["reviews"] == null ? [] : List<String>.from(json["reviews"]!.map((x) => x)),
-    likedUsers: json["likedUsers"] == null ? [] : List<dynamic>.from(json["likedUsers"]!.map((x) => x)),
-    alley: json["alley"],
     datumId: json["_id"],
     id: json["Id"],
     title: json["title"],
@@ -212,6 +212,7 @@ class Datum {
     hasBasement: json["hasBasement"],
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
+    salePrice: json["salePrice"],
     msSubClass: json["msSubClass"],
     mszoning: json["mszoning"],
     lotFrontage: json["lotFrontage"],
@@ -237,7 +238,7 @@ class Datum {
     masVnrArea: json["masVnrArea"],
     exterQual: json["exterQual"],
     exterCond: json["exterCond"],
-    foundation:json["foundation"],
+    foundation: json["foundation"],
     bsmtQual: json["bsmtQual"],
     bsmtCond: json["bsmtCond"],
     bsmtExposure: json["bsmtExposure"],
@@ -246,7 +247,7 @@ class Datum {
     heating: json["heating"],
     heatingQc: json["heatingQc"],
     centralAir: json["centralAir"],
-    electrical:json["electrical"],
+    electrical: json["electrical"],
     lowQualFinSf: json["lowQualFinSF"],
     bedroomAbvGr: json["bedroomAbvGr"],
     kitchenQual: json["kitchenQual"],
@@ -254,7 +255,7 @@ class Datum {
     fireplaceQu: json["fireplaceQu"],
     fireplaces: json["fireplaces"],
     garageType: json["garageType"],
-    garageFinish:json["garageFinish"],
+    garageFinish: json["garageFinish"],
     garageCars: json["garageCars"],
     garageQual: json["garageQual"],
     pavedDrive: json["pavedDrive"],
@@ -263,7 +264,6 @@ class Datum {
     moSold: json["moSold"],
     saleType: json["saleType"],
     saleCondition: json["saleCondition"],
-    salePrice: json["salePrice"]?.toDouble(),
     houseage: json["houseage"],
     houseremodelage: json["houseremodelage"],
     totalsf: json["totalsf"],
@@ -271,15 +271,17 @@ class Datum {
     totalbaths: json["totalbaths"]?.toDouble(),
     totalporchsf: json["totalporchsf"],
     images: json["images"] == null ? [] : List<Image>.from(json["images"]!.map((x) => Image.fromJson(x))),
+    alley: json["alley"],
+    avgRating: json["avgRating"],
+    bookedBy: json["bookedBy"] == null ? [] : List<dynamic>.from(json["bookedBy"]!.map((x) => x)),
+    likedUsers: json["likedUsers"] == null ? [] : List<dynamic>.from(json["likedUsers"]!.map((x) => x)),
+    ownerId: json["ownerId"],
+    reviews: json["reviews"] == null ? [] : List<dynamic>.from(json["reviews"]!.map((x) => x)),
   );
 
   Map<String, dynamic> toJson() => {
     "isLiked": isLiked,
     "location": location?.toJson(),
-    "avgRating": avgRating,
-    "reviews": reviews == null ? [] : List<dynamic>.from(reviews!.map((x) => x)),
-    "likedUsers": likedUsers == null ? [] : List<dynamic>.from(likedUsers!.map((x) => x)),
-    "alley": alley,
     "_id": datumId,
     "Id": id,
     "title": title,
@@ -292,8 +294,9 @@ class Datum {
     "hasGarage": hasGarage,
     "hasFireplace": hasFireplace,
     "hasBasement": hasBasement,
-    "createdAt": createdAt,
-    "updatedAt": updatedAt,
+    "createdAt": createdAt?.toIso8601String(),
+    "updatedAt": updatedAt?.toIso8601String(),
+    "salePrice": salePrice,
     "msSubClass": msSubClass,
     "mszoning": mszoning,
     "lotFrontage": lotFrontage,
@@ -325,7 +328,7 @@ class Datum {
     "bsmtExposure": bsmtExposure,
     "bsmtFinType1": bsmtFinType1,
     "bsmtUnfSF": bsmtUnfSf,
-    "heating":heating,
+    "heating": heating,
     "heatingQc": heatingQc,
     "centralAir": centralAir,
     "electrical": electrical,
@@ -333,7 +336,7 @@ class Datum {
     "bedroomAbvGr": bedroomAbvGr,
     "kitchenQual": kitchenQual,
     "totRmsAbvGrd": totRmsAbvGrd,
-    "fireplaceQu":fireplaceQu,
+    "fireplaceQu": fireplaceQu,
     "fireplaces": fireplaces,
     "garageType": garageType,
     "garageFinish": garageFinish,
@@ -345,7 +348,6 @@ class Datum {
     "moSold": moSold,
     "saleType": saleType,
     "saleCondition": saleCondition,
-    "salePrice": salePrice,
     "houseage": houseage,
     "houseremodelage": houseremodelage,
     "totalsf": totalsf,
@@ -353,11 +355,14 @@ class Datum {
     "totalbaths": totalbaths,
     "totalporchsf": totalporchsf,
     "images": images == null ? [] : List<dynamic>.from(images!.map((x) => x.toJson())),
+    "alley": alley,
+    "avgRating": avgRating,
+    "bookedBy": bookedBy == null ? [] : List<dynamic>.from(bookedBy!.map((x) => x)),
+    "likedUsers": likedUsers == null ? [] : List<dynamic>.from(likedUsers!.map((x) => x)),
+    "ownerId": ownerId,
+    "reviews": reviews == null ? [] : List<dynamic>.from(reviews!.map((x) => x)),
   };
 }
-
-
-
 
 class Image {
   String? id;
@@ -378,8 +383,6 @@ class Image {
     "url": url,
   };
 }
-
-
 
 class Location {
   String? type;
@@ -416,4 +419,3 @@ class Location {
     "country": country,
   };
 }
-

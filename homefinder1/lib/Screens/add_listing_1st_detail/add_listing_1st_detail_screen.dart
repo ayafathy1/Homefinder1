@@ -188,52 +188,92 @@ class _AddListingFirstDetailScreenState
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: 15, bottom: 10),
-                            child: Text(
-                              "Neighbourhood",
-                              style: TextStyle(
-                                  color: kDarkBlueColor,
-                                  fontFamily: kRegularFont,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w900),
-                            ),
-                          ),
-                          TextFormField(
-                            controller: controller.neighborhoodController,
-                            keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
-                              fillColor: const Color(0xffF5F4F8),
-                              filled: true,
-                              hintText: "college creek",
-                              hintStyle: TextStyle(
-                                  color: kVeryDarkBlueColor,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 12,
-                                  fontFamily: kRegularFont),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(25),
-                                  borderSide: const BorderSide(
-                                    color: Color(0xffF4F4F4),
-                                    width: 3,
-                                  )),
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(25),
-                                  borderSide: const BorderSide(
-                                    color: Color(0xff6C63FF),
-                                    width: 3,
-                                  )),
-                              errorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(25),
-                                  borderSide: BorderSide(
-                                    color: Colors.red.shade600,
-                                    width: 3,
-                                  )),
-                              focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(25),
-                                  borderSide: BorderSide(
-                                    color: Colors.red.shade600,
-                                    width: 3,
-                                  )),
+                            padding: const EdgeInsets.all(12.0),
+                            child: Center(
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButton2<String>(
+                                  isExpanded: true,
+                                  hint: const Row(
+                                    children: [
+                                      SizedBox(
+                                        width: 4,
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          'Neighbourhood',
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w700,
+                                            color: Color(0xff313144),
+                                          ),
+                                          overflow: TextOverflow.visible,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  items: controller.Neighbourhood
+                                      .map((String item) => DropdownMenuItem<String>(
+                                    value: item,
+                                    child: Text(
+                                      item,
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xff313144),
+                                      ),
+                                      overflow: TextOverflow.visible,
+                                    ),
+                                  ))
+                                      .toList(),
+                                  value: controller.selectedValue3,
+                                  onChanged: (String? value) {
+                                    setState(() {
+                                      controller.selectedValue3 = value;
+                                      controller.NeighbourhoodSelected =
+                                          controller.selectedValue3?? "colleg creek";
+                                    });
+                                  },
+                                  buttonStyleData: ButtonStyleData(
+                                    height: Get.height * 0.07,
+                                    width: Get.width * 0.9,
+                                    padding: const EdgeInsets.only(left: 14, right: 14),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      border:
+                                      Border.all(color: Colors.black26, width: 2),
+                                      color: const Color(0xffffffff),
+                                    ),
+                                    elevation: 2,
+                                  ),
+                                  iconStyleData: const IconStyleData(
+                                    icon: Icon(
+                                      Icons.keyboard_arrow_down_sharp,
+                                    ),
+                                    iconSize: 25,
+                                    iconEnabledColor: Color(0xff313144),
+                                    iconDisabledColor: Colors.grey,
+                                  ),
+                                  dropdownStyleData: DropdownStyleData(
+                                    width: Get.width * 0.9,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: const Color(0xffffffff),
+                                    ),
+                                    offset: const Offset(0, 10),
+                                    // Adjust the offset here
+                                    scrollbarTheme: ScrollbarThemeData(
+                                      radius: const Radius.circular(40),
+                                      thickness: WidgetStateProperty.all<double>(6),
+                                      thumbVisibility:
+                                      WidgetStateProperty.all<bool>(true),
+                                    ),
+                                  ),
+                                  menuItemStyleData: const MenuItemStyleData(
+                                    height: 40,
+                                    padding: EdgeInsets.only(left: 14, right: 14),
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                           Padding(
@@ -255,8 +295,8 @@ class _AddListingFirstDetailScreenState
                               filled: true,
                               hintText: "12",
                               hintStyle: TextStyle(
-                                  color: kVeryDarkBlueColor,
-                                  fontWeight: FontWeight.w700,
+                                  color: kDarkBlueColor,
+                                  fontWeight: FontWeight.w500,
                                   fontSize: 12,
                                   fontFamily: kRegularFont),
                               enabledBorder: OutlineInputBorder(
@@ -309,8 +349,8 @@ class _AddListingFirstDetailScreenState
                               filled: true,
                               hintText: "\$ 180,000",
                               hintStyle: TextStyle(
-                                  color: kVeryDarkBlueColor,
-                                  fontWeight: FontWeight.w700,
+                                  color: kDarkBlueColor,
+                                  fontWeight: FontWeight.w500,
                                   fontSize: 12,
                                   fontFamily: kRegularFont),
                               enabledBorder: OutlineInputBorder(

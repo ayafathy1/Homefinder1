@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:homefinder1/Screens/Featured%20Estates/controller/feature_estates_controller.dart';
 import 'package:homefinder1/Screens/popular_nearest_you/controller/popular_nearest_you_controller.dart';
 
+import '../../../models/get_one_residence_model.dart';
 import '../../../models/get_user_favorite_model.dart';
 import '../../../models/respose_model.dart';
 import '../../../services/residences_services.dart';
@@ -30,6 +31,7 @@ class FavoriteController extends GetxController{
     super.onInit();
     await getDataOfFavResidences(context!);
   }
+  Residence?residence;
   getDataOfFavResidences(BuildContext context) async {
     isLoading=true;
       try {
@@ -81,5 +83,29 @@ class FavoriteController extends GetxController{
     }
 
   }
+  getDataOfOneResidences(String resId, BuildContext context) async {
+    try {
+      GetOneResidencesModel? response =
+      await ResidenceServices.fetchOneResidences(resId, context);
+      print("API Response Status: ${response?.status}");
 
+      if (response == null) {
+        print("Some error occurred: Response is null");
+      } else {
+        residence = response.residence;
+
+        // Print or access other properties as needed
+        print("Number of residences: ${residence}");
+;
+
+
+      }
+
+
+      update();
+    } catch (e) {
+      print("Exception occurred: $e");
+
+    }
+  }
 }

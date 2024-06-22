@@ -1,12 +1,12 @@
 // To parse this JSON data, do
 //
-//     final thirdCompleteModel = thirdCompleteModelFromJson(jsonString);
+//     final thirdEditModel = thirdEditModelFromJson(jsonString);
 
 import 'dart:convert';
 
-ThirdEditModel  welcomeFromJson(String str) => ThirdEditModel.fromJson(json.decode(str));
+ThirdEditModel thirdEditModelFromJson(String str) => ThirdEditModel.fromJson(json.decode(str));
 
-String welcomeToJson(ThirdEditModel data) => json.encode(data.toJson());
+String thirdEditModelToJson(ThirdEditModel data) => json.encode(data.toJson());
 
 class ThirdEditModel {
   String? status;
@@ -17,7 +17,7 @@ class ThirdEditModel {
     this.residence,
   });
 
-  factory ThirdEditModel.fromJson(Map<String, dynamic> json) =>  ThirdEditModel(
+  factory ThirdEditModel.fromJson(Map<String, dynamic> json) => ThirdEditModel(
     status: json["status"],
     residence: json["residence"] == null ? null : Residence.fromJson(json["residence"]),
   );
@@ -33,6 +33,7 @@ class Residence {
   Location? location;
   String? residenceId;
   String? ownerId;
+  List<dynamic>? bookedBy;
   int? id;
   bool? isSold;
   bool? isCompleted;
@@ -51,17 +52,14 @@ class Residence {
   int? garageCars;
   String? garageFinish;
   String? garageType;
-  String? garageQual;
   int? fireplaces;
   String? fireplaceQu;
   String? bsmtExposure;
   String? bsmtFinType1;
-  String? bsmtCond;
-  String? bsmtQual;
   int? bsmtUnfSf;
   String? masVnrType;
   int? masVnrArea;
-  int? msSubClass;
+  String? msSubClass;
   int? totalporchsf;
   int? lotFrontage;
   int? lotArea;
@@ -73,20 +71,14 @@ class Residence {
   int? houseage;
   int? houseremodelage;
   List<dynamic>? images;
-  String? createdAt;
-  String? updatedAt;
-  String? bldgType;
-  String? electrical;
-  String? foundation;
-  String? lotShape;
-  int? moSold;
-  String? mszoning;
-  String? neighborhood;
-  String? paymentPeriod;
-  String? saleCondition;
-  int? salePrice;
-  String? saleType;
-  String? utilities;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  String? landContour;
+  String? landSlope;
+  String? lotConfig;
+  int? overallCond;
+  int? overallQual;
+  String? pavedDrive;
   String? centralAir;
   String? condition1;
   String? condition2;
@@ -104,18 +96,13 @@ class Residence {
   int? bedroomAbvGr;
   String? kitchenQual;
   int? totRmsAbvGrd;
-  String? landContour;
-  String? landSlope;
-  String? lotConfig;
-  int? overallCond;
-  int? overallQual;
-  String? pavedDrive;
 
   Residence({
     this.isLiked,
     this.location,
     this.residenceId,
     this.ownerId,
+    this.bookedBy,
     this.id,
     this.isSold,
     this.isCompleted,
@@ -134,13 +121,10 @@ class Residence {
     this.garageCars,
     this.garageFinish,
     this.garageType,
-    this.garageQual,
     this.fireplaces,
     this.fireplaceQu,
     this.bsmtExposure,
     this.bsmtFinType1,
-    this.bsmtCond,
-    this.bsmtQual,
     this.bsmtUnfSf,
     this.masVnrType,
     this.masVnrArea,
@@ -158,18 +142,12 @@ class Residence {
     this.images,
     this.createdAt,
     this.updatedAt,
-    this.bldgType,
-    this.electrical,
-    this.foundation,
-    this.lotShape,
-    this.moSold,
-    this.mszoning,
-    this.neighborhood,
-    this.paymentPeriod,
-    this.saleCondition,
-    this.salePrice,
-    this.saleType,
-    this.utilities,
+    this.landContour,
+    this.landSlope,
+    this.lotConfig,
+    this.overallCond,
+    this.overallQual,
+    this.pavedDrive,
     this.centralAir,
     this.condition1,
     this.condition2,
@@ -187,19 +165,14 @@ class Residence {
     this.bedroomAbvGr,
     this.kitchenQual,
     this.totRmsAbvGrd,
-    this.landContour,
-    this.landSlope,
-    this.lotConfig,
-    this.overallCond,
-    this.overallQual,
-    this.pavedDrive,
   });
 
-  factory Residence.fromJson(Map<String, dynamic> json) => new Residence(
+  factory Residence.fromJson(Map<String, dynamic> json) => Residence(
     isLiked: json["isLiked"],
-    location: Location.fromJson(json["location"]),
+    location: json["location"] == null ? null : Location.fromJson(json["location"]),
     residenceId: json["_id"],
     ownerId: json["ownerId"],
+    bookedBy: json["bookedBy"] == null ? [] : List<dynamic>.from(json["bookedBy"]!.map((x) => x)),
     id: json["Id"],
     isSold: json["isSold"],
     isCompleted: json["isCompleted"],
@@ -211,20 +184,17 @@ class Residence {
     hasGarage: json["hasGarage"],
     hasFireplace: json["hasFireplace"],
     hasBasement: json["hasBasement"],
-    reviews: new List<dynamic>.from(json["reviews"].map((x) => x)),
-    likedUsers: new List<dynamic>.from(json["likedUsers"].map((x) => x)),
+    reviews: json["reviews"] == null ? [] : List<dynamic>.from(json["reviews"]!.map((x) => x)),
+    likedUsers: json["likedUsers"] == null ? [] : List<dynamic>.from(json["likedUsers"]!.map((x) => x)),
     alley: json["alley"],
     poolArea: json["poolArea"],
     garageCars: json["garageCars"],
     garageFinish: json["garageFinish"],
     garageType: json["garageType"],
-    garageQual: json["garageQual"],
     fireplaces: json["fireplaces"],
     fireplaceQu: json["fireplaceQu"],
     bsmtExposure: json["bsmtExposure"],
     bsmtFinType1: json["bsmtFinType1"],
-    bsmtCond: json["bsmtCond"],
-    bsmtQual: json["bsmtQual"],
     bsmtUnfSf: json["bsmtUnfSF"],
     masVnrType: json["masVnrType"],
     masVnrArea: json["masVnrArea"],
@@ -239,21 +209,15 @@ class Residence {
     totalbaths: json["totalbaths"],
     houseage: json["houseage"],
     houseremodelage: json["houseremodelage"],
-    images:  List<dynamic>.from(json["images"].map((x) => x)),
-    createdAt: json["createdAt"],
-    updatedAt: json["updatedAt"],
-    bldgType: json["bldgType"],
-    electrical: json["electrical"],
-    foundation: json["foundation"],
-    lotShape: json["lotShape"],
-    moSold: json["moSold"],
-    mszoning: json["mszoning"],
-    neighborhood: json["neighborhood"],
-    paymentPeriod: json["paymentPeriod"],
-    saleCondition: json["saleCondition"],
-    salePrice: json["salePrice"],
-    saleType: json["saleType"],
-    utilities: json["utilities"],
+    images: json["images"] == null ? [] : List<dynamic>.from(json["images"]!.map((x) => x)),
+    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
+    updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
+    landContour: json["landContour"],
+    landSlope: json["landSlope"],
+    lotConfig: json["lotConfig"],
+    overallCond: json["overallCond"],
+    overallQual: json["overallQual"],
+    pavedDrive: json["pavedDrive"],
     centralAir: json["centralAir"],
     condition1: json["condition1"],
     condition2: json["condition2"],
@@ -271,12 +235,6 @@ class Residence {
     bedroomAbvGr: json["bedroomAbvGr"],
     kitchenQual: json["kitchenQual"],
     totRmsAbvGrd: json["totRmsAbvGrd"],
-    landContour: json["landContour"],
-    landSlope: json["landSlope"],
-    lotConfig: json["lotConfig"],
-    overallCond: json["overallCond"],
-    overallQual: json["overallQual"],
-    pavedDrive: json["pavedDrive"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -284,6 +242,7 @@ class Residence {
     "location": location?.toJson(),
     "_id": residenceId,
     "ownerId": ownerId,
+    "bookedBy": bookedBy == null ? [] : List<dynamic>.from(bookedBy!.map((x) => x)),
     "Id": id,
     "isSold": isSold,
     "isCompleted": isCompleted,
@@ -302,13 +261,10 @@ class Residence {
     "garageCars": garageCars,
     "garageFinish": garageFinish,
     "garageType": garageType,
-    "garageQual": garageQual,
     "fireplaces": fireplaces,
     "fireplaceQu": fireplaceQu,
     "bsmtExposure": bsmtExposure,
     "bsmtFinType1": bsmtFinType1,
-    "bsmtCond": bsmtCond,
-    "bsmtQual": bsmtQual,
     "bsmtUnfSF": bsmtUnfSf,
     "masVnrType": masVnrType,
     "masVnrArea": masVnrArea,
@@ -323,21 +279,15 @@ class Residence {
     "totalbaths": totalbaths,
     "houseage": houseage,
     "houseremodelage": houseremodelage,
-    "images": images == null? [] : List<dynamic>.from(images!.map((x) => x)),
-    "createdAt": createdAt,
-    "updatedAt": updatedAt,
-    "bldgType": bldgType,
-    "electrical": electrical,
-    "foundation": foundation,
-    "lotShape": lotShape,
-    "moSold": moSold,
-    "mszoning": mszoning,
-    "neighborhood": neighborhood,
-    "paymentPeriod": paymentPeriod,
-    "saleCondition": saleCondition,
-    "salePrice": salePrice,
-    "saleType": saleType,
-    "utilities": utilities,
+    "images": images == null ? [] : List<dynamic>.from(images!.map((x) => x)),
+    "createdAt": createdAt?.toIso8601String(),
+    "updatedAt": updatedAt?.toIso8601String(),
+    "landContour": landContour,
+    "landSlope": landSlope,
+    "lotConfig": lotConfig,
+    "overallCond": overallCond,
+    "overallQual": overallQual,
+    "pavedDrive": pavedDrive,
     "centralAir": centralAir,
     "condition1": condition1,
     "condition2": condition2,
@@ -355,14 +305,9 @@ class Residence {
     "bedroomAbvGr": bedroomAbvGr,
     "kitchenQual": kitchenQual,
     "totRmsAbvGrd": totRmsAbvGrd,
-    "landContour": landContour,
-    "landSlope": landSlope,
-    "lotConfig": lotConfig,
-    "overallCond": overallCond,
-    "overallQual": overallQual,
-    "pavedDrive": pavedDrive,
   };
 }
+
 class Location {
   String? type;
   List<double>? coordinates;
@@ -372,7 +317,7 @@ class Location {
     this.coordinates,
   });
 
-  factory Location.fromJson(Map<String, dynamic> json) =>  Location(
+  factory Location.fromJson(Map<String, dynamic> json) => Location(
     type: json["type"],
     coordinates: json["coordinates"] == null ? [] : List<double>.from(json["coordinates"]!.map((x) => x?.toDouble())),
   );

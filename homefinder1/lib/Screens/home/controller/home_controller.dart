@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/single%20detail/single_detail.dart';
+import 'package:homefinder1/models/get_nearest_residences_model.dart'as n;
 
 import 'package:homefinder1/utilities/colors.dart';
 
@@ -24,29 +25,32 @@ int? SelectedResidenceIndex;
   HomeController( this.context);
   ScrollController scroll = ScrollController();
   bool isLoading = true;
-  int counterOfResidences = 5;
+  int counterOfResidences =3;
   int maxNoOfPagesOfResidences = 1;
   bool isLoadingMoreDataOfResidences = false;
   List<a.Residence>? residences;
   o.Residence? residence;
   int? ResidenceCount;
   late TextEditingController searchController;
-
+int? SelectedResidenceIndex1;
 int favSelectedIndex=0;
+  int favSelectedIndex1=0;
 List<bool>add=[];
 int itemCount1=0;
   int itemCount2=0;
   @override
-  void onInit() async{
+  void onInit() {
     super.onInit();
-    searchController = TextEditingController();
-    await getDataOfResidences(context!);
+    update();
 
+     getDataOfResidences(context!);
+    getDataOfNearestResidences(context!);
+update();
 
   }
 List<a.Image>?images;
 
-
+bool? isLiked;
   getPhotosOfResidence(String resId,BuildContext context) async {
     try {
       isLoading=true;
@@ -71,6 +75,7 @@ List<a.Image>?images;
       print("Exception occurred: $e");
       isLoading = false;
     }
+    update();
   }
 List<c.Review>?reviews;
   getReviewsOfResidence(String resId,BuildContext context) async {
@@ -97,9 +102,12 @@ List<c.Review>?reviews;
       isLoading = false;
     }
   }
+  int counterOfNearestResidences=4;
+  List <a.Residence>?nearestResidences;
+  int nearestResidencesCounter=0;
   getDataOfResidences(BuildContext context) async {
 
-    if (counterOfResidences == 5) {
+    if (counterOfResidences == 3) {
       try {
         a.GetAllResidencesModel? response = await ResidenceServices.fetchAllResidences(counterOfResidences, context);
         print("API Response Status: ${response?.status}");
@@ -110,46 +118,26 @@ List<c.Review>?reviews;
           residences = response.residences ?? [];
           ResidenceCount = response.count ?? 0;
         if(residences==[]){
-          itemCount1=0;
-          itemCount2=0;
+
+
         }else{
-          itemCount1=5;
-          itemCount2=4;
+
         }
           // Print or access other properties as needed
           print("Number of residences: ${residences?.length}");
+
         }
 
-        isLoading = false;
-        update();
+
+
       } catch (e) {
         print("Exception occurred: $e");
-        isLoading = false;
+
       }
     } else {
-      if (counterOfResidences <= (maxNoOfPagesOfResidences)) {
-        try {
-          var response = await ResidenceServices.fetchAllResidences(counterOfResidences, context);
-          print("API Response Status: ${response?.status}");
 
-          if (response == null) {
-            print("Some error occurred: Response is null");
-          } else {
-            var newResidences = response.residences ?? [];
-            residences?.addAll(newResidences);
-
-            // Print or access other properties as needed
-            print("Number of additional residences fetched: ${newResidences.length}");
-          }
-
-          isLoadingMoreDataOfResidences = false;
-          update();
-        } catch (e) {
-          print("Exception occurred: $e");
-          isLoadingMoreDataOfResidences = false;
-        }
-      }
-    }
+    }  isLoading = false;
+    update();
   }
   getDataOfOneResidences(int Id,String resId,BuildContext context) async {
       try {
@@ -171,13 +159,13 @@ List<c.Review>?reviews;
           print("Number of residences: $residence");
         }
 
-        isLoading = false;
-        update();
+
       } catch (e) {
         print("Exception occurred: $e");
-        isLoading = false;
-      }
 
+      }
+      isLoading = false;
+      update();
   }
   Future<void> addResidenceToFav(String resId,BuildContext context) async {
     try {
@@ -187,7 +175,8 @@ List<c.Review>?reviews;
       );
       if (data?.status == "success") {
 
-       print(data?.message);
+        print(data?.message);
+        residence?.isLiked!=residence?.isLiked;
 
       }
     } catch (e) {
@@ -198,6 +187,8 @@ List<c.Review>?reviews;
       print(part);
     }
 
+    getDataOfResidences(context);
+    update();
   }
   Future<void> removeResidenceFromFav(String resId,BuildContext context) async {
     try {
@@ -208,15 +199,9 @@ List<c.Review>?reviews;
       if (data?.status == "success") {
 
         print(data?.message);
-        getDataOfResidences(context);
+        residence?.isLiked!=residence?.isLiked;
         update();
 
-        bool test4 = Get.isRegistered<HomeController>();
-        if(test4){
-          Get.delete<HomeController>();
-
-
-        }
       }else{
 
       }
@@ -227,11 +212,45 @@ List<c.Review>?reviews;
       String part = errorMessage.substring(26, 35);
       // Show error message on the screen
       print(part);
-      add.add(false);
+
     }
 
+    bool test4 = Get.isRegistered<HomeController>();
+    if(test4){
+      Get.delete<HomeController>();
+    }
+    update();
+    getDataOfResidences(context);
+    update();
   }
+  getDataOfNearestResidences(BuildContext context) async {
 
+    if (counterOfNearestResidences == 4) {
+      try {
+        a.GetAllResidencesModel? response = await ResidenceServices.fetchAllResidences(counterOfNearestResidences, context);
+        print("API Response Status: ${response?.status}");
+
+        if (response == null) {
+          print("Some error occurred: Response is null");
+        } else {
+          nearestResidences = response.residences ?? [];
+          nearestResidencesCounter = response.count ?? 0;
+          // Print or access other properties as needed
+          print("Number of residences: ${nearestResidences?.length}");
+
+        }
+
+
+
+      } catch (e) {
+        print("Exception occurred: $e");
+
+      }
+    } else {
+
+    }
+    getDataOfResidences(context);
+  }
 
 
 

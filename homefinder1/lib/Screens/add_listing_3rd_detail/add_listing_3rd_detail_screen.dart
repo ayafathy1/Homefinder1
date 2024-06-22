@@ -49,55 +49,44 @@ class _AddListingThirdDetailsScreenState
                 children: [
                   Row(
                     children: [
-                      const SizedBox(
-                        width: 200,
+                      SizedBox(
+                        width: 25,
                       ),
                       Text(
-                        "Yes",
-                        style: TextStyle(fontSize: 18, color: kGreyColor),
-                      ),
-                      const SizedBox(
-                        width: 40,
-                      ),
-                      Text("No",
-                          style: TextStyle(fontSize: 18, color: kGreyColor)),
-                    ],
-                  ),
-                  Row(children: [
-                   const SizedBox(
-                      width: 25,
-                    ),
-                    Text(
-                      "Has garage",
-                      style: TextStyle(
+                        "Has garage",
+                        style: TextStyle(
                           color: kVeryDarkBlueColor,
                           fontFamily: kRegularFont,
                           fontSize: 18,
-                          fontWeight: FontWeight.w900),
-                    ),
-                   const SizedBox(
-                      width: 50,
-                    ),
-                    Radio(
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 50,
+                      ),
+                      Radio(
                         value: "yes",
                         groupValue: groupValue,
                         onChanged: (value) {
                           setState(() {
                             groupValue = value!;
                           });
-                        }),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    Radio(
+                        },
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Radio(
                         value: "no",
                         groupValue: groupValue,
                         onChanged: (value) {
                           setState(() {
                             groupValue = value!;
                           });
-                        })
-                  ]),
+                        },
+                      ),
+                    ],
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(left: 12.0, top: 15),
                     child: Row(
@@ -105,10 +94,11 @@ class _AddListingThirdDetailsScreenState
                         Text(
                           "   Garage Type",
                           style: TextStyle(
-                              color: kVeryDarkBlueColor,
-                              fontFamily: kRegularFont,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w900),
+                            color: kVeryDarkBlueColor,
+                            fontFamily: kRegularFont,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w900,
+                          ),
                         ),
                       ],
                     ),
@@ -118,53 +108,45 @@ class _AddListingThirdDetailsScreenState
                     width: Get.width,
                     height: Get.height * 0.065,
                     child: ListView.separated(
-                        controller: controller.scroll,
-                        scrollDirection: Axis.horizontal,
-                        physics: const BouncingScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                              onTap: () {
-                                controller.selectedGarageTypeIndex = index;
-                                setState(() {});
-                              },
-                              child: Container(
-                                height: Get.height * 0.05,
-                                decoration: BoxDecoration(
-                                  color: controller.selectedGarageTypeIndex ==
-                                      index
-                                      ? kPrimaryColor
-                                      : const Color(0xffF5F4F8),
-                                  borderRadius: BorderRadius.circular(25),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 20.0,
-                                      right: 20,
-                                      top: 12,
-                                      bottom: 12),
-                                  child: Center(
-                                    child: Text(
-                                      controller.garageType[index],
-                                      style: TextStyle(
-                                          color: controller
-                                              .selectedGarageTypeIndex ==
-                                              index
-                                              ? Colors.white
-                                              : kVeryDarkBlueColor,
-                                          fontFamily: kRegularFont,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w600),
-                                    ),
+                      controller: controller.scroll,
+                      scrollDirection: Axis.horizontal,
+                      physics: const BouncingScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () {
+                            controller.selectedGarageTypeIndex = index;
+                            setState(() {});
+                          },
+                          child: Container(
+                            height: Get.height * 0.05,
+                            decoration: BoxDecoration(
+                              color: controller.selectedGarageTypeIndex == index
+                                  ? kPrimaryColor
+                                  : const Color(0xffF5F4F8),
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                              child: Center(
+                                child: Text(
+                                  controller.garageType[index],
+                                  style: TextStyle(
+                                    color: controller.selectedGarageTypeIndex == index
+                                        ? Colors.white
+                                        : kVeryDarkBlueColor,
+                                    fontFamily: kRegularFont,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                              ));
-                        },
-                        separatorBuilder: (context, index) {
-                          return SizedBox(
-                            width: Get.width * 0.02,
-                          );
-                        },
-                        itemCount: controller.garageType.length),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                      separatorBuilder: (context, index) => SizedBox(width: Get.width * 0.02),
+                      itemCount: controller.garageType.length,
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 12.0, top: 15),
@@ -173,125 +155,108 @@ class _AddListingThirdDetailsScreenState
                         Text(
                           "   Garage Quality",
                           style: TextStyle(
-                              color: kVeryDarkBlueColor,
-                              fontFamily: kRegularFont,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w900),
+                            color: kVeryDarkBlueColor,
+                            fontFamily: kRegularFont,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w900,
+                          ),
                         ),
                       ],
                     ),
                   ),
                   Container(
-                    margin:const EdgeInsets.only(left: 12, top: 15, bottom: 10),
+                    margin: const EdgeInsets.only(left: 12, top: 15, bottom: 10),
                     width: Get.width,
                     height: Get.height * 0.065,
                     child: ListView.separated(
-                        controller: controller.scroll,
-                        scrollDirection: Axis.horizontal,
-                        physics: const BouncingScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                              onTap: () {
-                                controller.selectedGarageQualityIndex = index;
-                                setState(() {});
-                              },
-                              child: Container(
-                                height: Get.height * 0.05,
-                                decoration: BoxDecoration(
-                                  color:
-                                  controller.selectedGarageQualityIndex ==
-                                      index
-                                      ? kPrimaryColor
-                                      : const Color(0xffF5F4F8),
-                                  borderRadius: BorderRadius.circular(25),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 20.0,
-                                      right: 20,
-                                      top: 12,
-                                      bottom: 12),
-                                  child: Center(
-                                    child: Text(
-                                      controller.garageQuality[index],
-                                      style: TextStyle(
-                                          color: controller
-                                              .selectedGarageQualityIndex ==
-                                              index
-                                              ? Colors.white
-                                              : kVeryDarkBlueColor,
-                                          fontFamily: kRegularFont,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w600),
-                                    ),
+                      controller: controller.scroll,
+                      scrollDirection: Axis.horizontal,
+                      physics: const BouncingScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () {
+                            controller.selectedGarageQualityIndex = index;
+                            setState(() {});
+                          },
+                          child: Container(
+                            height: Get.height * 0.05,
+                            decoration: BoxDecoration(
+                              color: controller.selectedGarageQualityIndex == index
+                                  ? kPrimaryColor
+                                  : const Color(0xffF5F4F8),
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                              child: Center(
+                                child: Text(
+                                  controller.garageQuality[index],
+                                  style: TextStyle(
+                                    color: controller.selectedGarageQualityIndex == index
+                                        ? Colors.white
+                                        : kVeryDarkBlueColor,
+                                    fontFamily: kRegularFont,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                              ));
-                        },
-                        separatorBuilder: (context, index) {
-                          return SizedBox(
-                            width: Get.width * 0.02,
-                          );
-                        },
-                        itemCount: controller.garageQuality.length),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                      separatorBuilder: (context, index) => SizedBox(width: Get.width * 0.02),
+                      itemCount: controller.garageQuality.length,
+                    ),
                   ),
-                  SizedBox(
-                    height: Get.height * 0.03,
-                  ),
+                  SizedBox(height: Get.height * 0.03),
                   Center(
                     child: Container(
                       height: Get.height * 0.11,
                       width: Get.width * 0.87,
-                      decoration:const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(30)),
-                        color: Color(0xffF4F4F4),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: const Color(0xffF4F4F4),
                       ),
                       child: Row(
                         children: [
                           Text(
                             "   Garage cars",
                             style: TextStyle(
-                                color: kDarkBlueColor,
-                                fontFamily: kRegularFont,
-                                fontWeight: FontWeight.w800,
-                                fontSize: 15),
+                              color: kDarkBlueColor,
+                              fontFamily: kRegularFont,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 15,
+                            ),
                           ),
-                          const SizedBox(
-                            width: 80,
-                          ),
+                          const SizedBox(width: 80),
                           InkWell(
                             onTap: () {
                               controller.decrementCounter1();
                             },
                             child: const Image(
-                              image: AssetImage(
-                                  'lib/assets/images/Delete - Icon.png'),
+                              image: AssetImage('lib/assets/images/Delete - Icon.png'),
                             ),
                           ),
-                          const SizedBox(
-                            width: 15,
-                          ),
+                          const SizedBox(width: 15),
                           Text(
                             '${controller.counter1}',
                             style: const TextStyle(fontSize: 20),
                           ),
-                          const SizedBox(
-                            width: 15,
-                          ),
+                          const SizedBox(width: 15),
                           InkWell(
-                              onTap: () {
-                                controller.incrementCounter1();
-                              },
-                              child:const  Image(
-                                  image: AssetImage(
-                                      'lib/assets/images/Add - Icon.png')))
+                            onTap: () {
+                              controller.incrementCounter1();
+                            },
+                            child: const Image(
+                              image: AssetImage('lib/assets/images/Add - Icon.png'),
+                            ),
+                          ),
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: Get.height * 0.03,
-                  ),
+                  SizedBox(height: Get.height * 0.03),
                   Padding(
                     padding: const EdgeInsets.only(left: 12.0, top: 15),
                     child: Row(
@@ -299,66 +264,59 @@ class _AddListingThirdDetailsScreenState
                         Text(
                           "   Garage Finish",
                           style: TextStyle(
-                              color: kVeryDarkBlueColor,
-                              fontFamily: kRegularFont,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w900),
+                            color: kVeryDarkBlueColor,
+                            fontFamily: kRegularFont,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w900,
+                          ),
                         ),
                       ],
                     ),
                   ),
                   Container(
-                    margin:const EdgeInsets.only(left: 12, top: 15, bottom: 10),
+                    margin: const EdgeInsets.only(left: 12, top: 15, bottom: 10),
                     width: Get.width,
                     height: Get.height * 0.065,
                     child: ListView.separated(
-                        controller: controller.scroll,
-                        scrollDirection: Axis.horizontal,
-                        physics:const BouncingScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                              onTap: () {
-                                controller.selectedGarageFinishIndex = index;
-                                setState(() {});
-                              },
-                              child: Container(
-                                height: Get.height * 0.05,
-                                decoration: BoxDecoration(
-                                  color: controller.selectedGarageFinishIndex ==
-                                      index
-                                      ? kPrimaryColor
-                                      :const  Color(0xffF5F4F8),
-                                  borderRadius: BorderRadius.circular(25),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 20.0,
-                                      right: 20,
-                                      top: 12,
-                                      bottom: 12),
-                                  child: Center(
-                                    child: Text(
-                                      controller.garageQuality[index],
-                                      style: TextStyle(
-                                          color: controller
-                                              .selectedGarageFinishIndex ==
-                                              index
-                                              ? Colors.white
-                                              : kVeryDarkBlueColor,
-                                          fontFamily: kRegularFont,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w600),
-                                    ),
+                      controller: controller.scroll,
+                      scrollDirection: Axis.horizontal,
+                      physics: const BouncingScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () {
+                            controller.selectedGarageFinishIndex = index;
+                            setState(() {});
+                          },
+                          child: Container(
+                            height: Get.height * 0.05,
+                            decoration: BoxDecoration(
+                              color: controller.selectedGarageFinishIndex == index
+                                  ? kPrimaryColor
+                                  : const Color(0xffF5F4F8),
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                              child: Center(
+                                child: Text(
+                                  controller.garageFinish[index],
+                                  style: TextStyle(
+                                    color: controller.selectedGarageFinishIndex == index
+                                        ? Colors.white
+                                        : kVeryDarkBlueColor,
+                                    fontFamily: kRegularFont,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                              ));
-                        },
-                        separatorBuilder: (context, index) {
-                          return SizedBox(
-                            width: Get.width * 0.02,
-                          );
-                        },
-                        itemCount: controller.garageFinish.length),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                      separatorBuilder: (context, index) => SizedBox(width: Get.width * 0.02),
+                      itemCount: controller.garageFinish.length,
+                    ),
                   ),
                   Row(
                     children: [
@@ -1206,7 +1164,9 @@ class _AddListingThirdDetailsScreenState
                     ),
                   ),
                   Container(
-                    height: Get.height * 0.1,
+                    margin: EdgeInsets.only(bottom: 15),
+                    padding:EdgeInsets.only(bottom: 15),
+                    height: Get.height * 0.15,
                     child: Center(
                       child: CustomElevatedButtonWidget(
                         text: 'Next',

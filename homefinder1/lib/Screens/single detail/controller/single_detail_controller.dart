@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:homefinder1/Screens/ChatingScreens/new_chat_screen/new_chat_screen.dart';
 import 'package:homefinder1/Screens/add_review/add_review_screen.dart';
 import 'package:homefinder1/Screens/prediction_price_for_detail/prediction_price_for_detail.dart';
+import 'package:homefinder1/Screens/single%20detail/single_detail.dart';
 import 'package:homefinder1/Widget/custom_elevated_button_widget.dart';
 import 'package:homefinder1/models/add_review_to_residence_model.dart';
 import 'package:homefinder1/models/get_all_reviews_of_residence_model.dart'as a;
@@ -24,10 +25,10 @@ import '../../../utilities/colors.dart';
 import '../../../utilities/constants.dart';
 
 class SingleDetailController extends GetxController {
-<
+
 int? selectedDisLike;
 or.Review?review;
-
+Color love=Colors.grey;
   int rating = 0;
   List<a.Review>? reviews;
   String userId;
@@ -103,7 +104,53 @@ int? favSelectedIndex;
 
   }
 
+Future<void> addResidenceToFav(String resId,BuildContext context) async {
+  try {
+    ResponseModel? data = await ResidenceServices.addFavorite(
+        resId,
+        context
+    );
+    if (data?.status == "success") {
 
+      print(data?.message);
+      residence?.isLiked!=residence?.isLiked;
+
+    }
+  } catch (e) {
+    // Handle bad request error
+    String errorMessage = " $e";
+    String part = errorMessage.substring(26, 35);
+    // Show error message on the screen
+    print(part);
+  }
+  update();
+}
+Future<void> removeResidenceFromFav(String resId,BuildContext context) async {
+  try {
+    ResponseModel? data = await ResidenceServices.deleteFavorite(
+        resId,
+        context
+    );
+    if (data?.status == "success") {
+
+      print(data?.message);
+    residence?.isLiked!=residence?.isLiked;
+      update();
+    }else{
+
+    }
+  } catch (e) {
+
+    // Handle bad request error
+    String errorMessage = " $e";
+    String part = errorMessage.substring(26, 35);
+    // Show error message on the screen
+    print(part);
+
+  }
+
+  update();
+}
 
   getDataOfOneResidences(String resId, BuildContext context) async {
     try {
@@ -206,10 +253,21 @@ update();
           revId, context);
       if (data?.status == "success") {
 
+        update();
+        bool test4 = Get.isRegistered<SingleDetailController>();
+        if(test4){
+          Get.delete<SingleDetailController>();
+        }
         getReviewsOfResidence(resId, context);
         update();
       }else{
         removeLikeToReview(revId,context);
+
+        bool test4 = Get.isRegistered<SingleDetailController>();
+        if(test4){
+          Get.delete<SingleDetailController>();
+        }
+        update();
         getReviewsOfResidence(resId, context);
         update();
       }
@@ -260,187 +318,6 @@ update();
   }
 
   Future<void> removeUnLikeToReview(String revId,BuildContext context) async {
-    try {
-      LikeReviewModel? data = await ResidenceServices.removeUnLikeToReview(
-          reviews?[selectedIndexOfReview ?? 0].id ?? "", context);
-      if (data?.status == "success") {
-        print(data?.message);
-      }
-    } catch (e) {
-      // Handle bad request error
-      String errorMessage = " $e";
-      String part = errorMessage.substring(26, 35);
-      // Show error message on the screen
-      print(part);
-    }
-  }
-  Future<void> addResidenceToFav(String resId,BuildContext context) async {
-    try {
-      ResponseModel? data = await ResidenceServices.addFavorite(
-          resId,
-          context
-      );
-      if (data?.status == "success") {
-
-        print(data?.message);
-
-      }
-    } catch (e) {
-      // Handle bad request error
-      String errorMessage = " $e";
-      String part = errorMessage.substring(26, 35);
-      // Show error message on the screen
-      print(part);
-    }
-
-  }
-  Future<void> removeResidenceFromFav(String resId,BuildContext context) async {
-    try {
-      ResponseModel? data = await ResidenceServices.deleteFavorite(
-          resId,
-          context
-      );
-      if (data?.status == "success") {
-
-        print(data?.message);
-        getDataOfRecommendationResidences(Id, context!);
-        update();
-
-        bool test4 = Get.isRegistered<SingleDetailController>();
-        if(test4){
-          Get.delete<SingleDetailController>();
-
-
-        }
-      }else{
-
-      }
-    } catch (e) {
-
-      // Handle bad request error
-      String errorMessage = " $e";
-      String part = errorMessage.substring(26, 35);
-      // Show error message on the screen
-      print(part);
-
-    }
-  }
-
-  getPhotosOfResidence(String resId,BuildContext context) async {
-    try {
-      o.GetResidencesImagesModel? response =
-          await ResidenceServices.fetchImagesOfResidences(
-              resId, context);
-      print("API Response Status: ${response?.status}");
-
-      if (response == null) {
-        print("Some error occurred: Response is null");
-      } else {
-        images = response.images ?? [];
-        print(images);
-
-        // Print or access other properties as needed
-        print("Number of residences: ${images?.length}");
-      }
-
-      isLoading = false;
-      update();
-    } catch (e) {
-      print("Exception occurred: $e");
-      isLoading = false;
-    }
-  }
-
-  getReviewsOfResidence(String resId,BuildContext context) async {
-    try {
-      a.GetAllReviewsOfResidenceModel? response =
-          await ResidenceServices.fetchReviewsOfResidences(
-              resId, context);
-      print("API Response Status: ${response?.status}");
-
-      if (response == null) {
-        print("Some error occurred: Response is null");
-      } else {
-        reviews = response.reviews ?? [];
-
-        // Print or access other properties as needed
-        print("Number of residences: ${images?.length}");
-      }
-
-      isLoading = false;
-      update();
-    } catch (e) {
-      print("Exception occurred: $e");
-      isLoading = false;
-    }
-  }
-
-  Future<void> addReview(BuildContext context) async {
-    try {
-      AddReviewToResidenceModel? data = await AuthServices.addReview(rating,
-          commentController.text, residence?.residenceId ?? "", context);
-      if (data?.status == "success") {}
-    } catch (e) {
-      String errorMessage = " $e";
-      String part = errorMessage.substring(26, 35);
-      CoolAlert.show(
-        context: context,
-        type: CoolAlertType.error,
-        title: "Error",
-        text: part,
-      );
-    }
-  }
-
-  Future<void> addLikeToReview(BuildContext context) async {
-    try {
-      LikeReviewModel? data = await ResidenceServices.addLikeToReview(
-          reviews?[selectedIndexOfReview ?? 0].id ?? "", context);
-      if (data?.status == "success") {
-        print(data?.message);
-      }
-    } catch (e) {
-      // Handle bad request error
-      String errorMessage = " $e";
-      String part = errorMessage.substring(26, 35);
-      // Show error message on the screen
-      print(part);
-    }
-  }
-
-  Future<void> removeLikeToReview(BuildContext context) async {
-    try {
-      LikeReviewModel? data = await ResidenceServices.removeLikeToReview(
-          reviews?[selectedIndexOfReview ?? 0].id ?? "", context);
-      if (data?.status == "success") {
-        print(data?.message);
-      }
-    } catch (e) {
-      // Handle bad request error
-      String errorMessage = " $e";
-      String part = errorMessage.substring(26, 35);
-      // Show error message on the screen
-      print(part);
-    }
-  }
-
-  Future<void> addUnLikeToReview(BuildContext context) async {
-    try {
-      LikeReviewModel? data = await ResidenceServices.addUnLikeToReview(
-          reviews?[selectedIndexOfReview ?? 0].id ?? "", context);
-      if (data?.status == "success") {
-        print(data?.message);
-      }
-    } catch (e) {
-      // Handle bad request error
-      String errorMessage = " $e";
-      String part = errorMessage.substring(26, 35);
-      // Show error message on the screen
-      print(part);
-    }
-  }
-
-  Future<void> removeUnLikeToReview(BuildContext context) async {
     try {
       LikeReviewModel? data = await ResidenceServices.removeUnLikeToReview(
           reviews?[selectedIndexOfReview ?? 0].id ?? "", context);
@@ -1488,7 +1365,7 @@ getReviewOneOfResidence(String resId,BuildContext context) async {
                       InkWell(
                         onTap:(){
                           selectedIndex=index;
-                         print(data?[selectedIndex].images?[0].url??"");
+
                         },
 
                         child: Container(
@@ -1614,10 +1491,11 @@ getReviewOneOfResidence(String resId,BuildContext context) async {
               height: Get.height * 0.28,
             ),
             Container(
-              margin: EdgeInsets.only(top: 15,bottom: 15),
+              margin: EdgeInsets.only(top: 5,bottom: 15),
+              padding: EdgeInsets.only(top: 5,bottom: 15),
 
               width: Get.width,
-              height: Get.height * 0.1,
+              height: Get.height * 0.12,
               decoration: BoxDecoration(
                   color: Colors.white,
 
@@ -1984,6 +1862,9 @@ getReviewOneOfResidence(String resId,BuildContext context) async {
                                   }, icon: Icon(Icons.thumb_down_rounded,color:Colors.red,size: 18,)),
                                   Text("${reviews?[index].unLikes}"),
                                   IconButton(onPressed: (){
+    bool test4 = Get.isRegistered<SingleDetailController>();
+    if(test4){
+    Get.delete<SingleDetailController>();}
                                     addLikeToReview(reviews?[selectedDisLike ?? 0].id ?? "",userId,context);
                                   }, icon: Icon(Icons.thumb_up_rounded,color:Colors.green,size: 18,)),
                                   Text("${reviews?[index].likes}"),

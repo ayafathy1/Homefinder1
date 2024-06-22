@@ -44,7 +44,7 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
 
                 :SingleChildScrollView(
               controller: controller.scroll,
-              physics: const BouncingScrollPhysics(),
+              physics: BouncingScrollPhysics(),
               child: Column(
                 children: [
                   SizedBox(
@@ -52,10 +52,11 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
                     child: Stack(
                       children: <Widget>[
                         Image(
+
                           image: NetworkImage(
                               controller.residence?.images?[0].url ?? ""),
                           width: double.infinity,
-
+fit: BoxFit.fill,
                         ),
                         Positioned(
                             top: 50,
@@ -72,18 +73,29 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
                           top: 50,
                           right: 20,
                           child: InkWell(
-                            onTap: () {},
-                            child: const Image(
-                                image: AssetImage(
-                                    'lib/assets/images/greyheart.png')),
+                            onTap: (){
+
+                             controller.love=kPrimaryColor;
+                              if(controller.residence?.isLiked==true){
+
+                                controller.removeResidenceFromFav(controller.residence?.residenceId??"",context);
+                                controller.update();
+                              }else{
+                                controller.addResidenceToFav(controller.residence?.residenceId??"", context);
+                                setState(() {
+                                  controller.update();
+                                });
+                              }
+                            },
+                            child: Icon(Icons.favorite_rounded,size:35
+                            ,color: controller.love,
+                            ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+
                   Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween
                   ,children: [

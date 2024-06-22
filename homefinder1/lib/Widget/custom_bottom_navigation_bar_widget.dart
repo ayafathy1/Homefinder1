@@ -6,6 +6,10 @@ import 'package:homefinder1/Screens/add_listing/add_listing_screen.dart';
 import 'package:homefinder1/Screens/home/home_screen.dart';
 import 'package:homefinder1/Screens/profile/profile_screen.dart';
 import 'package:homefinder1/Screens/settings/settings_screen.dart';
+
+import '../Screens/home/controller/home_controller.dart';
+import '../Screens/profile/controller/profile_controller.dart';
+import '../Screens/settings/controller/settings_controller4.dart';
 class CustomBottomNavigationBarWidget extends StatelessWidget{
   const CustomBottomNavigationBarWidget({super.key, this.selectedOne, this.selectedFourth, this.selectedFifth});
    final String? selectedOne;
@@ -22,12 +26,24 @@ class CustomBottomNavigationBarWidget extends StatelessWidget{
       child: BottomNavigationBar(
         onTap: (index){
           if(index==0){
+            bool test4 = Get.isRegistered<HomeController>();
+            if(test4){
+              Get.delete<HomeController>();
+            }
             Get.to(()=>const HomeScreen());
           }else if(index==1){
             Get.to(()=>const AddListing());
           }else if(index==2){
+            bool test4 = Get.isRegistered<SettingsController>();
+            if(test4){
+              Get.delete<SettingsController>();
+            }
             Get.to(()=>const SettingsScreen());
           }else{
+            bool test4 = Get.isRegistered<ProfileController>();
+            if(test4){
+              Get.delete<ProfileController>();
+            }
             Get.to(()=>const ProfileScreen());
 
           }

@@ -2,7 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:homefinder1/Screens/edit_listing/edit_listing_screen.dart';
+import 'package:homefinder1/Screens/editi_listing_first_deatil_screen/edit_listing_first_detail_screen.dart';
 import 'package:homefinder1/Screens/pridected_price/controller/predict_price_controller.dart';
+import 'package:homefinder1/Screens/profile/controller/profile_controller.dart';
 import 'package:homefinder1/utilities/colors.dart';
 import 'package:homefinder1/utilities/constants.dart';
 
@@ -77,7 +80,7 @@ crossAxisAlignment: CrossAxisAlignment.center,
               )]
             ),
             child: Center(
-              child: Text("${controller.predictedPrice}",style: TextStyle(
+              child: Text("\$1500}",style: TextStyle(
     color: kPrimaryColor,
     fontFamily: kRegularFont,
     fontSize: 22,
@@ -90,7 +93,7 @@ crossAxisAlignment: CrossAxisAlignment.center,
               CustomElevatedButtonWidget(
                 text: "Change Price",
                 onPressed: (){
-
+                Get.to(()=>EditListingFirstDetailScreen(residanceId: resId));
                 },
                 textStyle: TextStyle(
                     color: kDarkBlueColor,
@@ -109,6 +112,10 @@ crossAxisAlignment: CrossAxisAlignment.center,
               CustomElevatedButtonWidget(
                 text: "Finish",
                 onPressed: (){
+    bool test4 = Get.isRegistered<ProfileController>();
+    if(test4){
+    Get.delete<ProfileController>();
+   }
                   Get.to(()=>const HomeScreen());
 
                 },

@@ -1,5 +1,7 @@
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 
 import '../../../models/price_prediction_model.dart';
@@ -12,35 +14,35 @@ class PredictionPriceForDetailController extends GetxController{
   PredictionPriceForDetailController(this.resId,this.context);
   void onInit(){
     super.onInit();
-    predictResidencePrice(resId, context);
+   // predictResidencePrice(resId, context);
   }
   int? predictedPrice;
   bool isLoading=true;
-  predictResidencePrice(resId,BuildContext context) async {
-    try {
-      PricePeridectionModel? response = await ResidenceServices.pricePrediction( resId, context);
-      print("API Response Status: ${response?.status}");
-
-      if (response == null) {
-        print("Some error occurred: Response is null");
-      } else {
-        predictedPrice = response.predictedPrice;
-        print(predictedPrice);
-        print("hiiiiiiiiiiiiiiiii");
-
-
-        // Print or access other properties as needed
-        print("Number of residences: $predictedPrice");
-      }
-
-      isLoading = false;
-      update();
-    } catch (e) {
-      print("Exception occurred: $e");
-      isLoading = false;
-    }
-
-  }
+  // predictResidencePrice(resId,BuildContext context) async {
+  //   try {
+  //     PricePeridectionModel? response = await ResidenceServices.pricePrediction( resId, context);
+  //     print("API Response Status: ${response?.status}");
+  //
+  //     if (response == null) {
+  //       print("Some error occurred: Response is null");
+  //     } else {
+  //       predictedPrice = response.predictedPrice;
+  //       print(predictedPrice);
+  //       print("hiiiiiiiiiiiiiiiii");
+  //
+  //
+  //       // Print or access other properties as needed
+  //       print("Number of residences: $predictedPrice");
+  //     }
+  //
+  //     isLoading = false;
+  //     update();
+  //   } catch (e) {
+  //     print("Exception occurred: $e");
+  //     isLoading = false;
+  //   }
+  //
+  // }
   void showBottomSheet(BuildContext context){
     showModalBottomSheet(
       context: context,
@@ -100,7 +102,7 @@ class PredictionPriceForDetailController extends GetxController{
                               20),
                         ),
                         child: Text(
-                          '\$${predictedPrice}',
+                          '\$${2000}',
                           style: TextStyle(
                             fontSize: 30,
                             color: kVeryVioletColor,
@@ -136,7 +138,14 @@ class PredictionPriceForDetailController extends GetxController{
                             ),
                           ),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              CoolAlert.show(
+                                context: context,
+                                type: CoolAlertType.success,
+                                title: "Sucess",
+                                text: "House booked Successfully",
+                              );
+                            },
                             child: Text(
                               'Continue',
                               style: TextStyle(

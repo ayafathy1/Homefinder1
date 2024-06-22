@@ -13,7 +13,7 @@ class AddListingFirstDetailController extends GetxController{
   bool electricitySelected=true;
   bool gas=false;
   bool water=false;
-  List<String> utilitesSelected=[];
+  List<String> utilitesSelected=["electricity"];
   ScrollController scroll= ScrollController();
   TextEditingController neighborhoodController=TextEditingController();
   final List <String> msZoning=[
@@ -77,6 +77,32 @@ final List<String> paymentPeriod=[
     "mixed",
     "standard circuit breakers & romex",
   ];
+   String NeighbourhoodSelected="regular";
+   String? selectedValue3;
+   final List<String>Neighbourhood=[
+     "Bloomington Heights",
+     "Bluestem",
+     "Briardale",
+     "Brookside",
+     "Clear Creek",
+     "College Creek",
+     "Crawford",
+     "Edwards",
+     "Gilbert",
+     "Iowa DOT and Rail Road",
+     "Meadow Village",
+     "Mitchell",
+     "North Ames",
+     "Northridge",
+     "Northpark Villa",
+     "South & West of Iowa State University",
+     "Sawyer",
+     "Sawyer West",
+     "Somerset",
+     "Stone Brook",
+     "Timberland",
+     "Veenker"
+   ];
   String? selectedValue1;
 String electricityLevelSelected="average";
   final List<String> foundation=[
@@ -109,7 +135,7 @@ String electricityLevelSelected="average";
       ) async {
     try {
       FirstCompleteModel? data = await ResidenceServices.FirstComplete(
-       neighborhoodController.text,
+          NeighbourhoodSelected,
        msZoningSelected,
           SaleConditionSelected,
            int.parse(monthOfSoldController.text),

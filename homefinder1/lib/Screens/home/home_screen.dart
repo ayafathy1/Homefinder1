@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/Featured%20Estates/featured_estates.dart';
+import 'package:homefinder1/Screens/booked/booked_screen.dart';
 import 'package:homefinder1/Screens/home/controller/home_controller.dart';
 import 'package:homefinder1/Screens/popular_nearest_you/popular_nearest_you_screen.dart';
 import 'package:homefinder1/Screens/single%20detail/single_detail.dart';
@@ -22,6 +23,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+
     return  GetBuilder<HomeController>(
         init: HomeController(context),
     builder: (HomeController controller) {
@@ -76,6 +78,9 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             InkWell(
+              onTap:(){
+                Get.to(()=>BookedResidences());
+              },
               child: Container(
                 width: 52,
                 height: 52,
@@ -86,16 +91,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: 1.5,
                     ),
                     borderRadius: BorderRadius.circular(55)),
-                child: const Center(
-                    child: Image(
-                      image: AssetImage(
-                          "lib/assets/images/ion_notifications-outline.png"),
-                      width: 28,
-                      height: 28,
-                      fit: BoxFit.fill,
+                child:  Center(
+                    child: Icon(Icons.bookmark_outlined,color: kPrimaryColor,size: 30,),
+
                     )),
               ),
-            ),
+
             InkWell(
               onTap: (){
                 Get.to(()=>const ChatsListScreen());
@@ -210,41 +211,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderRadius: BorderRadius.circular(20)),
                 ),
                 const SizedBox(
-                  height: 8,
+                  height: 15,
                 ),
-                Container(
-                  width: Get.width * 0.95,
-                  height: 60,
-                  child: TextField(
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: const Color(0xffF4F4F4),
-                      hintText: "Search House, Apartment , etc",
-                      prefixIcon: const Icon(
-                        Icons.search_outlined,
-                        color: Colors.black,
-                      ),
-                      suffixIcon: InkWell(
-                          onTap: () {},
-                          child: const Image(
-                              image: AssetImage('lib/assets/images/options.png'))),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: const BorderSide(
-                            color: Color(0xffF4F4F4),
-                            width: 3,
-                          )),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: const BorderSide(
-                            color: Color(0xff6C63FF),
-                            width: 3,
-                          )),
-                    ),
-                  ),
 
-                ),
 
 
 
@@ -280,7 +249,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: ListView.builder(
                     controller: controller.scroll,
                     physics: const BouncingScrollPhysics(),
-                    itemCount: controller.itemCount1,
+                    itemCount: 5,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       return Row(
@@ -289,6 +258,17 @@ class _HomeScreenState extends State<HomeScreen> {
                             width: 10,
                           ),
                           InkWell(
+                            onTap:(){
+                              controller.SelectedResidenceIndex1=index;
+
+                              setState(() {
+
+                              });
+
+
+                              Get.to(()=>SingleDetailScreen(controller.nearestResidences?[controller.SelectedResidenceIndex1??0].id??0,controller.nearestResidences?[controller.SelectedResidenceIndex1??0].residenceId??""));
+
+                            },
 
                             child: Container(
                               decoration: BoxDecoration(
@@ -310,7 +290,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       borderRadius: BorderRadius.circular(20),
                                       child: Image(
                                         image: NetworkImage(
-                                          controller.residences?[index].images?[0].url??""),
+                                          controller.nearestResidences?[index].images?[0].url??""),
                                         width: 280,
                                         height: 140,
                                         fit: BoxFit.fill,
@@ -320,7 +300,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 8.0),
                                     child: Text(
-                                      controller.residences?[index].title??"",
+                                      controller.nearestResidences?[index].title??"",
                                       style: TextStyle(
                                           color: const Color(0xff2F2F2F),
                                           fontFamily: kRegularFont,
@@ -334,7 +314,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 8.0, top: 3),
                                     child: Text(
-                                      "\$${controller.residences?[index].salePrice}",
+                                      "\$${controller.nearestResidences?[index].salePrice}",
                                       style: TextStyle(
                                           color: kPrimaryColor,
                                           fontSize: 12,
@@ -362,7 +342,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         child: Container(
                                           width: 126,
                                           child: Text(
-                                            controller.residences?[index].location?.fullAddress??"",
+                                            controller.nearestResidences?[index].location?.fullAddress??"",
                                             overflow: TextOverflow.ellipsis,
 
                                             style: TextStyle(
@@ -378,13 +358,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                         width: 50,
                                       ),
                                       IconButton(
-                                          onPressed: () {
-                                            controller.favSelectedIndex=index;
+                                          onPressed: ()  {
 
+                                            controller.favSelectedIndex1=index;
+                                            if(controller.residences?[controller.favSelectedIndex1].isLiked==true){
+
+                                              controller.removeResidenceFromFav(controller.residences?[controller.favSelectedIndex1??0].residenceId??"",context);
+                                              controller.update();
+                                            }else{
+                                              controller.addResidenceToFav(controller.residences?[controller.favSelectedIndex1??0].residenceId??"", context);
+                                              setState(() {
+                                                controller.update();
+                                              });
+                                            }
                                           },
                                           icon: Icon(
                                             Icons.favorite_rounded,
-                                            color: kGreyColor,
+                                            color: controller.residences?[index].isLiked==true?kPrimaryColor:Colors.grey,
                                             size: 27,
                                           )),
                                     ],
@@ -437,7 +427,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: Get.height*0.7,
                   child: ListView.builder(
                     controller: controller.scroll,
-                      itemCount: controller.itemCount2,
+                      itemCount: 4,
                       physics: const NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
@@ -447,15 +437,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
                               onTap:(){
 
-                         controller.SelectedResidenceIndex=index;
+                                controller.SelectedResidenceIndex=index;
 
                                 setState(() {
 
                                 });
 
 
-                               Get.to(()=>SingleDetailScreen(controller.residences?[controller.SelectedResidenceIndex??0].id??0,controller.residences?[controller.SelectedResidenceIndex??0].residenceId??""));
-
+                                Get.to(()=>SingleDetailScreen(controller.residences?[controller.SelectedResidenceIndex??0].id??0,controller.residences?[controller.SelectedResidenceIndex??0].residenceId??""));
 
                               }
                               ,
@@ -601,17 +590,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 padding: const EdgeInsets.only(right: 10.0,top: 10),
                                                 child: InkWell(
                                                     onTap: () {
+
                                                       controller.favSelectedIndex=index;
                                                       if(controller.residences?[controller.favSelectedIndex].isLiked==true){
-                                                      controller.removeResidenceFromFav(controller.residences![index].residenceId!,context);
-                                                      controller.getDataOfResidences(context);
-                                                        setState(() {
 
-                                                        });}else{
-                                                        controller.addResidenceToFav(controller.residences![index].residenceId!, context);
-                                                        controller.getDataOfResidences(context);
+                                                      controller.removeResidenceFromFav(controller.residences?[controller.favSelectedIndex??0].residenceId??"",context);
+                                                      controller.update();
+                                                      }else{
+                                                        controller.addResidenceToFav(controller.residences?[controller.favSelectedIndex??0].residenceId??"", context);
                                                         setState(() {
-
+                                                          controller.getDataOfResidences(context);
                                                         });
                                                       }
                                                     },
