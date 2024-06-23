@@ -379,20 +379,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           child: Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Container(
-                                                width: 30,
-                                                height: 30,
-                                                decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    borderRadius: BorderRadius.circular(50)
-                                                ),
-                                                child: Center(
-                                                  child: IconButton(onPressed: (){
-                                                    controller.selectedPending=index;
-                                                    Get.to(()=>EditListingScreen(controller.pendingResidences?[controller.selectedPending??0].residenceId??""));
-                                                  }, icon: Icon(Icons.edit,color: kDarkBlueColor,size: 17,),),
-                                                ),
-                                              ),
+                                              // Container(
+                                              //   width: 30,
+                                              //   height: 30,
+                                              //   decoration: BoxDecoration(
+                                              //       color: Colors.white,
+                                              //       borderRadius: BorderRadius.circular(50)
+                                              //   ),
+                                              //   child: Center(
+                                              //     child: IconButton(onPressed: (){
+                                              //       controller.selectedPending=index;
+                                              //       Get.to(()=>EditListingScreen(controller.pendingResidences?[controller.selectedPending??0].residenceId??""));
+                                              //     }, icon: Icon(Icons.edit,color: kDarkBlueColor,size: 17,),),
+                                              //   ),
+                                              // ),
                                               InkWell(
                                                 onTap: () {
                                                   controller.slectedDelete = index;
