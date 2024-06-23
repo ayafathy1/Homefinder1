@@ -96,8 +96,6 @@ class VerficationCodeForgetController extends GetxController {
       );
 
       if (data?.status == "success") {
-
-        Get.to(() => const CompleteSignUp());
       }
     } catch (e) {
       // Handle bad request error

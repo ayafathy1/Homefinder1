@@ -29,7 +29,7 @@ class bookedController extends GetxController{
   @override
   void onInit()async{
     super.onInit();
-     await getDataOfOneResidences("667607773562cc60d3d07dbe", context!);
+     await getDataOfOneResidences("6676c135c7dc590ddae55891", context!);
   }
   Residence?favs;
 

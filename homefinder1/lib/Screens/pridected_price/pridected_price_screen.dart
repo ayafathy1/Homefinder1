@@ -80,7 +80,7 @@ crossAxisAlignment: CrossAxisAlignment.center,
               )]
             ),
             child: Center(
-              child: Text("\$1500",style: TextStyle(
+              child: Text("\$"+"${controller.predictedPrice}",style: TextStyle(
     color: kPrimaryColor,
     fontFamily: kRegularFont,
     fontSize: 22,

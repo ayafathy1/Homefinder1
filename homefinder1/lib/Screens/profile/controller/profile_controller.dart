@@ -43,7 +43,7 @@ ProfileController(this.context);
   late List<Widget> listViewItem = [];
   String pendingOrListingOrSold="Pending";
   ScrollController scrollController=ScrollController();
-
+int? SelectedResidenceIndex1;
   @override
   void onInit()async {
     super.onInit();

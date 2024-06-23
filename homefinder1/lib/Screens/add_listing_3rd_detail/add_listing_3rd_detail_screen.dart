@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homefinder1/Screens/add_listing_3rd_detail/controller/add_listing_3rd_detail_controller.dart';
+import 'package:homefinder1/Screens/add_listing_fourth_details/add_listing_fourth_details_screen.dart';
 import 'package:homefinder1/Widget/custom_arrow_back.dart';
 import 'package:homefinder1/Widget/custom_elevated_button_widget.dart';
 import 'package:homefinder1/utilities/constants.dart';
@@ -1172,7 +1173,8 @@ class _AddListingThirdDetailsScreenState
                         text: 'Next',
                         onPressed: () {
                if(controller.formkey.currentState!.validate()){
-                    controller.thirdComplete(context);
+                     controller.thirdComplete(context);
+                 // Get.to(()=>AddListingFourthDetailsScreen(residanceId:widget.residanceId));
                         }
                },
                         textStyle: TextStyle(

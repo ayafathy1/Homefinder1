@@ -1,3 +1,7 @@
+// To parse this JSON data, do
+//
+//     final userChatModel = userChatModelFromJson(jsonString);
+
 import 'dart:convert';
 
 UserChatModel userChatModelFromJson(String str) => UserChatModel.fromJson(json.decode(str));
@@ -101,7 +105,7 @@ class LastMessage {
     senderId: json["senderId"],
     receiverId: json["receiverId"],
     media: json["media"] == null ? [] : List<dynamic>.from(json["media"]!.map((x) => x)),
-    createdAt: json["createdAt"],
+    createdAt: json["createdAt"] ,
     updatedAt: json["updatedAt"],
   );
 

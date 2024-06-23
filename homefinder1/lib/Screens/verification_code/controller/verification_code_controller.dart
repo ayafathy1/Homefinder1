@@ -108,8 +108,6 @@ class VerficationCodeController extends GetxController {
    try {
      VerificationModel? data = await AuthServices.reSendingVerificationCode(
          context,
-
-
      );
 
      if (data?.status == "success") {

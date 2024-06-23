@@ -8,6 +8,7 @@ import 'package:homefinder1/Screens/single%20detail/controller/single_detail_con
 import 'package:homefinder1/Widget/custom_arrow_back.dart';
 import 'package:homefinder1/utilities/colors.dart';
 import 'package:homefinder1/utilities/constants.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 //////
 
 
@@ -24,7 +25,15 @@ String resId;
         init: AddReviewController(context,resId),
     builder: (AddReviewController controller) {
     return Scaffold(
-      body: SingleChildScrollView(
+      body:controller.isLoading
+          ? Center(
+        child: LoadingAnimationWidget.twistingDots(
+          leftDotColor: const Color(0xFFe9d9e9),
+          rightDotColor: const Color(0xFF8a81d2),
+          size: 200,
+        ),
+      )
+          : SingleChildScrollView(
           child: Column(
         children: [
           Container(
@@ -195,10 +204,8 @@ String resId;
 
                 onPressed: () {
                   controller.addReview(context);
-                  bool test4 = Get.isRegistered<SingleDetailController>();
-                  if(test4){
-                  Get.delete<SingleDetailController>();
-                }},
+
+              },
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
               fixedSize: const Size(215,53)

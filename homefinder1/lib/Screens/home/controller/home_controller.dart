@@ -25,7 +25,7 @@ int? SelectedResidenceIndex;
   HomeController( this.context);
   ScrollController scroll = ScrollController();
   bool isLoading = true;
-  int counterOfResidences =3;
+  int counterOfResidences =6;
   int maxNoOfPagesOfResidences = 1;
   bool isLoadingMoreDataOfResidences = false;
   List<a.Residence>? residences;
@@ -107,7 +107,7 @@ List<c.Review>?reviews;
   int nearestResidencesCounter=0;
   getDataOfResidences(BuildContext context) async {
 
-    if (counterOfResidences == 3) {
+    if (counterOfResidences == 6) {
       try {
         a.GetAllResidencesModel? response = await ResidenceServices.fetchAllResidences(counterOfResidences, context);
         print("API Response Status: ${response?.status}");

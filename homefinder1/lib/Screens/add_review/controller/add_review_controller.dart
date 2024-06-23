@@ -22,31 +22,7 @@ class AddReviewController extends GetxController{
   bool isLoading=true;
   User? data;
   AddReviewController(this.context,this.resId);
-  getReviewsOfResidence(String resId,BuildContext context) async {
-    try {
 
-      a.GetAllReviewsOfResidenceModel? response =
-      await ResidenceServices.fetchReviewsOfResidences(
-          resId, context);
-      print("API Response Status: ${response?.status}");
-
-      if (response == null) {
-        print("Some error occurred: Response is null");
-      } else {
-        reviews = response.reviews ?? [];
-
-        // Print or access other properties as needed
-        print("Number of residences: ${reviews?.length}");
-
-      }
-
-
-      update();
-    } catch (e) {
-      print("Exception occurred: $e");
-
-    }
-  }
 
   Future<void> addReview(BuildContext context) async {
     try {
@@ -74,7 +50,7 @@ class AddReviewController extends GetxController{
 
   getdata() async
   {
-    isLoading=true;
+
     update();
     GetUserModel? response = await AuthServices.fetchUserData();
 

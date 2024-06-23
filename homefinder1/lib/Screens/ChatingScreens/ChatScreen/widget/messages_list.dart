@@ -35,7 +35,7 @@ class MessagesList extends StatelessWidget {
                   itemBuilder: (context, int index) {
                     return  Column(
                       children: [
-                        ChattingCell(messageText: listOfMessages?[index].messageContent??"", sender:controller.detectWhoWroteTheMessage(listOfMessages?[index].senderId??0),messageTime: controller.returnDateAndTime(listOfMessages?[index].createdAt), longPress: () {controller.takeActionWithTheMessage(listOfMessages?[index].messageContent??"",listOfMessages?[index].id??"");  },),
+                        ChattingCell(messageText: listOfMessages?[index].messageContent??"", sender:controller.detectWhoWroteTheMessage(listOfMessages?[index].senderId??0),messageTime: listOfMessages?[index].createdAt==listOfMessages?[index].updatedAt?controller.returnDateAndTime(listOfMessages?[index].createdAt):"Updated on ${controller.returnDateAndTime(listOfMessages?[index].updatedAt)}", longPress: () {controller.takeActionWithTheMessage(listOfMessages?[index].messageContent??"",listOfMessages?[index].id??"");  },),
 
 
                       ],

@@ -93,7 +93,7 @@ class _PredictionPriceForDetailState extends State<PredictionPriceForDetail> {
               CustomElevatedButtonWidget(
                   text: "Show",
                   onPressed: (){
-                  controller.showBottomSheet(context);
+                  controller.showBottomSheet(140700,context);
                    setState(() {
 
                    });

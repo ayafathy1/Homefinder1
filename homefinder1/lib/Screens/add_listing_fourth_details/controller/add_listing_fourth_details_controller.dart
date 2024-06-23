@@ -88,6 +88,7 @@ class AddListingFourthDetailsController extends GetxController{
 
       );
       if (data?.status == "success") {
+        print(residanceId);
         Get.to(()=>PredictPriceScreen(resId: residanceId,));
       }
     } catch (e) {

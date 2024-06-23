@@ -46,7 +46,7 @@ class _SignUpState extends State<SignUp> {
                 child: Form(
                   key: controller.formkey,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 10.0,right: 10),
+                    padding: const EdgeInsets.only(left: 10.0,right: 10,top: 10),
                     child: Column(
                       children: [
                         Stack(
@@ -172,27 +172,7 @@ class _SignUpState extends State<SignUp> {
                             },
                           ),
                         ),
-                        SizedBox(
-                          width: Get.width,
-                          height: Get.height*0.05,
-                          child: Row(children: [
-                            Checkbox(
-                                value: rememberMe, onChanged: _onRememberMeChanged),
-                            const Text(
-                              "by checking the box you agree to our",
-                              style: TextStyle(fontSize: 12),
-                            ),
-                            const Text(
-                              "Terms",
-                              style: TextStyle(color: Color(0xff6C63FF)),
-                            ),
-                            const Text("and"),
-                            const Text(
-                              "Conditions",
-                              style: TextStyle(color: Color(0xff6C63FF)),
-                            ),
-                          ]),
-                        ),
+                          SizedBox(height: 30,),
                         SizedBox(
                           height: 55,
                           width: 300,
@@ -233,38 +213,7 @@ class _SignUpState extends State<SignUp> {
                         const SizedBox(
                           height: 15,
                         ),
-                        Container(
-                          height: 55,
-                          width: 302,
-                          decoration: BoxDecoration(
-                              color: const Color(0xffC4C4C4).withOpacity(0.7),
-                              borderRadius: BorderRadius.circular(25)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const SizedBox(
-                                width: 25,
-                                height: 25,
-                                child: Image(
-                                  image: AssetImage(
-                                      "lib/assets/images/google-icon 2.png"),
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
-                                child: Text(
-                                  "Sign in with Google",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w900,
-                                      fontFamily: kRegularFont),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+
 
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,

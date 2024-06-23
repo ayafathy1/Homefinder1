@@ -1365,6 +1365,7 @@ getReviewOneOfResidence(String resId,BuildContext context) async {
                       InkWell(
                         onTap:(){
                           selectedIndex=index;
+                          getDataOfOneResidences("${data?[selectedIndex].datumId}", context);
 
                         },
 
@@ -1887,7 +1888,7 @@ getReviewOneOfResidence(String resId,BuildContext context) async {
             ),
             Container(
               margin: EdgeInsets.only(top: 5,bottom:5),
-              padding: EdgeInsets.only(bottom:10),
+              padding: EdgeInsets.only(bottom:15),
               width: Get.width,
               height: Get.height * 0.1,
               decoration: BoxDecoration(

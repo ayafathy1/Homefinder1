@@ -601,11 +601,11 @@ class ResidenceServices {
 
   static Future<r.GetOneResidencesModel?> fetchOneResidences(String resId,
       BuildContext context) async {
-    const String endPoint = 'residence/get/';
+
 
     try {
       final response = await ApiService().request(
-        '$endPoint$resId',
+        'residence/get/${resId}',
         'GET',
         headers: {
           "Authorization": Get
@@ -834,7 +834,7 @@ class ResidenceServices {
         .getToken;
     try {
       final response = await ApiService().request(
-        '$endPoint$resId',
+        'residence/predict/6676c135c7dc590ddae55891',
         'GET',
         headers: {
           "Authorization": Get

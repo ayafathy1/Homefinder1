@@ -45,7 +45,7 @@ class _SignInState extends State<SignIn> {
                   child: Form(
                     key: controller.formkey,
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 10.0,right: 10),
+                      padding: const EdgeInsets.only(left: 10.0,right: 10,top: 30),
                       child: Column(
                         children: [
                           Stack(
@@ -117,16 +117,9 @@ class _SignInState extends State<SignIn> {
                             ),
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              Row(
-                                children: [
-                                  Checkbox(
-                                      value: rememberMe,
-                                      onChanged: _onRememberMeChanged),
-                                  const Text("Remember Me"),
-                                ],
-                              ),
+
 
                               TextButton(
                                 onPressed: () {
@@ -140,7 +133,7 @@ class _SignInState extends State<SignIn> {
                             ],
                           ),
                           const SizedBox(
-                            height: 20,
+                            height: 50,
                           ),
                           SizedBox(
                               height: 60,
@@ -171,65 +164,13 @@ class _SignInState extends State<SignIn> {
                           const SizedBox(
                             height: 10,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: 134.59,
-                                height: 0.5,
-                                color: Colors.black,
-                              ),
-                              Text(
-                                "or",
-                                style: TextStyle(
-                                    fontFamily: kRegularFont,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 16),
-                              ),
-                              Container(
-                                width: 134.59,
-                                height: 0.5,
-                                color: Colors.black,
-                              ),
-                            ],
-                          ),
+
                           const SizedBox(
                             height: 15,
                           ),
-                          Container(
-                            height: 57,
-                            width: 302,
-                            decoration: BoxDecoration(
-                                color: const Color(0xffC4C4C4).withOpacity(0.7),
-                                borderRadius: BorderRadius.circular(25)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const SizedBox(
-                                  width: 25,
-                                  height: 25,
-                                  child: Image(
-                                    image: AssetImage(
-                                        "lib/assets/images/google-icon 2.png"),
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 8.0),
-                                  child: Text(
-                                    "Sign in with Google",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w900,
-                                        fontFamily: kRegularFont),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+
                           const SizedBox(
-                            height: 15,
+                            height: 50,
                           ),
                           Row(
                             children: [

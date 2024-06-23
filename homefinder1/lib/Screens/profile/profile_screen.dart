@@ -12,6 +12,7 @@ import 'package:flutter/widgets.dart' as Flutter;
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../edit_listing/edit_listing_screen.dart';
+import '../single detail/single_detail.dart';
 
 
 
@@ -344,7 +345,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           return SizedBox(width:20);
                         },itemCount:controller.pendingResidences==[]?0:controller.pendingResidences?.length??0,itemBuilder: (BuildContext context, int index) {
                         return InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            controller.SelectedResidenceIndex1=index;
+                            controller.update();
+                            Get.to(()=>SingleDetailScreen(controller.pendingResidences?[controller.SelectedResidenceIndex1??0].id??0,controller.pendingResidences?[controller.SelectedResidenceIndex1??0].residenceId??""));
+                          },
                           child: Container(
                             padding:  EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 5),
                             width: 180,

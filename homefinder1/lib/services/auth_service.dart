@@ -95,7 +95,7 @@ class AuthServices{
     return null;
   }
   static Future<VerificationModel?> reSendingVerificationCode(BuildContext context) async {
-    var data = await api.request(context: context,Services.resendVerificationEndPoint, "GET",data: {
+    var data = await api.request(context: context,"auth/resend-code", "GET",data: {
     },headers:{"Authorization":await Get.find<StorageService>().getToken});
     if (data != null) {
       return VerificationModel.fromJson(data);
@@ -150,7 +150,6 @@ class AuthServices{
     return null;
   }
   static Future<GetUserModel?> fetchUserData() async {
-    // Replace with your actual API endpoint URL
     const String getUserEndPoint = 'https://home-finder-back-end-i7ca.onrender.com/api/v1/user/get-user'; // Example URL
 
     try {
@@ -215,7 +214,7 @@ class AuthServices{
     return null;
   }
   static Future<VerificationModel?> reSendingVerificationCodeForget(BuildContext context,String email) async {
-    var data = await api.request(context: context,Services.resendVerificationForgetEndPoint+email, "GET",data: {
+    var data = await api.request(context: context,"auth/resend-pass-otp/"+email, "POST",data: {
     });
     if (data != null) {
       return VerificationModel.fromJson(data);

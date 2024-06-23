@@ -14,36 +14,39 @@ class PredictionPriceForDetailController extends GetxController{
   PredictionPriceForDetailController(this.resId,this.context);
   void onInit(){
     super.onInit();
-   // predictResidencePrice(resId, context);
+   predictResidencePrice(resId, context);
   }
+  PricePeridectionModel?price;
   int? predictedPrice;
   bool isLoading=true;
-  // predictResidencePrice(resId,BuildContext context) async {
-  //   try {
-  //     PricePeridectionModel? response = await ResidenceServices.pricePrediction( resId, context);
-  //     print("API Response Status: ${response?.status}");
-  //
-  //     if (response == null) {
-  //       print("Some error occurred: Response is null");
-  //     } else {
-  //       predictedPrice = response.predictedPrice;
-  //       print(predictedPrice);
-  //       print("hiiiiiiiiiiiiiiiii");
-  //
-  //
-  //       // Print or access other properties as needed
-  //       print("Number of residences: $predictedPrice");
-  //     }
-  //
-  //     isLoading = false;
-  //     update();
-  //   } catch (e) {
-  //     print("Exception occurred: $e");
-  //     isLoading = false;
-  //   }
-  //
-  // }
-  void showBottomSheet(BuildContext context){
+  predictResidencePrice(resId,BuildContext context) async {
+    try {
+      PricePeridectionModel? response = await ResidenceServices.pricePrediction( resId, context);
+      print("API Response Status: ${response?.status}");
+
+      if (response == null) {
+        print("Some error occurred: Response is null");
+      } else {
+        price = response;
+        predictedPrice=price?.predictedPrice;
+        print(predictedPrice);
+        print("hiiiiiiiiiiiiiiiii");
+        predictedPrice=response.predictedPrice;
+
+
+        // Print or access other properties as needed
+        print("Number of residences: $predictedPrice");
+      }
+
+
+    } catch (e) {
+      print("Exception occurred: $e");
+
+    }
+    isLoading = false;
+    update();
+  }
+  void  showBottomSheet(int predicted,BuildContext context)async{
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -102,7 +105,7 @@ class PredictionPriceForDetailController extends GetxController{
                               20),
                         ),
                         child: Text(
-                          '\$${2000}',
+                          '\$${predictedPrice}',
                           style: TextStyle(
                             fontSize: 30,
                             color: kVeryVioletColor,
